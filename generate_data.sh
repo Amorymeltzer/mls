@@ -3,10 +3,21 @@
 # Create the proper index page, including sorting
 
 if [ ! "$1" ]; then
-    echo "Please specify an XLSX data file"
+    echo "Please specify an XLS/XLSX data file"
     exit 1
 else
     data=$1
-    # Would love to test if it's an xlsx properly but oh well
-    xlscat -c $data > data_table.csv
+    # Would love to test if it's an xlsx properly but this is close enough
+    if xlscat -i $data 1>/dev/null 2>&1 ; then
+	if [ ! $2 ]; then
+	    output=data_table.csv
+	else
+	    output=$2
+	fi
+	xlscat -c $data 1>/dev/null 2>&1 > $output
+	echo "Generated $output"
+    else
+	echo "$data is not a proper XLS/XLSX file"
+	exit 1
+    fi
 fi
