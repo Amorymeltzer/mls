@@ -71,4 +71,13 @@ foreach my $name (sort @names) {
   print $out "	  </tr>\n";
 }
 
+# Footer totals row
+foreach my $col (0..scalar @total - 1) {
+  print $out "	 <tr>\n";
+  print $out "	    <th>$total[$col]</th>\n";
+  print $out "	 </tr>\n";
+}
+
+
+
 close $out or die $!;
