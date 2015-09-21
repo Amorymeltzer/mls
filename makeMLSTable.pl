@@ -78,8 +78,14 @@ print $out "	 <tr>\n";
 foreach my $col (0..scalar @total - 1) {
   print $out "	    <th>$total[$col]</th>\n";
 }
-print $out "	 </tr>\n";
+print $out "	  </tr>\n";
+print $out "	</tbody>\n";
+print $out "   </table>\n\n";
 
+# More sortification
+print $out "      <script>\n";
+print $out "	new Tablesort(document.getElementById('mls-table'));\n";
+print $out "      </script>\n";
 
 
 close $out or die $!;
