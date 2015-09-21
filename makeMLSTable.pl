@@ -27,5 +27,8 @@ while (<$in>) {
 close $in or die $!;
 
 foreach my $name (sort @names) {
-  print "@{$data{$name}}\n";
+  foreach my $col (0.. scalar @{$data{$name}} - 1) {
+    print "@{$data{$name}}[$col]\t";
+  }
+  print "\n";
 }
