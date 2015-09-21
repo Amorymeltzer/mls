@@ -11,8 +11,10 @@ unless (@ARGV  > 0 && @ARGV < 3) {
   exit;
 }
 
-my %data;			# Hold arrays of data
-my @names;
+my %data;			# Hash of arrays of data
+my @names;			# MLS stars
+my @header;			# Header array
+my @total;			# Footer total array
 
 my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.html';
@@ -21,6 +23,14 @@ open my $in, '<', "$input" or die $!;
 while (<$in>) {
   chomp;
   my @tmp = split /,/;
+  if ($tmp[0] =~ /Player/) {
+    @header = @tmp;
+    next;
+  }
+  elsif ($tmp[0] =~ /Total/) {
+    @total = @tmp;
+    next;
+  }
   $data{$tmp[0]} = [@tmp];
   @names = (@names,$tmp[0]);
 }
