@@ -63,7 +63,7 @@ print $out "	</thead>\n";
 # Data
 print $out "	<tbody>\n";
 
-foreach my $name (sort @names) {
+foreach my $name (@names) {
   print $out "	  <tr>\n";
   foreach my $col (0.. scalar @{$data{$name}} - 1) {
     print $out "<td>@{$data{$name}}[$col]</td>\n";
