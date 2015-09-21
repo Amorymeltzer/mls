@@ -26,8 +26,7 @@ while (<$in>) {
   if ($tmp[0] =~ /Player/) {
     @header = @tmp;
     next;
-  }
-  elsif ($tmp[0] =~ /Total/) {
+  } elsif ($tmp[0] =~ /Total/) {
     @total = @tmp;
     next;
   }
@@ -45,8 +44,11 @@ foreach my $name (sort @names) {
 
 
 open my $out, '>', "$output" or die $!;
+# Sortify
 print $out "      <script src='tablesort.min.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
+
+# Header row
 print $out "	<thead>\n";
 print $out "	 <tr>\n";
 
@@ -56,5 +58,17 @@ foreach my $col (0..scalar @header - 1) {
 
 print $out "	 </tr>\n";
 print $out "	</thead>\n";
+
+
+# Data
+print $out "	<tbody>\n";
+
+foreach my $name (sort @names) {
+  print $out "	  <tr>\n";
+  foreach my $col (0.. scalar @{$data{$name}} - 1) {
+    print $out "<td>@{$data{$name}}[$col]</td>\n";
+  }
+  print $out "	  </tr>\n";
+}
 
 close $out or die $!;
