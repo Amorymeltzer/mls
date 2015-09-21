@@ -42,3 +42,19 @@ foreach my $name (sort @names) {
   }
   print "\n";
 }
+
+
+open my $out, '>', "$output" or die $!;
+print $out "      <script src='tablesort.min.js'></script>\n\n";
+print $out "      <table id='mls-table'>\n";
+print $out "	<thead>\n";
+print $out "	 <tr>\n";
+
+foreach my $col (0..scalar @header - 1) {
+  print $out "	    <th>$header[$col]</th>\n";
+}
+
+print $out "	 </tr>\n";
+print $out "	</thead>\n";
+
+close $out or die $!;
