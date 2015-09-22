@@ -78,7 +78,7 @@ foreach my $name (@names) {
 # Footer totals row
 print $out "	 <tr>\n";
 foreach my $col (0..scalar @total - 1) {
-  print $out "	    <th>$total[$col]</th>\n";
+  print $out "	    <td>$total[$col]</td>\n";
 }
 print $out "	  </tr>\n";
 print $out "	</tbody>\n";
