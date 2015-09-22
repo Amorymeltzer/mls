@@ -6,6 +6,8 @@ use strict;
 use warnings;
 use diagnostics;
 
+use English qw( -no_match_vars );
+
 unless (@ARGV  > 0 && @ARGV < 3) {
   print "Usage: makeMLSTAble.pl data.csv <output.html>\n";
   exit;
@@ -19,7 +21,7 @@ my @total;			# Footer total array
 my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.html';
 
-open my $in, '<', "$input" or die $!;
+open my $in, '<', "$input" or die $ERRNO;
 while (<$in>) {
   chomp;
   my @tmp = split /,/;
@@ -35,7 +37,7 @@ while (<$in>) {
   $data{$tmp[0]} = [@tmp];
   @names = (@names,$tmp[0]);
 }
-close $in or die $!;
+close $in or die $ERRNO;
 
 foreach my $name (sort @names) {
   foreach my $col (0.. scalar @{$data{$name}} - 1) {
@@ -45,7 +47,7 @@ foreach my $name (sort @names) {
 }
 
 
-open my $out, '>', "$output" or die $!;
+open my $out, '>', "$output" or die $ERRNO;
 # Sortify
 print $out "      <script src='tablesort.min.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
@@ -88,4 +90,4 @@ print $out "	new Tablesort(document.getElementById('mls-table'));\n";
 print $out "      </script>\n";
 
 
-close $out or die $!;
+close $out or die $ERRNO;
