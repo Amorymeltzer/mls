@@ -14,15 +14,21 @@ else
 	else
 	    output=$2
 	fi
+	# Convert XLS/XLSX to csv
 	xlscat -c $data 1>/dev/null 2>&1 > $output
 	echo "Generated $output"
 
+	# Build the table
 	perl makeMLSTable.pl $output table.html
 	echo "Generated table.html"
 
+	# Combine all the html pieces
 	cat top.html > index.html
 	cat table.html >> index.html
 	cat bottom.html >> index.html
+
+	# Properly indent file
+	emacs -batch index.html --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
 	echo "Generated index.html"
 	echo "Site ready!"
