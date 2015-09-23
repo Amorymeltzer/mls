@@ -1,11 +1,7 @@
 ### ToDo
 #### Appearance
-- Arrow appearance?
 - Check mobile, other monitor sizes
 
-
-Basic layout for simple stats recording
-Should also throw in actual calculation of stats, website, etc.
 
 <!-- Needed: AB, R, H, 2B, 3B, HR, RBI, BB, K -->
 
