@@ -192,6 +192,8 @@ a:hover {
     white-space: nowrap;
     padding: 0.5rem 1rem;
     border: 1px solid #e9ebec; }
+.main-content table tr:nth-child(even) {
+    background-color: #e6e6e6; }
 .main-content dl {
     padding: 0; }
 .main-content dl dt {
