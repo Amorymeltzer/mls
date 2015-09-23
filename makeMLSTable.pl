@@ -39,17 +39,10 @@ while (<$in>) {
 }
 close $in or die $ERRNO;
 
-foreach my $name (sort @names) {
-  foreach my $col (0.. scalar @{$data{$name}} - 1) {
-    print "@{$data{$name}}[$col]\t";
-  }
-  print "\n";
-}
-
 
 open my $out, '>', "$output" or die $ERRNO;
 # Sortify
-print $out "      <script src='tablesort.min.js'></script>\n\n";
+print $out "      <script src='tablesort.min.js'></script>\n";
 print $out "      <script src='tablesort.numeric.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
 

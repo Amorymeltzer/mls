@@ -16,6 +16,16 @@ else
 	fi
 	xlscat -c $data 1>/dev/null 2>&1 > $output
 	echo "Generated $output"
+
+	perl makeMLSTable.pl $output table.html
+	echo "Generated table.html"
+
+	cat top.html > index.html
+	cat table.html >> index.html
+	cat bottom.html >> index.html
+
+	echo "Generated index.html"
+	echo "Site ready!"
     else
 	echo "$data is not a proper XLS/XLSX file"
 	exit 1

@@ -1,11 +1,6 @@
 ### ToDo
-#### Content
-- Finalize top
-- Finalize bottom
-- Perl script to parse csv into sortable html table (see sorting format below)
-- Combine together to update index.html
-- Totals or averages?!?!
 #### Appearance
+- Bold total row
 - Arrow appearance?
 - Check mobile, other monitor sizes
 - Spacing within headers, cells
