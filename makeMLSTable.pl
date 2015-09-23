@@ -57,9 +57,12 @@ print $out "	<thead>\n";
 print $out "	 <tr>\n";
 
 foreach my $col (0..scalar @header - 1) {
-  print $out "	    <th>$header[$col]</th>\n";
+  if ($header[$col] eq q{}) {	# Don't sort blank column before sabermetrics
+    print $out "	    <th class='no-sort'>$header[$col]</th>\n";
+  } else {
+    print $out "	    <th>$header[$col]</th>\n";
+  }
 }
-
 print $out "	 </tr>\n";
 print $out "	</thead>\n";
 
@@ -68,7 +71,11 @@ print $out "	</thead>\n";
 print $out "	<tbody>\n";
 
 foreach my $name (@names) {
-  print $out "	  <tr>\n";
+  if ($name eq q{}) {		# Don't sort blank row before totals
+    print $out "	  <tr class='no-sort'>\n";
+  } else {
+    print $out "	  <tr>\n";
+  }
   foreach my $col (0.. scalar @{$data{$name}} - 1) {
     print $out "<td>@{$data{$name}}[$col]</td>\n";
   }
@@ -76,7 +83,7 @@ foreach my $name (@names) {
 }
 
 # Footer totals row
-print $out "	 <tr>\n";
+print $out "	  <tr class='no-sort'>\n"; # Don't sort totals
 foreach my $col (0..scalar @total - 1) {
   print $out "	    <td>$total[$col]</td>\n";
 }
