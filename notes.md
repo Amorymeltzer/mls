@@ -7,8 +7,7 @@
 #### Appearance
 - Sorting format - numerical, non-numerical, required javascripts
 - Arrow appearance?
-- Remove links up top, replace with...?
-- MLS logo
+- Check mobile, other monitor sizes
 
 
 Basic layout for simple stats recording
