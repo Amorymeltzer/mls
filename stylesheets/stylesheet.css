@@ -187,6 +187,9 @@ a:hover {
 .main-content table th {
     font-weight: bold; }
 .main-content table th, .main-content table td {
+    vertical-align: baseline;
+    text-align: center;
+    white-space: nowrap;
     padding: 0.5rem 1rem;
     border: 1px solid #e9ebec; }
 .main-content dl {

@@ -1,10 +1,7 @@
 ### ToDo
 #### Appearance
-- Bold total row
 - Arrow appearance?
 - Check mobile, other monitor sizes
-- Spacing within headers, cells
-- Wider space for names?
 
 
 Basic layout for simple stats recording

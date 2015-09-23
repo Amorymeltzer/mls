@@ -95,7 +95,7 @@ foreach my $name (@names) {
 # Don't sort totals
 print $out "	  <tr class='no-sort'>\n";
 foreach my $col (0..scalar @total - 1) {
-  print $out "	    <td>$total[$col]</td>\n";
+  print $out "	    <td style='font-weight:bold;'>$total[$col]</td>\n";
 }
 
 print $out "	  </tr>\n";
