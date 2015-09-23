@@ -50,6 +50,7 @@ foreach my $name (sort @names) {
 open my $out, '>', "$output" or die $ERRNO;
 # Sortify
 print $out "      <script src='tablesort.min.js'></script>\n\n";
+print $out "      <script src='tablesort.numeric.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
 
 # Header row
@@ -59,6 +60,8 @@ print $out "	 <tr>\n";
 foreach my $col (0..scalar @header - 1) {
   if ($header[$col] eq q{}) {	# Don't sort blank column before sabermetrics
     print $out "	    <th class='no-sort'>$header[$col]</th>\n";
+  } elsif ($col > 0) {
+    print $out "	    <th data-sort-method='number'>$header[$col]</th>\n";
   } else {
     print $out "	    <th>$header[$col]</th>\n";
   }
