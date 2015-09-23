@@ -4,11 +4,15 @@
 - Finalize bottom
 - Perl script to parse csv into sortable html table (see sorting format below)
 - Combine together to update index.html
+- Totals or averages?!?!
 #### Appearance
-- Sorting format - numerical, non-numerical, required javascripts
 - Arrow appearance?
 - Check mobile, other monitor sizes
-
+#### Sorting
+- Numerical for numbers
+- Surname for names
+- Skip the blanks
+- Don't sort the totals
 
 Basic layout for simple stats recording
 Should also throw in actual calculation of stats, website, etc.
