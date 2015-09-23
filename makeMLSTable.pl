@@ -58,7 +58,8 @@ print $out "	<thead>\n";
 print $out "	 <tr>\n";
 
 foreach my $col (0..scalar @header - 1) {
-  if ($header[$col] eq q{}) {	# Don't sort blank column before sabermetrics
+  # Don't sort blank columns
+  if ($header[$col] eq q{}) {
     print $out "	    <th class='no-sort'>$header[$col]</th>\n";
   } elsif ($col > 0) {
     print $out "	    <th data-sort-method='number'>$header[$col]</th>\n";
@@ -66,6 +67,7 @@ foreach my $col (0..scalar @header - 1) {
     print $out "	    <th>$header[$col]</th>\n";
   }
 }
+
 print $out "	 </tr>\n";
 print $out "	</thead>\n";
 
@@ -74,22 +76,35 @@ print $out "	</thead>\n";
 print $out "	<tbody>\n";
 
 foreach my $name (@names) {
-  if ($name eq q{}) {		# Don't sort blank row before totals
+  # Don't sort blank row before totals
+  if ($name eq q{}) {
     print $out "	  <tr class='no-sort'>\n";
   } else {
     print $out "	  <tr>\n";
   }
+
+  # Split on space in order to get last name for sorting
+  my @lname = split / /, $name;
+
   foreach my $col (0.. scalar @{$data{$name}} - 1) {
-    print $out "<td>@{$data{$name}}[$col]</td>\n";
+    # Sort players by last name
+    if ($col == 0 && $lname[-1]) {
+      print $out "<td data-sort='$lname[-1]'>@{$data{$name}}[$col]</td>\n";
+    } else {
+      print $out "<td>@{$data{$name}}[$col]</td>\n";
+    }
   }
+
   print $out "	  </tr>\n";
 }
 
 # Footer totals row
-print $out "	  <tr class='no-sort'>\n"; # Don't sort totals
+# Don't sort totals
+print $out "	  <tr class='no-sort'>\n";
 foreach my $col (0..scalar @total - 1) {
   print $out "	    <td>$total[$col]</td>\n";
 }
+
 print $out "	  </tr>\n";
 print $out "	</tbody>\n";
 print $out "   </table>\n\n";

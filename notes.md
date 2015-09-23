@@ -8,11 +8,9 @@
 #### Appearance
 - Arrow appearance?
 - Check mobile, other monitor sizes
-#### Sorting
-- Numerical for numbers
-- Surname for names
-- Skip the blanks
-- Don't sort the totals
+- Spacing within headers, cells
+- Wider space for names?
+
 
 Basic layout for simple stats recording
 Should also throw in actual calculation of stats, website, etc.
