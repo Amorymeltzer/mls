@@ -62,12 +62,12 @@ a:hover {
 @media screen and (min-width: 64em) {
     .page-header {
 	/* padding: 5rem 6rem; } } */
-	padding: 4rem 6rem 0.25rem 6rem; } }
+	padding: 3rem 6rem 0.25rem 6rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
     .page-header {
 	/* padding: 3rem 4rem; } } */
-	padding: 2rem 4rem 0.25rem 4rem; } }
+	padding: 1rem 4rem 0.25rem 4rem; } }
 
 @media screen and (max-width: 42em) {
     .page-header {
@@ -253,3 +253,4 @@ a:hover {
 @media screen and (max-width: 42em) {
     .site-footer {
 	font-size: 0.9rem; } }
+
