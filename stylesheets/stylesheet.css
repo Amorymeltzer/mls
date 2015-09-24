@@ -229,7 +229,7 @@ a:hover {
 	font-size: 1rem; } }
 
 .site-footer {
-    padding-top: 2rem;
+    padding-top: 0.75rem;
     margin-top: 2rem;
     border-top: solid 1px #eff0f1; }
 
@@ -238,6 +238,7 @@ a:hover {
     font-weight: bold; }
 
 .site-footer-credits {
+    font-size: 0.8rem;
     color: #819198; }
 
 @media screen and (min-width: 64em) {
