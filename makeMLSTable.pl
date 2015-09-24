@@ -39,9 +39,16 @@ while (<$in>) {
 }
 close $in or die $ERRNO;
 
+# Get proper date when updating
+my @months = qw (January February March April May June July August September
+		 October November December);
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
+$year += 1900;			# Convert to 4-digit year
 
 open my $out, '>', "$output" or die $ERRNO;
 # Sortify
+print $out '      <p>Click on the column headers to sort the table.';
+print $out "  Data are current as of $months[$mon] $mday, $year.</p>\n\n";
 print $out "      <script src='tablesort.min.js'></script>\n";
 print $out "      <script src='tablesort.number.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
