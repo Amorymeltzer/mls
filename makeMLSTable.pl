@@ -43,7 +43,7 @@ close $in or die $ERRNO;
 open my $out, '>', "$output" or die $ERRNO;
 # Sortify
 print $out "      <script src='tablesort.min.js'></script>\n";
-print $out "      <script src='tablesort.numeric.js'></script>\n\n";
+print $out "      <script src='tablesort.number.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
 
 # Header row
