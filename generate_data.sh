@@ -30,7 +30,11 @@ else
 
 	    # Build the tables
 	    table=$(echo $file.html)
-	    perl makeMLSTable.pl $csv $table
+	    if [ $excel == $data ]; then
+		perl makeMLSTable.pl $csv $table
+	    else
+		perl makeMLSTable.pl $csv $table 1
+	    fi
 	    echo "Generated $table"
 
 	    # Combine all the html pieces
@@ -41,9 +45,9 @@ else
 		cat bottom.html >> $index
 	    else
 		index=$file.index.html
-		cat top.html > $index
+		cat archive_top.html > $index
 		cat $table >> $index
-		cat bottom.html >> $index
+		cat archive_bottom.html >> $index
 	    fi
 
 	    # Properly indent file

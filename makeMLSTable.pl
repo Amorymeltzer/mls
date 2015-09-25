@@ -8,28 +8,14 @@ use diagnostics;
 
 use English qw( -no_match_vars );
 
-if (@ARGV == 0 || @ARGV > 2) {
-  print "Usage: makeMLSTAble.pl data.csv <output.html>\n";
+if (@ARGV == 0 || @ARGV > 3) {
+  print "Usage: makeMLSTAble.pl mls_data.csv <output.html> <archive_or_no>\n";
   exit;
 }
 
 my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.html';
-
-# Should allow for xls somehow
-# glob takes regex?! FIXME TODO
-my %files = map {$_ => 1} glob 'mls_*.xlsx';
-
-my $fileCount = scalar keys %files;
-if ($fileCount > 1) {
-  delete $files{$input};
-  $fileCount--;
-}
-foreach my $file (keys %files) {
-  print "$file\n";
-}
-print "$fileCount\n";
-exit;
+my $archive = $ARGV[2] // 0;
 
 my %data;			# Hash of arrays of data
 my @names;			# MLS stars
@@ -65,8 +51,17 @@ open my $out, '>', "$output" or die $ERRNO;
 # Sortify
 print $out '      <p>Click on the column headers to sort the table.';
 print $out "  Data are current as of $months[$mon] $mday, $year.</p>\n\n";
-print $out "      <script src='tablesort.min.js'></script>\n";
-print $out "      <script src='tablesort.number.js'></script>\n\n";
+
+# Handle archiveness
+my $archivePre = q{};
+$archivePre ='../' if $archive;
+
+print $out '      <script src=\'';
+print $out $archivePre;
+print $out "tablesort.min.js'></script>\n";
+print $out '      <script src=\'';
+print $out $archivePre;
+print $out "tablesort.number.js'></script>\n\n";
 print $out "      <table id='mls-table'>\n";
 
 # Header row
