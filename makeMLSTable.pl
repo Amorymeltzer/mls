@@ -51,10 +51,7 @@ $year += 1900;			# Convert to 4-digit year
 
 open my $out, '>', "$output" or die $ERRNO;
 
-# Handle archive relativity
-my $archivePre = q{};
-$archivePre ='../' if $archive;
-# Parse filenames for seasons 
+# Parse filenames for seasons
 my $filename = $input;
 $filename =~ s/^(?:archive\/)?mls_(\w\d\d)\.csv$/$1/;
 my %seasons = (
@@ -81,8 +78,14 @@ if ($archive) {
 
 # Sortify
 print $out '      <p>Click on the column headers to sort the table.';
-print $out "  Data are current as of $months[$mon] $mday, $year.</p>\n\n";
+if (!$archive) {
+  print $out "  Data are current as of $months[$mon] $mday, $year.";
+}
+print $out "</p>\n\n";
 
+# Handle archive relativity
+my $archivePre = q{};
+$archivePre ='../' if $archive;
 
 print $out '      <script src=\'';
 print $out $archivePre;
@@ -152,6 +155,7 @@ print $out "   </table>\n\n";
 print $out "      <script>\n";
 print $out "	new Tablesort(document.getElementById('mls-table'));\n";
 print $out "      </script>\n";
+
 
 
 close $out or die $ERRNO;
