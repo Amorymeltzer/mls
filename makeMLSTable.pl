@@ -48,13 +48,29 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 
 open my $out, '>', "$output" or die $ERRNO;
+# Handle archiveness
+my $archivePre = q{};
+$archivePre ='../' if $archive;
+
+if ($archive) {
+  print $out '<small>← <a href="../archive">Return to the archive index</a></small>';
+  print $out "<h3>\n";
+  print $out '<a id="mls-stats-old" class="anchor"';
+  print $out 'href="#mls-stats-old" aria-hidden="true">';
+  print $out '<span class="octicon octicon-link"></span>';
+  print $out '</a>MLS stats, Old 2015 (old)</h3>';
+} else {
+  print $out "<h3>\n";
+  print $out '<a id="mls-stats-ongoing" class="anchor"';
+  print $out 'href="#mls-stats-ongoing" aria-hidden="true">';
+  print $out '<span class="octicon octicon-link"></span>';
+  print $out '</a>MLS stats, Fall 2015 (ongoing)</h3>';
+}
+
 # Sortify
 print $out '      <p>Click on the column headers to sort the table.';
 print $out "  Data are current as of $months[$mon] $mday, $year.</p>\n\n";
 
-# Handle archiveness
-my $archivePre = q{};
-$archivePre ='../' if $archive;
 
 print $out '      <script src=\'';
 print $out $archivePre;
