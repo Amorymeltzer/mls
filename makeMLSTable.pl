@@ -17,6 +17,8 @@ my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.html';
 my $archive = $ARGV[2] // 0;
 
+
+
 my %data;			# Hash of arrays of data
 my @names;			# MLS stars
 my @header;			# Header array
@@ -48,23 +50,33 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 
 open my $out, '>', "$output" or die $ERRNO;
-# Handle archiveness
+
+# Handle archive relativity
 my $archivePre = q{};
 $archivePre ='../' if $archive;
+# Parse filenames for seasons 
+my $filename = $input;
+$filename =~ s/^(?:archive\/)?mls_(\w\d\d)\.csv$/$1/;
+my %seasons = (
+	       s => 'Spring',
+	       u => 'Summer',
+	       f => 'Fall');
+my $season = $seasons{substr $filename, 0, 1};
+my $date = '20'.substr $filename, -2, 2;
 
 if ($archive) {
   print $out '<small>← <a href="../archive">Return to the archive index</a></small>';
   print $out "<h3>\n";
-  print $out '<a id="mls-stats-old" class="anchor"';
-  print $out 'href="#mls-stats-old" aria-hidden="true">';
+  print $out "<a id=\"mls-stats-$season-$date\" class=\"anchor\"";
+  print $out "href=\"#mls-stats-$season-$date\" aria-hidden=\"true\">";
   print $out '<span class="octicon octicon-link"></span>';
-  print $out '</a>MLS stats, Old 2015 (old)</h3>';
+  print $out "</a>MLS stats, $season $date (archived)</h3>";
 } else {
   print $out "<h3>\n";
   print $out '<a id="mls-stats-ongoing" class="anchor"';
   print $out 'href="#mls-stats-ongoing" aria-hidden="true">';
   print $out '<span class="octicon octicon-link"></span>';
-  print $out '</a>MLS stats, Fall 2015 (ongoing)</h3>';
+  print $out "</a>MLS stats, $season $date (ongoing)</h3>";
 }
 
 # Sortify
