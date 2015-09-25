@@ -8,23 +8,21 @@ if [ ! "$1" ]; then
 else
     data=$1
 
-    FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
-    # Would love to test if it's an xlsx properly but this is close enough
-    for file in $FILES
-    do
-	echo $file
-	if xlscat -i $file 1>/dev/null 2>&1 ; then
-	    echo $file
-	fi
-    done
-    exit
+    # FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
+    # # Would love to test if it's an xlsx properly but this is close enough
+    # for file in $FILES
+    # do
+    #	echo $file
+    #	echo $file | perl -pe 's/(mls_.\d\d).xlsx?/\1.csv/;'
+    #	if xlscat -i $file 1>/dev/null 2>&1 ; then
+    #	    echo $file
+    #	fi
+    # done
+    # exit
 
     if xlscat -i $data 1>/dev/null 2>&1 ; then
-	if [ ! $2 ]; then
-	    output=data_table.csv
-	else
-	    output=$2
-	fi
+	output=$(echo $data | perl -pe 's/(mls_.\d\d).xlsx?/\1.csv/;')
+
 	# Convert XLS/XLSX to csv
 	xlscat -c $data 1>/dev/null 2>&1 > $output
 	echo "Generated $output"
