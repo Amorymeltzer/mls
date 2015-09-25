@@ -16,6 +16,8 @@
 - Use ** glob matching (would be bash4 dependent) for archive folder
 - Do so in place ie archive folder
 - Check if input handled properly, not in files, etc
+- Rename table.html to just table or something
+- Use mls_f14.html as index page - much neater
 ##### perl
 - Everything except cl-provided file gets archived
 - If 1, current text
