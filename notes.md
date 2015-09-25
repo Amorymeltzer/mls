@@ -9,6 +9,8 @@
 
 #### Planning
 - Get list of all xlsx
+- Also allow xls via glob regex?
+- XLSX ISN'T THE WAY FORWARD IT'S CSV CSV CSV
 - Everything except cl-provided file gets archived
 - If 1, current text
 - If >1, build archive page
