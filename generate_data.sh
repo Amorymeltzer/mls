@@ -8,6 +8,9 @@ if [ ! "$1" ]; then
 else
     data=$1
 
+    arcindex="archive/index.html"
+    cat archive/archive.index.top > $arcindex
+
     FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
     for excel in $FILES
     do
@@ -56,6 +59,7 @@ else
 	    # FIXME TODO
 	    # rm $index~
 
+
 	    echo "Generated $index"
 	    #echo "Site ready!"
 	else
@@ -63,4 +67,5 @@ else
 	    exit 1
 	fi
     done
+    cat archive/archive.index.bottom >> $arcindex
 fi

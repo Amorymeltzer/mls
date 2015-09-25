@@ -67,13 +67,13 @@ if ($archive) {
   print $out "<a id=\"mls-stats-$season-$date\" class=\"anchor\"";
   print $out "href=\"#mls-stats-$season-$date\" aria-hidden=\"true\">";
   print $out '<span class="octicon octicon-link"></span>';
-  print $out "</a>MLS stats, $season $date (archived)</h3>";
+  print $out "</a>MLS stats, $season $date (archived)</h3>\n";
 } else {
   print $out "<h3>\n";
   print $out '<a id="mls-stats-ongoing" class="anchor"';
   print $out 'href="#mls-stats-ongoing" aria-hidden="true">';
   print $out '<span class="octicon octicon-link"></span>';
-  print $out "</a>MLS stats, $season $date (ongoing)</h3>";
+  print $out "</a>MLS stats, $season $date (ongoing)</h3>\n";
 }
 
 # Sortify
@@ -156,6 +156,9 @@ print $out "      <script>\n";
 print $out "	new Tablesort(document.getElementById('mls-table'));\n";
 print $out "      </script>\n";
 
-
-
 close $out or die $ERRNO;
+
+open my $arci, '>>', 'archive/index.html' or die $ERRNO;
+print $arci "      <p><a href=\"./mls_$filename.index.html\">";
+print $arci "$season $date</a></p>\n";
+close $arci or die $ERRNO;
