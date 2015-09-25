@@ -8,9 +8,13 @@
 - Pages
 
 #### Planning
+##### bash
 - Get list of all xlsx
-- Also allow xls via glob regex?
-- XLSX ISN'T THE WAY FORWARD IT'S CSV CSV CSV
+- Also allow xls via ls/find
+- Recursively generate csv for each xlsx
+- Use ** glob matching (would be bash4 dependent) for archive folder
+- Do so in place ie archive folder
+##### perl
 - Everything except cl-provided file gets archived
 - If 1, current text
 - If >1, build archive page
