@@ -1,5 +1,6 @@
 ### ToDo
 - Sanitize files
+- Inputs MUST be named mls_[suf]\d\d.xlsx?
 - Build checks to ensure data and site build are valid
 - Nothing after total, nothing past OPS
 #### Archive system
@@ -14,6 +15,7 @@
 - Recursively generate csv for each xlsx
 - Use ** glob matching (would be bash4 dependent) for archive folder
 - Do so in place ie archive folder
+- Check if input handled properly, not in files, etc
 ##### perl
 - Everything except cl-provided file gets archived
 - If 1, current text
