@@ -8,7 +8,7 @@ use diagnostics;
 
 use English qw( -no_match_vars );
 
-unless (@ARGV  > 0 && @ARGV < 3) {
+if (@ARGV == 0 || @ARGV > 2) {
   print "Usage: makeMLSTAble.pl data.csv <output.html>\n";
   exit;
 }
