@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 # makeMLSTable.pl by Amory Meltzer
-# TRansform CSV data into a sortable html table
+# Transform CSV data into a sortable html table
 
 use strict;
 use warnings;
@@ -157,8 +157,3 @@ print $out "	new Tablesort(document.getElementById('mls-table'));\n";
 print $out "      </script>\n";
 
 close $out or die $ERRNO;
-
-open my $arci, '>>', 'archive/index.html' or die $ERRNO;
-print $arci "      <p><a href=\"./mls_$filename.index.html\">";
-print $arci "$season $date</a></p>\n";
-close $arci or die $ERRNO;

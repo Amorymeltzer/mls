@@ -51,6 +51,7 @@ else
 		cat archive_top.html > $index
 		cat $table >> $index
 		cat archive_bottom.html >> $index
+		perl makeArchiveIndex.pl $file $arcindex
 	    fi
 
 	    # Properly indent file
