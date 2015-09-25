@@ -7,33 +7,42 @@ if [ ! "$1" ]; then
     exit 1
 else
     data=$1
+    # Prune file format
+    data=$(echo $data | perl -pe 's/\.xlsx?$//;')
 
     FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
-    for file in $FILES
+    for excel in $FILES
     do
 	# find insists on a leading ./
 	# I generally won't be providing such things when running this but
 	# it's a good thing to watch out for when sanitizing FIXME TODO
-	file=$(echo $file | perl -pe 's/^.\///;')
+	excel=$(echo $excel | perl -pe 's/^.\///;')
 
 	# Would love to test if it's an xls/x properly but this is close enough
-	if xlscat -i $file 1>/dev/null 2>&1 ; then
+	if xlscat -i $excel 1>/dev/null 2>&1 ; then
+
+	    # Prune file format
+	    file=$(echo $excel | perl -pe 's/\.xlsx?$//;')
 
 	    # Output file with same base name
-	    output=$(echo $file | perl -pe 's/(mls_.\d\d).xlsx?/\1.csv/;')
+	    csv=$(echo $file.csv)
 	    # Convert XLS/XLSX to csv
-	    xlscat -c $file 1>/dev/null 2>&1 > $output
-	    echo "Generated $output"
+	    xlscat -c $excel 1>/dev/null 2>&1 > $csv
+	    echo "Generated $csv"
 
 	    # Build the tables
-	    table=$(echo $output | perl -pe 's/\.csv$/\1.html/;')
-	    perl makeMLSTable.pl $output $table
+	    table=$(echo $file.html)
+	    perl makeMLSTable.pl $csv $table
 	    echo "Generated $table"
 
-	    # # Combine all the html pieces
-	    # cat top.html > index.html
-	    # cat table.html >> index.html
-	    # cat bottom.html >> index.html
+	    # Combine all the html pieces
+	    # if [ $file == $data ]; then
+	    #  cat top.html >
+	    #  cat table.html >> index.html
+	    #  cat bottom.html >> index.html
+	    # else
+
+	    #	fi
 
 	    # # Properly indent file
 	    # emacs -batch index.html --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
