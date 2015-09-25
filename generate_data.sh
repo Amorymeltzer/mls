@@ -7,8 +7,6 @@ if [ ! "$1" ]; then
     exit 1
 else
     data=$1
-    # Prune file format
-    data=$(echo $data | perl -pe 's/\.xlsx?$//;')
 
     FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
     for excel in $FILES
@@ -36,19 +34,26 @@ else
 	    echo "Generated $table"
 
 	    # Combine all the html pieces
-	    # if [ $file == $data ]; then
-	    #  cat top.html >
-	    #  cat table.html >> index.html
-	    #  cat bottom.html >> index.html
-	    # else
+	    if [ $excel == $data ]; then
+		index=index.html
+		cat top.html > $index
+		cat $table >> $index
+		cat bottom.html >> $index
+	    else
+		index=$file.index.html
+		cat top.html > $index
+		cat $table >> $index
+		cat bottom.html >> $index
+	    fi
 
-	    #	fi
+	    # Properly indent file
+	    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
+	    # Except not for index.html - WHY?
+	    # FIXME TODO
+	    # rm $index~
 
-	    # # Properly indent file
-	    # emacs -batch index.html --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
-
-	    # echo "Generated index.html"
-	    # echo "Site ready!"
+	    echo "Generated $index"
+	    #echo "Site ready!"
 	else
 	    echo "$data is not a proper XLS/XLSX file"
 	    exit 1
