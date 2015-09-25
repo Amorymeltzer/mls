@@ -7,7 +7,18 @@ if [ ! "$1" ]; then
     exit 1
 else
     data=$1
+
+    FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
     # Would love to test if it's an xlsx properly but this is close enough
+    for file in $FILES
+    do
+	echo $file
+	if xlscat -i $file 1>/dev/null 2>&1 ; then
+	    echo $file
+	fi
+    done
+    exit
+
     if xlscat -i $data 1>/dev/null 2>&1 ; then
 	if [ ! $2 ]; then
 	    output=data_table.csv
