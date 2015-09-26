@@ -67,8 +67,8 @@ if ($archive) {
   print $out '<small>← <a href="../archive">Return to the archive index</a>';
   print $out ' | <a href="../">return home</a></small>';
   print $out "<h3>\n";
-  print $out "<a id=\"mls-stats-$season-$date\" class=\"anchor\"";
-  print $out "href=\"#mls-stats-$season-$date\" aria-hidden=\"true\">";
+  print $out "<a id=\"mls-stats-$filename\" class=\"anchor\"";
+  print $out "href=\"#mls-stats-$filename\" aria-hidden=\"true\">";
   print $out '<span class="octicon octicon-link"></span>';
   print $out "</a>MLS stats, $season $date (archived)</h3>\n";
 } else {
