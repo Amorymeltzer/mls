@@ -62,7 +62,9 @@ my $season = $seasons{substr $filename, 0, 1};
 my $date = '20'.substr $filename, -2, 2;
 
 if ($archive) {
-  print $out '<small>← <a href="../archive">Return to the archive index</a></small>';
+  #  print $out '<small>← <a href="../archive">Return to the archive index</a></small>';
+  print $out '<small>← <a href="../archive">Return to the archive index</a>';
+  print $out ' | <a href="../">return home</a></small>';
   print $out "<h3>\n";
   print $out "<a id=\"mls-stats-$season-$date\" class=\"anchor\"";
   print $out "href=\"#mls-stats-$season-$date\" aria-hidden=\"true\">";
