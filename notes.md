@@ -1,11 +1,11 @@
 ### ToDo
 - Sanitize files
 - Inputs MUST be named mls_[suf]\d\d.xlsx?
+- What about tournament data?
 - Build checks to ensure data and site build are valid
 - Better commenting!
 - Nothing after total, nothing past OPS
 - Homepage link - gordon, image, on top of archive
-- Sub links on archive indexes
 #### Archive system
 - Sorting
 - Appearance

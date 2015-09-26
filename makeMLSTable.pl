@@ -51,14 +51,15 @@ $year += 1900;			# Convert to 4-digit year
 
 open my $out, '>', "$output" or die $ERRNO;
 
-# Parse filenames for seasons
+# Parse filenames for seasons, tournaments
 my $filename = $input;
-$filename =~ s/^(?:archive\/)?mls_(\w\d\d)\.csv$/$1/;
+$filename =~ s/^(?:archive\/)?mls_(\w\w?\d\d)\.csv$/$1/;
 my %seasons = (
 	       s => 'Spring',
 	       u => 'Summer',
 	       f => 'Fall');
-my $season = $seasons{substr $filename, 0, 1};
+my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
+$season .= $seasons{substr $filename, -3, 1};
 my $date = '20'.substr $filename, -2, 2;
 
 if ($archive) {

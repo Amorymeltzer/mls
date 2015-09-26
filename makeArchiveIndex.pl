@@ -19,12 +19,13 @@ my $output = $ARGV[1];
 
 # Parse filenames for seasons
 my $filename = $input;
-$filename =~ s/^(?:archive\/)?mls_(\w\d\d)$/$1/;
+$filename =~ s/^(?:archive\/)?mls_(\w\w?\d\d)$/$1/;
 my %seasons = (
 	       s => 'Spring',
 	       u => 'Summer',
 	       f => 'Fall');
-my $season = $seasons{substr $filename, 0, 1};
+my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
+$season .= $seasons{substr $filename, -3, 1};
 my $date = '20'.substr $filename, -2, 2;
 
 open my $arci, '>>', "$output" or die $ERRNO;
