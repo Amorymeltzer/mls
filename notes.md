@@ -9,18 +9,16 @@
 #### Archive system
 - Sorting
 - Appearance
-- Total current past past
+- Total versus current versus past
 
 #### Planning
 ##### bash
-- Use ** glob matching (would be bash4 dependent?) for archive folder
 - Check if input handled properly, not in files, etc
 - Rename table.html to just table or something
 - Use mls_f14.html as index page - much neater
 ##### perl
 - List individual pages on main index.html (sorted by date?)
 - Sort index page by season (separate perl to parse input to generate??)
-- Links on subpages to go back to homepage a la enWiki ARBCOM <- AC/C/D/E
 - Small links to other archived tables - next/previous seasons or just archive index?
 
 - index.html should display total or season or...?
