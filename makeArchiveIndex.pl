@@ -17,7 +17,7 @@ my $input = $ARGV[0];
 my $output = $ARGV[1];
 
 
-# Parse filenames for seasons
+# Parse filenames for seasons, tournaments
 my $filename = $input;
 $filename =~ s/^(?:archive\/)?mls_(\w\w?\d\d)$/$1/;
 my %seasons = (
