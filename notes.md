@@ -6,6 +6,8 @@
 - Better commenting!
 - Nothing after total, nothing past OPS
 - Homepage link - gordon, image, on top of archive
+- Potentially deal with multiple sheets in xlscat
+- xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
 #### Archive system
 - Sorting
 - Appearance
