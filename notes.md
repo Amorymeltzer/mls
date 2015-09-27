@@ -8,25 +8,19 @@
 - Homepage link - gordon, image, on top of archive
 - Potentially deal with multiple sheets in xlscat
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
+- index.html should display total or season or...?
+- Get input from Joe, team
 #### Archive system
 - Sorting
 - Appearance
 - Total versus current versus past
-
 #### Planning
 ##### bash
 - Check if input handled properly, not in files, etc
-- Rename table.html to just table or something
-- Use mls_f14.html as index page - much neater
 ##### perl
 - List individual pages on main index.html (sorted by date?)
 - Sort index page by season (separate perl to parse input to generate??)
 - Small links to other archived tables - next/previous seasons or just archive index?
-
-- index.html should display total or season or...?
-- Get input from Joe, team
-
-
 #### Appearance
 - Check iPad sizes
 - Better gradient?
