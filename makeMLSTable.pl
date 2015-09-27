@@ -14,7 +14,7 @@ if (@ARGV == 0 || @ARGV > 3) {
 }
 
 my $input = $ARGV[0];
-my $output = $ARGV[1] // 'table.html';
+my $output = $ARGV[1] // 'table.table';
 my $archive = $ARGV[2] // 0;
 
 

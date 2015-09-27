@@ -32,7 +32,8 @@ else
 	    echo "Generated $csv"
 
 	    # Build the tables
-	    table=$(echo $file.html)
+	    #  table=$(echo $file.html)
+	    table=$(echo $file.table)
 	    if [ $excel == $data ]; then
 		perl makeMLSTable.pl $csv $table
 	    else
@@ -47,7 +48,7 @@ else
 		cat $table >> $index
 		cat bottom.html >> $index
 	    else
-		index=$file.index.html
+		index=$file.html
 		cat archive_top.html > $index
 		cat $table >> $index
 		cat archive_bottom.html >> $index

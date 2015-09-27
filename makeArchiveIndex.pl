@@ -29,6 +29,6 @@ $season .= $seasons{substr $filename, -3, 1};
 my $date = '20'.substr $filename, -2, 2;
 
 open my $arci, '>>', "$output" or die $ERRNO;
-print $arci "      <p><a href=\"./mls_$filename.index.html\">";
+print $arci "      <p><a href=\"./mls_$filename.html\">";
 print $arci "$season $date</a></p>\n";
 close $arci or die $ERRNO;
