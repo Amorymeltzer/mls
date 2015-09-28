@@ -19,13 +19,10 @@ foreach my $file (@ARGV) {
   $hash{$key} = $file;
 }
 
-my @files;
 foreach my $key (sort seasonSort keys %hash) {
-  push @files, $hash{$key};
+  print "$hash{$key} ";		# Quotes ensure the list is formatted for bash
 }
 
-# Quotes ensure the list is formatted for bash
-print "@files";
 
 sub seasonSort
   {
