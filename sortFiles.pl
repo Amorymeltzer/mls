@@ -10,22 +10,22 @@ if (!@ARGV) {
   print "Usage: sortFiles.pl list_of_files\n";
   exit;
 }
-my @files = @ARGV;
-print "@files\n";
 
 my %hash;
 
-foreach my $i (@files) {
-  print "\t$i\n";
-  my $tmp = $i;
-  $tmp =~ s/\.\/(?:archive\/)?mls_(\w\w?\d\d).xlsx?$/$1/;
-  print "\t$tmp\t$i\n";
-  $hash{$tmp} = $i;
+foreach my $file (@ARGV) {
+  my $key = $file;
+  $key =~ s/\.\/(?:archive\/)?mls_(\w\w?\d\d).xlsx?$/$1/;
+  $hash{$key} = $file;
 }
 
+my @files;
 foreach my $key (sort seasonSort keys %hash) {
-  print "a\ta\t$key\t$hash{$key}\n";
+  push @files, $hash{$key};
 }
+
+# Quotes ensure the list is formatted for bash
+print "@files";
 
 sub seasonSort
   {
@@ -42,8 +42,6 @@ sub seasonSort
     $w =~ s/\d//g;
     my $aLength = length $a;
     my $bLength = length $b;
-
-    print "\n\na\t$a\nb\t$b\nv\t$v\nw\t$w\nx\t$x\ny\t$y\n\n";
 
     $x <=> $y || $seasonOrderMap{$v} cmp $seasonOrderMap{$w} || $aLength <=> $bLength;
   }
