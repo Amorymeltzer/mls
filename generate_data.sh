@@ -12,6 +12,11 @@ else
     cat archive/archive.index.top > $arcindex
 
     FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
+    echo $FILES
+    perl sortFiles.pl $FILES
+    echo $FILES
+    exit;
+    
     for excel in $FILES
     do
 	# find insists on a leading ./
