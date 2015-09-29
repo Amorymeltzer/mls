@@ -4,7 +4,6 @@
 - Inputs MUST be named mls_t?[suf]1\d.xlsx?
 - Build checks to ensure data and site build are valid
 - Check if input handled properly, not in files, etc
-- Homepage link - gordon, image, on top of archive
 - Potentially deal with multiple sheets in xlscat
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
 - index.html should display total or season or...?
