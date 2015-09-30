@@ -16,5 +16,3 @@
 - Small links to other archived tables - next/previous seasons?
 #### Appearance
 - Check iPad sizes
-- Better gradient?
-- Use stylesheet/span for archive backlinks (arbcom-style) resizing
