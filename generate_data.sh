@@ -15,6 +15,12 @@ else
     # Sort files chronologically
     FILES=$(perl sortFiles.pl $FILES)
 
+    # Die if no proper files can be found
+    if [ -z "$FILES" ]; then
+	echo "No valid files given!!!"
+	exit
+    fi
+
     for excel in $FILES
     do
 	# find insists on a leading ./

@@ -15,6 +15,13 @@ my %hash;
 
 foreach my $file (@ARGV) {
   my $key = $file;
+
+  # Die if no proper files can be found
+  if ($key !~ m/mls_t?[suf]1\d.xlsx?$/) {
+    warn "Input file $key is improperly named and will be skipped\n";
+    next;
+  }
+
   $key =~ s/\.\/(?:archive\/)?mls_(\w\w?\d\d).xlsx?$/$1/;
   $hash{$key} = $file;
 }

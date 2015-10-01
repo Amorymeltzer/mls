@@ -1,7 +1,6 @@
 ### ToDo
 - Better commenting!
 - Sanitize files
-- Inputs MUST be named mls_t?[suf]1\d.xlsx?
 - Build checks to ensure data and site build are valid
 - Check if input handled properly, not in files, etc
 - Potentially deal with multiple sheets in xlscat
