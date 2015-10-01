@@ -22,7 +22,7 @@ foreach my $file (@ARGV) {
     next;
   }
 
-  $key =~ s/\.\/(?:archive\/)?mls_(\w\w?\d\d).xlsx?$/$1/;
+  $key =~ s/\.\/(?:archive\/)?mls_(t?[suf]1\d).xlsx?$/$1/;
   $hash{$key} = $file;
 }
 

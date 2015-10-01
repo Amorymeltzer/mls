@@ -58,7 +58,7 @@ open my $out, '>', "$output" or die $ERRNO;
 
 # Parse filenames for seasons, tournaments
 my $filename = $input;
-$filename =~ s/^(?:archive\/)?mls_(\w\w?\d\d)\.csv$/$1/;
+$filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
 my %seasons = (
 	       s => 'Spring',
 	       u => 'Summer',
