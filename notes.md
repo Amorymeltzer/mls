@@ -7,11 +7,10 @@
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
 - index.html should display total or season or...?
 - Get input from Joe, team
+- Photo section?
 #### Archive system
-- Appearance
 - Total versus current versus past
-#### Planning
-- List individual pages on main index.html (sorted by date?)
+- List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
 #### Appearance
 - Check iPad sizes
