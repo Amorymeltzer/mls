@@ -5,11 +5,9 @@
 - Check if input handled properly, not in files, etc
 - Potentially deal with multiple sheets in xlscat
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
-- index.html should display total or season or...?
-- Get input from Joe, team
+- index.html should display total or season or...?  Get input
 - Photo section?
 #### Archive system
-- Total versus current versus past
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
 #### Appearance
