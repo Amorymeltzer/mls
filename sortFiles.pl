@@ -22,6 +22,7 @@ foreach my $file (@ARGV) {
     next;
   }
 
+  # season/Year => file
   $key =~ s/\.\/(?:archive\/)?mls_(t?[suf]1\d).xlsx?$/$1/;
   $hash{$key} = $file;
 }
@@ -30,7 +31,8 @@ foreach my $key (sort seasonSort keys %hash) {
   print "$hash{$key} ";		# Quotes ensure the list is formatted for bash
 }
 
-
+# Special sorting subroutine to ensure Spring comes before sUmmer which
+# comes before Fall
 sub seasonSort
   {
     my @input = ($a, $b);
@@ -47,5 +49,6 @@ sub seasonSort
     my $aLength = length $a;
     my $bLength = length $b;
 
+    # Year, season, tournaments
     $x <=> $y || $seasonOrderMap{$v} cmp $seasonOrderMap{$w} || $aLength <=> $bLength;
   }

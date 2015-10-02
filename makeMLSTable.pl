@@ -34,7 +34,7 @@ while (<$in>) {
   if ($tmp[0] =~ /Player/) {
     @header = @tmp;
 
-    # Can't quit but try to catch some potential errors
+    # Try to catch some potential errors
     if ($header[-1] ne 'OPS') {
       print "Potential extra columns detected\n";
     }
@@ -43,6 +43,7 @@ while (<$in>) {
     @total = @tmp;
     last;
   }
+
   $data{$tmp[0]} = [@tmp];
   @names = (@names,$tmp[0]);
 }

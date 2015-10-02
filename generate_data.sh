@@ -11,6 +11,7 @@ else
     arcindex="archive/index.html"
     cat archive/archive.index.top > $arcindex
 
+    # Grab everything...
     FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
     # Sort files chronologically
     FILES=$(perl sortFiles.pl $FILES)
@@ -41,7 +42,6 @@ else
 	    echo "Generated $csv"
 
 	    # Build the tables
-	    #  table=$(echo $file.html)
 	    table=$(echo $file.table)
 	    if [ $excel == $data ]; then
 		perl makeMLSTable.pl $csv $table
@@ -66,17 +66,20 @@ else
 
 	    # Properly indent file
 	    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
-	    # Except not for index.html - WHY?
-	    # FIXME TODO
+
+	    # Except not for index.html - WHY? FIXME TODO
 	    # rm $index~
 
 
 	    echo "Generated $index"
-	    #echo "Site ready!"
+
 	else
 	    echo "$data is not a proper XLS/XLSX file"
 	    exit 1
 	fi
     done
     cat archive/archive.index.bottom >> $arcindex
+
+    echo
+    echo "Site ready!"
 fi
