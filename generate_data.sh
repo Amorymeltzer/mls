@@ -53,16 +53,18 @@ else
 	    # Combine all the html pieces
 	    if [ $excel == $data ]; then
 		index=index.html
-		cat top.html > $index
-		cat $table >> $index
-		cat bottom.html >> $index
+		top=top.html
+		bottom=bottom.html
 	    else
 		index=$file.html
-		cat archive_top.html > $index
-		cat $table >> $index
-		cat archive_bottom.html >> $index
+		top=archive_top.html
+		bottom=archive_bottom.html
 		perl makeArchiveIndex.pl $file $arcindex
 	    fi
+
+	    cat $top > $index
+	    cat $table >> $index
+	    cat $bottom >> $index
 
 	    # Properly indent file
 	    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
