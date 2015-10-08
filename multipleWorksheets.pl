@@ -35,20 +35,15 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   for (my $r = 1; $r<=$rowN; $r++) {
     for (my $c = 1; $c<=$colN; $c++) {
       if ($book->[$i]{'cell'}[$c][$r]) {
-	print "$book->[$i]{'cell'}[$c][$r],";
 	if ($colN-$c<=4) {
 	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
 	} else {
 	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
 	}
       } elsif ($c != 13) {
-	print ",";
 	$sheet->write($r-1, $c-1, '0');
-      } else {
-	print ",";
       }
     }
-    print "\n";
   }
 
 }
