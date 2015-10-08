@@ -11,10 +11,8 @@
 #### Multiple sheets
 - Use multipleWorksheets.pl to deal with multiple sheets in xlscat
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
-- Make hash of 1-based worksheet number=>label/name
-- Parse each worksheet (for loop)
-- Print via Excel::Writer::XLSX
-- Report
-- Comments
+- Return original formatting?  Figure out attr
+- Better way to deal with blank column, zero
+- Process files for naming?
 #### Appearance
 - Check iPad sizes
