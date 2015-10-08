@@ -36,8 +36,11 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
     for (my $c = 1; $c<=$colN; $c++) {
       if ($book->[$i]{'cell'}[$c][$r]) {
 	print "$book->[$i]{'cell'}[$c][$r],";
-	#  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
-	$sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
+	if ($colN-$c<=4) {
+	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
+	} else {
+	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
+	}
       } else {
 	print ",";
 	$sheet->write($r-1, $c-1, '0');

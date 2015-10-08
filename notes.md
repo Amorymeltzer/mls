@@ -14,11 +14,7 @@
 - Make hash of 1-based worksheet number=>label/name
 - Parse each worksheet (for loop)
 - Print via Excel::Writer::XLSX
-- Keep zeros (keep_zeros?)
 - Don't throw in zero for blank column??
-- write_string, write_number, etc.
-- Formatting (keep 0.000)
-- Only use trailing zeros format for last four columns
 - Report
 #### Appearance
 - Check iPad sizes
