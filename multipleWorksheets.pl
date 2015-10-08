@@ -12,10 +12,6 @@ use Excel::Writer::XLSX;
 
 
 my $book = ReadData ($ARGV[0]);
-#print "$book->[0]{'sheets'}\n";
-#print "$book->[1]{'label'}\n";
-#print "$book->[2]{'label'}\n";
-# print "$book->[3]{'label'}\n";
 
 my $sheetNum = $book->[0]{'sheets'};
 for (my $i = 1; $i<=$sheetNum; $i++) {
