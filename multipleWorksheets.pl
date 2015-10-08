@@ -27,13 +27,16 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   my $outfile = $book->[$i]{'label'}.'.xlsx';
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
+  my$formatNum = $workbook->add_format();
+  $formatNum->set_num_format( '0.000' );
 
   # Build!
   for (my $r = 1; $r<=$rowN; $r++) {
     for (my $c = 1; $c<=$colN; $c++) {
       if ($book->[$i]{'cell'}[$c][$r]) {
 	print "$book->[$i]{'cell'}[$c][$r],";
-	$sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
+	#  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
+	$sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
       } else {
 	print ",";
       }
