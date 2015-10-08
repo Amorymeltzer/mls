@@ -24,7 +24,7 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   my $rowN = $book->[$i]{'maxrow'};
   my $colN = $book->[$i]{'maxcol'};
 
-  my $outfile = $book->[$sheetNum]{'label'}.'.xlsx';
+  my $outfile = $book->[$i]{'label'}.'.xlsx';
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
 
