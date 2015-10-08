@@ -41,9 +41,11 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
 	} else {
 	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
 	}
-      } else {
+      } elsif ($c != 13) {
 	print ",";
 	$sheet->write($r-1, $c-1, '0');
+      } else {
+	print ",";
       }
     }
     print "\n";

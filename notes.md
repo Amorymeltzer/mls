@@ -14,7 +14,7 @@
 - Make hash of 1-based worksheet number=>label/name
 - Parse each worksheet (for loop)
 - Print via Excel::Writer::XLSX
-- Don't throw in zero for blank column??
 - Report
+- Comments
 #### Appearance
 - Check iPad sizes
