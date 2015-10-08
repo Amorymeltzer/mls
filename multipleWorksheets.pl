@@ -27,6 +27,7 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   my $outfile = $book->[$i]{'label'}.'.xlsx';
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
+  $sheet->keep_leading_zeros();
   my$formatNum = $workbook->add_format();
   $formatNum->set_num_format( '0.000' );
 
@@ -39,6 +40,7 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
 	$sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
       } else {
 	print ",";
+	$sheet->write($r-1, $c-1, '0');
       }
     }
     print "\n";
