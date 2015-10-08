@@ -13,6 +13,7 @@ use Excel::Writer::XLSX;
 
 my $book = ReadData ($ARGV[0]);
 
+# Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
 for (my $i = 1; $i<=$sheetNum; $i++) {
   # Inverted from how I think about rows/columns.  Value essentially means how
@@ -20,9 +21,12 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   my $rowN = $book->[$i]{'maxrow'};
   my $colN = $book->[$i]{'maxcol'};
 
+  # Name each file according to worksheet name
   my $outfile = $book->[$i]{'label'}.'.xlsx';
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
+
+  # Formatting options
   $sheet->keep_leading_zeros();
   my $formatNum = $workbook->add_format();
   $formatNum->set_num_format( '0.000' );
@@ -32,14 +36,18 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
     for (my $c = 1; $c<=$colN; $c++) {
       if ($book->[$i]{'cell'}[$c][$r]) {
 	if ($colN-$c<=4) {
+	  # Only use 0.000 formatting on calculated stats
 	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
 	} else {
 	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
 	}
       } elsif ($c != 13) {
+	# Zero-fill, unless it's a purposeful blank column
 	$sheet->write($r-1, $c-1, '0');
       }
     }
   }
 
+  # All done
+  print "Created $outfile\n";
 }
