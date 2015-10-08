@@ -24,7 +24,7 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
   $sheet->keep_leading_zeros();
-  my$formatNum = $workbook->add_format();
+  my $formatNum = $workbook->add_format();
   $formatNum->set_num_format( '0.000' );
 
   # Build!
