@@ -13,7 +13,10 @@
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
 - Make hash of 1-based worksheet number=>label/name
 - Parse each worksheet (for loop)
-- Print via Excel::Writer::XLSX(?)
+- Print via Excel::Writer::XLSX
+- Keep zeros (keep_zeros?)
+- write_string, write_number, etc.
+- Formatting (keep 0.000)
 - Report
 #### Appearance
 - Check iPad sizes
