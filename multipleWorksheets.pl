@@ -15,7 +15,8 @@ my $book = ReadData ($ARGV[0]);
 
 # Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
-for (my $i = 1; $i<=$sheetNum; $i++) {
+for (1..$sheetNum) {
+  my $i = $_;
   # Inverted from how I think about rows/columns.  Value essentially means how
   # far they go, i.e. a maxrow of 5 means rows extend 5 places to column E
   my $rowN = $book->[$i]{'maxrow'};
@@ -32,8 +33,10 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
   $formatNum->set_num_format( '0.000' );
 
   # Build!
-  for (my $r = 1; $r<=$rowN; $r++) {
-    for (my $c = 1; $c<=$colN; $c++) {
+  for (1..$rowN) {
+    my $r = $_;
+    for (1..$colN) {
+      my $c = $_;
       if ($book->[$i]{'cell'}[$c][$r]) {
 	if ($colN-$c<=4) {
 	  # Only use 0.000 formatting on calculated stats
@@ -47,7 +50,6 @@ for (my $i = 1; $i<=$sheetNum; $i++) {
       }
     }
   }
-
   # All done
   print "Created $outfile\n";
 }
