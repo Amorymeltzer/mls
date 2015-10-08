@@ -16,11 +16,11 @@ print "$book->[1]{'label'}\n";
 print "$book->[2]{'label'}\n";
 print "$book->[3]{'label'}\n";
 
-my %sheets = %{$book->[0]{'sheet'}};
-my @keys = keys %sheets;
-print "@keys\n";
-
 my $sheetNum = $book->[0]{'sheets'};
 for (my $i = 1; $i<=$sheetNum; $i++) {
   print "$i\t$book->[$i]{'label'}\n";
+  print "$book->[$i]{'maxrow'}\t";
+  print "$book->[$i]{'B3'}\t";
+  print "$book->[$i]{'maxcol'}\n";
+
 }
