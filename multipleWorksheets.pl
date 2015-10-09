@@ -83,6 +83,7 @@ sub createName
     my $re = join q{|}, keys %seasons;
     my ($season) = $label =~ /($re)/i;
     $name .= $seasons{lc $season};
+    $name = 'archive/'.$name if lc $season ne $curSeason;
     # Year
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
