@@ -30,6 +30,7 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 
 # Attempt to divine current season
+# Not exact, esp. around June
 my $curSeason = ($mon < 8 && $mon > 4) ? 'summer' : 'fall';
 $curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
 
@@ -101,8 +102,8 @@ sub createName
 
 sub archiveFiles
   {
-    my $file = shift;
-    my ($name) = split /\./, $file;
+    my $name = shift;
+    ($name) = split /\./, $name;
     # Year
     my $curYear = '20'.substr $name, -2, 2;
     # Season
@@ -111,6 +112,6 @@ sub archiveFiles
     if ($name =~ /t/ || $curYear != $year || $season ne $seasons{$curSeason}) {
       $name = 'archive/'.$name;
     }
-
+    print "$name\n";
     return $name.'.xlsx';
   }
