@@ -18,6 +18,9 @@ my %seasons = (
 
 my $book = ReadData ($ARGV[0]);
 
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
+$year += 1900;			# Convert to 4-digit year
+
 # Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
 for (1..$sheetNum) {
@@ -67,16 +70,21 @@ sub createName
     my $name = 'mls_';
 
     # Tournament
-    $name .= 't' if $label =~ m/tournament/i;
+    if ($label =~ m/tournament/i) {
+      $name .= 't';
+      $name = 'archive/'.$name;
+    }
     # Season
     my $re = join q{|}, keys %seasons;
     my ($season) = $label =~ /($re)/i;
     $name .= $seasons{lc $season};
     # Year
-    my ($year) = $label =~ /(\d+)/;
-    $name .= substr $year, 2;
+    my ($curYear) = $label =~ /(\d+)/;
+    $name .= substr $curYear, 2;
     # Extension
     $name .= '.xlsx';
+
+    $name = 'archive/'.$name if $curYear != $year;
 
     return $name;
   }
