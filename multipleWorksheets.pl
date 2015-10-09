@@ -30,8 +30,8 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 
 # Attempt to divine current season
-my $curSeason = ($mon < 8 && $mon > 4) ? 'u' : 'f';
-$curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 's';
+my $curSeason = ($mon < 8 && $mon > 4) ? 'summer' : 'fall';
+$curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
 
 # Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
@@ -108,7 +108,7 @@ sub archiveFiles
     # Season
     my $season = substr $name, -3, 1;
     # Also tournament
-    if ($name =~ /t/ || $curYear != $year || $season ne $curSeason) {
+    if ($name =~ /t/ || $curYear != $year || $season ne $seasons{$curSeason}) {
       $name = 'archive/'.$name;
     }
 
