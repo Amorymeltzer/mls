@@ -11,12 +11,17 @@ use Spreadsheet::Read;
 use Excel::Writer::XLSX;
 
 
+if (@ARGV != 1) {
+  print "Usage: multipleWorksheets.pl MLS_Stats.xlsx\n";
+  exit;
+}
+
+my $book = ReadData ($ARGV[0]);
+
 my %seasons = (
 	       spring => 's',
 	       summer => 'u',
 	       fall => 'f');
-
-my $book = ReadData ($ARGV[0]);
 
 # Date parsing
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
