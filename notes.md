@@ -13,6 +13,5 @@
 - xlscat -c mls.xlsx -S "Fall Tournament" 1>/dev/null 2>&1
 - Return original formatting?  Figure out attr
 - Better way to deal with blank column, zero
-- Process files for naming?
 #### Appearance
 - Check iPad sizes

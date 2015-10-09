@@ -11,6 +11,11 @@ use Spreadsheet::Read;
 use Excel::Writer::XLSX;
 
 
+my %seasons = (
+	       spring => 's',
+	       summer => 'u',
+	       fall => 'f');
+
 my $book = ReadData ($ARGV[0]);
 
 # Iterate over each sheet
@@ -23,7 +28,7 @@ for (1..$sheetNum) {
   my $colN = $book->[$i]{'maxcol'};
 
   # Name each file according to worksheet name
-  my $outfile = $book->[$i]{'label'}.'.xlsx';
+  my $outfile = createName($book->[$i]{'label'});
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
 
@@ -53,3 +58,25 @@ for (1..$sheetNum) {
   # All done
   print "Created $outfile\n";
 }
+
+
+# Get the appropriate name
+sub createName
+  {
+    my $label = shift;
+    my $name = 'mls_';
+
+    # Tournament
+    $name .= 't' if $label =~ m/tournament/i;
+    # Season
+    my $re = join q{|}, keys %seasons;
+    my ($season) = $label =~ /($re)/i;
+    $name .= $seasons{lc $season};
+    # Year
+    my ($year) = $label =~ /(\d+)/;
+    $name .= substr $year, 2;
+    # Extension
+    $name .= '.xlsx';
+
+    return $name;
+  }
