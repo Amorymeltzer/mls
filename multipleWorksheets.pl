@@ -18,6 +18,8 @@ if (@ARGV != 1) {
 
 my $book = ReadData ($ARGV[0]);
 
+# Season lookup.  Would be easy to substring, but this also means I get all
+# seasons as a nice keys array
 my %seasons = (
 	       spring => 's',
 	       summer => 'u',
@@ -45,12 +47,12 @@ for (1..$sheetNum) {
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
 
-  # Formatting options
+  # Formatting options for sabermetrics
   $sheet->keep_leading_zeros();
   my $formatNum = $workbook->add_format();
   $formatNum->set_num_format( '0.000' );
 
-  # Build!
+  # Iterate all the the things!
   for (1..$rowN) {
     my $r = $_;
     for (1..$colN) {
@@ -62,8 +64,7 @@ for (1..$sheetNum) {
 	} else {
 	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
 	}
-      } elsif ($c != 13) {
-	# Zero-fill, unless it's a purposeful blank column
+      } elsif ($c != 13) {  # Zero-fill, unless it's a purposeful blank column
 	$sheet->write($r-1, $c-1, '0');
       }
     }
@@ -76,6 +77,7 @@ for (1..$sheetNum) {
 }
 
 
+#### Subroutines
 # Get the appropriate name
 sub createName
   {
@@ -101,9 +103,11 @@ sub archiveFiles
   {
     my $file = shift;
     my ($name) = split /\./, $file;
+    # Year
     my $curYear = '20'.substr $name, -2, 2;
+    # Season
     my $season = substr $name, -3, 1;
-
+    # Also tournament
     if ($name =~ /t/ || $curYear != $year || $season ne $curSeason) {
       $name = 'archive/'.$name;
     }
