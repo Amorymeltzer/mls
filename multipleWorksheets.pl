@@ -23,8 +23,8 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 
 # Attempt to divine current season
-my $curSeason = ($mon < 8 && $mon > 4) ? 'summer' : 'fall';
-$curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
+my $curSeason = ($mon < 8 && $mon > 4) ? 'u' : 'f';
+$curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 's';
 
 # Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
@@ -63,6 +63,9 @@ for (1..$sheetNum) {
       }
     }
   }
+  # Rename if needed
+  rename $outfile, archiveFiles($outfile);
+
   # All done
   print "Created $outfile\n";
 }
@@ -75,22 +78,30 @@ sub createName
     my $name = 'mls_';
 
     # Tournament
-    if ($label =~ m/tournament/i) {
-      $name .= 't';
-      $name = 'archive/'.$name;
-    }
+    $name .= 't' if $label =~ m/tournament/i;
     # Season
     my $re = join q{|}, keys %seasons;
     my ($season) = $label =~ /($re)/i;
     $name .= $seasons{lc $season};
-    $name = 'archive/'.$name if lc $season ne $curSeason;
     # Year
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
     # Extension
     $name .= '.xlsx';
 
-    $name = 'archive/'.$name if $curYear != $year;
-
     return $name;
+  }
+
+sub archiveFiles
+  {
+    my $file = shift;
+    my ($name) = split /\./, $file;
+    my $curYear = '20'.substr $name, -2, 2;
+    my $season = substr $name, -3, 1;
+
+    if ($name =~ /t/ || $curYear != $year || $season ne $curSeason) {
+      $name = 'archive/'.$name;
+    }
+
+    return $name.'.xlsx';
   }
