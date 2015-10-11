@@ -100,10 +100,11 @@ sub createName
     return $name;
   }
 
+# Any previous seasons should be renamed/archived
 sub archiveFiles
   {
     my $name = shift;
-    ($name) = split /\./, $name;
+    ($name) = split /\./, $name; # Listification takes first item
     # Year
     my $curYear = '20'.substr $name, -2, 2;
     # Season
