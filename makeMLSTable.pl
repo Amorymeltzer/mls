@@ -15,28 +15,28 @@ if (@ARGV == 0 || @ARGV > 3) {
 
 my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.table';
-my $archive = $ARGV[2] // 0;
+my $archive = $ARGV[2] // 0;	# Treat old ones slightly differently
 
 
 
 my %data;			# Hash of arrays of data
-my @names;			# MLS stars
-my @header;			# Header array
-my @total;			# Footer total array
+my @names;			# MLS allstars
+my @header;			# Column headers
+my @total;			# Totals
 
 
 open my $in, '<', "$input" or die $ERRNO;
 while (<$in>) {
   chomp;
   my @tmp = split /,/;
-  $tmp[0] =~ s/\"//g;		# No quotes in names
+  $tmp[0] =~ s/\"//g;		# No quotes around names
   $tmp[-1] =~ s/\r//g;		# No stupid ^M crap
   if ($tmp[0] =~ /Player/) {
     @header = @tmp;
 
     # Try to catch some potential errors
     if ($header[-1] ne 'OPS') {
-      print "Potential extra columns detected\n";
+      print "Warning: Potential extra columns detected!!\n";
     }
     next;
   } elsif ($tmp[0] =~ /Total/) {
@@ -44,6 +44,7 @@ while (<$in>) {
     last;
   }
 
+  # Build hash of data arrays
   $data{$tmp[0]} = [@tmp];
   @names = (@names,$tmp[0]);
 }
@@ -55,8 +56,6 @@ my @months = qw (January February March April May June July August September
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 
-open my $out, '>', "$output" or die $ERRNO;
-
 # Parse filenames for seasons, tournaments
 my $filename = $input;
 $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
@@ -67,6 +66,8 @@ my %seasons = (
 my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
 $season .= $seasons{substr $filename, -3, 1};
 my $date = '20'.substr $filename, -2, 2;
+
+open my $out, '>', "$output" or die $ERRNO;
 
 if ($archive) {
   print $out '<span class="archive-nav">← <a href="../archive">Return to the archive index</a>';
