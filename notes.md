@@ -3,6 +3,7 @@
 - Check if input handled properly, not in files, etc
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
+- Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
 - News feed? Updates?  Luke hit for cycle 10/21/15
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
