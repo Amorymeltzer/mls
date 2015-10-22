@@ -67,23 +67,23 @@
 <td>1.752</td>
 	  </tr>
 	  <tr>
-<td data-sort='Squitieri'>Rich Squitieri</td>
-<td>21</td>
-<td>21</td>
-<td>4</td>
-<td>14</td>
+<td data-sort='Patel'>Qaiser Patel</td>
+<td>12</td>
+<td>9</td>
+<td>5</td>
+<td>7</td>
 <td>2</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
 <td>1</td>
-<td>0</td>
-<td>11</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
 <td></td>
-<td>0.667</td>
-<td>0.857</td>
-<td>0.667</td>
-<td>1.524</td>
+<td>0.778</td>
+<td>1.000</td>
+<td>0.750</td>
+<td>1.750</td>
 	  </tr>
 	  <tr>
 <td data-sort='Heuer'>Luke Heuer</td>
@@ -143,6 +143,25 @@
 <td>1.962</td>
 	  </tr>
 	  <tr>
+<td data-sort='Squitieri'>Rich Squitieri</td>
+<td>21</td>
+<td>21</td>
+<td>4</td>
+<td>14</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td>0.667</td>
+<td>0.857</td>
+<td>0.667</td>
+<td>1.524</td>
+	  </tr>
+	  <tr>
 <td data-sort='Mirman'>Nick Mirman</td>
 <td>9</td>
 <td>8</td>
@@ -181,25 +200,6 @@
 <td>1.000</td>
 	  </tr>
 	  <tr>
-<td data-sort='Richardson'>Scott Richardson</td>
-<td>17</td>
-<td>17</td>
-<td>6</td>
-<td>9</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>5</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td></td>
-<td>0.529</td>
-<td>0.765</td>
-<td>0.529</td>
-<td>1.294</td>
-	  </tr>
-	  <tr>
 <td data-sort='Henschen'>Charlie Henschen</td>
 <td>15</td>
 <td>15</td>
@@ -219,23 +219,23 @@
 <td>1.467</td>
 	  </tr>
 	  <tr>
-<td data-sort='Walker'>Gordon Walker</td>
-<td>19</td>
+<td data-sort='Richardson'>Scott Richardson</td>
 <td>17</td>
-<td>10</td>
+<td>17</td>
+<td>6</td>
 <td>9</td>
+<td>1</td>
 <td>0</td>
-<td>0</td>
-<td>0</td>
+<td>1</td>
 <td>5</td>
-<td>2</td>
+<td>0</td>
 <td>0</td>
 <td>0</td>
 <td></td>
 <td>0.529</td>
+<td>0.765</td>
 <td>0.529</td>
-<td>0.579</td>
-<td>1.108</td>
+<td>1.294</td>
 	  </tr>
 	  <tr>
 <td data-sort='Meltzer'>Amory Meltzer</td>
@@ -257,6 +257,25 @@
 <td>1.190</td>
 	  </tr>
 	  <tr>
+<td data-sort='Walker'>Gordon Walker</td>
+<td>19</td>
+<td>17</td>
+<td>10</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td>0.529</td>
+<td>0.529</td>
+<td>0.579</td>
+<td>1.108</td>
+	  </tr>
+	  <tr>
 <td data-sort='Scott'>Andrew Scott</td>
 <td>7</td>
 <td>7</td>
@@ -274,25 +293,6 @@
 <td>0.571</td>
 <td>0.571</td>
 <td>1.143</td>
-	  </tr>
-	  <tr>
-<td data-sort='Patel'>Qaiser Patel</td>
-<td>12</td>
-<td>9</td>
-<td>5</td>
-<td>7</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>7</td>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-<td></td>
-<td>0.778</td>
-<td>1.000</td>
-<td>0.750</td>
-<td>1.750</td>
 	  </tr>
 	  <tr>
 <td data-sort='Smith'>Brett Smith</td>
