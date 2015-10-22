@@ -3,6 +3,7 @@
 - Check if input handled properly, not in files, etc
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
+- News feed? Updates?  Luke hit for cycle 10/21/15
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
@@ -15,7 +16,6 @@
 - Captions?  Titletext?
 - Popup in-window, with text (kind of like KSP historian or something)
 - Peruse gh for good photo gallery options
-- Programmatic?  Prob overkill.
 - Rename archive-nav span
 #### Appearance
 - Check iPad sizes
