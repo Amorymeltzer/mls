@@ -5,6 +5,7 @@
 - Use perl to parse csv, skip xlscat entirely?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
 - News feed? Updates?  Luke hit for cycle 10/21/15
+- Notes on season win-loss record, RF/RA?
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
