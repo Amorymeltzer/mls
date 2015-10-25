@@ -22,8 +22,8 @@
 	    <th data-sort-method='number'>SAC</th>
 	    <th class='no-sort'></th>
 	    <th data-sort-method='number'>AVG</th>
-	    <th data-sort-method='number'>SLG</th>
 	    <th data-sort-method='number'>OBP</th>
+	    <th data-sort-method='number'>SLG</th>
 	    <th data-sort-method='number'>OPS</th>
 	 </tr>
 	</thead>
@@ -43,8 +43,8 @@
 <td>0</td>
 <td></td>
 <td>0.700</td>
-<td>1.000</td>
 <td>0.727</td>
+<td>1.000</td>
 <td>1.727</td>
 	  </tr>
 	  <tr>
@@ -62,8 +62,8 @@
 <td>0</td>
 <td></td>
 <td>0.625</td>
-<td>0.625</td>
 <td>0.700</td>
+<td>0.625</td>
 <td>1.325</td>
 	  </tr>
 	  <tr>
@@ -81,8 +81,8 @@
 <td>0</td>
 <td></td>
 <td>0.778</td>
-<td>1.222</td>
 <td>0.778</td>
+<td>1.222</td>
 <td>2.000</td>
 	  </tr>
 	  <tr>
@@ -100,8 +100,8 @@
 <td>1</td>
 <td></td>
 <td>0.400</td>
-<td>0.500</td>
 <td>0.364</td>
+<td>0.500</td>
 <td>0.864</td>
 	  </tr>
 	  <tr>
@@ -176,8 +176,8 @@
 <td>0</td>
 <td></td>
 <td>0.600</td>
-<td>0.800</td>
 <td>0.600</td>
+<td>0.800</td>
 <td>1.400</td>
 	  </tr>
 	  <tr>
@@ -195,8 +195,8 @@
 <td>2</td>
 <td></td>
 <td>0.571</td>
-<td>0.857</td>
 <td>0.444</td>
+<td>0.857</td>
 <td>1.302</td>
 	  </tr>
 	  <tr>
@@ -252,8 +252,8 @@
 	    <td style='font-weight:bold;'>3</td>
 	    <td style='font-weight:bold;'></td>
 	    <td style='font-weight:bold;'>0.533</td>
-	    <td style='font-weight:bold;'>0.663</td>
 	    <td style='font-weight:bold;'>0.531</td>
+	    <td style='font-weight:bold;'>0.663</td>
 	    <td style='font-weight:bold;'>1.194</td>
 	  </tr>
 	</tbody>

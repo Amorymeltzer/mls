@@ -1,6 +1,6 @@
 <h3>
 <a id="mls-stats-ongoing" class="anchor"href="#mls-stats-ongoing" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLS stats, Fall 2015 (ongoing)</h3>
-      <p>Click on the column headers to sort the table.  Data are current as of October 22, 2015.</p>
+      <p>Click on the column headers to sort the table.  Data are current as of October 25, 2015.</p>
 
       <script src='tablesort.min.js'></script>
       <script src='tablesort.number.js'></script>
@@ -22,8 +22,8 @@
 	    <th data-sort-method='number'>SAC</th>
 	    <th class='no-sort'></th>
 	    <th data-sort-method='number'>AVG</th>
-	    <th data-sort-method='number'>SLG</th>
 	    <th data-sort-method='number'>OBP</th>
+	    <th data-sort-method='number'>SLG</th>
 	    <th data-sort-method='number'>OPS</th>
 	 </tr>
 	</thead>
@@ -43,8 +43,8 @@
 <td>0</td>
 <td></td>
 <td>0.818</td>
-<td>1.273</td>
 <td>0.833</td>
+<td>1.273</td>
 <td>2.106</td>
 	  </tr>
 	  <tr>
@@ -62,8 +62,8 @@
 <td>1</td>
 <td></td>
 <td>0.619</td>
-<td>1.143</td>
 <td>0.609</td>
+<td>1.143</td>
 <td>1.752</td>
 	  </tr>
 	  <tr>
@@ -81,8 +81,8 @@
 <td>1</td>
 <td></td>
 <td>0.778</td>
-<td>1.000</td>
 <td>0.750</td>
+<td>1.000</td>
 <td>1.750</td>
 	  </tr>
 	  <tr>
@@ -100,8 +100,8 @@
 <td>1</td>
 <td></td>
 <td>0.667</td>
-<td>1.389</td>
 <td>0.632</td>
+<td>1.389</td>
 <td>2.020</td>
 	  </tr>
 	  <tr>
@@ -119,8 +119,8 @@
 <td>0</td>
 <td></td>
 <td>0.556</td>
-<td>0.556</td>
 <td>0.600</td>
+<td>0.556</td>
 <td>1.156</td>
 	  </tr>
 	  <tr>
@@ -138,8 +138,8 @@
 <td>1</td>
 <td></td>
 <td>0.722</td>
-<td>1.278</td>
 <td>0.684</td>
+<td>1.278</td>
 <td>1.962</td>
 	  </tr>
 	  <tr>
@@ -157,8 +157,8 @@
 <td>0</td>
 <td></td>
 <td>0.667</td>
-<td>0.857</td>
 <td>0.667</td>
+<td>0.857</td>
 <td>1.524</td>
 	  </tr>
 	  <tr>
@@ -176,8 +176,8 @@
 <td>0</td>
 <td></td>
 <td>0.625</td>
-<td>0.625</td>
 <td>0.667</td>
+<td>0.625</td>
 <td>1.292</td>
 	  </tr>
 	  <tr>
@@ -214,8 +214,8 @@
 <td>0</td>
 <td></td>
 <td>0.600</td>
-<td>0.867</td>
 <td>0.600</td>
+<td>0.867</td>
 <td>1.467</td>
 	  </tr>
 	  <tr>
@@ -233,8 +233,8 @@
 <td>0</td>
 <td></td>
 <td>0.529</td>
-<td>0.765</td>
 <td>0.529</td>
+<td>0.765</td>
 <td>1.294</td>
 	  </tr>
 	  <tr>
@@ -252,8 +252,8 @@
 <td>0</td>
 <td></td>
 <td>0.556</td>
-<td>0.611</td>
 <td>0.579</td>
+<td>0.611</td>
 <td>1.190</td>
 	  </tr>
 	  <tr>
@@ -271,8 +271,8 @@
 <td>0</td>
 <td></td>
 <td>0.529</td>
-<td>0.529</td>
 <td>0.579</td>
+<td>0.529</td>
 <td>1.108</td>
 	  </tr>
 	  <tr>
@@ -309,8 +309,8 @@
 <td>0</td>
 <td></td>
 <td>1.000</td>
-<td>1.667</td>
 <td>1.000</td>
+<td>1.667</td>
 <td>2.667</td>
 	  </tr>
 	  <tr>
@@ -328,8 +328,8 @@
 <td>0</td>
 <td></td>
 <td>0.333</td>
-<td>0.333</td>
 <td>0.500</td>
+<td>0.333</td>
 <td>0.833</td>
 	  </tr>
 	  <tr class='no-sort'>
@@ -347,8 +347,8 @@
 	    <td style='font-weight:bold;'>4</td>
 	    <td style='font-weight:bold;'></td>
 	    <td style='font-weight:bold;'>0.629</td>
-	    <td style='font-weight:bold;'>0.902</td>
 	    <td style='font-weight:bold;'>0.636</td>
+	    <td style='font-weight:bold;'>0.902</td>
 	    <td style='font-weight:bold;'>1.538</td>
 	  </tr>
 	</tbody>
