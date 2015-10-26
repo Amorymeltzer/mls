@@ -10,9 +10,6 @@
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
-#### Multiple sheets
-- Return original formatting?  Figure out attr
-- Better way to deal with blank column, zero
 #### Photo section
 - Proper spacing, order
 - Size?
