@@ -23,6 +23,7 @@
 - Check iPad sizes
 ### Future design
 - More content! :+1: :100: :+1:
+- More sabermetrics?  wOBA, others?
 - Move all stats to /stats, archive to /stats/archive
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page
