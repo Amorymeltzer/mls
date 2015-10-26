@@ -30,7 +30,7 @@ else
 	excel=$(echo $excel | perl -pe 's/^.\///;')
 
 	# Would love to test if it's an xls/x properly but this is close enough
-	if xlscat -i $excel 1>/dev/null 2>&1 ; then
+	if xlscat -i $excel &>/dev/null ; then
 
 	    # Prune file format
 	    file=$(echo $excel | perl -pe 's/\.xlsx?$//;')
@@ -38,7 +38,7 @@ else
 	    # Output file with same base name
 	    csv=$(echo $file.csv)
 	    # Convert XLS/XLSX to csv
-	    xlscat -c $excel 1>/dev/null 2>&1 > $csv
+	    xlscat -c $excel &>/dev/null > $csv
 	    echo "Generated $csv"
 
 	    # Build the tables
