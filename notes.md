@@ -6,6 +6,7 @@
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
 - News feed? Updates?  Luke hit for cycle 10/21/15
 - Notes on season win-loss record, RF/RA?
+- Build in non-date modifying option (would need to parse current file)
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
@@ -18,7 +19,6 @@
 - Captions?  Titletext?
 - Popup in-window, with text (kind of like KSP historian or something)
 - Peruse gh for good photo gallery options
-- Rename archive-nav span
 #### Appearance
 - Check iPad sizes
 ### Future design

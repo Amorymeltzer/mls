@@ -70,7 +70,7 @@ my $date = '20'.substr $filename, -2, 2;
 open my $out, '>', "$output" or die $ERRNO;
 
 if ($archive) {
-  print $out '<span class="archive-nav">← <a href="../archive">Return to the archive index</a>';
+  print $out '<span class="header-nav">← <a href="../archive">Return to the archive index</a>';
   print $out ' | <a href="../">return home</a></span>';
   print $out "<h3>\n";
   print $out "<a id=\"mls-stats-$filename\" class=\"anchor\"";
