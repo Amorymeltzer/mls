@@ -113,6 +113,5 @@ sub archiveFiles
     if ($name =~ /t/ || $curYear != $year || $season ne $seasons{$curSeason}) {
       $name = 'archive/'.$name;
     }
-    print "$name\n";
     return $name.'.xlsx';
   }
