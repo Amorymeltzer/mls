@@ -45,6 +45,7 @@ for (1..$sheetNum) {
 
   # Name each file according to worksheet name
   my $outfile = createName($book->[$i]{'label'});
+  next if $outfile eq '1';	# Skip if the above errors out
   my $workbook = Excel::Writer::XLSX->new( "$outfile" );
   my $sheet = $workbook->add_worksheet( "$outfile" );
 
@@ -89,7 +90,14 @@ sub createName
     $name .= 't' if $label =~ m/tournament/i;
     # Season
     my $re = join q{|}, keys %seasons;
-    my ($season) = $label =~ /\b($re)\b/i or die "Error in worksheet name\n";
+    my $season;
+    # Error handling if a poorly-named worksheet is encountered
+    if ($label =~ /\b($re)\b/i) {
+      ($season) = $label =~ /\b($re)\b/i;
+    } else {
+      print "Worksheet '$label' improperly named, skipping...\n";
+      return 1;
+    }
     $name .= $seasons{lc $season};
     # Year
     my ($curYear) = $label =~ /(\d+)/;
