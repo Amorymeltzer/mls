@@ -12,10 +12,8 @@ use Getopt::Std;
 # Parse commandline options
 my %opts = ();
 getopts('uh',\%opts);
-if ($opts{h}) { usage(); exit; }	# Usage
 
-if (@ARGV == 0 || @ARGV > 3) {
-  #  print "Usage: makeMLSTAble.pl <-u> mls_data.csv <output.html> <archive_or_no>\n";
+if ($opts{h} || @ARGV == 0 || @ARGV > 3) {
   usage();
   exit;
 }
