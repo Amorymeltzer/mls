@@ -55,6 +55,7 @@ my @months = qw (January February March April May June July August September
 		 October November December);
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
+my $updatedDate = "$months[$mon] $mday, $year";
 
 # Parse filenames for seasons, tournaments
 my $filename = $input;
@@ -88,7 +89,7 @@ if ($archive) {
 # Sortify
 print $out '      <p>Click on the column headers to sort the table.';
 if (!$archive) {
-  print $out "  Data are current as of $months[$mon] $mday, $year.";
+  print $out "  Data are current as of $updatedDate.";
 }
 print $out "</p>\n\n";
 
