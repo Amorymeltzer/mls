@@ -16,8 +16,6 @@
 - Captions?  Titletext?
 - Popup in-window, with text (kind of like KSP historian or something)
 - Peruse gh for good photo gallery options
-#### Appearance
-- Check iPad sizes
 ### Future design
 - More content! :+1: :100: :+1:
 - More sabermetrics?  wOBA, others?
