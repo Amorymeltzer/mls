@@ -89,7 +89,7 @@ sub createName
     $name .= 't' if $label =~ m/tournament/i;
     # Season
     my $re = join q{|}, keys %seasons;
-    my ($season) = $label =~ /($re)/i or die "Error in worksheet name\n";
+    my ($season) = $label =~ /\b($re)\b/i or die "Error in worksheet name\n";
     $name .= $seasons{lc $season};
     # Year
     my ($curYear) = $label =~ /(\d+)/;
