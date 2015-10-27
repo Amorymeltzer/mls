@@ -11,10 +11,12 @@ use Getopt::Std;
 
 # Parse commandline options
 my %opts = ();
-getopts('u',\%opts);
+getopts('uh',\%opts);
+if ($opts{h}) { usage(); exit; }	# Usage
 
 if (@ARGV == 0 || @ARGV > 3) {
-  print "Usage: makeMLSTAble.pl <-u> mls_data.csv <output.html> <archive_or_no>\n";
+  #  print "Usage: makeMLSTAble.pl <-u> mls_data.csv <output.html> <archive_or_no>\n";
+  usage();
   exit;
 }
 
@@ -172,3 +174,17 @@ print $out "	new Tablesort(document.getElementById('mls-table'));\n";
 print $out "      </script>\n";
 
 close $out or die $ERRNO;
+
+
+#### Usage statement ####
+# Use POD or whatever?
+# Escapes not necessary but ensure pretty colors
+# Final line must be unindented?
+sub usage
+{
+    print <<USAGE;
+Usage: $0 [-uh] mls_data.csv [output.html] [archive_or_no]
+      -u Specify a date of the form MM/DD
+      -h print this message
+USAGE
+}
