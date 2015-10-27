@@ -9,8 +9,11 @@ use diagnostics;
 use English qw( -no_match_vars );
 use Getopt::Std;
 
-# Better accounting FIXME TODO
-if (@ARGV == 0 || @ARGV > 4) {
+# Parse commandline options
+my %opts = ();
+getopts('u',\%opts);
+
+if (@ARGV == 0 || @ARGV > 3) {
   print "Usage: makeMLSTAble.pl <-u> mls_data.csv <output.html> <archive_or_no>\n";
   exit;
 }
