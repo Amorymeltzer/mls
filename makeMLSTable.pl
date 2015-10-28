@@ -11,7 +11,7 @@ use Getopt::Std;
 
 # Parse commandline options
 my %opts = ();
-getopts('uah',\%opts);
+getopts('ualh',\%opts);
 
 if ($opts{h} || @ARGV == 0 || @ARGV > 2) {
   usage();
@@ -98,14 +98,16 @@ if ($archive) {
   print $out "<a id=\"mls-stats-$filename\" class=\"anchor\"";
   print $out "href=\"#mls-stats-$filename\" aria-hidden=\"true\">";
   print $out '<span class="octicon octicon-link"></span>';
-  print $out "</a>MLS stats, $season $date (archived)</h3>\n";
 } else {
   print $out "<h3>\n";
   print $out '<a id="mls-stats-ongoing" class="anchor"';
   print $out 'href="#mls-stats-ongoing" aria-hidden="true">';
   print $out '<span class="octicon octicon-link"></span>';
-  print $out "</a>MLS stats, $season $date (ongoing)</h3>\n";
 }
+
+my $status = $opts{l} ? 'latest' : 'ongoing';
+$status = 'archived' if $archive;
+print $out "</a>MLS stats, $season $date ($status)</h3>\n";
 
 # Sortify
 print $out '      <p>Click on the column headers to sort the table.';
@@ -200,6 +202,7 @@ sub usage
 Usage: $0 [-uah] mls_data.csv [output.html]
       -u Update the last-modified date of the index page
       -a Indicate input is an archived file, treat differently
+      -l Offseason message
       -h Print this help message
 USAGE
   }
