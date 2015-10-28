@@ -11,16 +11,16 @@ use Getopt::Std;
 
 # Parse commandline options
 my %opts = ();
-getopts('uh',\%opts);
+getopts('uah',\%opts);
 
-if ($opts{h} || @ARGV == 0 || @ARGV > 3) {
+if ($opts{h} || @ARGV == 0 || @ARGV > 2) {
   usage();
   exit;
 }
 
 my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.table';
-my $archive = $ARGV[2] // 0;	# Treat old ones slightly differently
+my $archive = $opts{a} // 0;	# Treat old ones slightly differently
 
 
 
@@ -198,8 +198,9 @@ close $out or die $ERRNO;
 sub usage
   {
     print <<USAGE;
-Usage: $0 [-uh] mls_data.csv [output.html] [archive_or_no]
+Usage: $0 [-uah] mls_data.csv [output.html]
       -u Update the last-modified date of the index page
+      -a Indicate input is an archived file, treat differently
       -h Print this help message
 USAGE
   }

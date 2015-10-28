@@ -48,7 +48,7 @@ else
 		echo "'Current as of' date no longer updated by default"
 		echo "Use 'perl makeMLSTable.pl -u $csv $table' to update index"
 	    else
-		perl makeMLSTable.pl $csv $table 1
+		perl makeMLSTable.pl -a $csv $table
 	    fi
 	    echo "Generated $table"
 
