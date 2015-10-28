@@ -55,12 +55,29 @@ while (<$in>) {
 }
 close $in or die $ERRNO;
 
-# Get proper date when updating
-my @months = qw (January February March April May June July August September
-		 October November December);
-my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
-$year += 1900;			# Convert to 4-digit year
-my $updatedDate = "$months[$mon] $mday, $year";
+# Get proper date when updating, default to old date
+my $dateFile = '.updatedDate.txt';
+my $updatedDate;
+if ($opts{u}) {
+  my @months = qw (January February March April May June July August September
+		   October November December);
+  my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
+  $year += 1900;		# Convert to 4-digit year
+  $updatedDate = "$months[$mon] $mday, $year";
+
+  # Save for next time
+  open my $dOut, '>', "$dateFile" or die $ERRNO;
+  print $dOut $updatedDate;
+  close $dOut or die $ERRNO;
+} else {
+  open my $dOut, '<', "$dateFile" or die $ERRNO;
+  while (<$dOut>) {
+    chomp;
+    $updatedDate = $_;
+  }
+  close $dOut or die $ERRNO;
+  exit;
+}
 
 # Parse filenames for seasons, tournaments
 my $filename = $input;
@@ -179,10 +196,10 @@ close $out or die $ERRNO;
 # Escapes not necessary but ensure pretty colors
 # Final line must be unindented?
 sub usage
-{
+  {
     print <<USAGE;
 Usage: $0 [-uh] mls_data.csv [output.html] [archive_or_no]
-      -u Specify a date of the form MM/DD
-      -h print this message
+      -u Update the last-modified date of the index page
+      -h Print this help message
 USAGE
-}
+  }
