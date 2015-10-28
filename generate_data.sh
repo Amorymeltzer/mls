@@ -8,6 +8,11 @@ if [ ! "$1" ]; then
 else
     data=$1
 
+    #local
+    if [ "$2" ]; then
+	flag=$2
+    fi
+
     arcindex="archive/index.html"
     cat archive/archive.index.top > $arcindex
 
@@ -44,7 +49,7 @@ else
 	    # Build the tables
 	    table=$(echo $file.table)
 	    if [ $excel == $data ]; then
-		perl makeMLSTable.pl $csv $table
+		perl makeMLSTable.pl $flag $csv $table
 		echo "'Current as of' date no longer updated by default"
 		echo "Use 'perl makeMLSTable.pl -u $csv $table' to update index"
 	    else
