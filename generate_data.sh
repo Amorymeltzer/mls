@@ -45,6 +45,8 @@ else
 	    table=$(echo $file.table)
 	    if [ $excel == $data ]; then
 		perl makeMLSTable.pl $csv $table
+		echo "'Current as of' date no longer updated by default"
+		echo "Use 'perl makeMLSTable.pl -u $csv $table' to update index"
 	    else
 		perl makeMLSTable.pl $csv $table 1
 	    fi
