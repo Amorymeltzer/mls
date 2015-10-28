@@ -76,7 +76,6 @@ if ($opts{u}) {
     $updatedDate = $_;
   }
   close $dOut or die $ERRNO;
-  exit;
 }
 
 # Parse filenames for seasons, tournaments
