@@ -22,3 +22,4 @@
 - Notes on season win-loss record, RF/RA?
 - Team stats (RF/RA), record, etc.
 - More sabermetrics?  wOBA, others?
+- Individual stats/graphs over time? -> Joe
