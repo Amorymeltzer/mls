@@ -4,8 +4,6 @@
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
-- News feed? Updates?  Luke hit for cycle 10/21/15
-- Notes on season win-loss record, RF/RA?
 - What if .updatedDate.txt is empty? Unlikely but should check
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
@@ -17,8 +15,11 @@
 - Popup in-window, with text (kind of like KSP historian or something)
 - Peruse gh for good photo gallery options
 ### Future design
-- More content! :+1: :100: :+1:
-- More sabermetrics?  wOBA, others?
-- Move all stats to /stats, archive to /stats/archive
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page
+- Move all stats to /stats, archive to /stats/archive
+- More content! :+1: :100: :+1:
+- News feed? Updates?  Luke hit for cycle 10/21/15
+- Notes on season win-loss record, RF/RA?
+- Team stats (RF/RA), record, etc.
+- More sabermetrics?  wOBA, others?
