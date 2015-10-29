@@ -4,7 +4,6 @@
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
-- What if .updatedDate.txt is empty? Unlikely but should check
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
