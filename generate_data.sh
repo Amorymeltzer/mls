@@ -4,12 +4,13 @@
 
 function get_help {
     cat <<END_HELP
-Usage: $1 [-iulhH?]
+
+Usage: $1 -i <current_season.xlsx> [-ulh]
 
   -i		Specify input XLS/XLSX data file.  Required.
   -u		Pass -u to makeMLSTable.pl (updates 'current as of' date)
   -l		Pass -l to makeMLSTable.pl (latest, not current, season)
-  -h -H -?	this help
+  -h		this help
 END_HELP
 }
 
@@ -18,8 +19,8 @@ while getopts 'i:ulhH?' opt; do
 	i) input=$OPTARG;;
 	u) upDate='-u';;
 	l) latest='-l';;
-	h|H|\?) get_help $0
-		exit 0;;
+	h) get_help $0
+	   exit 0;;
 	:) printf "Option -"$opt" requires an argument, try $0 -h\n" >&2
            exit 1;;
     esac
