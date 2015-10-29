@@ -105,7 +105,7 @@ if ($archive) {
   print $out '<span class="octicon octicon-link"></span>';
 }
 
-my $status = $opts{l} ? 'latest' : 'ongoing';
+my $status = $opts{l} ? 'latest season' : 'ongoing';
 $status = 'archived' if $archive;
 print $out "</a>MLS stats, $season $date ($status)</h3>\n";
 
