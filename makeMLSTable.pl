@@ -58,7 +58,7 @@ close $in or die $ERRNO;
 # Get proper date when updating, default to old date
 my $dateFile = '.updatedDate.txt';
 my $updatedDate;
-if ($opts{u}) {
+if ($opts{u} && !$archive) {
   my @months = qw (January February March April May June July August September
 		   October November December);
   my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
