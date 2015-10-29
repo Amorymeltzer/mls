@@ -2,17 +2,34 @@
 # generate_data.sh by Amory Meltzer
 # Create the proper index page, including sorting
 
-if [ ! "$1" ]; then
+function get_help {
+    cat <<END_HELP
+Usage: $1 [-iulhH?]
+
+  -i		Specify input XLS/XLSX data file.  Required.
+  -u		Pass -u to makeMLSTable.pl (updates 'current as of' date)
+  -l		Pass -l to makeMLSTable.pl (latest, not current, season)
+  -h -H -?	this help
+END_HELP
+}
+
+while getopts 'i:ulhH?' opt; do
+    case $opt in
+	i) input=$OPTARG;;
+	u) upDate='-u';;
+	l) latest='-l';;
+	h|H|\?) get_help $0
+		exit 0;;
+	:) printf "Option -"$opt" requires an argument, try $0 -h\n" >&2
+           exit 1;;
+    esac
+done
+
+
+if [ ! $input ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
 else
-    data=$1
-
-    #local
-    if [ "$2" ]; then
-	flag=$2
-    fi
-
     arcindex="archive/index.html"
     cat archive/archive.index.top > $arcindex
 
@@ -48,15 +65,15 @@ else
 
 	    # Build the tables
 	    table=$(echo $file.table)
-	    if [ $excel == $data ]; then
-		perl makeMLSTable.pl $flag $csv $table
+	    if [ $excel == $input ]; then
+		perl makeMLSTable.pl $upDate $latest $csv $table
 	    else
 		perl makeMLSTable.pl -a $csv $table
 	    fi
 	    echo "Generated $table"
 
 	    # Combine all the html pieces
-	    if [ $excel == $data ]; then
+	    if [ $excel == $input ]; then
 		index=index.html
 		top=top.html
 		bottom=bottom.html
@@ -81,7 +98,7 @@ else
 	    echo "Generated $index"
 
 	else
-	    echo "$data is not a proper XLS/XLSX file"
+	    echo "$input is not a proper XLS/XLSX file"
 	    exit 1
 	fi
     done
