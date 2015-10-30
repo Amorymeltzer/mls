@@ -135,12 +135,13 @@ print $out "	 <tr>\n";
 foreach my $col (0..scalar @header - 1) {
   # Don't sort blank columns
   if ($header[$col] eq q{}) {
-    print $out "	    <th class='no-sort'>$header[$col]</th>\n";
+    print $out "	    <th class='no-sort'>$header[$col]";
   } elsif ($col > 0) {
-    print $out "	    <th data-sort-method='number'>$header[$col]</th>\n";
+    print $out "	    <th data-sort-method='number'>$header[$col]";
   } else {
-    print $out "	    <th>$header[$col]</th>\n";
+    print $out "	    <th>$header[$col]";
   }
+  print $out "</th>\n";
 }
 
 print $out "	 </tr>\n";
