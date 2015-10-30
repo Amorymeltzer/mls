@@ -145,14 +145,13 @@ print $out "	 <tr>\n";
 foreach my $col (0..scalar @header - 1) {
   # Don't sort blank columns
   if ($header[$col] eq q{}) {
-    print $out "	    <th class='no-sort'";
+    print $out '	    <th class=\'no-sort\'';
   } elsif ($col > 0) {
-    print $out "	    <th data-sort-method='number'";
+    print $out '	    <th data-sort-method=\'number\'';
   } else {
-    print $out "	    <th";
+    print $out '	    <th';
   }
   if ($titleTips{$header[$col]}) {
-    print "$header[$col]\t$titleTips{$header[$col]}\n";
     print $out " title='$titleTips{$header[$col]}'";
   }
   print $out ">$header[$col]</th>\n";
@@ -229,17 +228,17 @@ USAGE
 ## order to make reading the stats tables easier.
 __END__
 PA Plate appearances
-  AB At-bats
+  AB At Bats
   R Runs
   H Hits
   2B Doubles
   3B Triples
-  HR Home runs
+  HR Home Runs
   RBI Runs Batted In
   BB Walks (bases-on-balls)
   K Strikeouts
   SAC Sacrifice flies
-  AVG Batting average (H/AB)
-  OBP On-Base Percentage ((H+BB)/PA)
-  SLG Sugging percentage (Total bases/AB)
-  OPS On-base Plus Slugging (OBP+SLG)
+  AVG Batting average - H/AB
+  OBP On-Base Percentage - (H+BB)/PA
+  SLG Sugging percentage - Total bases/AB
+  OPS On-base Plus Slugging - OBP+SLG

@@ -9,22 +9,22 @@
 	<thead>
 	 <tr>
 	    <th>Player</th>
-	    <th data-sort-method='number'>PA</th>
-	    <th data-sort-method='number'>AB</th>
-	    <th data-sort-method='number'>R</th>
-	    <th data-sort-method='number'>H</th>
-	    <th data-sort-method='number'>2B</th>
-	    <th data-sort-method='number'>3B</th>
-	    <th data-sort-method='number'>HR</th>
-	    <th data-sort-method='number'>RBI</th>
-	    <th data-sort-method='number'>BB</th>
-	    <th data-sort-method='number'>K</th>
-	    <th data-sort-method='number'>SAC</th>
+	    <th data-sort-method='number' title='Plate appearances'>PA</th>
+	    <th data-sort-method='number' title='At Bats'>AB</th>
+	    <th data-sort-method='number' title='Runs'>R</th>
+	    <th data-sort-method='number' title='Hits'>H</th>
+	    <th data-sort-method='number' title='Doubles'>2B</th>
+	    <th data-sort-method='number' title='Triples'>3B</th>
+	    <th data-sort-method='number' title='Home Runs'>HR</th>
+	    <th data-sort-method='number' title='Runs Batted In'>RBI</th>
+	    <th data-sort-method='number' title='Walks (bases-on-balls)'>BB</th>
+	    <th data-sort-method='number' title='Strikeouts'>K</th>
+	    <th data-sort-method='number' title='Sacrifice flies'>SAC</th>
 	    <th class='no-sort'></th>
-	    <th data-sort-method='number'>AVG</th>
-	    <th data-sort-method='number'>OBP</th>
-	    <th data-sort-method='number'>SLG</th>
-	    <th data-sort-method='number'>OPS</th>
+	    <th data-sort-method='number' title='Batting average - H/AB'>AVG</th>
+	    <th data-sort-method='number' title='On-Base Percentage - (H+BB)/PA'>OBP</th>
+	    <th data-sort-method='number' title='Sugging percentage - Total bases/AB'>SLG</th>
+	    <th data-sort-method='number' title='On-base Plus Slugging - OBP+SLG'>OPS</th>
 	 </tr>
 	</thead>
 	<tbody>
