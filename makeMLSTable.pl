@@ -25,6 +25,7 @@ my $archive = $opts{a} // 0;	# Treat old ones slightly differently
 
 
 my %data;			# Hash of arrays of data
+my %titleTips;			# Title text for header row
 my @names;			# MLS allstars
 my @header;			# Column headers
 my @total;			# Totals
@@ -89,6 +90,15 @@ my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
 $season .= $seasons{substr $filename, -3, 1};
 my $date = '20'.substr $filename, -2, 2;
 
+
+# Build hash of header row titletips
+while (<DATA>) {
+  chomp;
+  my @titles = split;
+  my $title = shift @titles;
+  $titleTips{$title} = join ' ', @titles;
+}
+
 open my $out, '>', "$output" or die $ERRNO;
 
 if ($archive) {
@@ -135,13 +145,17 @@ print $out "	 <tr>\n";
 foreach my $col (0..scalar @header - 1) {
   # Don't sort blank columns
   if ($header[$col] eq q{}) {
-    print $out "	    <th class='no-sort'>$header[$col]";
+    print $out "	    <th class='no-sort'";
   } elsif ($col > 0) {
-    print $out "	    <th data-sort-method='number'>$header[$col]";
+    print $out "	    <th data-sort-method='number'";
   } else {
-    print $out "	    <th>$header[$col]";
+    print $out "	    <th";
   }
-  print $out "</th>\n";
+  if ($titleTips{$header[$col]}) {
+    print "$header[$col]\t$titleTips{$header[$col]}\n";
+    print $out " title='$titleTips{$header[$col]}'";
+  }
+  print $out ">$header[$col]</th>\n";
 }
 
 print $out "	 </tr>\n";
@@ -207,3 +221,25 @@ Usage: $0 [-uah] mls_data.csv [output.html]
       -h Print this help message
 USAGE
   }
+
+
+
+## The lines below do not represent Perl code, and are not examined by the
+## compiler.  Rather, they are brief descriptions of the statics, provided in
+## order to make reading the stats tables easier.
+__END__
+PA Plate appearances
+  AB At-bats
+  R Runs
+  H Hits
+  2B Doubles
+  3B Triples
+  HR Home runs
+  RBI Runs Batted In
+  BB Walks (bases-on-balls)
+  K Strikeouts
+  SAC Sacrifice flies
+  AVG Batting average (H/AB)
+  OBP On-Base Percentage ((H+BB)/PA)
+  SLG Sugging percentage (Total bases/AB)
+  OPS On-base Plus Slugging (OBP+SLG)
