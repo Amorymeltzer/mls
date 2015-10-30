@@ -30,6 +30,9 @@ my @names;			# MLS allstars
 my @header;			# Column headers
 my @total;			# Totals
 
+# Store last updated date
+my $dateFile = '.updatedDate.txt';
+
 
 open my $in, '<', "$input" or die $ERRNO;
 while (<$in>) {
@@ -57,7 +60,6 @@ while (<$in>) {
 close $in or die $ERRNO;
 
 # Get proper date when updating, default to old date
-my $dateFile = '.updatedDate.txt';
 my $updatedDate;
 if ($opts{u} && !$archive) {
   my @months = qw (January February March April May June July August September
@@ -143,13 +145,12 @@ print $out "	<thead>\n";
 print $out "	 <tr>\n";
 
 foreach my $col (0..scalar @header - 1) {
+  print $out '	    <th';
   # Don't sort blank columns
   if ($header[$col] eq q{}) {
-    print $out '	    <th class=\'no-sort\'';
+    print $out ' class=\'no-sort\'';
   } elsif ($col > 0) {
-    print $out '	    <th data-sort-method=\'number\'';
-  } else {
-    print $out '	    <th';
+    print $out ' data-sort-method=\'number\'';
   }
   if ($titleTips{$header[$col]}) {
     print $out " title='$titleTips{$header[$col]}'";
@@ -227,7 +228,8 @@ USAGE
 ## compiler.  Rather, they are brief descriptions of the statics, provided in
 ## order to make reading the stats tables easier.
 __END__
-PA Plate appearances
+Player Minor league science, Major league style
+  PA Plate appearances
   AB At Bats
   R Runs
   H Hits
