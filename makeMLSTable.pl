@@ -106,16 +106,13 @@ open my $out, '>', "$output" or die $ERRNO;
 if ($archive) {
   print $out '<span class="header-nav">← <a href="../archive">Return to the archive index</a>';
   print $out ' | <a href="../">return home</a></span>';
-  print $out "<h3>\n";
-  print $out "<a id=\"mls-stats-$filename\" class=\"anchor\"";
-  print $out "href=\"#mls-stats-$filename\" aria-hidden=\"true\">";
-  print $out '<span class="octicon octicon-link"></span>';
 } else {
-  print $out "<h3>\n";
-  print $out '<a id="mls-stats-ongoing" class="anchor"';
-  print $out 'href="#mls-stats-ongoing" aria-hidden="true">';
-  print $out '<span class="octicon octicon-link"></span>';
+  $filename = 'latest';
 }
+print $out "<h3>\n";
+print $out "<a id=\"mls-stats-$filename\" class=\"anchor\"";
+print $out "href=\"#mls-stats-$filename\" aria-hidden=\"true\">";
+print $out '<span class="octicon octicon-link"></span>';
 
 my $status = $opts{l} ? 'latest season' : 'ongoing';
 $status = 'archived' if $archive;
