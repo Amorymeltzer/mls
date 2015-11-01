@@ -59,6 +59,10 @@ while (<$in>) {
 }
 close $in or die $ERRNO;
 
+if ($total[2]+$total[9]+$total[11] != $total[1]) {
+  warn "Warning: AB+BB+SAC and PA are NOT equal\nMissing data?\n";
+}
+
 # Get proper date when updating, default to old date
 my $updatedDate;
 if ($opts{u} && !$archive) {
