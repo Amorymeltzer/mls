@@ -45,9 +45,9 @@ while (<$in>) {
 
     # Try to catch some potential errors
     if ($header[-1] ne 'OPS') {
-      print "Warning: Potential extra columns detected!!\n";
+      warn "Warning: Potential extra columns detected!!\n";
     }
-    if ($. != 1) {
+    if ($NR != 1) {
       warn "Warning: Potential extra rows detected!\n"
     }
     next;
