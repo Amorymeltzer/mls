@@ -47,6 +47,9 @@ while (<$in>) {
     if ($header[-1] ne 'OPS') {
       print "Warning: Potential extra columns detected!!\n";
     }
+    if ($. != 1) {
+      warn "Warning: Potential extra rows detected!\n"
+    }
     next;
   } elsif ($tmp[0] =~ /Total/) {
     @total = @tmp;
