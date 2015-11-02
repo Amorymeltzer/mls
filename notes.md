@@ -12,8 +12,6 @@
 - 1 or 2 photos, link photos page?
 - Move all stats to /stats, archive to /stats/archive
 - More content! :+1: :100: :+1:
-- News feed? Updates?  Luke hit for cycle 10/21/15
-- Notes on season win-loss record, RF/RA?
 - Team stats (RF/RA), record, etc.
 - More sabermetrics?  wOBA, others?
 - Individual stats/graphs over time? -> Joe
