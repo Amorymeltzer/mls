@@ -7,15 +7,9 @@
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
-#### Photo section
-- Proper spacing, order
-- Size?
-- Captions?  Titletext?
-- Popup in-window, with text (kind of like KSP historian or something)
-- Peruse gh for good photo gallery options
 ### Future design
 - Front with brief splash, link to current/ongoing past stats
-- 1 or 2 photos, link photos page
+- 1 or 2 photos, link photos page?
 - Move all stats to /stats, archive to /stats/archive
 - More content! :+1: :100: :+1:
 - News feed? Updates?  Luke hit for cycle 10/21/15
