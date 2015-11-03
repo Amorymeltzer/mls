@@ -77,15 +77,18 @@ else
 	    if [ $excel == $input ]; then
 		index=index.html
 		top=top.html
+		news=news.html
 		bottom=bottom.html
 	    else
 		index=$file.html
 		top=archive_top.html
+		news=/dev/null
 		bottom=archive_bottom.html
 		perl makeArchiveIndex.pl $file $arcindex
 	    fi
 
 	    cat $top > $index
+	    cat $news >> $index
 	    cat $table >> $index
 	    cat $bottom >> $index
 
