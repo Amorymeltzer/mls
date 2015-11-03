@@ -92,12 +92,7 @@ else
 	    # Properly indent file
 	    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
-	    # Except not for index.html - WHY? FIXME TODO
-	    # rm $index~
-
-
 	    echo "Generated $index"
-
 	else
 	    echo "$input is not a proper XLS/XLSX file"
 	    exit 1
