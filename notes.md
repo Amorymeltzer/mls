@@ -1,12 +1,7 @@
 ### ToDo
-- Build checks to ensure sanitary data and valid site build
-- Check if input handled properly, not in files, etc
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
-#### Archive system
-- List individual pages on main page index.html (sorted by date?)
-- Small links to other archived tables - next/previous seasons?
 ### Future design
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
@@ -15,3 +10,6 @@
 - Team stats (RF/RA), record, etc.
 - More sabermetrics?  wOBA, others?
 - Individual stats/graphs over time? -> Joe
+#### Archive system
+- List individual pages on main page index.html (sorted by date?)
+- Small links to other archived tables - next/previous seasons?
