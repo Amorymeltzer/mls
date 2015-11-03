@@ -105,7 +105,7 @@ while (<DATA>) {
   chomp;
   my @titles = split;
   my $title = shift @titles;
-  $titleTips{$title} = join ' ', @titles;
+  $titleTips{$title} = join q{ }, @titles;
 }
 
 open my $out, '>', "$output" or die $ERRNO;
@@ -217,8 +217,8 @@ close $out or die $ERRNO;
 # Final line must be unindented?
 sub usage
   {
-    print <<USAGE;
-Usage: $0 [-uah] mls_data.csv [output.html]
+    print <<"USAGE";
+Usage: $PROGRAM_NAME [-uah] mls_data.csv [output.html]
       -u Update the last-modified date of the index page
       -a Indicate input is an archived file, treat differently
       -l Offseason message
