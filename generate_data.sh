@@ -47,9 +47,9 @@ else
 
     for excel in $FILES
     do
-	# find insists on a leading ./
-	# I generally won't be providing such things when running this but
-	# it's a good thing to watch out for when sanitizing FIXME TODO
+	# find insists on a leading ./ - I generally won't be providing such
+	# things when running this but it's a good thing to watch out for when
+	# sanitizing
 	excel=$(echo $excel | perl -pe 's/^.\///;')
 
 	# Would love to test if it's an xls/x properly but this is close enough
