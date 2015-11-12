@@ -2,6 +2,7 @@
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
+- Be better about picking seasons (multipleWorksheets.pl)
 ### Future design
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
