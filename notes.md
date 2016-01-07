@@ -1,8 +1,11 @@
+- htmlproof stuff
+- https://github.com/gjtorikian/html-proofer
 ### ToDo
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
 - Be better about picking seasons (multipleWorksheets.pl)
+- Individual column sorting? https://github.com/tristen/tablesort/pull/97
 ### Future design
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
