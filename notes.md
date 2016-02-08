@@ -10,11 +10,14 @@
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
 - Move all stats to /stats, archive to /stats/archive
+- Convert data to individual game stats, so can do game-by-game progression
 - More content! :+1: :100: :+1:
+### Stats
 - Team stats (RF/RA), record, etc.
 - More sabermetrics?  wOBA, others?
 - Individual stats/graphs over time? -> Joe
 - plotly for graphs, etc?  python or r?
+- See also http://mikecostelloe.com/crazyrhythms/ and https://github.com/MikeCostelloe/crazy-rhythms
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
