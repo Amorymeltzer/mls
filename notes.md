@@ -3,6 +3,7 @@
 ### ToDo
 - index.html should display total or season or...?  Get input
 - Use perl to parse csv, skip xlscat entirely?
+- Convert to python?
 - Parse main, joint xlsx into csv (skip intermediate xlsx, (tables?))
 - Be better about picking seasons (multipleWorksheets.pl)
 - Individual column sorting? https://github.com/tristen/tablesort/pull/97
@@ -16,6 +17,7 @@
 - Team stats (RF/RA), record, etc.
 - More sabermetrics?  wOBA, others?
 - Individual stats/graphs over time? -> Joe
+- Per-game data, graph if played 1 or more games (cut down on 1-off anomalies)
 - plotly for graphs, etc?  python or r?
 - See also http://mikecostelloe.com/crazyrhythms/ and https://github.com/MikeCostelloe/crazy-rhythms
 #### Archive system
