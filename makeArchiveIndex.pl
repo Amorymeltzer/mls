@@ -30,6 +30,6 @@ my $date = '20'.substr $filename, -2, 2;
 
 # Simply append file name to the archive index
 open my $arci, '>>', "$output" or die $ERRNO;
-print $arci "      <p><a href=\"./mls_$filename.html\">";
+print $arci "<p><a href=\"./mls_$filename.html\">";
 print $arci "$season $date</a></p>\n";
 close $arci or die $ERRNO;

@@ -126,7 +126,7 @@ $status = 'archived' if $archive;
 print $out "</a>MLS stats, $season $date ($status)</h3>\n";
 
 # Sortify
-print $out '      <p>Click on the column headers to sort the table.';
+print $out '<p>Click on the column headers to sort the table.';
 if (!$archive) {
   print $out "  Data are current as of $updatedDate.";
 }
@@ -136,20 +136,20 @@ print $out "</p>\n\n";
 my $archivePre = q{};
 $archivePre ='../' if $archive;
 
-print $out '      <script src=\'';
+print $out '<script src=\'';
 print $out $archivePre;
 print $out "tablesort.min.js'></script>\n";
-print $out '      <script src=\'';
+print $out '<script src=\'';
 print $out $archivePre;
 print $out "tablesort.number.js'></script>\n\n";
-print $out "      <table id='mls-table'>\n";
+print $out "<table id='mls-table'>\n";
 
 # Header row
-print $out "	<thead>\n";
-print $out "	 <tr>\n";
+print $out "<thead>\n";
+print $out "<tr>\n";
 
 foreach my $col (0..scalar @header - 1) {
-  print $out '	    <th';
+  print $out '<th';
   # Don't sort blank columns
   if ($header[$col] eq q{}) {
     print $out ' class=\'no-sort\'';
@@ -162,19 +162,19 @@ foreach my $col (0..scalar @header - 1) {
   print $out ">$header[$col]</th>\n";
 }
 
-print $out "	 </tr>\n";
-print $out "	</thead>\n";
+print $out "</tr>\n";
+print $out "</thead>\n";
 
 
 # Data
-print $out "	<tbody>\n";
+print $out "<tbody>\n";
 
 foreach my $name (@names) {
   # Don't sort blank row before totals
   if ($name eq q{}) {
-    print $out "	  <tr class='no-sort'>\n";
+    print $out "<tr class='no-sort'>\n";
   } else {
-    print $out "	  <tr>\n";
+    print $out "<tr>\n";
   }
 
   # Split on space in order to get last name for sorting
@@ -189,24 +189,24 @@ foreach my $name (@names) {
     }
   }
 
-  print $out "	  </tr>\n";
+  print $out "</tr>\n";
 }
 
 # Footer totals row
 # Don't sort totals
-print $out "	  <tr class='no-sort'>\n";
+print $out "<tr class='no-sort'>\n";
 foreach my $col (0..scalar @total - 1) {
-  print $out "	    <td style='font-weight:bold;'>$total[$col]</td>\n";
+  print $out "<td style='font-weight:bold;'>$total[$col]</td>\n";
 }
 
-print $out "	  </tr>\n";
-print $out "	</tbody>\n";
-print $out "   </table>\n\n";
+print $out "</tr>\n";
+print $out "</tbody>\n";
+print $out "</table>\n\n";
 
 # More sortification
-print $out "      <script>\n";
-print $out "	new Tablesort(document.getElementById('mls-table'));\n";
-print $out "      </script>\n";
+print $out "<script>\n";
+print $out "new Tablesort(document.getElementById('mls-table'));\n";
+print $out "</script>\n";
 
 close $out or die $ERRNO;
 

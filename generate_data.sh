@@ -102,6 +102,8 @@ else
 	fi
     done
     cat archive/archive.index.bottom >> $arcindex
+    # Properly indent file
+    emacs -batch $arcindex --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
     echo
     echo "Site ready!"
