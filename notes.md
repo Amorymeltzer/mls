@@ -27,7 +27,7 @@
 - Small links to other archived tables - next/previous seasons?
 
 ### Revamp plan
-- Stats for individual games, one per worksheet (google doc, name: Season Year mm/dd/yy)
+- Stats for individual games, one per worksheet (google doc, name: Season Year MM/DD))
 - Parse into csv for each stat measured (multipleWorksheets.pl)
 - Also parse into per-season data  (multipleWorksheets.pl)
 - Columns with game id (stretch over seasons), date, and individuals
