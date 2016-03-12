@@ -23,3 +23,9 @@
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
+
+### Revamp plan
+- Stats for individual games, one per worksheet
+- Parse into csv for each stat measured
+- Columns with game id (stretch over seasons), date, and individuals
+- Keep data sum for each individual season, show graph for each season?
