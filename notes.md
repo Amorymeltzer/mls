@@ -8,6 +8,7 @@
 - Be better about picking seasons (multipleWorksheets.pl)
 - Individual column sorting? https://github.com/tristen/tablesort/pull/97
 - Reorganize files (data, js, etc. folders)
+- Change summer u to m?  For sorting (ie everything before t)
 ### Future design
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
