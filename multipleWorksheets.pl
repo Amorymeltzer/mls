@@ -52,17 +52,35 @@ for (1..$sheetNum) {
     @{$seasonsList{$seas}} = sort @{$seasonsList{$seas}};
   }
 }
-print "$_\t@{$seasonsList{$_}}\n" foreach sort keys %seasonsList;
 
-for (1..$sheetNum) {
-  # Get label
-  my $game = $book->[$_]{'label'};
-  print "$game\n";
-  my @tmp = split / /, $game;
-  my ($season,$year,$date) = @tmp;
-  print "$season\t$year\t$date\n";
+# This ignores tournys, need to handle them above FIXME TODO
+foreach (sort keys %seasonsList) {
+  print "full: $_\t@{$seasonsList{$_}}\n";
+
+  # Get each individual game info
+  while (@{$seasonsList{$_}}) {
+    my $date = shift @{$seasonsList{$_}};
+    print "$date\n";
+    my ($season,$syear) = split / /;
+    print "$season\t$syear\t$date\n";
+
+    # Pull out corresponding worksheet for the individual game
+    my %gameSheet = %{$book->[$book->[0]{sheet}{"$syear $season $date"}]};
+
+    ## Parse into CSV
+    # Inverted from how I think about rows/columns.  Value essentially means
+    # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
+    my $rowN = $gameSheet{'maxrow'};
+    my $colN = $gameSheet{'maxcol'};
+
+    # Get player names for stat headers
+    my @players;
+    for (2..$rowN-1) {
+      push @players, $gameSheet{'cell'}[1][$_];
+    }
+    print "@players\n";
+  }
   # Identify season
-  # Parse into CSV
   # - Output individual game tables
   # - Append to row for each stat
   # - Sum for season total
