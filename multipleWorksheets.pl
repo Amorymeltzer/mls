@@ -74,16 +74,17 @@ foreach (sort keys %seasonsList) {
     my $colN = $gameSheet{'maxcol'};
 
     # Get player names for stat headers
+    # Placeholder: This isn't actually enough, it won't cover subs, etc.  Need
+    # to pull info from a master list, maintained elsewhere FIXME TODO
     my @players;
     for (2..$rowN-1) {
       push @players, $gameSheet{'cell'}[1][$_];
     }
     print "@players\n";
   }
-  # Identify season
-  # - Output individual game tables
-  # - Append to row for each stat
-  # - Sum for season total
+  # Output individual game tables (loop above as below rowN, colN)
+  # Append to row for each stat (need to parse names first, etc.)
+  # Sum for season total (make hash for each player for each season, dump)
   # Also handle tournaments somehow (table, no graph)
 }
 
