@@ -22,6 +22,7 @@
 - Per-game data, graph if played 1 or more games (cut down on 1-off anomalies)
 - plotly for graphs, etc?  python or r?
 - See also http://mikecostelloe.com/crazyrhythms/ and https://github.com/MikeCostelloe/crazy-rhythms
+- js/standings.js
 #### Archive system
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
@@ -32,3 +33,5 @@
 - Also parse into per-season data  (multipleWorksheets.pl)
 - Columns with game id (stretch over seasons), date, and individuals
 - Keep data sum for each individual season, show graph for each season?
+- What do with generate_data?  Need to figure out workflow, python parsing/graphing scripts
+- Splash page welcomes, has TOC with: current season table and graphs, archives, photos

@@ -36,6 +36,39 @@ $curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
 
 # Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
+my %seasonsList;		# Unique list of seasons that need parsing
+# It's silly to run through this multiple times, need to just grab all names
+# from initial hash.  Order unimportant so it's doable.
+for (1..$sheetNum) {
+  my $seas = $book->[$_]{'label'};
+  %seasonsList{$seas} if $seas !~ /Tournament/;
+}
+
+for (1..$sheetNum) {
+  # Get label
+  # Identify season
+  # Parse into CSV
+  # - Output individual game tables
+  # - Sum for season total
+  # - Append to row for each stat
+  # Also handle tournaments somehow (table, no graph)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 for (1..$sheetNum) {
   my $i = $_;
   # Inverted from how I think about rows/columns.  Value essentially means how
