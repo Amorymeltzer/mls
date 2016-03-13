@@ -43,9 +43,10 @@ for (1..$sheetNum) {
   my $seas = $book->[$_]{'label'};
   next if $seas =~ /Tournament/;
   my @tmp = split / /, $seas;
-  $seas = "$tmp[0] $tmp[1]";
+  $seas = "$tmp[1] $tmp[0]";
   $seasonsList{$seas} = 1;
 }
+print "$_\n" foreach sort keys %seasonsList;
 
 for (1..$sheetNum) {
   # Get label
@@ -57,6 +58,7 @@ for (1..$sheetNum) {
   # Also handle tournaments somehow (table, no graph)
 }
 
+exit;
 
 
 
