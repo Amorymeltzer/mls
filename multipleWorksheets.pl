@@ -41,7 +41,10 @@ my %seasonsList;		# Unique list of seasons that need parsing
 # from initial hash.  Order unimportant so it's doable.
 for (1..$sheetNum) {
   my $seas = $book->[$_]{'label'};
-  %seasonsList{$seas} if $seas !~ /Tournament/;
+  next if $seas =~ /Tournament/;
+  my @tmp = split / /, $seas;
+  $seas = "$tmp[0] $tmp[1]";
+  $seasonsList{$seas} = 1;
 }
 
 for (1..$sheetNum) {
@@ -49,8 +52,8 @@ for (1..$sheetNum) {
   # Identify season
   # Parse into CSV
   # - Output individual game tables
-  # - Sum for season total
   # - Append to row for each stat
+  # - Sum for season total
   # Also handle tournaments somehow (table, no graph)
 }
 
