@@ -44,12 +44,23 @@ for (1..$sheetNum) {
   next if $seas =~ /Tournament/;
   my @tmp = split / /, $seas;
   $seas = "$tmp[1] $tmp[0]";
-  $seasonsList{$seas} = 1;
+  if (!$seasonsList{$seas}) {
+    $seasonsList{$seas} = [$tmp[2]];
+  } else {
+    push @{$seasonsList{$seas}}, $tmp[2];
+    # Ensure each season's game are chronological
+    @{$seasonsList{$seas}} = sort @{$seasonsList{$seas}};
+  }
 }
-print "$_\n" foreach sort keys %seasonsList;
+print "$_\t@{$seasonsList{$_}}\n" foreach sort keys %seasonsList;
 
 for (1..$sheetNum) {
   # Get label
+  my $game = $book->[$_]{'label'};
+  print "$game\n";
+  my @tmp = split / /, $game;
+  my ($season,$year,$date) = @tmp;
+  print "$season\t$year\t$date\n";
   # Identify season
   # Parse into CSV
   # - Output individual game tables
