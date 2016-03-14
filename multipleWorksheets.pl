@@ -53,9 +53,11 @@ for (1..$sheetNum) {
   }
 }
 
+
 # This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
   print "full: $_\t@{$seasonsList{$_}}\n";
+  my %playerData;			# Hash holding per-player data
 
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
@@ -65,26 +67,35 @@ foreach (sort keys %seasonsList) {
     print "$season\t$syear\t$date\n";
 
     # Pull out corresponding worksheet for the individual game
-    my %gameSheet = %{$book->[$book->[0]{sheet}{"$syear $season $date"}]};
+    my %gameData = %{$book->[$book->[0]{sheet}{"$syear $season $date"}]};
 
     ## Parse into CSV
     # Inverted from how I think about rows/columns.  Value essentially means
     # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
-    my $rowN = $gameSheet{'maxrow'};
-    my $colN = $gameSheet{'maxcol'};
+    my $rowN = $gameData{'maxrow'};
+    my $colN = $gameData{'maxcol'};
 
-    # Get player names for stat headers
-    # Placeholder: This isn't actually enough, it won't cover subs, etc.  Need
-    # to pull info from a master list, maintained elsewhere FIXME TODO
+    # Get player names for individual stat headers.  This is really just for
+    # sorting purposes when dumping out the full-scale player has database
     my @players;
-    for (2..$rowN-1) {
-      push @players, $gameSheet{'cell'}[1][$_];
+    for (2..$rowN-1) {		# Ignore header and total rows
+      push @players, $gameData{'cell'}[1][$_];
     }
     print "@players\n";
+
+    # Stats measured, for building the player hash
+    my @stats;
+    for (2..$colN) {		# Ignore player column
+      push @stats, $gameData{'cell'}[$_][1];
+    }
+    print "@stats\n";
+
+    
   }
-  # Output individual game tables (loop above as below rowN, colN)
-  # Append to row for each stat (need to parse names first, etc.)
-  # Sum for season total (make hash for each player for each season, dump)
+  # Make hash for each player each each stat [total, current game]
+  # Output individual game tables (loop above as below rowN, colN) (dump hash)
+  # Append to row for each stat (need to parse names first, use hash)
+  # Sum for season total (dump hash for each player for each season)
   # Also handle tournaments somehow (table, no graph)
 }
 

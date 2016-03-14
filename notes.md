@@ -20,7 +20,7 @@
 - Team stats (RF/RA), record, etc.
 - More sabermetrics?  wOBA, others?
 - Individual stats/graphs over time? -> Joe
-- Per-game data, graph if played 1 or more games (cut down on 1-off anomalies)
+- Per-game data, graph if played 1 or more games (cut down on 1-off anomalies) (15-20% threshold)
 - plotly for graphs, etc?  python or r?
 - See also http://mikecostelloe.com/crazyrhythms/ and https://github.com/MikeCostelloe/crazy-rhythms
 - js/standings.js
