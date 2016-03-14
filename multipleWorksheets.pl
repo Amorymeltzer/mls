@@ -88,16 +88,19 @@ foreach (sort keys %seasonsList) {
 	  # Player names for individual stat headers, really just for sorting
 	  # purposes when dumping out the full-scale player database
 	  push @players, $gameData{'cell'}[$c][$r];
+	  $playerData{$players[-1]}{'total'}[$c-1] = 0;
 	  next;
 	}
-	push @{$playerData{$players[-1]}}, $gameData{'cell'}[$c][$r];
+	push @{$playerData{$players[-1]}{'current'}}, $gameData{'cell'}[$c][$r];
+	$playerData{$players[-1]}{'total'}[$c-1] += $gameData{'cell'}[$c][$r] if $gameData{'cell'}[$c][$r];
       }
     }
     print "@players\n";
     print "@stats\n";
     print keys %playerData;
     print "\n";
-    print "@{$playerData{'Andrew Burch'}}\n";
+    print "@{$playerData{'Andrew Burch'}{'current'}}\n";
+    print "@{$playerData{'Andrew Burch'}{'total'}}\n";
   }
   # Make hash for each player each each stat [total, current game]
   # Output individual game tables (loop above as below rowN, colN) (dump hash)
