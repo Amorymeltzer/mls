@@ -57,7 +57,7 @@ for (1..$sheetNum) {
 # This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
   print "full: $_\t@{$seasonsList{$_}}\n";
-  my %playerData;		# Hash holding per-player data
+  my %playerData;    # Hash holding per-player stat data [total, current game]
 
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
@@ -80,20 +80,21 @@ foreach (sort keys %seasonsList) {
     my @stats;
     for my $r (1..$rowN) {
       for my $c (1..$colN) {
+	my $cell = $gameData{'cell'}[$c][$r];
 	if ($r == 1) {
 	  # Stats measured, for building the player hash
-	  push @stats, $gameData{'cell'}[$c][$r];
+	  push @stats, $cell;
 	  next;
 	} elsif ($c == 1) {
 	  # Player names for individual stat headers, really just for sorting
 	  # purposes when dumping out the full-scale player database
-	  push @players, $gameData{'cell'}[$c][$r];
-	  @{$playerData{$players[-1]}{'current'}} = ();
+	  push @players, $cell;
+	  @{$playerData{$cell}{'current'}} = ();
 	  next;
 	}
-	push @{$playerData{$players[-1]}{'current'}}, $gameData{'cell'}[$c][$r];
+	push @{$playerData{$players[-1]}{'current'}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
-	  $playerData{$players[-1]}{'total'}[$c-2] += $gameData{'cell'}[$c][$r];
+	  $playerData{$players[-1]}{'total'}[$c-2] += $cell;
 	} else {
 	  $playerData{$players[-1]}{'total'}[$c-2] = 0;
 	}
@@ -105,9 +106,11 @@ foreach (sort keys %seasonsList) {
     print "\n";
     print "@{$playerData{'Andrew Burch'}{'current'}}\n";
     print "@{$playerData{'Andrew Burch'}{'total'}}\n";
-    print "$playerData{'Andrew Burch'}{'total'}[0]\n";
+
+    # print "\n\n\n\n";
+    # use Data::Dumper qw(Dumper);
+    # print Dumper \%playerData;
   }
-  # Make hash for each player each each stat [total, current game]
   # Output individual game tables (loop above as below rowN, colN) (dump hash)
   # Append to row for each stat (need to parse names first, use hash)
   # Sum for season total (dump hash for each player for each season)
