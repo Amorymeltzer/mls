@@ -36,3 +36,4 @@
 - Keep data sum for each individual season, show graph for each season?
 - What do with generate_data?  Need to figure out workflow, python parsing/graphing scripts
 - Splash page welcomes, has TOC with: current season table and graphs, archives, photos
+- Manually calculate (ie not in excel/google sheets) stats?
