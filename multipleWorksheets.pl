@@ -57,7 +57,7 @@ for (1..$sheetNum) {
 # This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
   print "full: $_\t@{$seasonsList{$_}}\n";
-  my %playerData;			# Hash holding per-player data
+  my %playerData;		# Hash holding per-player data
 
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
@@ -75,22 +75,29 @@ foreach (sort keys %seasonsList) {
     my $rowN = $gameData{'maxrow'};
     my $colN = $gameData{'maxcol'};
 
-    # Get player names for individual stat headers.  This is really just for
-    # sorting purposes when dumping out the full-scale player has database
+    # Build player-data hash, as well as player and stat arrays
     my @players;
-    for (2..$rowN-1) {		# Ignore header and total rows
-      push @players, $gameData{'cell'}[1][$_];
+    my @stats;
+    for my $r (1..$rowN) {
+      for my $c (1..$colN) {
+	if ($r == 1) {
+	  # Stats measured, for building the player hash
+	  push @stats, $gameData{'cell'}[$c][$r];
+	  next;
+	} elsif ($c == 1) {
+	  # Player names for individual stat headers, really just for sorting
+	  # purposes when dumping out the full-scale player database
+	  push @players, $gameData{'cell'}[$c][$r];
+	  next;
+	}
+	push @{$playerData{$players[-1]}}, $gameData{'cell'}[$c][$r];
+      }
     }
     print "@players\n";
-
-    # Stats measured, for building the player hash
-    my @stats;
-    for (2..$colN) {		# Ignore player column
-      push @stats, $gameData{'cell'}[$_][1];
-    }
     print "@stats\n";
-
-    
+    print keys %playerData;
+    print "\n";
+    print "@{$playerData{'Andrew Burch'}}\n";
   }
   # Make hash for each player each each stat [total, current game]
   # Output individual game tables (loop above as below rowN, colN) (dump hash)
