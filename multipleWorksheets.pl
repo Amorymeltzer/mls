@@ -107,6 +107,19 @@ foreach (sort keys %seasonsList) {
     print "@{$playerData{'Andrew Burch'}{'current'}}\n";
     print "@{$playerData{'Andrew Burch'}{'total'}}\n";
 
+
+    my $outfile = createName($book->[$book->[0]{sheet}{"$syear $season $date"}]{'label'});
+    print "$outfile\n";
+
+    open my $csv, '>', "$outfile" or die $1;
+    print $csv join(',', @stats);
+    print $csv "\n";
+    foreach my $dude (@players) {
+      print $csv "$dude,";
+      print $csv join(',', @{$playerData{$dude}{'total'}});
+      print $csv "\n";
+    }
+    close $csv or die !$;
     # print "\n\n\n\n";
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
@@ -200,7 +213,8 @@ sub createName
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
     # Extension
-    $name .= '.xlsx';
+    #  $name .= '.xlsx';
+    $name .= '.csv';
 
     return $name;
   }
