@@ -7,6 +7,8 @@ use strict;
 use warnings;
 use diagnostics;
 
+use English qw( -no_match_vars );
+
 use Spreadsheet::Read;
 use Excel::Writer::XLSX;
 
@@ -126,7 +128,7 @@ foreach (sort keys %seasonsList) {
   ## Dump season totals into CSV (each player for each season)
   my $outfile = createName($_);
   print "$outfile\n";
-  open my $csv, '>', "$outfile" or die $1;
+  open my $csv, '>', "$outfile" or die $ERRNO;
   print $csv join(',', @stats);
   print $csv "\n";
   foreach my $dude (@players) {
@@ -134,7 +136,7 @@ foreach (sort keys %seasonsList) {
     print $csv join(',', @{$playerData{$dude}{'total'}});
     print $csv "\n";
   }
-  close $csv or die !$;
+  close $csv or die $ERRNO;
 }
 
 exit;
