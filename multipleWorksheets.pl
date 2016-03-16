@@ -73,7 +73,6 @@ foreach (sort keys %seasonsList) {
     # Pull out corresponding worksheet for the individual game
     my %gameData = %{$book->[$book->[0]{sheet}{"$syear $season $date"}]};
 
-    ## Parse into CSV
     # Inverted from how I think about rows/columns.  Value essentially means
     # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
     my $rowN = $gameData{'maxrow'};
@@ -84,7 +83,6 @@ foreach (sort keys %seasonsList) {
     for my $r (1..$rowN) {
       for my $c (1..$colN) {
 	my $cell = $gameData{'cell'}[$c][$r];
-	#print "r: $r\tc: $c\t$cell\n";
 	if ($r == 1) {
 	  next;
 	} elsif ($c == 1) {
@@ -104,7 +102,7 @@ foreach (sort keys %seasonsList) {
 	  $playerData{$player}{'total'}[$c-2] += $cell;
 
 	  # Format calculated stats to 3 decimal places.  Temporary kludge to
-	  # make comparison diffs easier
+	  # make comparison diffs easier.  Ugly.  FIXME TODO
 	  $playerData{$player}{'total'}[$c-2] = sprintf '%.3f', $playerData{$player}{'total'}[$c-2] if $c >= 14;
 	} else {
 	  $playerData{$player}{'total'}[$c-2] = 0;
@@ -117,30 +115,26 @@ foreach (sort keys %seasonsList) {
     print "\n";
     print "@{$playerData{'Andrew Burch'}{'current'}}\n";
     print "@{$playerData{'Andrew Burch'}{'total'}}\n";
-
-
-    my $outfile = createName($book->[$book->[0]{sheet}{"$syear $season $date"}]{'label'});
-    print "$outfile\n";
-
-    # Sum for season total (dump hash for each player for each season)
-    # Need to move this out to *just* season totals but that leads to issues
-    # with the @players and @stats FIXME TODO
-    open my $csv, '>', "$outfile" or die $1;
-    print $csv join(',', @stats);
-    print $csv "\n";
-    foreach my $dude (@players) {
-      print $csv "\"$dude\",";
-      print $csv join(',', @{$playerData{$dude}{'total'}});
-      print $csv "\n";
-    }
-    close $csv or die !$;
     # print "\n\n\n\n";
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
   }
-  # Output individual game tables (loop above as below rowN, colN) (dump hash)
-  # Append to row for each stat (need to parse names first, use hash)
-  # Also handle tournaments somehow (table, no graph)
+  ### Output individual game tables (loop above as below rowN, colN) (dump hash)
+  ### Append to row for each stat (need to parse names first, use hash)
+  ### Also handle tournaments somehow (table, no graph)
+
+  ## Dump season totals into CSV (each player for each season)
+  my $outfile = createName($_);
+  print "$outfile\n";
+  open my $csv, '>', "$outfile" or die $1;
+  print $csv join(',', @stats);
+  print $csv "\n";
+  foreach my $dude (@players) {
+    print $csv "\"$dude\",";
+    print $csv join(',', @{$playerData{$dude}{'total'}});
+    print $csv "\n";
+  }
+  close $csv or die !$;
 }
 
 exit;
