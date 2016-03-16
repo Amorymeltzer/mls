@@ -80,41 +80,48 @@ foreach (sort keys %seasonsList) {
     my $rowN = $gameData{'maxrow'};
     my $colN = $gameData{'maxcol'};
 
-    ## Dump game totals into CSV (each player)
-    my $outfile = createName($_);
-    $outfile =~ s/.csv/_$date.csv/;
-    print "$outfile\n";
-    open my $csv, '>', "$outfile" or die $ERRNO;
-    print $csv join(',', @stats);
+    ## Dump per-game totals (basically a copy of %gameData)
+    ## Could I just use dataDumper? FIXME TODO
+    my $gameOutfile = createName($_);
+    $gameOutfile =~ s/.csv/_$date.csv/; # Incorporate into subroutine FIXME TODO
+    print "$gameOutfile\n";
+    open my $gameCsv, '>', "$gameOutfile" or die $ERRNO;
+    print $gameCsv join q{,}, @stats;
 
     my $player;
-    # Build player-data hash
+    # Build player-data hash (of hash of arrays)
     for my $r (1..$rowN) {
       for my $c (1..$colN) {
-	my $cell = $gameData{'cell'}[$c][$r];
-	if ($r == 1) {
+	my $cell = $gameData{'cell'}[$c][$r]; # Just easier to remember
+	if ($r == 1) {			      # Hardcoded above in @stats
+				# Good place for a check with length of @stats
+				# and $colN FIXME TODO
 	  next;
 	} elsif ($c == 1) {
-	  print $csv "\n\"$cell\",";
-	  $player = $cell;
+	  print $gameCsv "\n\"$cell\",";
+	  $player = $cell;	# Define current player for entire row, saves
+                                # issue of duplicating and polluting @players
+
+	  # Build player array; really just for sorting purposes when dumping
+	  # out the full-scale player database.  Only append if it's a new
+	  # player, otherwise we should just clear-out the 'current' array
 	  if (! $playerData{$cell}{'current'}) {
-	    # Player names for individual stat headers, really just for
-	    # sorting purposes when dumping out the full-scale player database
 	    push @players, $cell;
 	  } else {
 	    @{$playerData{$cell}{'current'}} = ();
 	  }
 	  next;
 	}
+
+	# Format calculated stats to 3 decimal places.  Temporary kludge to
+	# make comparison diffs easier.  Ugly.  FIXME TODO
 	$cell = sprintf '%.3f', $cell if $c >= 14;
-	print $csv "$cell,";
+	print $gameCsv "$cell,";
 
 	push @{$playerData{$player}{'current'}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
 	  $playerData{$player}{'total'}[$c-2] += $cell;
-
-	  # Format calculated stats to 3 decimal places.  Temporary kludge to
-	  # make comparison diffs easier.  Ugly.  FIXME TODO
+	  # See above
 	  $playerData{$player}{'total'}[$c-2] = sprintf '%.3f', $playerData{$player}{'total'}[$c-2] if $c >= 14;
 	} else {
 	  $playerData{$player}{'total'}[$c-2] = 0;
@@ -130,24 +137,24 @@ foreach (sort keys %seasonsList) {
     # print "\n\n\n\n";
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
-    close $csv or die $ERRNO;
+    close $gameCsv or die $ERRNO;
   }
-  ### Output individual game tables (loop above as below rowN, colN) (dump hash)
   ### Append to row for each stat (need to parse names first, use hash)
   ### Also handle tournaments somehow (table, no graph)
 
-  ## Dump season totals into CSV (each player for each season)
-  my $outfile = createName($_);
-  print "$outfile\n";
-  open my $csv, '>', "$outfile" or die $ERRNO;
-  print $csv join(',', @stats);
-  print $csv "\n";
+  ## Dump season totals (identical to old-style format)
+  ## Need to deal with empty column filled with zero... or do I? FIXME TODO
+  my $seasonOutfile = createName($_);
+  print "$seasonOutfile\n";
+  open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
+  print $seasonCsv join q{,}, @stats;
+  print $seasonCsv "\n";
   foreach my $dude (@players) {
-    print $csv "\"$dude\",";
-    print $csv join(',', @{$playerData{$dude}{'total'}});
-    print $csv "\n";
+    print $seasonCsv "\"$dude\",";
+    print $seasonCsv join q{,}, @{$playerData{$dude}{'total'}};
+    print $seasonCsv "\n";
   }
-  close $csv or die $ERRNO;
+  close $seasonCsv or die $ERRNO;
 }
 
 exit;
@@ -210,7 +217,7 @@ for (1..$sheetNum) {
 
 
 #### Subroutines
-# Get the appropriate name
+# Build an appropriate name
 sub createName
   {
     my $label = shift;
@@ -233,7 +240,6 @@ sub createName
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
     # Extension
-    #  $name .= '.xlsx';
     $name .= '.csv';
 
     return $name;
