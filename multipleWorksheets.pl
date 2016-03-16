@@ -55,7 +55,7 @@ for (1..$sheetNum) {
 
 
 # Stats measured, for building the player hash
-my @stats = qw (Player PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
+my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
 
 # This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
@@ -98,10 +98,14 @@ foreach (sort keys %seasonsList) {
 	  }
 	  next;
 	}
-	#  push @{$playerData{$players[-1]}{'current'}}, $cell;
+
 	push @{$playerData{$player}{'current'}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
 	  $playerData{$player}{'total'}[$c-2] += $cell;
+
+	  # Format calculated stats to 3 decimal places.  Temporary kludge to
+	  # make comparison diffs easier
+	  $playerData{$player}{'total'}[$c-2] = sprintf '%.3f', $playerData{$player}{'total'}[$c-2] if $c >= 14;
 	} else {
 	  $playerData{$player}{'total'}[$c-2] = 0;
 	}
