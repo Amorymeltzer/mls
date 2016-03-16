@@ -111,11 +111,14 @@ foreach (sort keys %seasonsList) {
     my $outfile = createName($book->[$book->[0]{sheet}{"$syear $season $date"}]{'label'});
     print "$outfile\n";
 
+    # Sum for season total (dump hash for each player for each season)
+    # Need to move this out to *just* season totals but that leads to issues
+    # with the @players and @stats FIXME TODO
     open my $csv, '>', "$outfile" or die $1;
     print $csv join(',', @stats);
     print $csv "\n";
     foreach my $dude (@players) {
-      print $csv "$dude,";
+      print $csv "\"$dude\",";
       print $csv join(',', @{$playerData{$dude}{'total'}});
       print $csv "\n";
     }
@@ -126,7 +129,6 @@ foreach (sort keys %seasonsList) {
   }
   # Output individual game tables (loop above as below rowN, colN) (dump hash)
   # Append to row for each stat (need to parse names first, use hash)
-  # Sum for season total (dump hash for each player for each season)
   # Also handle tournaments somehow (table, no graph)
 }
 
