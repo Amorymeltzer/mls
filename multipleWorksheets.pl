@@ -80,6 +80,13 @@ foreach (sort keys %seasonsList) {
     my $rowN = $gameData{'maxrow'};
     my $colN = $gameData{'maxcol'};
 
+    ## Dump game totals into CSV (each player)
+    my $outfile = createName($_);
+    $outfile =~ s/.csv/_$date.csv/;
+    print "$outfile\n";
+    open my $csv, '>', "$outfile" or die $ERRNO;
+    print $csv join(',', @stats);
+
     my $player;
     # Build player-data hash
     for my $r (1..$rowN) {
@@ -88,6 +95,7 @@ foreach (sort keys %seasonsList) {
 	if ($r == 1) {
 	  next;
 	} elsif ($c == 1) {
+	  print $csv "\n\"$cell\",";
 	  $player = $cell;
 	  if (! $playerData{$cell}{'current'}) {
 	    # Player names for individual stat headers, really just for
@@ -98,6 +106,8 @@ foreach (sort keys %seasonsList) {
 	  }
 	  next;
 	}
+	$cell = sprintf '%.3f', $cell if $c >= 14;
+	print $csv "$cell,";
 
 	push @{$playerData{$player}{'current'}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
@@ -120,6 +130,7 @@ foreach (sort keys %seasonsList) {
     # print "\n\n\n\n";
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
+    close $csv or die $ERRNO;
   }
   ### Output individual game tables (loop above as below rowN, colN) (dump hash)
   ### Append to row for each stat (need to parse names first, use hash)
