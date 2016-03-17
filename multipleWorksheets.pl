@@ -58,6 +58,9 @@ for (1..$sheetNum) {
 
 # Stats measured, for building the player hash
 my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
+# Master hash of player stats, across all seasons
+my %masterData;
+my @masterPlayers;
 
 # This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
@@ -94,7 +97,7 @@ foreach (sort keys %seasonsList) {
       for my $c (1..$colN) {
 	my $cell = $gameData{'cell'}[$c][$r]; # Just easier to remember
 	if ($r == 1) {			      # Hardcoded above in @stats
-				# Good place for a check with length of @stats
+	  # Good place for a check with length of @stats
 				# and $colN FIXME TODO
 	  next;
 	} elsif ($c == 1) {
@@ -110,6 +113,9 @@ foreach (sort keys %seasonsList) {
 	  } else {
 	    @{$playerData{$cell}{'current'}} = ();
 	  }
+	  # Do the same for the master list of players
+	  push @masterPlayers, $cell if ! $masterData{$cell};
+
 	  next;
 	}
 
@@ -121,10 +127,13 @@ foreach (sort keys %seasonsList) {
 	push @{$playerData{$player}{'current'}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
 	  $playerData{$player}{'total'}[$c-2] += $cell;
+	  $masterData{$player}[$c-2] += $cell;
 	  # See above
 	  $playerData{$player}{'total'}[$c-2] = sprintf '%.3f', $playerData{$player}{'total'}[$c-2] if $c >= 14;
+	  $masterData{$player}[$c-2] = sprintf '%.3f', $masterData{$player}[$c-2] if $c >= 14;
 	} else {
 	  $playerData{$player}{'total'}[$c-2] = 0;
+	  $masterData{$player}[$c-2] = 0;
 	}
       }
     }
@@ -156,6 +165,18 @@ foreach (sort keys %seasonsList) {
   }
   close $seasonCsv or die $ERRNO;
 }
+
+## Dump lifetime totals (same format as season totals)
+open my $masterCsv, '>', 'masterData.csv' or die $!;
+print $masterCsv join q{,}, @stats;
+print $masterCsv "\n";
+foreach my $dude (@masterPlayers) {
+  print $masterCsv "\"$dude\",";
+  print $masterCsv join q{,}, @{$masterData{$dude}};
+  print $masterCsv "\n";
+}
+close $masterCsv or die $ERRNO;
+
 
 exit;
 
