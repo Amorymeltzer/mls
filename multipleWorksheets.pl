@@ -45,7 +45,7 @@ for (1..$sheetNum) {
   my $seas = $book->[$_]{'label'};
   next if $seas =~ /Tournament/;
   my @tmp = split / /, $seas;
-  $seas = "$tmp[1] $tmp[0]";
+  $seas = "$tmp[0] $tmp[1]";
   if (!$seasonsList{$seas}) {
     $seasonsList{$seas} = [$tmp[2]];
   } else {
@@ -58,15 +58,17 @@ for (1..$sheetNum) {
 
 # Stats measured, for building the player hash
 my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
-# Master hash of player stats, across all seasons
+# Master lists of stats, players, and dates played
 my %masterData;
 my @masterPlayers;
+my @masterDates;
 
 # This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
   print "full: $_\t@{$seasonsList{$_}}\n";
   my %playerData;    # Hash holding per-player stat data [total, current game]
   my @players;	     # Player names
+  my @dates;	     # Dates of play
 
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
@@ -74,9 +76,14 @@ foreach (sort keys %seasonsList) {
     print "$date\n";
     my ($season,$syear) = split / /;
     print "$season\t$syear\t$date\n";
+    my $gameDate = "$date.".substr $syear, 2;
+
+    # Keep track of time
+    push @dates, $gameDate;
+    push @masterDates, $gameDate;
 
     # Pull out corresponding worksheet for the individual game
-    my %gameData = %{$book->[$book->[0]{sheet}{"$syear $season $date"}]};
+    my %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
 
     # Inverted from how I think about rows/columns.  Value essentially means
     # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
@@ -108,10 +115,10 @@ foreach (sort keys %seasonsList) {
 	  # Build player array; really just for sorting purposes when dumping
 	  # out the full-scale player database.  Only append if it's a new
 	  # player, otherwise we should just clear-out the 'current' array
-	  if (! $playerData{$cell}{'current'}) {
+	  if (! $playerData{$cell}{$gameDate}) {
 	    push @players, $cell;
 	  } else {
-	    @{$playerData{$cell}{'current'}} = ();
+	    @{$playerData{$cell}{$gameDate}} = ();
 	  }
 	  # Do the same for the master list of players
 	  push @masterPlayers, $cell if ! $masterData{$cell};
@@ -124,7 +131,7 @@ foreach (sort keys %seasonsList) {
 	$cell = sprintf '%.3f', $cell if $c >= 14;
 	print $gameCsv "$cell,";
 
-	push @{$playerData{$player}{'current'}}, $cell;
+	push @{$playerData{$player}{$gameDate}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
 	  $playerData{$player}{'total'}[$c-2] += $cell;
 	  $masterData{$player}[$c-2] += $cell;
@@ -137,16 +144,18 @@ foreach (sort keys %seasonsList) {
 	}
       }
     }
+    close $gameCsv or die $ERRNO;
+
+
     print "@players\n";
     print "@stats\n";
     print keys %playerData;
     print "\n";
-    print "@{$playerData{'Andrew Burch'}{'current'}}\n";
+    print "@{$playerData{'Andrew Burch'}{$gameDate}}\n";
     print "@{$playerData{'Andrew Burch'}{'total'}}\n";
     # print "\n\n\n\n";
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
-    close $gameCsv or die $ERRNO;
   }
   ### Append to row for each stat (need to parse names first, use hash)
   ### Also handle tournaments somehow (table, no graph)
