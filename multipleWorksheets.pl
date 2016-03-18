@@ -176,8 +176,6 @@ foreach (sort keys %seasonsList) {
 
 
   # Dump per-game values for each student
-  # Not increasing yet, but should be FIXME TODO
-  # Also has issue with Total: showing up in some output?  FIXME TODO
   my $seasonSuffix = $seasonOutfile;
   $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
   foreach my $i (1..scalar @stats - 1) {
