@@ -176,11 +176,19 @@ foreach (sort keys %seasonsList) {
   close $seasonCsv or die $ERRNO;
 
 
+  # Schwartzian transform to sort dates, should combine FIXME TODO
+  @dates =
+    map {$_->[0]}
+    sort { $a->[1] cmp $b->[1] }
+    map {[$_, join('', (split '\.', $_)[2,0,1])]}
+    @dates;
+
+
   # Dump per-game values for each stat in each season
   my $seasonSuffix = $seasonOutfile;
   $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
   foreach my $i (1..scalar @stats - 1) {
-    next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
+    next if $stats[$i] =~ m/\"/; # Deal with blank column, temporary FIXME TODO
     open my $stat, '>', "$stats[$i]_$seasonSuffix.csv" or die $!;
     print $stat 'Date,';
     print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
@@ -212,26 +220,41 @@ foreach my $dude (@masterPlayers) {
 close $masterCsv or die $ERRNO;
 
 
-  # Dump lifetime per-game values for each stat
-  foreach my $i (1..scalar @stats - 1) {
-    next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
-    open my $stat, '>', "$stats[$i].csv" or die $!;
-    print $stat 'Date,';
-    print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
-    print $stat "\n";
-    foreach my $j (0..scalar @masterDates - 1) {
-      print $stat "$masterDates[$j],";
-      foreach my $dude (@masterPlayers[0..$#masterPlayers-2]) {
-	# Awkward kludge to add data, destructive but at the end so not an issue
-	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
-	print $stat "$masterData{$dude}{$masterDates[$j]}[$i-1],";
-      }
-      $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
-      print $stat "$masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1]";
-      print $stat "\n";
+# Schwartzian transform to sort dates, should combine FIXME TODO
+@masterDates =
+  map {$_->[0]}
+  sort { $a->[1] cmp $b->[1] }
+  map {[$_, join('', (split '\.', $_)[2,0,1])]}
+  @masterDates;
+
+# Dump lifetime per-game values for each stat
+foreach my $i (1..scalar @stats - 1) {
+  next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
+  open my $stat, '>', "$stats[$i].csv" or die $!;
+  print $stat 'Date,';
+  print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
+  print $stat "\n";
+  foreach my $j (0..scalar @masterDates - 1) {
+    print $stat "$masterDates[$j],";
+    foreach my $dude (@masterPlayers[0..$#masterPlayers-2]) {
+      # Awkward kludge to add data, destructive but at the end so not an issue
+      $masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
+      print $stat "$masterData{$dude}{$masterDates[$j]}[$i-1],";
     }
-    close $stat or die $ERRNO;
+    $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
+    print $stat "$masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1]";
+    print $stat "\n";
   }
+  close $stat or die $ERRNO;
+}
+
+
+
+# American dates are dumb
+
+
+
+
 
 
 exit;
