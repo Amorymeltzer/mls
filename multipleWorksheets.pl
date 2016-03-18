@@ -132,15 +132,16 @@ foreach (sort keys %seasonsList) {
 	print $gameCsv "$cell,";
 
 	push @{$playerData{$player}{$gameDate}}, $cell;
+	push @{$masterData{$player}{$gameDate}}, $cell;
 	if ($gameData{'cell'}[$c][$r]) {
 	  $playerData{$player}{'total'}[$c-2] += $cell;
-	  $masterData{$player}[$c-2] += $cell;
+	  $masterData{$player}{'total'}[$c-2] += $cell;
 	  # See above
 	  $playerData{$player}{'total'}[$c-2] = sprintf '%.3f', $playerData{$player}{'total'}[$c-2] if $c >= 14;
-	  $masterData{$player}[$c-2] = sprintf '%.3f', $masterData{$player}[$c-2] if $c >= 14;
+	  $masterData{$player}{'total'}[$c-2] = sprintf '%.3f', $masterData{$player}{'total'}[$c-2] if $c >= 14;
 	} else {
 	  $playerData{$player}{'total'}[$c-2] = 0;
-	  $masterData{$player}[$c-2] = 0;
+	  $masterData{$player}{'total'}[$c-2] = 0;
 	}
       }
     }
@@ -157,8 +158,8 @@ foreach (sort keys %seasonsList) {
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
   }
-  ### Append to row for each stat (need to parse names first, use hash)
   ### Also handle tournaments somehow (table, no graph)
+  ### Need to sort dates! FIXME TODO
 
   ## Dump season totals (identical to old-style format)
   ## Need to deal with empty column filled with zero... or do I? FIXME TODO
@@ -175,7 +176,7 @@ foreach (sort keys %seasonsList) {
   close $seasonCsv or die $ERRNO;
 
 
-  # Dump per-game values for each student
+  # Dump per-game values for each stat in each season
   my $seasonSuffix = $seasonOutfile;
   $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
   foreach my $i (1..scalar @stats - 1) {
@@ -205,10 +206,32 @@ print $masterCsv join q{,}, @stats;
 print $masterCsv "\n";
 foreach my $dude (@masterPlayers) {
   print $masterCsv "\"$dude\",";
-  print $masterCsv join q{,}, @{$masterData{$dude}};
+  print $masterCsv join q{,}, @{$masterData{$dude}{'total'}};
   print $masterCsv "\n";
 }
 close $masterCsv or die $ERRNO;
+
+
+  # Dump lifetime per-game values for each stat
+  foreach my $i (1..scalar @stats - 1) {
+    next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
+    open my $stat, '>', "$stats[$i].csv" or die $!;
+    print $stat 'Date,';
+    print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
+    print $stat "\n";
+    foreach my $j (0..scalar @masterDates - 1) {
+      print $stat "$masterDates[$j],";
+      foreach my $dude (@masterPlayers[0..$#masterPlayers-2]) {
+	# Awkward kludge to add data, destructive but at the end so not an issue
+	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
+	print $stat "$masterData{$dude}{$masterDates[$j]}[$i-1],";
+      }
+      $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
+      print $stat "$masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1]";
+      print $stat "\n";
+    }
+    close $stat or die $ERRNO;
+  }
 
 
 exit;
