@@ -159,7 +159,6 @@ foreach (sort keys %seasonsList) {
     # print Dumper \%playerData;
   }
   ### Also handle tournaments somehow (table, no graph)
-  ### Need to sort dates! FIXME TODO
 
   ## Dump season totals (identical to old-style format)
   ## Need to deal with empty column filled with zero... or do I? FIXME TODO
@@ -176,14 +175,8 @@ foreach (sort keys %seasonsList) {
   close $seasonCsv or die $ERRNO;
 
 
-  # Schwartzian transform to sort dates, should combine FIXME TODO
-  @dates =
-    map {$_->[0]}
-    sort { $a->[1] cmp $b->[1] }
-    map {[$_, join('', (split '\.', $_)[2,0,1])]}
-    @dates;
-
-
+  # Sort dates
+  schwartz(\@dates);
   # Dump per-game values for each stat in each season
   my $seasonSuffix = $seasonOutfile;
   $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
@@ -220,13 +213,8 @@ foreach my $dude (@masterPlayers) {
 close $masterCsv or die $ERRNO;
 
 
-# Schwartzian transform to sort dates, should combine FIXME TODO
-@masterDates =
-  map {$_->[0]}
-  sort { $a->[1] cmp $b->[1] }
-  map {[$_, join('', (split '\.', $_)[2,0,1])]}
-  @masterDates;
-
+# Sort dates
+schwartz(\@masterDates);
 # Dump lifetime per-game values for each stat
 foreach my $i (1..scalar @stats - 1) {
   next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
@@ -250,8 +238,18 @@ foreach my $i (1..scalar @stats - 1) {
 
 
 
-# American dates are dumb
-
+### Subroutine
+# American dates are dumb, sort on YY/MM/DD
+# Schwartzian transform
+sub schwartz
+  {
+    my $ref = shift;
+    @{$ref} =
+      map {$_->[0]}
+      sort { $a->[1] cmp $b->[1] }
+      map {[$_, join('', (split '\.', $_)[2,0,1])]}
+      @{$ref};
+  }
 
 
 
