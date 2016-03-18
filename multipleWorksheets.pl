@@ -186,12 +186,15 @@ foreach (sort keys %seasonsList) {
     print $stat 'Date,';
     print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
     print $stat "\n";
-    foreach my $date (@dates) {
-      print $stat "$date,";
+    foreach my $j (0..scalar @dates - 1) {
+      print $stat "$dates[$j],";
       foreach my $dude (@players[0..$#players-2]) {
-	print $stat "$playerData{$dude}{$date}[$i-1],";
+	# Awkward kludge to add data, destructive but at the end so not an issue
+	$playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
+	print $stat "$playerData{$dude}{$dates[$j]}[$i-1],";
       }
-      print $stat "$playerData{$players[-2]}{$date}[$i-1]";
+      $playerData{$players[-2]}{$dates[$j]}[$i-1] += $playerData{$players[-2]}{$dates[$j-1]}[$i-1] if $j != 0;
+      print $stat "$playerData{$players[-2]}{$dates[$j]}[$i-1]";
       print $stat "\n";
     }
     close $stat or die $ERRNO;
