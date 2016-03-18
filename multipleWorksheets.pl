@@ -188,9 +188,10 @@ foreach (sort keys %seasonsList) {
     print $stat "\n";
     foreach my $date (@dates) {
       print $stat "$date,";
-      foreach my $dude (@players[0..$#players-1]) {
+      foreach my $dude (@players[0..$#players-2]) {
 	print $stat "$playerData{$dude}{$date}[$i-1],";
       }
+      print $stat "$playerData{$players[-2]}{$date}[$i-1]";
       print $stat "\n";
     }
     close $stat or die $ERRNO;
