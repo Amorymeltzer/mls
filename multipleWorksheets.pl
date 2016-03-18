@@ -114,8 +114,8 @@ foreach (sort keys %seasonsList) {
 
 	  # Build player array; really just for sorting purposes when dumping
 	  # out the full-scale player database.  Only append if it's a new
-	  # player, otherwise we should just clear-out the 'current' array
-	  if (! $playerData{$cell}{$gameDate}) {
+	  # player, otherwise we should just clear-out the current game array
+	  if (! $playerData{$cell}) {
 	    push @players, $cell;
 	  } else {
 	    @{$playerData{$cell}{$gameDate}} = ();
