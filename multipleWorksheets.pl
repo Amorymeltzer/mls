@@ -173,6 +173,28 @@ foreach (sort keys %seasonsList) {
     print $seasonCsv "\n";
   }
   close $seasonCsv or die $ERRNO;
+
+
+  # Dump per-game values for each student
+  # Not increasing yet, but should be FIXME TODO
+  # Also has issue with Total: showing up in some output?  FIXME TODO
+  my $seasonSuffix = $seasonOutfile;
+  $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
+  foreach my $i (1..scalar @stats - 1) {
+    next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
+    open my $stat, '>', "$stats[$i]_$seasonSuffix.csv" or die $!;
+    print $stat 'Date,';
+    print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
+    print $stat "\n";
+    foreach my $date (@dates) {
+      print $stat "$date,";
+      foreach my $dude (@players[0..$#players-1]) {
+	print $stat "$playerData{$dude}{$date}[$i-1],";
+      }
+      print $stat "\n";
+    }
+    close $stat or die $ERRNO;
+  }
 }
 
 ## Dump lifetime totals (same format as season totals)
