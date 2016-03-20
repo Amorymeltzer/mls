@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Temporary stats page</title>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<style type="text/css">
+			body {
+			  font: 10px sans-serif;
+			}
+			h1 {
+			  font: 14px sans-serif;
+			  fill: #a0a0a0;
+			}
+			a {
+			  color: #1f77b4;
+			  text-decoration: none;
+			}
+			.axis {
+			  font: 10px sans-serif;
+			  fill: #a0a0a0;
+			}
+			.axis path,
+			.axis line {
+			  fill: none;
+			  stroke: #a0a0a0;
+			  shape-rendering: crispEdges;
+			}
+			/*
+			.x.axis path {
+			  display: none;
+			}
+			*/
+			.line {
+			  fill: none;
+			  stroke-width: 2px;
+			}
+			#tooltip {
+			  font: 11px sans-serif;
+			}
+			#container {
+				width: 1100px;
+				margin-left:auto;
+				margin-right:auto;
+			}
+			#column {
+				width:200px;
+				height:1200px;
+				float: left;
+			}
+			#linegraph {
+				width:900px;
+				float: right;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="container">
+		<div id="column">
+		<h1>Temporary page</h1>
+		<a href="http://www.google.com" target="_blank">Google</a>
+		<p>Heavily based on Mike Costelloe's <a href="http://mikecostelloe.com/crazyrhythms/" target="_blank">Visual Rhythms</a>.
+		</div>
+		<div id="linegraph">
+			<select id="menu">
+				<option value="R">Runs</option>
+				<option value="H">Hits</option>
+				<option value="2B">Doubles</option>
+				<option value="3B">Triples</option>
+				<option value="HR">Home Runs</option>
+				<!-- <option value="TB">Total Bases</option> -->
+				<option value="RBI">Runs Batted In</option>
+				<option value="BB">Walks</option>
+				<option value="K">Strikeouts</option>
+				<option value="SAC">Sac-flies</option>
+				<option value="AVG">Batting average</option>
+				<option value="OBP">On-Base Pencentage</option>
+				<option value="SLG">Slugging</option>
+				<option value="OPS">OBP plus SLG</option>
+				<!-- <option value="K-BB">Strikeout to Walk Ratio</option> -->
+			</select>
+
+			<script type="text/javascript" src="./linegraph.js"></script>
+		</div>
+	</div>
+	</body>
+</html>
