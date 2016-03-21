@@ -58,7 +58,8 @@ for (1..$sheetNum) {
 
 # Stats measured, for building the player hash
 #  my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
-my @stats = qw ("Player" AB R H 2B 3B HR RBI BB K SAC);
+#  my @stats = qw ("Player" AB R H 2B 3B HR RBI BB K SAC);
+my @stats = qw ("Player" AB R H 2B 3B HR RBI BB K SAC AVG OBP SLG OPS);
 # Master lists of stats, players, and dates played
 my %masterData;
 my @masterPlayers;
@@ -135,19 +136,13 @@ foreach (sort keys %seasonsList) {
 
 
 	if ($c >= 12) {
-
-	  # print "aary @{$masterData{$player}{'total'}}\n";
-
 	  # Calculate total first, so we don't overlap
-	  #  $cell = calcStats($r,$c,$player,$gameDate,\%gameData);
-	  $cell = calcTotal($c,$player,'total',\%playerData);
-
+	  $cell = calcStats($c,$player,'total',\%playerData);
 	  $playerData{$player}{'total'}[$c-2] = $cell;
 	  $masterData{$player}{'total'}[$c-2] = $cell;
 
 	  # Calculate for the given gameDate to append
-	  $cell = calcTotal($c,$player,$gameDate,\%playerData);
-	  #  $cell = calcStats($r,$c,$player,$gameDate,\%gameData);
+	  $cell = calcStats($c,$player,$gameDate,\%playerData);
 	} else {
 	  if ($gameData{'cell'}[$c][$r]) {
 	    $playerData{$player}{'total'}[$c-2] += $cell;
@@ -273,67 +268,27 @@ sub schwartz
 # Calc stats
 sub calcStats
   {
-    my ($r,$c,$player,$gameDate,$gameRef) = @_;
-    my $cell;			# Hold calculated stat
-
-    # Repeatedly used for calculations, convenient (AB=PA-BB-SAC)
-    my $AB = ${$gameRef}{'cell'}[2][$r] - ${$gameRef}{'cell'}[9][$r] - ${$gameRef}{'cell'}[11][$r];
-    # TB=H+2B+2*3B+3*4B
-    my $TB = ${$gameRef}{'cell'}[4][$r] + ${$gameRef}{'cell'}[5][$r] + (2 * ${$gameRef}{'cell'}[6][$r]) + (3 * ${$gameRef}{'cell'}[7][$r]);
-
-    #print "$player $gameDate AB: $AB TB: $TB r: $r c: $c\n";
-    #print "curr 1\t${$gameRef}{'cell'}[1][$r]\n 2\t${$gameRef}{'cell'}[2][$r]\n 3\t${$gameRef}{'cell'}[3][$r]\n";
-
-    if ($c == 12) {		# AVG = H/AB
-      $cell = ${$gameRef}{'cell'}[4][$r] / $AB;
-    } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      $cell = (${$gameRef}{'cell'}[4][$r] + ${$gameRef}{'cell'}[9][$r]) / ${$gameRef}{'cell'}[2][$r];
-    } elsif ($c == 14) {	# SLG = Total bases/AB
-      $cell = $TB / $AB;
-    } elsif ($c == 15) {	# OPS = OBP+SLG
-      #  $cell = ${$gameRef}{'cell'}[$c-2][$r] + ${$gameRef}{'cell'}[$c-1][$r];
-      print "$c ${$gameRef}{'cell'}[$c-4][$r] + ${$gameRef}{'cell'}[$c-3][$r]\n";
-      $cell = ${$gameRef}{'cell'}[$c-4][$r] + ${$gameRef}{'cell'}[$c-3][$r];
-    }
-
-    return sprintf '%.3f', $cell;
-  }
-
-
-# Calc total stats, very temporary FIXME TODO
-sub calcTotal
-  {
     my ($c,$player,$chart,$playerRef) = @_;
     my $cell;			# Hold calculated stat
 
-    #  print "1 1 $player\t@{${$playerRef}{$player}{'total'}}\n";
-
-    # Repeatedly used for calculations, convenient (AB=PA-BB-SAC)
-    #  my $AB = ${$playerRef}{$player}{'total'}[2] - ${$playerRef}{$player}{'total'}[9] - ${$playerRef}{$player}{'total'}[11];
-    #  my $AB = ${$playerRef}{$player}{'total'}[0] - ${$playerRef}{$player}{'total'}[7] - ${$playerRef}{$player}{'total'}[9];
+    ## Repeatedly used for calculations, convenient (
+    # AB=PA-BB-SAC
     my $AB = ${$playerRef}{$player}{$chart}[0] - ${$playerRef}{$player}{$chart}[7] - ${$playerRef}{$player}{$chart}[9];
     # TB=H+2B+2*3B+3*4B
-    #  my $TB = ${$playerRef}{$player}{'total'}[2] + ${$playerRef}{$player}{'total'}[3] + (2 * ${$playerRef}{$player}{'total'}[4]) + (3 * ${$playerRef}{$player}{'total'}[5]);
     my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
 
-    print "$player  AB: $AB TB: $TB $c: $chart ${$playerRef}{$player}{$chart}[$c-2]\n";
+    #  print "$player  AB: $AB TB: $TB $c: $chart ${$playerRef}{$player}{$chart}[$c-2]\n";
     if ($c == 12) {	  # AVG = H/AB
-      #  $cell = ${$playerRef}{$player}{'total'}[4] / $AB;
-      #  $cell = ${$playerRef}{$player}{'total'}[2] / $AB;
       $cell = ${$playerRef}{$player}{$chart}[2] / $AB;
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      #  $cell = (${$playerRef}{$player}{'total'}[4] + ${$playerRef}{$player}{'total'}[9]) / ${$playerRef}{$player}{'total'}[2];
-      #  $cell = (${$playerRef}{$player}{'total'}[2] + ${$playerRef}{$player}{'total'}[7]) / ${$playerRef}{$player}{'total'}[0];
       $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 14) {	# SLG = Total bases/AB
       $cell = $TB / $AB;
     } elsif ($c == 15) {	# OPS = OBP+SLG
-      #  $cell = ${$playerRef}{$player}{'total'}[$c-2] + ${$playerRef}{$player}{'total'}[$c-1];
-      #  $cell = ${$playerRef}{$player}{'total'}[$c-4] + ${$playerRef}{$player}{'total'}[$c-3];
       $cell = ${$playerRef}{$player}{$chart}[$c-4] + ${$playerRef}{$player}{$chart}[$c-3];
     }
 
-    return sprintf '%.3f', $cell;
+    return sprintf '%.3f', $cell; # Prettify to three decimals
   }
 
 
