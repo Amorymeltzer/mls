@@ -201,13 +201,20 @@ foreach (sort keys %seasonsList) {
     print $stat "\n";
     foreach my $j (0..scalar @dates - 1) {
       print $stat "$dates[$j],";
-      foreach my $dude (@players[0..$#players-2]) {
+      #  foreach my $dude (@players[0..$#players-2]) {
+      foreach my $dude (@players[0..$#players-1]) {
 	# Awkward kludge to add data, destructive but at the end so not an issue
-	$playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
-	print $stat "$playerData{$dude}{$dates[$j]}[$i-1],";
+	if ($i >= 11) {
+	  my $tamp = calcStats($i+1,$dude,$dates[$j],\%playerData);
+	  print $stat "$tamp,";
+	} else {
+	  $playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
+	  print $stat "$playerData{$dude}{$dates[$j]}[$i-1],";
+	}
       }
-      $playerData{$players[-2]}{$dates[$j]}[$i-1] += $playerData{$players[-2]}{$dates[$j-1]}[$i-1] if $j != 0;
-      print $stat "$playerData{$players[-2]}{$dates[$j]}[$i-1]";
+      #  $playerData{$players[-2]}{$dates[$j]}[$i-1] += $playerData{$players[-2]}{$dates[$j-1]}[$i-1] if $j != 0;
+      #  print $stat "$playerData{$players[-2]}{$dates[$j]}[$i-1]";
+      #print $stat "$playerData{$players[-1]}{$dates[$j]}[$i-1]";
       print $stat "\n";
     }
     close $stat or die $ERRNO;
@@ -236,14 +243,24 @@ foreach my $i (1..scalar @stats - 1) {
   print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
   print $stat "\n";
   foreach my $j (0..scalar @masterDates - 1) {
+    print "$masterDates[$j] i $i $stats[$i]\n";
     print $stat "$masterDates[$j],";
-    foreach my $dude (@masterPlayers[0..$#masterPlayers-2]) {
+    #  foreach my $dude (@masterPlayers[0..$#masterPlayers-2]) {
+    foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) {
       # Awkward kludge to add data, destructive but at the end so not an issue
-      $masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
-      print $stat "$masterData{$dude}{$masterDates[$j]}[$i-1],";
+      # Doesn't print masterData totals properl, almost like saving last one FIXME TODO
+      if ($i >= 11) {
+	my $tamp = calcStats($i+1,$dude,$masterDates[$j],\%masterData);
+	print $stat "$tamp,";
+      } else {
+	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
+	print $stat "$masterData{$dude}{$masterDates[$j]}[$i-1],";
+      }
     }
-    $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
-    print $stat "$masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1]";
+    #    $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
+    #  print $stat "$masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1]";
+    #  print $stat "$masterData{$masterPlayers[-1]}{$masterDates[$j]}[$i-1]";
+    #  print $stat "\n";
     print $stat "\n";
   }
   close $stat or die $ERRNO;
@@ -278,7 +295,7 @@ sub calcStats
     my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
 
     #  print "$player  AB: $AB TB: $TB $c: $chart ${$playerRef}{$player}{$chart}[$c-2]\n";
-    if ($c == 12) {	  # AVG = H/AB
+    if ($c == 12) {		# AVG = H/AB
       $cell = ${$playerRef}{$player}{$chart}[2] / $AB;
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
       $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / ${$playerRef}{$player}{$chart}[0];
@@ -288,6 +305,7 @@ sub calcStats
       $cell = ${$playerRef}{$player}{$chart}[$c-4] + ${$playerRef}{$player}{$chart}[$c-3];
     }
 
+    #print "c: $c $player $chart\n";
     return sprintf '%.3f', $cell; # Prettify to three decimals
   }
 
