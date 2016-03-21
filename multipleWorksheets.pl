@@ -57,7 +57,8 @@ for (1..$sheetNum) {
 
 
 # Stats measured, for building the player hash
-my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
+#  my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
+my @stats = qw ("Player" AB R H 2B 3B HR RBI BB K SAC);
 # Master lists of stats, players, and dates played
 my %masterData;
 my @masterPlayers;
@@ -88,7 +89,8 @@ foreach (sort keys %seasonsList) {
     # Inverted from how I think about rows/columns.  Value essentially means
     # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
     my $rowN = $gameData{'maxrow'};
-    my $colN = $gameData{'maxcol'};
+    #  my $colN = $gameData{'maxcol'};
+    my $colN = $gameData{'maxcol'} + 4; # Make room for calculated stats
 
     ## Dump per-game totals (basically a copy of %gameData)
     ## Could I just use dataDumper? FIXME TODO
@@ -128,21 +130,32 @@ foreach (sort keys %seasonsList) {
 
 	# Format calculated stats to 3 decimal places.  Temporary kludge to
 	# make comparison diffs easier.  Ugly.  FIXME TODO
-	$cell = sprintf '%.3f', $cell if $c >= 14;
-	print $gameCsv "$cell,";
+	#  $cell = sprintf '%.3f', $cell if $c >= 14;
+	#  Not needed in testing of calculations???? FIXME TODO
 
+
+	if ($c >= 12) {
+	  # Calculate total first, so we don't overlap
+	  $cell = calcStats($r,$c,$player,$gameDate,\%gameData,\%playerData);
+
+	  $playerData{$player}{'total'}[$c-2] = $cell;
+	  $masterData{$player}{'total'}[$c-2] = $cell;
+
+	  # Calculate for the given gameDate to append
+	  $cell = calcStats($r,$c,$player,$gameDate,\%gameData,\%playerData);
+	} else {
+	  if ($gameData{'cell'}[$c][$r]) {
+	    $playerData{$player}{'total'}[$c-2] += $cell;
+	    $masterData{$player}{'total'}[$c-2] += $cell;
+	  } else {
+	    $playerData{$player}{'total'}[$c-2] = 0;
+	    $masterData{$player}{'total'}[$c-2] = 0;
+	  }
+	}
 	push @{$playerData{$player}{$gameDate}}, $cell;
 	push @{$masterData{$player}{$gameDate}}, $cell;
-	if ($gameData{'cell'}[$c][$r]) {
-	  $playerData{$player}{'total'}[$c-2] += $cell;
-	  $masterData{$player}{'total'}[$c-2] += $cell;
-	  # See above
-	  $playerData{$player}{'total'}[$c-2] = sprintf '%.3f', $playerData{$player}{'total'}[$c-2] if $c >= 14;
-	  $masterData{$player}{'total'}[$c-2] = sprintf '%.3f', $masterData{$player}{'total'}[$c-2] if $c >= 14;
-	} else {
-	  $playerData{$player}{'total'}[$c-2] = 0;
-	  $masterData{$player}{'total'}[$c-2] = 0;
-	}
+
+	print $gameCsv "$cell,";
       }
     }
     close $gameCsv or die $ERRNO;
@@ -252,6 +265,38 @@ sub schwartz
   }
 
 
+# Calc stats
+sub calcStats
+  {
+    my ($r,$c,$player,$gameDate,$gameRef,$playerRef) = @_;
+    my $cell;			# Hold calculated stat
+
+    # Repeatedly used for calculations, convenient (AB=PA-BB-SAC)
+    my $AB = ${$gameRef}{'cell'}[2][$r] - ${$gameRef}{'cell'}[9][$r] - ${$gameRef}{'cell'}[11][$r];
+    # TB=H+2B+2*3B+3*4B
+    my $TB = ${$gameRef}{'cell'}[4][$r] + ${$gameRef}{'cell'}[5][$r] + (2 * ${$gameRef}{'cell'}[6][$r]) + (3 * ${$gameRef}{'cell'}[7][$r]);
+
+    print "$player $gameDate AB: $AB TB: $TB\n";
+    print " 1\t${$gameRef}{'cell'}[1][$r]\n 2\t${$gameRef}{'cell'}[2][$r]\n 3\t${$gameRef}{'cell'}[3][$r]\n";
+    if ($c == 12) {		# AVG = H/AB
+      $cell = ${$gameRef}{'cell'}[4][$r] / $AB;
+    } elsif ($c == 13) {	# OBP = (H+BB)/PA
+      $cell = (${$gameRef}{'cell'}[4][$r] + ${$gameRef}{'cell'}[9][$r]) / ${$gameRef}{'cell'}[2][$r];
+    } elsif ($c == 14) {	# SLG = Total bases/AB
+      $cell = $TB / $AB;
+    } elsif ($c == 15) {	# OPS = OBP+SLG
+      $cell = ${$gameRef}{'cell'}[$c-2][$r] + ${$gameRef}{'cell'}[$c-1][$r];
+    }
+
+    $cell = sprintf '%.3f', $cell;
+
+    # ${$playerRef}{$player}{'total'}[$c-2] = $cell;
+    # ${$playerRef}{$player}{$gameDate}[$c-2] = $cell;
+    # $masterData{$player}{'total'}[$c-2] = $cell;
+    # $masterData{$player}{$gameDate}[$c-2] = $cell;
+
+    return $cell;
+  }
 
 
 
