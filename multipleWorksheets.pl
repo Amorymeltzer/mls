@@ -200,16 +200,16 @@ foreach (sort keys %seasonsList) {
     print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
     print $stat "\n";
     foreach my $j (0..scalar @dates - 1) {
-      print $stat "$dates[$j],";
+      print $stat "$dates[$j]";
       #  foreach my $dude (@players[0..$#players-2]) {
       foreach my $dude (@players[0..$#players-1]) {
 	# Awkward kludge to add data, destructive but at the end so not an issue
 	if ($i >= 11) {
 	  my $tamp = calcStats($i+1,$dude,$dates[$j],\%playerData);
-	  print $stat "$tamp,";
+	  print $stat ",$tamp";
 	} else {
 	  $playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
-	  print $stat "$playerData{$dude}{$dates[$j]}[$i-1],";
+	  print $stat ",$playerData{$dude}{$dates[$j]}[$i-1]";
 	}
       }
       #  $playerData{$players[-2]}{$dates[$j]}[$i-1] += $playerData{$players[-2]}{$dates[$j-1]}[$i-1] if $j != 0;
@@ -244,17 +244,17 @@ foreach my $i (1..scalar @stats - 1) {
   print $stat "\n";
   foreach my $j (0..scalar @masterDates - 1) {
     print "$masterDates[$j] i $i $stats[$i]\n";
-    print $stat "$masterDates[$j],";
+    print $stat "$masterDates[$j]";
     #  foreach my $dude (@masterPlayers[0..$#masterPlayers-2]) {
     foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) {
       # Awkward kludge to add data, destructive but at the end so not an issue
       # Doesn't print masterData totals properl, almost like saving last one FIXME TODO
       if ($i >= 11) {
 	my $tamp = calcStats($i+1,$dude,$masterDates[$j],\%masterData);
-	print $stat "$tamp,";
+	print $stat ",$tamp";
       } else {
 	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
-	print $stat "$masterData{$dude}{$masterDates[$j]}[$i-1],";
+	print $stat ",$masterData{$dude}{$masterDates[$j]}[$i-1]";
       }
     }
     #    $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
