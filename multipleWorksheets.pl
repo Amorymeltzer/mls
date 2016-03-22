@@ -57,8 +57,6 @@ for (1..$sheetNum) {
 
 
 # Stats measured, for building the player hash
-#  my @stats = qw ("Player" PA AB R H 2B 3B HR RBI BB K SAC "" AVG OBP SLG OPS);
-#  my @stats = qw ("Player" PA R H 2B 3B HR RBI BB K SAC);
 my @stats = qw ("Player" PA R H 2B 3B HR RBI BB K SAC AVG OBP SLG OPS);
 # Master lists of stats, players, and dates played
 my %masterData;
@@ -128,12 +126,6 @@ foreach (sort keys %seasonsList) {
 
 	  next;
 	}
-
-	# Format calculated stats to 3 decimal places.  Temporary kludge to
-	# make comparison diffs easier.  Ugly.  FIXME TODO
-	#  $cell = sprintf '%.3f', $cell if $c >= 14;
-	#  Not needed in testing of calculations???? FIXME TODO
-
 
 	if ($c >= 12) {
 	  # Calculate total first, so we don't overlap
@@ -207,14 +199,12 @@ foreach (sort keys %seasonsList) {
 	if ($i >= 11) {
 	  my $tamp = calcStats($i+1,$dude,$dates[$j],\%playerData);
 	  print $stat ",$tamp";
+	  $playerData{$dude}{$dates[$j]}[$i-1] = $tamp;
 	} else {
 	  $playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
 	  print $stat ",$playerData{$dude}{$dates[$j]}[$i-1]";
 	}
       }
-      #  $playerData{$players[-2]}{$dates[$j]}[$i-1] += $playerData{$players[-2]}{$dates[$j-1]}[$i-1] if $j != 0;
-      #  print $stat "$playerData{$players[-2]}{$dates[$j]}[$i-1]";
-      #print $stat "$playerData{$players[-1]}{$dates[$j]}[$i-1]";
       print $stat "\n";
     }
     close $stat or die $ERRNO;
@@ -249,21 +239,14 @@ foreach my $i (1..scalar @stats - 1) {
       # Awkward kludge to add data, destructive but at the end so not an issue
       # Doesn't print masterData totals properl, almost like saving last one FIXME TODO
       if ($i >= 11) {
-	#print "$dude $masterDates[$j] $stats[$i] @{$masterData{$dude}{$masterDates[$j]}}\n";
 	my $tamp = calcStats($i+1,$dude,$masterDates[$j],\%masterData);
 	print $stat ",$tamp";
-	#print "$dude $masterDates[$j] $stats[$i] @{$masterData{$dude}{$masterDates[$j]}}\n";
+	$masterData{$dude}{$masterDates[$j]}[$i-1] = $tamp;
       } else {
 	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
 	print $stat ",$masterData{$dude}{$masterDates[$j]}[$i-1]";
-	#print "\tj $j $masterDates[$j] $masterDates[$j-1] $i $stats[$i]\n";
-	#print "$dude $masterDates[$j] $stats[$i] @{$masterData{$dude}{$masterDates[$j]}}\n";
       }
     }
-    #    $masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1] += $masterData{$masterPlayers[-2]}{$masterDates[$j-1]}[$i-1] if $j != 0;
-    #  print $stat "$masterData{$masterPlayers[-2]}{$masterDates[$j]}[$i-1]";
-    #  print $stat "$masterData{$masterPlayers[-1]}{$masterDates[$j]}[$i-1]";
-    #  print $stat "\n";
     print $stat "\n";
   }
   close $stat or die $ERRNO;
@@ -294,30 +277,20 @@ sub calcStats
     ## Repeatedly used for calculations, convenient (
     # AB=PA-BB-SAC
     my $AB = ${$playerRef}{$player}{$chart}[0] - ${$playerRef}{$player}{$chart}[7] - ${$playerRef}{$player}{$chart}[9];
-    #$AB = sprintf '%.3f', $AB;
     # TB=H+2B+2*3B+3*4B
     my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
-    #$TB = sprintf '%.3f', $TB;
-    #print "\tasd $chart $c ab $AB tb $TB\n";
-    #  print "$player  AB: $AB TB: $TB $c: $chart ${$playerRef}{$player}{$chart}[$c-2]\n";
+
     if ($c == 12) {		# AVG = H/AB
       $cell = ${$playerRef}{$player}{$chart}[2] / $AB;
       $cell = sprintf '%.3f', $cell;
-      #print "\t$c $player $chart H ${$playerRef}{$player}{$chart}[2] AB $AB AVG $cell\n";
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
       $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 14) {	# SLG = Total bases/AB
       $cell = $TB / $AB;
-      $cell = sprintf '%.3f', $cell;
-      #print "$player $c $chart AB $AB TB $TB SLG $cell\n";
     } elsif ($c == 15) {	# OPS = OBP+SLG
-      #  $cell = ${$playerRef}{$player}{$chart}[$c-4] + ${$playerRef}{$player}{$chart}[$c-3];
       $cell = ${$playerRef}{$player}{$chart}[11] + ${$playerRef}{$player}{$chart}[12];
-      $cell = sprintf '%.3f', $cell;
-      #print "$player $c $chart AB $AB TB $TB OPS $cell ${$playerRef}{$player}{$chart}[$c-4] + ${$playerRef}{$player}{$chart}[$c-3]\n";
     }
 
-    #print "c: $c $player $chart\n";
     return sprintf '%.3f', $cell; # Prettify to three decimals
   }
 
