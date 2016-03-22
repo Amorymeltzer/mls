@@ -39,6 +39,72 @@ if [ ! $input ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
 else
+    #arcindex="archive/index.html"
+    #cat archive/archive.index.top > $arcindex
+
+    # Grab everything...
+    #  FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
+    FILES=$(find -E . -regex "./.*[sfu][0-9][0-9].*csv" | grep -v _site)
+    echo $FILES
+
+    # # Sort files chronologically
+    # FILES=$(perl sortFiles.pl $FILES)
+    # echo $FILES
+
+    # Die if no proper files can be found
+    if [ -z "$FILES" ]; then
+	echo "No valid files given!!!"
+	exit
+    fi
+
+    for csv in $FILES
+    do
+	# find insists on a leading ./ - I generally won't be providing such
+	# things when running this but it's a good thing to watch out for when
+	# sanitizing
+	csv=$(echo $csv | perl -pe 's/^.\///;')
+
+	# Generate names of subfolders
+	season=$(echo $csv | grep -oE "[sfu][0-9][0-9]")
+	game=$(echo $csv | grep -oE "[0-9][0-9]\.[0-9][0-9]")
+
+	# Check each folder individually, avoid overwriting any data
+	if [ -n $game ]; then	# Individual game data
+	    if [[ ! -d $season ]] || [[ ! -d $season/$game ]]; then
+		mkdir -p $season/$game/
+	    fi
+	    mv $csv $season/$game
+	elif [ -n $season ]; then # Season-total
+	    if [ ! -d $season ]; then
+		mkdir -p $season/
+	    fi
+	    mv $csv $season
+	else
+	    echo "Warning: unable to properly file $csv"
+	fi
+    done
+
+    # Properly indent file
+    #emacs -batch $arcindex --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
+
+    echo
+    echo "Site ready!"
+fi
+
+
+
+
+
+exit
+
+
+
+
+
+if [ ! $input ]; then
+    echo "Please specify an XLS/XLSX data file"
+    exit 1
+else
     arcindex="archive/index.html"
     cat archive/archive.index.top > $arcindex
 
