@@ -233,7 +233,6 @@ foreach my $i (1..scalar @stats - 1) {
     print $stat "$masterDates[$j]";
     foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) { # Ignore totals
       # Awkward kludge to add data, destructive but at the end so not an issue
-      # Doesn't print masterData totals properl, almost like saving last one FIXME TODO
       if ($i >= 11) {
 	$masterData{$dude}{$masterDates[$j]}[$i-1] = calcStats($i+1,$dude,$masterDates[$j],\%masterData);
       } else {
