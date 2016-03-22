@@ -39,3 +39,6 @@
 - Individual stats with goal AVG?  Would need a player page...
 - Average batting order for ranking?  Prob not worth it.
 - PA or AB or what?  Insert TB or not?
+- Set axis for calculated stats to start at 0?  Should start at zero for everyone?
+- Adjust formatting in index3, margins, width, styles, etc.
+- Sortable table below?  Don't use div for graph?
