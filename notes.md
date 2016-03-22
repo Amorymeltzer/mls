@@ -39,3 +39,4 @@
 - Manually calculate (ie not in excel/google sheets) stats?
 - Individual stats with goal AVG?  Would need a player page...
 - Average batting order for ranking?  Prob not worth it.
+- PA or AB or what?  Insert TB or not?
