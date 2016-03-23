@@ -6,14 +6,15 @@ function linegraph() {
     // Customize, need to make these be relative not absolute pixel counts
     // FIXME TODO
     // var margin = {top: 20, right: 40, bottom: 20, left: 80};
-    var margin = {top: 20, right: 250, bottom: 200, left: 250}
+    // var margin = {top: 20, right: 250, bottom: 20, left: 250}
+    var margin = {top: 20, right: 40, bottom: 20, left: 80}
     // , width = parseInt(d3.select('#linegraph').style('width'), 10)
-    , width = window.innerWidth
+    , width = 0.7 * window.innerWidth
     // , height = 500
-    , height = window.innerHeight
+    , height = 0.6 * window.innerHeight
     , width = width - margin.left - margin.right
-    , height = height - margin.top - margin.bottom
-    , percent = d3.format('%');
+    , height = height - margin.top - margin.bottom;
+    // , percent = d3.format('%');
 
 
 
