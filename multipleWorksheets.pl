@@ -118,7 +118,8 @@ foreach (sort keys %seasonsList) {
     ## Dump per-game totals (basically a copy of %gameData)
     ## Could I just use dataDumper? FIXME TODO
     my $gameOutfile = createName($_);
-    $gameOutfile =~ s/.csv/_$date.csv/; # Incorporate into subroutine FIXME TODO
+    # Incorporate into subroutine FIXME TODO
+    $gameOutfile =~ s/.csv/_$date.csv/ unless $tournament == 1;
     print "$gameOutfile\n";
     open my $gameCsv, '>', "$gameOutfile" or die $ERRNO;
     print $gameCsv join q{,}, @stats;

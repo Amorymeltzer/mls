@@ -45,7 +45,7 @@ else
     # Grab everything...
     #  FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
     #  FILES=$(find -E . -regex "./.*[sfu][0-9][0-9].*csv" | grep -v _site)
-    FILES=$(find -E . -maxdepth 1 -regex "./.*[sfu][0-9][0-9].*csv" | grep -v _site)
+    FILES=$(find -E . -maxdepth 1 -regex "./.*_[sfu][0-9][0-9].*csv" | grep -v _site)
     echo $FILES
 
     # # Sort files chronologically
