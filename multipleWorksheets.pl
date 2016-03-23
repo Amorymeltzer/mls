@@ -43,9 +43,16 @@ my %seasonsList;		# Unique list of seasons that need parsing
 # from initial hash.  Order unimportant so it's doable.
 for (1..$sheetNum) {
   my $seas = $book->[$_]{'label'};
-  next if $seas =~ /Tournament/;
+  #  next if $seas =~ /Tournament/;
+
   my @tmp = split / /, $seas;
   $seas = "$tmp[0] $tmp[1]";
+
+  if ($seas =~ /Tournament/) {
+    $seas = "$tmp[0] $tmp[1] $tmp[2]";
+    $tmp[2] = $seas;
+  }
+
   if (!$seasonsList{$seas}) {
     $seasonsList{$seas} = [$tmp[2]];
   } else {
@@ -70,6 +77,9 @@ foreach (sort keys %seasonsList) {
   my @players;	     # Player names
   my @dates;	     # Dates of play
 
+  my $tournament = 0;
+  $tournament = 1 if /Tournament/;
+
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
     my $date = shift @{$seasonsList{$_}};
@@ -78,12 +88,26 @@ foreach (sort keys %seasonsList) {
     print "$season\t$syear\t$date\n";
     my $gameDate = "$date.".substr $syear, 2;
 
+
+    if ($tournament == 1) {
+      $gameDate = $date;
+    }
+
+
     # Keep track of time
     push @dates, $gameDate;
-    push @masterDates, $gameDate;
+    push @masterDates, $gameDate unless $tournament == 1;
 
     # Pull out corresponding worksheet for the individual game
-    my %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
+    #  my %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
+    my %gameData;
+
+    if ($tournament == 1) {
+      %gameData = %{$book->[$book->[0]{sheet}{"$date"}]};
+    } else {
+      %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
+    }
+
 
     # Inverted from how I think about rows/columns.  Value essentially means
     # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
@@ -122,7 +146,9 @@ foreach (sort keys %seasonsList) {
 	    @{$playerData{$cell}{$gameDate}} = ();
 	  }
 	  # Do the same for the master list of players
-	  push @masterPlayers, $cell if ! $masterData{$cell};
+	  if ($tournament != 1) {
+	    push @masterPlayers, $cell if ! $masterData{$cell};
+	  }
 
 	  next;
 	}
@@ -131,21 +157,21 @@ foreach (sort keys %seasonsList) {
 	  # Calculate total first, so we don't overlap
 	  $cell = calcStats($c,$player,'total',\%playerData);
 	  $playerData{$player}{'total'}[$c-2] = $cell;
-	  $masterData{$player}{'total'}[$c-2] = $cell;
+	  $masterData{$player}{'total'}[$c-2] = $cell unless $tournament == 1;
 
 	  # Calculate for the given gameDate to append
 	  $cell = calcStats($c,$player,$gameDate,\%playerData);
 	} else {
 	  if ($gameData{'cell'}[$c][$r]) {
 	    $playerData{$player}{'total'}[$c-2] += $cell;
-	    $masterData{$player}{'total'}[$c-2] += $cell;
+	    $masterData{$player}{'total'}[$c-2] += $cell unless $tournament == 1;
 	  } else {
 	    $playerData{$player}{'total'}[$c-2] += 0;
-	    $masterData{$player}{'total'}[$c-2] += 0;
+	    $masterData{$player}{'total'}[$c-2] += 0 unless $tournament == 1;
 	  }
 	}
 	push @{$playerData{$player}{$gameDate}}, $cell;
-	push @{$masterData{$player}{$gameDate}}, $cell;
+	push @{$masterData{$player}{$gameDate}}, $cell unless $tournament == 1;
 
 	print $gameCsv "$cell,";
       }
@@ -164,6 +190,7 @@ foreach (sort keys %seasonsList) {
     # print Dumper \%playerData;
   }
   ### Also handle tournaments somehow (table, no graph)
+  next if $tournament == 1;
 
   ## Dump season totals (identical to old-style format)
   ## Need to deal with empty column filled with zero... or do I? FIXME TODO
