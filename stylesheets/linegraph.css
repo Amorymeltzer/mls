@@ -1,17 +1,18 @@
-* {
-    box-sizing: border-box; }
+/* * { */
+/*     box-sizing: border-box; } */
 
-body {
-    font: 10px sans-serif;
-}
-h1 {
-    font: 14px sans-serif;
-    fill: #a0a0a0;
-}
-a {
-    color: #1f77b4;
-    text-decoration: none;
-}
+/* body { */
+/*     font: 10px sans-serif; */
+/* } */
+/* h1 { */
+/*     font: 14px sans-serif; */
+/*     fill: #a0a0a0; */
+/* } */
+/* a { */
+/*     color: #1f77b4; */
+/*     text-decoration: none; */
+/* } */
+
 .axis {
     font: 10px sans-serif;
     fill: #a0a0a0;
@@ -49,4 +50,19 @@ a {
     /* width:900px; */
     width: auto;
     float: right;
+}
+
+.svg-linegraph {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

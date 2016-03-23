@@ -3,13 +3,31 @@
 // http://mikecostelloe.com/crazyrhythms/
 function linegraph() {
     // Conventional Margins start
-    // Customize FIXME TODO
-    var margin = {top: 20, right: 40, bottom: 20, left: 80};
-    width = 900 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    // Customize, need to make these be relative not absolute pixel counts
+    // FIXME TODO
+    // var margin = {top: 20, right: 40, bottom: 20, left: 80};
+    var margin = {top: 20, right: 250, bottom: 200, left: 250}
+    // , width = parseInt(d3.select('#linegraph').style('width'), 10)
+    , width = window.innerWidth
+    // , height = 500
+    , height = window.innerHeight
+    , width = width - margin.left - margin.right
+    , height = height - margin.top - margin.bottom
+    , percent = d3.format('%');
+
+
+
+    // width = 1000 - margin.left - margin.right,
+//    width = 950 - margin.left - margin.right,
+    // width = 50 + "em",
+    // width = 0.7 * window.innerWidth,
+//    height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#linegraph").append("svg")
 	.attr("width", width + margin.left + margin.right)
+    // .attr("width", width)
+    // .attr("width", width + margin.left + margin.right + "%")
+    // .attr("width", "60" + "em")
 	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -21,7 +39,8 @@ function linegraph() {
 
     // Scales
     var x = d3.scale.ordinal()
-	.rangePoints([0, width]);
+    // .rangePoints([0, width]);
+	.rangePoints([0, 960]);
 
     var y = d3.scale.linear()
 	.range([height, 0]);
