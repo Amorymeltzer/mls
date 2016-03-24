@@ -58,16 +58,19 @@ else
 	csv=$(echo $csv | perl -pe 's/^.\///;')
 	# Prune file format
 	file=$(echo $csv | perl -pe 's/\.csv$//;')
-	# Build table
-	table=$(echo $file.table)
-	perl makeMLSTable.pl $csv $table
 
 	# Generate names of subfolders
-	season=$(echo $csv | grep -oE "t?[sfu][0-9][0-9]")
-	game=$(echo $csv | grep -oE "[0-9][0-9]\.[0-9][0-9]")
+	season=$(echo $file | grep -oE "t?[sfu][0-9][0-9]")
+	game=$(echo $file | grep -oE "[0-9][0-9]\.[0-9][0-9]")
+
+	# Build table
+	table=''		# Empty on new file
 	# Tournaments get their own subsubfolder
 	if [ $(echo $season | grep -oE "t[sfu][0-9][0-9]") ]; then
 	    season=tournaments/$season
+	elif [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
+	    table=$(echo $file.table)
+	    perl makeMLSTable.pl $csv $table
 	fi
 
 	# Check each folder individually, avoid overwriting any data
@@ -82,7 +85,10 @@ else
 	    fi
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
-	    continue		# non-canonical filename allowed just this once
+	    # non-canonical filename allowed just this once
+	    # should probably dedupe this
+	    table=$(echo $file.table)
+	    perl makeMLSTable.pl $csv $table
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
