@@ -65,6 +65,15 @@ else
 	# things when running this but it's a good thing to watch out for when
 	# sanitizing
 	csv=$(echo $csv | perl -pe 's/^.\///;')
+	# Prune file format
+	file=$(echo $csv | perl -pe 's/\.csv$//;')
+	# Build table
+	# Only handles seasons at the moment FIXME TODO
+	table=''
+	if [ $(echo $csv | grep -oE "mls_[sfu][0-9][0-9].csv") ]; then
+	    table=$(echo $file.table)
+	    perl makeMLSTable.pl $csv $table
+	fi
 
 	# Generate names of subfolders
 	season=$(echo $csv | grep -oE "[sfu][0-9][0-9]")
@@ -75,12 +84,12 @@ else
 	    if [ ! -d $season/$game ]; then
 		mkdir -p $season/$game/
 	    fi
-	    mv $csv $season/$game
+	    mv $csv $table $season/$game
 	elif [ -n $season ]; then # Season-total
 	    if [ ! -d $season ]; then
 		mkdir -p $season/
 	    fi
-	    mv $csv $season
+	    mv $csv $table $season
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
