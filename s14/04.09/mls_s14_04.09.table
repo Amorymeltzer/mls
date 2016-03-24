@@ -9,7 +9,7 @@
 <thead>
 <tr>
 <th title='Minor league science, Major league style'>Player</th>
-<th data-sort-method='number' title='Plate appearances'>PA</th>
+<th data-sort-method='number' title='At Bats'>AB</th>
 <th data-sort-method='number' title='Runs'>R</th>
 <th data-sort-method='number' title='Hits'>H</th>
 <th data-sort-method='number' title='Doubles'>2B</th>
@@ -28,7 +28,7 @@
 <tbody>
 <tr>
 <td data-sort='Burch'>Andrew Burch</td>
-<td>5</td>
+<td>4</td>
 <td>4</td>
 <td>3</td>
 <td>1</td>
@@ -96,7 +96,7 @@
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
-<td style='font-weight:bold;'>19</td>
+<td style='font-weight:bold;'>18</td>
 <td style='font-weight:bold;'>14</td>
 <td style='font-weight:bold;'>13</td>
 <td style='font-weight:bold;'>7</td>

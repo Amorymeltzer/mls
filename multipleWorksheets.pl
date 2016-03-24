@@ -64,7 +64,7 @@ for (1..$sheetNum) {
 
 
 # Stats measured, for building the player hash
-my @stats = qw ("Player" PA R H 2B 3B HR RBI BB K SAC AVG OBP SLG OPS);
+my @stats = qw ("Player" AB R H 2B 3B HR RBI BB K SAC AVG OBP SLG OPS);
 # Master lists of stats, players, and dates played
 my %masterData;
 my @masterPlayers;
@@ -296,18 +296,18 @@ sub calcStats
     my $cell;			# Hold calculated stat
 
     ## Repeatedly used for calculations, convenient (
-    # AB=PA-BB-SAC
-    my $AB = ${$playerRef}{$player}{$chart}[0] - ${$playerRef}{$player}{$chart}[7] - ${$playerRef}{$player}{$chart}[9];
+    # PA=AB+BB+SAC
+    my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[7] + ${$playerRef}{$player}{$chart}[9];
     # TB=H+2B+2*3B+3*4B
     my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
 
     if ($c == 12) {		# AVG = H/AB
-      $cell = ${$playerRef}{$player}{$chart}[2] / $AB;
+      $cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
       $cell = sprintf '%.3f', $cell;
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / ${$playerRef}{$player}{$chart}[0];
+      $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / $PA;
     } elsif ($c == 14) {	# SLG = Total bases/AB
-      $cell = $TB / $AB;
+      $cell = $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 15) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[11] + ${$playerRef}{$player}{$chart}[12];
     }

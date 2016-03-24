@@ -9,7 +9,7 @@
 <thead>
 <tr>
 <th title='Minor league science, Major league style'>Player</th>
-<th data-sort-method='number' title='Plate appearances'>PA</th>
+<th data-sort-method='number' title='At Bats'>AB</th>
 <th data-sort-method='number' title='Runs'>R</th>
 <th data-sort-method='number' title='Hits'>H</th>
 <th data-sort-method='number' title='Doubles'>2B</th>
@@ -28,7 +28,7 @@
 <tbody>
 <tr>
 <td data-sort='Burch'>Andrew Burch</td>
-<td>21</td>
+<td>18</td>
 <td>14</td>
 <td>11</td>
 <td>3</td>
@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td data-sort='Heuer'>Luke Heuer</td>
-<td>20</td>
+<td>18</td>
 <td>12</td>
 <td>12</td>
 <td>1</td>
@@ -70,7 +70,7 @@
 <td>0</td>
 <td>12</td>
 <td>2</td>
-<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>0.750</td>
 <td>0.778</td>
@@ -79,7 +79,7 @@
 </tr>
 <tr>
 <td data-sort='Edwards'>Joe Edwards</td>
-<td>21</td>
+<td>18</td>
 <td>12</td>
 <td>15</td>
 <td>8</td>
@@ -96,7 +96,7 @@
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
-<td style='font-weight:bold;'>82</td>
+<td style='font-weight:bold;'>74</td>
 <td style='font-weight:bold;'>54</td>
 <td style='font-weight:bold;'>54</td>
 <td style='font-weight:bold;'>24</td>
@@ -104,7 +104,7 @@
 <td style='font-weight:bold;'>0</td>
 <td style='font-weight:bold;'>48</td>
 <td style='font-weight:bold;'>5</td>
-<td style='font-weight:bold;'>0</td>
+<td style='font-weight:bold;'>1</td>
 <td style='font-weight:bold;'>3</td>
 <td style='font-weight:bold;'>0.750</td>
 <td style='font-weight:bold;'>0.769</td>
