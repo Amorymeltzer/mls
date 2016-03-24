@@ -36,7 +36,7 @@ while getopts 'i:ulhH?' opt; do
 done
 
 
-if [ ! $input ]; then
+if [ ! "$input" ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
 else
