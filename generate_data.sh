@@ -11,6 +11,16 @@
 ## Generate index, archive page (ordered) with tournaments
 ## Games link back to main season; season links to all individual games+tournys
 
+
+### HTML planning
+## masterData gets top, TOC, news, graph, table, archive nav, photos, bottom
+## archive nav lists each season and tournament page
+## each season gets top, navback, graph, table, individual game nav, bottom
+### individual games get top, navback, table, bottom
+## tournament index gets top, navback, tourny links, bottom
+## each tourny gets top, navback, table, bottom
+
+
 function get_help {
     cat <<END_HELP
 

@@ -38,3 +38,4 @@
 - Adjust formatting in index3, margins, width, styles, etc.
 - Sortable table below?  Don't use div for graph?
 - PA/AB/etc. checks for division by zero, proper sums (H+K+BB+SAC<PA, etc.)
+- Tournaments one table or as multiple games with chart?  Only one so far so prob not worth the effort
