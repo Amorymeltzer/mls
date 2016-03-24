@@ -90,15 +90,33 @@ if ($opts{u} && !$archive) {
 }
 
 # Parse filenames for seasons, tournaments
+# FIXME TODO
+# my $filename = $input;
+# $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
+# my %seasons = (
+#	       s => 'Spring',
+#	       u => 'Summer',
+#	       f => 'Fall');
+# my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
+# $season .= $seasons{substr $filename, -3, 1};
+# my $date = '20'.substr $filename, -2, 2;
+
+
+# Allow for noncanonical filenames (masterdata, per-game stats) FIXME TODO
 my $filename = $input;
-$filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
 my %seasons = (
 	       s => 'Spring',
 	       u => 'Summer',
 	       f => 'Fall');
-my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
-$season .= $seasons{substr $filename, -3, 1};
-my $date = '20'.substr $filename, -2, 2;
+my ($season,$date) = (q{},q{});	# WOW this is ugly FIXME TODO
+if ($input =~ m/mls_t?[suf]\d\d\.csv/) {
+  $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
+  $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
+  $season .= $seasons{substr $filename, -3, 1};
+  $date = '20'.substr $filename, -2, 2;
+}
+# Need to get date and season info right for table html FIXME TODO
+
 
 
 # Build hash of header row titletips

@@ -47,6 +47,7 @@ else
     #  FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
     #  FILES=$(find -E . -regex "./.*[sfu][0-9][0-9].*csv" | grep -v _site)
     FILES=$(find -E . -maxdepth 1 -regex "./.*_[sfu][0-9][0-9].*csv" | grep -v _site)
+    FILES="$FILES ./masterData.csv" # Add lifetime totals
     echo $FILES
 
     # # Sort files chronologically
@@ -70,26 +71,31 @@ else
 	# Build table
 	# Only handles seasons at the moment FIXME TODO
 	table=''
-	if [ $(echo $csv | grep -oE "mls_[sfu][0-9][0-9].csv") ]; then
+	if [ $(echo $csv | grep -oE "mls_[sfu][0-9][0-9](_[0-9][0-9]\.[0-9][0-9])?.csv") ]; then
 	    table=$(echo $file.table)
 	    perl makeMLSTable.pl $csv $table
 	fi
 
 	# Generate names of subfolders
+	season=''
 	season=$(echo $csv | grep -oE "[sfu][0-9][0-9]")
+	game=''
 	game=$(echo $csv | grep -oE "[0-9][0-9]\.[0-9][0-9]")
 
 	# Check each folder individually, avoid overwriting any data
-	if [ -n $game ]; then	# Individual game data
-	    if [ ! -d $season/$game ]; then
+	if [[ -n $game ]]; then	# Individual game data
+	    if [[ ! -d $season/$game ]]; then
 		mkdir -p $season/$game/
 	    fi
 	    mv $csv $table $season/$game
-	elif [ -n $season ]; then # Season-total
-	    if [ ! -d $season ]; then
+	elif [[ -n $season ]]; then # Season-total
+	    echo $file
+	    if [[ ! -d $season ]]; then
 		mkdir -p $season/
 	    fi
 	    mv $csv $table $season
+	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
+	    perl makeMLSTable.pl $csv $file.table
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
