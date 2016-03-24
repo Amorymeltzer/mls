@@ -8,9 +8,7 @@ use warnings;
 use diagnostics;
 
 use English qw( -no_match_vars );
-
 use Spreadsheet::Read;
-use Excel::Writer::XLSX;
 
 
 if (@ARGV != 1) {
@@ -180,21 +178,21 @@ foreach (sort keys %seasonsList) {
     close $gameCsv or die $ERRNO;
 
 
-    print "@players\n";
-    print "@stats\n";
-    print keys %playerData;
-    print "\n";
-    print "@{$playerData{'Andrew Burch'}{$gameDate}}\n";
-    print "@{$playerData{'Andrew Burch'}{'total'}}\n";
+    # print "@players\n";
+    # print "@stats\n";
+    # print keys %playerData;
+    # print "\n";
+    # print "@{$playerData{'Andrew Burch'}{$gameDate}}\n";
+    # print "@{$playerData{'Andrew Burch'}{'total'}}\n";
+
     # print "\n\n\n\n";
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
   }
-  ### Also handle tournaments somehow (table, no graph)
+  ### Also handle tournaments somehow (table, no graph) FIXME TODO
   next if $tournament == 1;
 
   ## Dump season totals (identical to old-style format)
-  ## Need to deal with empty column filled with zero... or do I? FIXME TODO
   my $seasonOutfile = createName($_);
   print "$seasonOutfile\n";
   open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
@@ -214,7 +212,6 @@ foreach (sort keys %seasonsList) {
   my $seasonSuffix = $seasonOutfile;
   $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
   foreach my $i (1..scalar @stats - 1) {
-    next if $stats[$i] =~ m/\"/; # Deal with blank column, temporary FIXME TODO
     open my $stat, '>', "$stats[$i]_$seasonSuffix.csv" or die $!;
     print $stat 'Date,';
     print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
@@ -252,7 +249,6 @@ close $masterCsv or die $ERRNO;
 schwartz(\@masterDates);
 # Dump lifetime per-game values for each stat
 foreach my $i (1..scalar @stats - 1) {
-  next if $stats[$i] =~ m/\"/;	# Deal with blank column, temporary FIXME TODO
   open my $stat, '>', "$stats[$i].csv" or die $!;
   print $stat 'Date,';
   print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
@@ -274,106 +270,6 @@ foreach my $i (1..scalar @stats - 1) {
 }
 
 
-
-### Subroutine
-# American dates are dumb, sort on YY/MM/DD
-# Schwartzian transform
-sub schwartz
-  {
-    my $ref = shift;
-    @{$ref} =
-      map {$_->[0]}
-      sort { $a->[1] cmp $b->[1] }
-      map {[$_, join('', (split '\.', $_)[2,0,1])]}
-      @{$ref};
-  }
-
-
-# Calc stats
-sub calcStats
-  {
-    my ($c,$player,$chart,$playerRef) = @_;
-    my $cell;			# Hold calculated stat
-
-    ## Repeatedly used for calculations, convenient (
-    # PA=AB+BB+SAC
-    my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[7] + ${$playerRef}{$player}{$chart}[9];
-    # TB=H+2B+2*3B+3*4B
-    my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
-
-    if ($c == 12) {		# AVG = H/AB
-      $cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
-      $cell = sprintf '%.3f', $cell;
-    } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / $PA;
-    } elsif ($c == 14) {	# SLG = Total bases/AB
-      $cell = $TB / ${$playerRef}{$player}{$chart}[0];
-    } elsif ($c == 15) {	# OPS = OBP+SLG
-      $cell = ${$playerRef}{$player}{$chart}[11] + ${$playerRef}{$player}{$chart}[12];
-    }
-
-    return sprintf '%.3f', $cell; # Prettify to three decimals
-  }
-
-
-
-exit;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-for (1..$sheetNum) {
-  my $i = $_;
-  # Inverted from how I think about rows/columns.  Value essentially means how
-  # far they go, i.e. a maxrow of 5 means rows extend 5 places to column E
-  my $rowN = $book->[$i]{'maxrow'};
-  my $colN = $book->[$i]{'maxcol'};
-
-  # Name each file according to worksheet name
-  my $outfile = createName($book->[$i]{'label'});
-  next if $outfile eq '1';	# Skip if the above errors out
-  my $workbook = Excel::Writer::XLSX->new( "$outfile" );
-  my $sheet = $workbook->add_worksheet( "$outfile" );
-
-  # Formatting options for sabermetrics
-  $sheet->keep_leading_zeros();
-  my $formatNum = $workbook->add_format();
-  $formatNum->set_num_format( '0.000' );
-
-  # Iterate all the the things!
-  for (1..$rowN) {
-    my $r = $_;
-    for (1..$colN) {
-      my $c = $_;
-      if ($book->[$i]{'cell'}[$c][$r]) {
-	if ($colN-$c<=4) {
-	  # Only use 0.000 formatting on calculated stats
-	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r], $formatNum);
-	} else {
-	  $sheet->write($r-1, $c-1, $book->[$i]{'cell'}[$c][$r]);
-	}
-      } elsif ($c != 13) {  # Zero-fill, unless it's a purposeful blank column
-	$sheet->write($r-1, $c-1, '0');
-      }
-    }
-  }
-  # Rename if needed
-  rename $outfile, archiveFiles($outfile);
-
-  # All done
-  print "Created $outfile\n";
-}
 
 
 #### Subroutines
@@ -405,6 +301,47 @@ sub createName
     return $name;
   }
 
+
+# Calc stats
+sub calcStats
+  {
+    my ($c,$player,$chart,$playerRef) = @_;
+    my $cell;			# Hold calculated stat
+
+    ## Repeatedly used for calculations, convenient (
+    # PA=AB+BB+SAC
+    my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[7] + ${$playerRef}{$player}{$chart}[9];
+    # TB=H+2B+2*3B+3*4B
+    my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
+
+    if ($c == 12) {		# AVG = H/AB
+      $cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
+    } elsif ($c == 13) {	# OBP = (H+BB)/PA
+      $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / $PA;
+    } elsif ($c == 14) {	# SLG = Total bases/AB
+      $cell = $TB / ${$playerRef}{$player}{$chart}[0];
+    } elsif ($c == 15) {	# OPS = OBP+SLG
+      $cell = ${$playerRef}{$player}{$chart}[11] + ${$playerRef}{$player}{$chart}[12];
+    }
+
+    return sprintf '%.3f', $cell; # Prettify to three decimals
+  }
+
+
+# American dates are dumb, sort on YY/MM/DD
+# Schwartzian transform
+sub schwartz
+  {
+    my $ref = shift;
+    @{$ref} =
+      map {$_->[0]}
+      sort { $a->[1] cmp $b->[1] }
+      map {[$_, join('', (split '\.', $_)[2,0,1])]}
+      @{$ref};
+  }
+
+
+#### Useful? FIXME TODO
 # Any previous seasons should be renamed/archived
 sub archiveFiles
   {
