@@ -2,37 +2,20 @@
 // Heavily based on Mike Costelloe's Visual Rhythmes:
 // http://mikecostelloe.com/crazyrhythms/
 function linegraph() {
-    // Conventional Margins start
     // Customize, need to make these be relative not absolute pixel counts
     // FIXME TODO
-    // var margin = {top: 20, right: 40, bottom: 20, left: 80};
-    // var margin = {top: 20, right: 250, bottom: 20, left: 250}
-    var margin = {top: 20, right: 40, bottom: 20, left: 80}
-    // , width = parseInt(d3.select('#linegraph').style('width'), 10)
-    , width = 0.7 * window.innerWidth
-    // , height = 500
-    , height = 0.6 * window.innerHeight
+    var margin = {top: 20, right: 120, bottom: 30, left: 80}
+    , width = 0.85 * window.innerWidth
+    , height = 0.7 * window.innerHeight
     , width = width - margin.left - margin.right
     , height = height - margin.top - margin.bottom;
-    // , percent = d3.format('%');
-
-
-
-    // width = 1000 - margin.left - margin.right,
-//    width = 950 - margin.left - margin.right,
-    // width = 50 + "em",
-    // width = 0.7 * window.innerWidth,
-//    height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#linegraph").append("svg")
 	.attr("width", width + margin.left + margin.right)
-    // .attr("width", width)
-    // .attr("width", width + margin.left + margin.right + "%")
-    // .attr("width", "60" + "em")
 	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    // Conventional Margins end
+
 
     // Properly parse and nicely format dates
     var parseDate = d3.time.format("%m.%d.%y").parse;
@@ -40,8 +23,7 @@ function linegraph() {
 
     // Scales
     var x = d3.scale.ordinal()
-    // .rangePoints([0, width]);
-	.rangePoints([0, 960]);
+	.rangePoints([0, width]);
 
     var y = d3.scale.linear()
 	.range([height, 0]);
