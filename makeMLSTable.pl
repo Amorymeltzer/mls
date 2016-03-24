@@ -89,18 +89,6 @@ if ($opts{u} && !$archive) {
   close $dOut or die $ERRNO;
 }
 
-# Parse filenames for seasons, tournaments
-# FIXME TODO
-# my $filename = $input;
-# $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
-# my %seasons = (
-#	       s => 'Spring',
-#	       u => 'Summer',
-#	       f => 'Fall');
-# my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
-# $season .= $seasons{substr $filename, -3, 1};
-# my $date = '20'.substr $filename, -2, 2;
-
 
 # Allow for noncanonical filenames (masterdata, per-game stats) FIXME TODO
 my $filename = $input;
