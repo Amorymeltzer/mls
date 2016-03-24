@@ -114,7 +114,7 @@ function linegraph() {
 	owner.append('g').selectAll('circle')
 	    .data(function(d) {return d.values; })
 	    .enter().append('circle')
-	    .attr('r', 4)
+	    .attr('r', 5)
 	    .attr('cx', function(c) { return x(c.Date); })
 	    .attr('cy', function(c) { return y(c.Record); })
 	    .attr('fill', function(d) { return color(this.parentNode.__data__.name); }) //pulls color from range in way I don't understand
