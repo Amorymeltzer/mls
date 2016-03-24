@@ -41,7 +41,7 @@ if [ ! "$input" ]; then
     exit 1
 else
     # Grab everything...
-    FILES=$(find -E . -maxdepth 1 -regex "./.*_[sfu][0-9][0-9].*csv" | grep -v _site)
+    FILES=$(find -E . -maxdepth 1 -regex "./.*_t?[sfu][0-9][0-9].*csv" | grep -v _site)
     FILES="$FILES ./masterData.csv" # Add lifetime totals
     echo $FILES
 
@@ -53,9 +53,8 @@ else
 
     for csv in $FILES
     do
-	# find insists on a leading ./ - I generally won't be providing such
-	# things when running this but it's a good thing to watch out for when
-	# sanitizing
+	# find insists on a leading ./ - I won't be providing such things when
+	# running this but it's a good thing to watch out for when sanitizing
 	csv=$(echo $csv | perl -pe 's/^.\///;')
 	# Prune file format
 	file=$(echo $csv | perl -pe 's/\.csv$//;')
@@ -64,9 +63,12 @@ else
 	perl makeMLSTable.pl $csv $table
 
 	# Generate names of subfolders
-	# Doesn't handle tournaments FIXME TODO
-	season=$(echo $csv | grep -oE "[sfu][0-9][0-9]")
+	season=$(echo $csv | grep -oE "t?[sfu][0-9][0-9]")
 	game=$(echo $csv | grep -oE "[0-9][0-9]\.[0-9][0-9]")
+	# Tournaments get their own subsubfolder
+	if [ $(echo $season | grep -oE "t[sfu][0-9][0-9]") ]; then
+	    season=tournaments/$season
+	fi
 
 	# Check each folder individually, avoid overwriting any data
 	if [[ -n $game ]]; then	# Individual game data
@@ -80,14 +82,11 @@ else
 	    fi
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
-	    continue		# Don't error out
+	    continue		# non-canonical filename allowed just this once
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
     done
-
-    # Properly indent file
-    #emacs -batch $arcindex --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
     echo
     echo "Site ready!"
