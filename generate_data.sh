@@ -72,7 +72,7 @@ else
 
 	# Check each folder individually, avoid overwriting any data
 	if [ -n $game ]; then	# Individual game data
-	    if [[ ! -d $season ]] || [[ ! -d $season/$game ]]; then
+	    if [ ! -d $season/$game ]; then
 		mkdir -p $season/$game/
 	    fi
 	    mv $csv $season/$game
