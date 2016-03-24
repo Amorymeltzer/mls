@@ -4,11 +4,12 @@
 
 #### Rewrite plans
 ## Run multipleWorksheets.pl
-## Collect mls_[sfu]YY.csv, mls_[sfu]YY_MM.DD.csv, and STAT_[sfu]YY.csv
-## Move to folder and generate season index (chart, table)
-## Move mls_[sfu]YY_MM.DD.csv to gameday sub-folder, generate index (table)
-## Generate tournament page with index, csv, table
+## Generate season index (chart, table)
+## Generate individual gameday index (table)
+## Move tournament results to appropriate place
+## Generate tournament index (csv, table)
 ## Generate index, archive page (ordered) with tournaments
+## Games link back to main season; season links to all individual games+tournys
 
 function get_help {
     cat <<END_HELP
