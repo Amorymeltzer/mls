@@ -73,8 +73,9 @@ foreach (sort keys %seasonsList) {
   my @players;	     # Player names
   my @dates;	     # Dates of play
 
-  my $tournament = 0;
-  $tournament = 1 if /Tournament/;
+  # Ternary ?: ($a = $test ? $b : $c;)
+  # a is b if test, c if not
+  my $tournament = /Tournament/ ? 1 : 0;
 
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
@@ -84,15 +85,11 @@ foreach (sort keys %seasonsList) {
     print "$season\t$syear\t$date\n";
     my $gameDate = "$date.".substr $syear, 2;
 
-
-    if ($tournament == 1) {
-      $gameDate = $date;
-    }
-
+    $gameDate = $date if $tournament == 1;
 
     # Keep track of time
     push @dates, $gameDate;
-    push @masterDates, $gameDate unless $tournament == 1;
+    push @masterDates, $gameDate if $tournament != 1;
 
     # Pull out corresponding worksheet for the individual game
     #  my %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
@@ -113,9 +110,7 @@ foreach (sort keys %seasonsList) {
 
     ## Dump per-game totals (basically a copy of %gameData)
     ## Could I just use dataDumper? FIXME TODO
-    my $gameOutfile = createName($_);
-    # Incorporate into subroutine FIXME TODO
-    $gameOutfile =~ s/.csv/_$date.csv/ unless $tournament == 1;
+    my $gameOutfile = createName($_,$date,$tournament);
     print "$gameOutfile\n";
     open my $gameCsv, '>', "$gameOutfile" or die $ERRNO;
     print $gameCsv join q{,}, @stats;
@@ -142,9 +137,10 @@ foreach (sort keys %seasonsList) {
 	  } else {
 	    @{$playerData{$cell}{$gameDate}} = ();
 	  }
+
 	  # Do the same for the master list of players
-	  if ($tournament != 1) {
-	    push @masterPlayers, $cell if ! $masterData{$cell};
+	  if ($tournament != 1 && !$masterData{$cell}) {
+	    push @masterPlayers, $cell;
 	  }
 
 	  next;
@@ -154,21 +150,21 @@ foreach (sort keys %seasonsList) {
 	  # Calculate total first, so we don't overlap
 	  $cell = calcStats($c,$player,'total',\%playerData);
 	  $playerData{$player}{'total'}[$c-2] = $cell;
-	  $masterData{$player}{'total'}[$c-2] = $cell unless $tournament == 1;
+	  $masterData{$player}{'total'}[$c-2] = $cell if $tournament != 1;
 
 	  # Calculate for the given gameDate to append
 	  $cell = calcStats($c,$player,$gameDate,\%playerData);
 	} else {
 	  if ($gameData{'cell'}[$c][$r]) {
 	    $playerData{$player}{'total'}[$c-2] += $cell;
-	    $masterData{$player}{'total'}[$c-2] += $cell unless $tournament == 1;
+	    $masterData{$player}{'total'}[$c-2] += $cell if $tournament != 1;
 	  } else {
 	    $playerData{$player}{'total'}[$c-2] += 0;
-	    $masterData{$player}{'total'}[$c-2] += 0 unless $tournament == 1;
+	    $masterData{$player}{'total'}[$c-2] += 0 if $tournament != 1;
 	  }
 	}
 	push @{$playerData{$player}{$gameDate}}, $cell;
-	push @{$masterData{$player}{$gameDate}}, $cell unless $tournament == 1;
+	push @{$masterData{$player}{$gameDate}}, $cell if $tournament != 1;
 
 	print $gameCsv "$cell,";
       }
@@ -187,11 +183,12 @@ foreach (sort keys %seasonsList) {
     # use Data::Dumper qw(Dumper);
     # print Dumper \%playerData;
   }
-  ### Also handle tournaments somehow (table, no graph) FIXME TODO
+
+  # Don't treat tournaments as part of a season
   next if $tournament == 1;
 
   ## Dump season totals (identical to old-style format)
-  my $seasonOutfile = createName($_);
+  my $seasonOutfile = createName($_,q{},0);
   print "$seasonOutfile\n";
   open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
   print $seasonCsv join q{,}, @stats;
@@ -274,7 +271,7 @@ foreach my $i (1..scalar @stats - 1) {
 # Build an appropriate name
 sub createName
   {
-    my $label = shift;
+    my ($label,$datum,$tourny) = @_;
     my $name = 'mls_';
 
     # Tournament
@@ -293,8 +290,12 @@ sub createName
     # Year
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
-    # Extension
-    $name .= '.csv';
+
+    if ($tourny != 1 && $datum) { # Only append gamedate if appropriate
+      $name .= '_';
+      $name .= "$datum";
+    }
+    $name .= '.csv';		# Extension
 
     return $name;
   }
