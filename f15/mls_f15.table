@@ -1,6 +1,6 @@
-<h3>
-<a id="mls-stats-latest" class="anchor" href="#mls-stats-latest" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLS stats, Fall 2015 (ongoing)</h3>
-<p>Click on the column headers to sort the table.  Data are current as of October 28, 2015.</p>
+<span class="header-nav">← <a href="/">return home</a></span><h3>
+<a id="mls-stats-f15" class="anchor" href="#mls-stats-f15" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLS stats, Fall 2015 (archived)</h3>
+<p>Click on the column headers to sort the table.</p>
 
 <script src='/tablesort.min.js'></script>
 <script src='/tablesort.number.js'></script>

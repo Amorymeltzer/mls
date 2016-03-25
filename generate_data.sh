@@ -80,7 +80,11 @@ else
 	    season=tournaments/$season
 	elif [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
 	    table=$(echo $file.table)
-	    perl makeMLSTable.pl $csv $table
+	    if [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]_") ]; then
+		perl makeMLSTable.pl -ag $csv $table # Game index
+	    elif [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
+		perl makeMLSTable.pl -a $csv $table # Season index
+	    fi
 	fi
 
 	# Check each folder individually, avoid overwriting any data

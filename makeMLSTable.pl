@@ -98,11 +98,16 @@ my %seasons = (
 	       u => 'Summer',
 	       f => 'Fall');
 my ($season,$date) = (q{},q{});	# WOW this is ugly FIXME TODO
-if ($input =~ m/mls_t?[suf]\d\d\.csv/) {
-  $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
+#  if ($input =~ m/mls_t?[suf]\d\d\.csv/) {
+if ($input =~ m/mls_t?[suf]\d\d/) {
+  # $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
+  $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/;
+
   $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
-  $season .= $seasons{substr $filename, -3, 1};
-  $date = '20'.substr $filename, -2, 2;
+
+  my $kludge = $filename =~ s/mls_t?([suf]\d\d.*)\.csv$/$1/r;
+  $season .= $seasons{substr $kludge, 0, 1};
+  $date = '20'.substr $kludge, 1, 2;
 }
 # Need to get date and season info right for table html FIXME TODO
 
