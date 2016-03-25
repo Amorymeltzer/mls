@@ -275,27 +275,24 @@ sub createName
     my $name = 'mls_';
 
     # Tournament
-    #  $name .= 't' if $label =~ m/tournament/i;
     $name .= 't' if $tourny == 1;
     # Season
     my $re = join q{|}, keys %seasons;
-    my $season;
+    my ($season) = $label =~ /\b($re)\b/i;
+
     # Error handling if a poorly-named worksheet is encountered
-    if ($label =~ /\b($re)\b/i) {
-      ($season) = $label =~ /\b($re)\b/i;
-    } else {
+    if (!$season) {
       print "Worksheet '$label' improperly named, skipping...\n";
       return 1;
     }
+
     $name .= $seasons{lc $season};
     # Year
-    # I think I can avoid these constructs in perl 5.22??  
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
-
-    if ($tourny != 1 && $datum) { # Only append gamedate if appropriate
-      $name .= '_';
-      $name .= "$datum";
+    # Only append gamedate if appropriate
+    if ($tourny != 1 && $datum) {
+      $name .= "_$datum";
     }
 
     return "$name.csv";		# Extension
