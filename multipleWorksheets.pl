@@ -66,7 +66,6 @@ my %masterData;
 my @masterPlayers;
 my @masterDates;
 
-# This ignores tournys, need to handle them above FIXME TODO
 foreach (sort keys %seasonsList) {
   print "full: $_\t@{$seasonsList{$_}}\n";
   my %playerData;    # Hash holding per-player stat data [total, current game]
@@ -203,11 +202,11 @@ foreach (sort keys %seasonsList) {
 
   # Sort dates
   schwartz(\@dates);
+  # Non-destructive /r option added in 5.14, probably safe
+  my ($seasonSuffix) = $seasonOutfile =~ s/.*mls_(\w\d\d).*/$1/r;
   # Dump per-game values for each stat in each season
-  my $seasonSuffix = $seasonOutfile;
-  $seasonSuffix =~ s/.*mls_(\w\d\d).*/$1/;
   foreach my $i (1..scalar @stats - 1) {
-    open my $stat, '>', "$stats[$i]_$seasonSuffix.csv" or die $!;
+    open my $stat, '>', "$stats[$i]_$seasonSuffix.csv" or die $ERRNO;
     print $stat 'Date,';
     print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
     print $stat "\n";
@@ -229,7 +228,7 @@ foreach (sort keys %seasonsList) {
 }
 
 ## Dump lifetime totals (same format as season totals)
-open my $masterCsv, '>', 'masterData.csv' or die $!;
+open my $masterCsv, '>', 'masterData.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
 print $masterCsv "\n";
 foreach my $dude (@masterPlayers) {
@@ -244,7 +243,7 @@ close $masterCsv or die $ERRNO;
 schwartz(\@masterDates);
 # Dump lifetime per-game values for each stat
 foreach my $i (1..scalar @stats - 1) {
-  open my $stat, '>', "$stats[$i].csv" or die $!;
+  open my $stat, '>', "$stats[$i].csv" or die $ERRNO;
   print $stat 'Date,';
   print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
   print $stat "\n";
