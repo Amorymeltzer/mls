@@ -98,14 +98,13 @@ my %seasons = (
 	       u => 'Summer',
 	       f => 'Fall');
 my ($season,$date) = (q{},q{});	# WOW this is ugly FIXME TODO
-#  if ($input =~ m/mls_t?[suf]\d\d\.csv/) {
+
 if ($input =~ m/mls_t?[suf]\d\d/) {
-  # $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)\.csv$/$1/;
   $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/;
 
-  $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
+  my ($kludge) = $filename =~ s/t?([suf]\d\d.*)/$1/r;
+  $season = 'Tournament ' if $filename =~ /^t/;
 
-  my $kludge = $filename =~ s/mls_t?([suf]\d\d.*)\.csv$/$1/r;
   $season .= $seasons{substr $kludge, 0, 1};
   $date = '20'.substr $kludge, 1, 2;
 }
