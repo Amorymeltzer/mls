@@ -122,14 +122,7 @@ while (<DATA>) {
 
 open my $out, '>', "$output" or die $ERRNO;
 
-if ($archive) {
-  #  print $out '<span class="header-nav">← <a href="../">Return to the season index</a>';
-  print $out '<span class="header-nav">← ';
-  if ($game) {			# Return to season index on individual games
-     print $out '<a href="../">Return to the season index</a> | '
-  }
-  print $out '<a href="/">return home</a></span>';
-} else {
+if (!$archive) {
   $filename = 'latest';
 }
 print $out "<h3>\n";
