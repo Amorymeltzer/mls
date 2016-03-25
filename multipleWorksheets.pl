@@ -41,20 +41,20 @@ my %seasonsList;		# Unique list of seasons that need parsing
 # from initial hash.  Order unimportant so it's doable.
 for (1..$sheetNum) {
   my $seas = $book->[$_]{'label'};
-  #  next if $seas =~ /Tournament/;
 
   my @tmp = split / /, $seas;
   $seas = "$tmp[0] $tmp[1]";
+  my $game = $tmp[2];
 
   if ($seas =~ /Tournament/) {
     $seas = "$tmp[0] $tmp[1] $tmp[2]";
-    $tmp[2] = $seas;
+    $game = $seas;
   }
 
   if (!$seasonsList{$seas}) {
-    $seasonsList{$seas} = [$tmp[2]];
+    $seasonsList{$seas} = [$game];
   } else {
-    push @{$seasonsList{$seas}}, $tmp[2];
+    push @{$seasonsList{$seas}}, $game;
     # Ensure each season's game are chronological
     @{$seasonsList{$seas}} = sort @{$seasonsList{$seas}};
   }
