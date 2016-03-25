@@ -55,8 +55,6 @@ for (1..$sheetNum) {
     $seasonsList{$seas} = [$game];
   } else {
     push @{$seasonsList{$seas}}, $game;
-    # Ensure each season's game are chronological
-    @{$seasonsList{$seas}} = sort @{$seasonsList{$seas}};
   }
 }
 
