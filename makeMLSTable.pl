@@ -11,7 +11,7 @@ use Getopt::Std;
 
 # Parse commandline options
 my %opts = ();
-getopts('ualh',\%opts);
+getopts('uaglh',\%opts);
 
 if ($opts{h} || @ARGV == 0 || @ARGV > 2) {
   usage();
@@ -21,6 +21,7 @@ if ($opts{h} || @ARGV == 0 || @ARGV > 2) {
 my $input = $ARGV[0];
 my $output = $ARGV[1] // 'table.table';
 my $archive = $opts{a} // 0;	# Treat old ones slightly differently
+my $game = $opts{g} // 0;	# Treat old ones slightly differently
 
 
 
@@ -118,8 +119,12 @@ while (<DATA>) {
 open my $out, '>', "$output" or die $ERRNO;
 
 if ($archive) {
-  print $out '<span class="header-nav">← <a href="../archive">Return to the archive index</a>';
-  print $out ' | <a href="../">return home</a></span>';
+  #  print $out '<span class="header-nav">← <a href="../">Return to the season index</a>';
+  print $out '<span class="header-nav">← ';
+  if ($game) {			# Return to season index on individual games
+     print $out '<a href="../">Return to the season index</a> | '
+  }
+  print $out '<a href="/">return home</a></span>';
 } else {
   $filename = 'latest';
 }
@@ -139,16 +144,8 @@ if (!$archive) {
 }
 print $out "</p>\n\n";
 
-# Handle archive relativity
-my $archivePre = q{};
-$archivePre ='../' if $archive;
-
-print $out '<script src=\'';
-print $out $archivePre;
-print $out "tablesort.min.js'></script>\n";
-print $out '<script src=\'';
-print $out $archivePre;
-print $out "tablesort.number.js'></script>\n\n";
+print $out "<script src='/tablesort.min.js'></script>\n";
+print $out "<script src='/tablesort.number.js'></script>\n\n";
 print $out "<table id='mls-table'>\n";
 
 # Header row
@@ -171,7 +168,6 @@ foreach my $col (0..scalar @header - 1) {
 
 print $out "</tr>\n";
 print $out "</thead>\n";
-
 
 # Data
 print $out "<tbody>\n";
@@ -227,7 +223,8 @@ sub usage
     print <<"USAGE";
 Usage: $PROGRAM_NAME [-uah] mls_data.csv [output.html]
       -u Update the last-modified date of the index page
-      -a Indicate input is an archived file, treat differently
+      -a Indicate input is a season file, treat differently
+      -g Indicate input is a game file, treat differently
       -l Offseason message
       -h Print this help message
 USAGE
