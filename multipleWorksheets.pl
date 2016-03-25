@@ -275,7 +275,8 @@ sub createName
     my $name = 'mls_';
 
     # Tournament
-    $name .= 't' if $label =~ m/tournament/i;
+    #  $name .= 't' if $label =~ m/tournament/i;
+    $name .= 't' if $tourny == 1;
     # Season
     my $re = join q{|}, keys %seasons;
     my $season;
@@ -288,6 +289,7 @@ sub createName
     }
     $name .= $seasons{lc $season};
     # Year
+    # I think I can avoid these constructs in perl 5.22??  
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
 
@@ -295,9 +297,8 @@ sub createName
       $name .= '_';
       $name .= "$datum";
     }
-    $name .= '.csv';		# Extension
 
-    return $name;
+    return "$name.csv";		# Extension
   }
 
 
