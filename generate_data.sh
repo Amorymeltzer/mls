@@ -73,20 +73,20 @@ else
 	season=$(echo $file | grep -oE "t?[sfu][0-9][0-9]")
 	game=$(echo $file | grep -oE "[0-9][0-9]\.[0-9][0-9]")
 
-	# Build table
-	table=''		# Empty on new file
+	# Build tables
+	table=$(echo $file.table)
 	# Tournaments get their own subsubfolder
 	if [ $(echo $season | grep -oE "t[sfu][0-9][0-9]") ]; then
-	    table=$(echo $file.table) # Need to dedupe this FIXME TODO
 	    season=tournaments/$season
 	    perl makeMLSTable.pl -ag $csv $table # Game index
 	elif [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
-	    table=$(echo $file.table)
 	    if [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]_") ]; then
 		perl makeMLSTable.pl -ag $csv $table # Game index
-	    elif [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
+	    else
 		perl makeMLSTable.pl -a $csv $table # Season index
 	    fi
+	else
+	    table=''		# Empty on new file
 	fi
 
 	# Check each folder individually, avoid overwriting any data
