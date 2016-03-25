@@ -94,17 +94,44 @@ else
 	    if [[ ! -d $season/$game ]]; then
 		mkdir -p $season/$game/
 	    fi
+
+	    index=$season/$game/index.html
+	    cat game.index.top.html > $index
+	    cat $table >> $index
+	    cat game.index.bottom.html >> $index
+
 	    mv $csv $table $season/$game
 	elif [[ -n $season ]]; then # Season-total
 	    if [[ ! -d $season ]]; then
 		mkdir -p $season/
 	    fi
+
+
+	    # Only generate if season total
+	    if [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
+		index=$season/index.html
+		cat season.index.top.html > $index
+		cat chart.html >> $index
+		cat $table >> $index
+		cat season.index.bottom.html >> $index
+	    fi
+
+
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
 	    # non-canonical filename allowed just this once
 	    # should probably dedupe this
 	    table=$(echo $file.table)
 	    perl makeMLSTable.pl $csv $table
+
+
+	    index=index.html
+	    cat top.html > $index
+	    cat chart.html >> $index
+	    cat $table >> $index
+	    cat news.html >> $index
+	    cat bottom.html >> $index
+
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
