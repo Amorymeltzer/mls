@@ -102,8 +102,6 @@ else
 	    fi
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
 	    perl makeMLSTable.pl $csv $table
-	else
-	    table=/dev/null	# Empty on new file
 	fi
 
 	# Check each folder individually, avoid overwriting any data
