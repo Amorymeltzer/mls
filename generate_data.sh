@@ -85,6 +85,7 @@ else
 	game=$(echo $file | grep -oE "[0-9][0-9]\.[0-9][0-9]")
 
 	# Set default values ahead of time
+	index=index.html
 	news=/dev/null
 	chart=chart
 	# Build tables
@@ -110,7 +111,7 @@ else
 	    if [[ ! -d $season/$game ]]; then
 		mkdir -p $season/$game/
 	    fi
-	    index=$season/$game/index.html
+	    index=$season/$game/$index
 	    chart=/dev/null
 	    top=game.index.top
 	    bottom=game.index.bottom
@@ -123,7 +124,7 @@ else
 	    fi
 	    # Only generate if season total
 	    if [ $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
-		index=$season/index.html
+		index=$season/$index
 		top=season.index.top
 		bottom=season.index.bottom
 		print
@@ -135,7 +136,6 @@ else
 
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
-	    index=index.html
 	    top=top
 	    news=news
 	    bottom=bottom
