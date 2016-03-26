@@ -124,7 +124,7 @@ foreach (sort keys %seasonsList) {
 				# and $colN FIXME TODO
 	  next;
 	} elsif ($c == 1) {
-	  print $gameCsv "\n\"$cell\",";
+	  print $gameCsv "\n\"$cell\"";
 	  $player = $cell;	# Define current player for entire row, saves
                                 # issue of duplicating and polluting @players
 
@@ -165,7 +165,7 @@ foreach (sort keys %seasonsList) {
 	push @{$playerData{$player}{$gameDate}}, $cell;
 	push @{$masterData{$player}{$gameDate}}, $cell if $tournament != 1;
 
-	print $gameCsv "$cell,";
+	print $gameCsv ",$cell";
       }
     }
     close $gameCsv or die $ERRNO;
