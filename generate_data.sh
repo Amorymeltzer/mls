@@ -84,8 +84,9 @@ else
 	season=$(echo $file | grep -oE "t?[sfu][0-9][0-9]")
 	game=$(echo $file | grep -oE "[0-9][0-9]\.[0-9][0-9]")
 
-	# Just in case
+	# Set default values ahead of time
 	news=/dev/null
+	chart=chart.html
 	# Build tables
 	table=$(echo $file.table)
 	# Tournaments get their own subsubfolder
@@ -98,6 +99,8 @@ else
 	    else
 		perl makeMLSTable.pl -a $csv $table # Season index
 	    fi
+	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
+	    perl makeMLSTable.pl $csv $table
 	else
 	    table=/dev/null	# Empty on new file
 	fi
@@ -122,26 +125,18 @@ else
 	    if [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
 		index=$season/index.html
 		top=season.index.top.html
-		chart=chart.html
 		bottom=season.index.bottom.html
 		print
 	    elif [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
-		new=$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
-		mv $csv $season/$new
+		mv $csv $season/$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
 		continue
 	    fi
 
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
-	    # non-canonical filename allowed just this once
-	    # should probably dedupe this
-	    table=$(echo $file.table)
-	    perl makeMLSTable.pl $csv $table
-
 	    index=index.html
 	    top=top.html
-	    chart=chart.html
 	    news=news.html
 	    bottom=bottom.html
 	    print
