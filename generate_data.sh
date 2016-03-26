@@ -122,7 +122,7 @@ else
 		mkdir -p $season/
 	    fi
 	    # Only generate if season total
-	    if [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
+	    if [ $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		index=$season/index.html
 		top=season.index.top.html
 		bottom=season.index.bottom.html
