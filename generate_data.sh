@@ -86,7 +86,7 @@ else
 
 	# Set default values ahead of time
 	news=/dev/null
-	chart=chart.html
+	chart=chart
 	# Build tables
 	table=$(echo $file.table)
 	# Tournaments get their own subsubfolder
@@ -112,8 +112,8 @@ else
 	    fi
 	    index=$season/$game/index.html
 	    chart=/dev/null
-	    top=game.index.top.html
-	    bottom=game.index.bottom.html
+	    top=game.index.top
+	    bottom=game.index.bottom
 	    print
 
 	    mv $csv $table $season/$game
@@ -124,8 +124,8 @@ else
 	    # Only generate if season total
 	    if [ $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		index=$season/index.html
-		top=season.index.top.html
-		bottom=season.index.bottom.html
+		top=season.index.top
+		bottom=season.index.bottom
 		print
 	    elif [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
@@ -136,9 +136,9 @@ else
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
 	    index=index.html
-	    top=top.html
-	    news=news.html
-	    bottom=bottom.html
+	    top=top
+	    news=news
+	    bottom=bottom
 	    print
 	else
 	    echo "Warning: unable to properly file $csv"
