@@ -114,6 +114,11 @@ else
 		cat chart.html >> $index
 		cat $table >> $index
 		cat season.index.bottom.html >> $index
+	    elif [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
+		# Rename and be done with season-based stats
+		new=$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
+		mv $csv $season/$new
+		continue
 	    fi
 
 
