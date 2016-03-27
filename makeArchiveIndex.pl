@@ -33,6 +33,11 @@ my %seasons = (
 	       u => 'Summer',
 	       f => 'Fall');
 
+open my $arcindex, '>', 'arc.list' or die $ERRNO;
+print $arcindex "<h3>\n";
+print $arcindex '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
+print $arcindex "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
+
 foreach my $key (sort seasonSort keys %hash) {
   print "$key: @{$hash{$key}}\n"; # Quotes ensure the list is formatted for bash
   @{$hash{$key}} = sort @{$hash{$key}};
@@ -47,14 +52,15 @@ foreach my $key (sort seasonSort keys %hash) {
 
   open my $out, '>', "$key.list" or die $ERRNO;
   print $out "<h3>\n";
-  print $out "<a id=\"archive\" class=\"anchor\" href=\"#archive\" aria-hidden=\"true\">";
+  print $out '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
   print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
 
-  print $out "<p><a href=\"./$key\">$season $date</a></p>";
+  print $arcindex "<p><a href=\"/$key\">$season $date</a></p>";
 
   close $out or die $ERRNO;
 }
-
+print $arcindex '<p><a href="/tournaments\>Tournaments</a></p>';
+close $arcindex or die $ERRNO;
 
 
 
