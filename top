@@ -23,3 +23,14 @@
     </section>
 
     <section class="main-content">
+
+      <nav role='navigation' class='table-of-contents'>
+	<h2>On this page:</h2>
+	<ul>
+	  <li><a href='#newsfeed'>News</a></li>
+	  <li><a href='#graph'>Stat graph</a></li>
+	  <li><a href='#mls-stats-latest'>Table</a></li>
+	  <li><a href='#archive'>Other Data</a></li>
+	  <li><a href='#photos'>Photos</a></li>
+	</ul>
+      </nav>
