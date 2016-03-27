@@ -15,7 +15,6 @@ if (!@ARGV) {
 
 # Keys access array of game dates
 my %hash;
-# ./mls_f15_09.09.csv
 foreach (@ARGV) {
   s/^\.\/mls_(.*)\.csv$/$1/;
 
@@ -29,61 +28,56 @@ foreach (@ARGV) {
 }
 
 
-foreach my $key (sort keys %hash) {
-  print "$key: @{$hash{$key}}\n";	# Quotes ensure the list is formatted for bash
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exit;
-
-
-
-
-
-
-if (@ARGV != 2) {
-  print "Usage: makeArchiveIndex.pl mls_data.csv archive_index.html\n";
-  exit;
-}
-
-my $input = $ARGV[0];
-my $output = $ARGV[1];
-
-
-# Parse filenames for seasons, tournaments
-my $filename = $input;
-$filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)$/$1/;
 my %seasons = (
 	       s => 'Spring',
 	       u => 'Summer',
 	       f => 'Fall');
-my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
-$season .= $seasons{substr $filename, -3, 1};
-my $date = '20'.substr $filename, -2, 2;
 
-# Simply append file name to the archive index
-open my $arci, '>>', "$output" or die $ERRNO;
-print $arci "<p><a href=\"./mls_$filename.html\">";
-print $arci "$season $date</a></p>\n";
-close $arci or die $ERRNO;
+foreach my $key (sort seasonSort keys %hash) {
+  print "$key: @{$hash{$key}}\n"; # Quotes ensure the list is formatted for bash
+  @{$hash{$key}} = sort @{$hash{$key}};
+  print "$key: @{$hash{$key}}\n"; # Quotes ensure the list is formatted for bash
+
+  # Parse filenames for seasons, tournaments
+  my $filename = $key;
+  $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)$/$1/;
+  my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
+  $season .= $seasons{substr $filename, -3, 1};
+  my $date = '20'.substr $filename, -2, 2;
+
+  open my $out, '>', "$key.list" or die $ERRNO;
+  print $out "<h3>\n";
+  print $out "<a id=\"archive\" class=\"anchor\" href=\"#archive\" aria-hidden=\"true\">";
+  print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
+
+  print $out "<p><a href=\"./$key\">$season $date</a></p>";
+
+  close $out or die $ERRNO;
+}
+
+
+
+
+
+
+# Special sorting subroutine to ensure Spring comes before sUmmer which
+# comes before Fall
+sub seasonSort
+  {
+    my @input = ($a, $b);
+
+    my @seasonOrder = qw (s u f);
+    my %seasonOrderMap = map { $seasonOrder[$_] => $_ } 0..$#seasonOrder;
+    my ($v,$w) = ($a,$b);
+    $v =~ s/^t//;
+    $w =~ s/^t//;
+    my $x = substr $v, 1, 2;
+    my $y = substr $w, 1, 2;
+    $v =~ s/\d//g;
+    $w =~ s/\d//g;
+    my $aLength = length $a;
+    my $bLength = length $b;
+
+    # Year, season, tournaments
+    $x <=> $y || $seasonOrderMap{$v} cmp $seasonOrderMap{$w} || $aLength <=> $bLength;
+  }

@@ -61,6 +61,11 @@ if [ ! "$input" ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
 else
+    # Get all the games and seasons that need linking to
+    SUBS=$(find -E . -regex "./mls_.*_.*.csv" | grep -v _site)
+    # Generate archive indexes via makeArchiveIndex.pl
+    perl makearchiveindex.pl $SUBS
+
     # Grab everything...
     FILES=$(find -E . -maxdepth 1 -regex "./.*_t?[sfu][0-9][0-9].*csv" | grep -v _site)
     FILES="$FILES ./masterData.csv" # Add lifetime totals
