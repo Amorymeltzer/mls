@@ -64,7 +64,6 @@ else
     # Grab everything...
     FILES=$(find -E . -maxdepth 1 -regex "./.*_t?[sfu][0-9][0-9].*csv" | grep -v _site)
     FILES="$FILES ./masterData.csv" # Add lifetime totals
-    echo $FILES
 
     # Die if no proper files can be found
     if [ -z "$FILES" ]; then

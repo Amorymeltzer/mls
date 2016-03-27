@@ -67,7 +67,7 @@ my @masterPlayers;
 my @masterDates;
 
 foreach (sort keys %seasonsList) {
-  print "full: $_\t@{$seasonsList{$_}}\n";
+  print "seas: $_\t items: @{$seasonsList{$_}}\n";
   my %playerData;    # Hash holding per-player stat data [total, current game]
   my @players;	     # Player names
   my @dates;	     # Dates of play
@@ -79,9 +79,7 @@ foreach (sort keys %seasonsList) {
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
     my $date = shift @{$seasonsList{$_}};
-    print "$date\n";
     my ($season,$syear) = split / /;
-    print "$season\t$syear\t$date\n";
     my $gameDate = "$date.".substr $syear, 2;
 
     $gameDate = $date if $tournament == 1;
@@ -91,10 +89,8 @@ foreach (sort keys %seasonsList) {
     push @masterDates, $gameDate if $tournament != 1;
 
     # Pull out corresponding worksheet for the individual game
-    #  my %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
     my %gameData;
-
-    if ($tournament == 1) {
+    if ($tournament == 1) {	# Tourny names are parsed differently
       %gameData = %{$book->[$book->[0]{sheet}{"$date"}]};
     } else {
       %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
@@ -110,7 +106,6 @@ foreach (sort keys %seasonsList) {
     ## Dump per-game totals (basically a copy of %gameData)
     ## Could I just use dataDumper? FIXME TODO
     my $gameOutfile = createName($_,$date,$tournament);
-    print "$gameOutfile\n";
     open my $gameCsv, '>', "$gameOutfile" or die $ERRNO;
     print $gameCsv join q{,}, @stats;
 
@@ -169,18 +164,6 @@ foreach (sort keys %seasonsList) {
       }
     }
     close $gameCsv or die $ERRNO;
-
-
-    # print "@players\n";
-    # print "@stats\n";
-    # print keys %playerData;
-    # print "\n";
-    # print "@{$playerData{'Andrew Burch'}{$gameDate}}\n";
-    # print "@{$playerData{'Andrew Burch'}{'total'}}\n";
-
-    # print "\n\n\n\n";
-    # use Data::Dumper qw(Dumper);
-    # print Dumper \%playerData;
   }
 
   # Don't treat tournaments as part of a season
@@ -188,7 +171,6 @@ foreach (sort keys %seasonsList) {
 
   ## Dump season totals (identical to old-style format)
   my $seasonOutfile = createName($_,q{},0);
-  print "$seasonOutfile\n";
   open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
   print $seasonCsv join q{,}, @stats;
   print $seasonCsv "\n";
