@@ -44,8 +44,7 @@ foreach my $key (sort seasonSort keys %hash) {
   print "$key: @{$hash{$key}}\n"; # Quotes ensure the list is formatted for bash
 
   # Parse filenames for seasons, tournaments
-  my $filename = $key;
-  $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d)$/$1/;
+  my ($filename) = $key =~ s/^(?:archive\/)?mls_(t?[suf]1\d)$/$1/r;
   my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};
   $season .= $seasons{substr $filename, -3, 1};
   my $date = '20'.substr $filename, -2, 2;
