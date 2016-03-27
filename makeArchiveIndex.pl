@@ -14,16 +14,21 @@ if (!@ARGV) {
 }
 
 # Keys access array of game dates
-my %hash;
+my %seas;
 foreach (@ARGV) {
   s/^\.\/mls_(.*)\.csv$/$1/;
 
   my @tmp = split /_/;
 
-  if (!$hash{$tmp[0]}) {
-    $hash{$tmp[0]} = [$tmp[1]];
+  # Put tournaments on the mainpage, treat 'em like a pseudo season
+  if ($tmp[0] =~ /^t/) {
+    $tmp[1] = $tmp[0];
+  }
+
+  if (!$seas{$tmp[0]}) {
+    $seas{$tmp[0]} = [$tmp[1]];
   } else {
-    push @{$hash{$tmp[0]}}, $tmp[1];
+    push @{$seas{$tmp[0]}}, $tmp[1];
   }
 }
 
@@ -38,10 +43,10 @@ print $arcindex "<h3>\n";
 print $arcindex '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
 print $arcindex "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
 
-foreach my $key (sort seasonSort keys %hash) {
-  print "$key: @{$hash{$key}}\n"; # Quotes ensure the list is formatted for bash
-  @{$hash{$key}} = sort @{$hash{$key}};
-  print "$key: @{$hash{$key}}\n"; # Quotes ensure the list is formatted for bash
+foreach my $key (sort seasonSort keys %seas) {
+  # List games chronologically
+  @{$seas{$key}} = sort @{$seas{$key}};
+  print "$key: @{$seas{$key}}\n";
 
   # Parse filenames for seasons, tournaments
   my ($filename) = $key =~ s/^(?:archive\/)?mls_(t?[suf]1\d)$/$1/r;
@@ -49,21 +54,22 @@ foreach my $key (sort seasonSort keys %hash) {
   $season .= $seasons{substr $filename, -3, 1};
   my $date = '20'.substr $filename, -2, 2;
 
-  open my $out, '>', "$key.list" or die $ERRNO;
-  print $out "<h3>\n";
-  print $out '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
-  print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
-
   print $arcindex "<p><a href=\"/$key\">$season $date</a></p>";
 
-  foreach (sort @{$hash{$key}}) {
-    my ($show) = s/\./\//r;			# More reasonable formatting
-    print $out "<p><a href=\"./$_\">$show/$date</a></p>";
-  }
+  # Only print index for full-on seasons
+  if ($season !~ /tournament/i) {
+    open my $out, '>', "$key.list" or die $ERRNO;
+    print $out "<h3>\n";
+    print $out '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
+    print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
 
-  close $out or die $ERRNO;
+    foreach (sort @{$seas{$key}}) {
+      my ($show) = s/\./\//r;	# More reasonable formatting
+      print $out "<p><a href=\"./$_\">$show/$date</a></p>";
+    }
+    close $out or die $ERRNO;
+  }
 }
-print $arcindex '<p><a href="/tournaments">Tournaments</a></p>';
 close $arcindex or die $ERRNO;
 
 

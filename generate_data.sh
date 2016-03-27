@@ -62,10 +62,10 @@ if [ ! "$input" ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
 else
-    # Get all the games and seasons that need linking to
-    SUBS=$(find -E . -regex "./mls_.*_.*.csv" | grep -v _site)
-    # Generate archive indexes via makeArchiveIndex.pl
-    perl makearchiveindex.pl $SUBS
+    # Get all the games and seasons and tournaments that need linking to
+    SUBS=$(find -E . -regex "./mls_.*_.*.csv" -o -regex "./mls_t....csv" | grep -v _site)
+    # Generate archive index lists via makeArchiveIndex.pl
+    perl makeArchiveIndex.pl $SUBS
 
     # Grab everything...
     FILES=$(find -E . -maxdepth 1 -regex "./.*_t?[sfu][0-9][0-9].*csv" | grep -v _site)
@@ -96,9 +96,10 @@ else
 	arc=/dev/null
 	# Build tables
 	table=$(echo $file.table)
-	# Tournaments get their own subsubfolder
+
+	# Tournaments are halfway between seasons and games
+	# Should be able to make this more efficient FIXME TODO
 	if [ $(echo $season | grep -oE "t[sfu][0-9][0-9]") ]; then
-	    season=tournaments/$season
 	    perl makeMLSTable.pl -ag $csv $table # Game index
 	    chart=/dev/null
 	elif [ $(echo $file | grep -oE "mls_[sfu][0-9][0-9]") ]; then
@@ -134,7 +135,6 @@ else
 	    if [ $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		index=$season/$index
 		top=season.index.top
-		#arc=$season.list
 		bottom=season.index.bottom
 		print
 	    elif [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
