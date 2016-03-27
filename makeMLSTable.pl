@@ -126,8 +126,8 @@ if (!$archive) {
   $filename = 'latest';
 }
 print $out "<h3>\n";
-print $out "<a id=\"mls-stats-$filename\" class=\"anchor\" ";
-print $out "href=\"#mls-stats-$filename\" aria-hidden=\"true\">";
+print $out "<a id=\"statstable-$filename\" class=\"anchor\" ";
+print $out "href=\"#statstable-$filename\" aria-hidden=\"true\">";
 print $out '<span class="octicon octicon-link"></span>';
 
 my $status = $opts{l} ? 'latest season' : 'ongoing';

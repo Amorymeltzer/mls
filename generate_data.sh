@@ -50,9 +50,9 @@ done
 # uncomfortable FIXME TODO
 function print() {
     cat $top > $index
+    cat $news >> $index
     cat $chart >> $index
     cat $table >> $index
-    cat $news >> $index
     cat $bottom >> $index
 }
 
