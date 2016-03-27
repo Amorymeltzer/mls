@@ -8,6 +8,60 @@ use diagnostics;
 
 use English qw( -no_match_vars );
 
+if (!@ARGV) {
+  print "Usage: $PROGRAM_NAME list_of_files\n";
+  exit;
+}
+
+# Keys access array of game dates
+my %hash;
+# ./mls_f15_09.09.csv
+foreach (@ARGV) {
+  s/^\.\/mls_(.*)\.csv$/$1/;
+
+  my @tmp = split /_/;
+
+  if (!$hash{$tmp[0]}) {
+    $hash{$tmp[0]} = [$tmp[1]];
+  } else {
+    push @{$hash{$tmp[0]}}, $tmp[1];
+  }
+}
+
+
+foreach my $key (sort keys %hash) {
+  print "$key: @{$hash{$key}}\n";	# Quotes ensure the list is formatted for bash
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exit;
+
+
+
+
+
+
 if (@ARGV != 2) {
   print "Usage: makeArchiveIndex.pl mls_data.csv archive_index.html\n";
   exit;
