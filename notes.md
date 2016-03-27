@@ -7,6 +7,7 @@
 - Individual column sorting? https://github.com/tristen/tablesort/pull/97
 - Reorganize files (data, js, etc. folders)
 - Change summer u to m?  For sorting (ie everything before t)
+- Propagate use English esp $PROGRAM_NAME for $0
 ### Future design
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
@@ -48,3 +49,4 @@
 - Maybe beef up font size?  Or just table size?
 - Figure out how to generate season index of individual games
 - That could tie in well with news header and "archive" footer?
+- Use makeArchiveIndex.pl like sortFiles.pl to produce before moving other files
