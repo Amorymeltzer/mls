@@ -46,3 +46,5 @@
 - Graph won't load data named as R_f15, RBI_f15; need to rename those
 - Why so small?  Font size shrunk but the table is tiny
 - Maybe beef up font size?  Or just table size?
+- Figure out how to generate season index of individual games
+- That could tie in well with news header and "archive" footer?
