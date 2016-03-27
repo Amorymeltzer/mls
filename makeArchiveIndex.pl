@@ -63,7 +63,7 @@ foreach my $key (sort seasonSort keys %hash) {
 
   close $out or die $ERRNO;
 }
-print $arcindex '<p><a href="/tournaments\>Tournaments</a></p>';
+print $arcindex '<p><a href="/tournaments">Tournaments</a></p>';
 close $arcindex or die $ERRNO;
 
 
