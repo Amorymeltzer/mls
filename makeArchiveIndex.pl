@@ -56,6 +56,11 @@ foreach my $key (sort seasonSort keys %hash) {
 
   print $arcindex "<p><a href=\"/$key\">$season $date</a></p>";
 
+  foreach (sort @{$hash{$key}}) {
+    my ($show) = s/\./\//r;			# More reasonable formatting
+    print $out "<p><a href=\"./$_\">$show/$date</a></p>";
+  }
+
   close $out or die $ERRNO;
 }
 print $arcindex '<p><a href="/tournaments\>Tournaments</a></p>';
