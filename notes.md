@@ -38,4 +38,3 @@
 - Maybe beef up font size?  Or just table size?
 - Figure out how to generate season index of individual games
 - That could tie in well with news header and "archive" footer?
-- Use makeArchiveIndex.pl like sortFiles.pl to produce before moving other files
