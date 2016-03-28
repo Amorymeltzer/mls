@@ -21,8 +21,7 @@
 - List individual pages on main page index.html (sorted by date?)
 - Small links to other archived tables - next/previous seasons?
 - One line, not multiple lines
-- Tournament index
-- Tournaments link back to tourny index and home
+- Should archive index list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
 
 ### Revamp plan
 - Stats for individual games, one per worksheet (google doc, name: Season Year MM/DD))
