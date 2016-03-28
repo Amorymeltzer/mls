@@ -56,13 +56,8 @@ foreach my $key (@indices) {
   $season .= $seasons{substr $filename, -3, 1};
   my $date = '20'.substr $filename, -2, 2;
 
-  #  print $arcindex "<p><a href=\"/$key\">$season $date</a></p>";
-  #  print $arcindex " \&bull\; <a href=\"/$key\">$season $date</a>";
   print $arcindex "<a href=\"/$key\">$season $date</a>";
-
-  if ($key ne $indices[-1]) {
-    print $arcindex ' &bull; ';
-  }
+  print $arcindex ' &bull; ' if $key ne $indices[-1];
 
   # Only print index for full-on seasons
   if ($season !~ /tournament/i) {
@@ -75,13 +70,8 @@ foreach my $key (@indices) {
     my @games = sort @{$seas{$key}};
     foreach (@games) {
       my ($show) = s/\./\//r;	# More reasonable formatting
-      #  print $out "<p><a href=\"./$_\">$show/$date</a></p>";
-      #  print $out " \&bull\; <a href=\"./$_\">$show/$date</a>";
       print $out "<a href=\"./$_\">$show/$date</a>";
-
-      if ($_ ne $games[-1]) {
-	print $out ' &bull; ';
-      }
+      print $out ' &bull; ' if $_ ne $games[-1];
     }
     print $out '</p>';
     close $out or die $ERRNO;
@@ -89,8 +79,6 @@ foreach my $key (@indices) {
 }
 print $arcindex '</p>';
 close $arcindex or die $ERRNO;
-
-
 
 
 
