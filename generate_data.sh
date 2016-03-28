@@ -55,7 +55,7 @@ function print() {
     cat $table >> $index
     cat $arc >> $index
     cat $bottom >> $index
-    cat site_footer >> $index
+    cat templates/site_footer >> $index
 }
 
 
@@ -93,7 +93,7 @@ else
 	# Set default values ahead of time
 	index=index.html
 	news=/dev/null
-	chart=chart
+	chart=templates/chart
 	arc=/dev/null
 	# Build tables
 	table=$(echo $file.table)
@@ -109,7 +109,7 @@ else
 	    else
 		perl makeMLSTable.pl -a $csv $table # Season index
 		# Set here to avoid tourny errors FIXME TODO
-		arc=$season.list
+		arc=templates/$season.list
 	    fi
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
 	    perl makeMLSTable.pl $csv $table
@@ -122,9 +122,9 @@ else
 	    fi
 	    index=$season/$game/$index
 	    chart=/dev/null
-	    top=game.index.top
+	    top=templates/game.index.top
 	    arc=/dev/null
-	    bottom=game.index.bottom
+	    bottom=templates/game.index.bottom
 	    print
 
 	    mv $csv $table $season/$game
@@ -135,8 +135,8 @@ else
 	    # Only generate if season total
 	    if [ $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		index=$season/$index
-		top=season.index.top
-		bottom=season.index.bottom
+		top=templates/season.index.top
+		bottom=templates/season.index.bottom
 		print
 	    elif [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
@@ -146,10 +146,10 @@ else
 
 	    mv $csv $table $season
 	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
-	    top=top
-	    news=news
-	    arc=arc.list
-	    bottom=bottom
+	    top=templates/top
+	    news=templates/news
+	    arc=templates/arc.list
+	    bottom=templates/bottom
 	    print
 	else
 	    echo "Warning: unable to properly file $csv"

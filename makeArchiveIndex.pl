@@ -38,7 +38,7 @@ my %seasons = (
 	       u => 'Summer',
 	       f => 'Fall');
 
-open my $arcindex, '>', 'arc.list' or die $ERRNO;
+open my $arcindex, '>', 'templates/arc.list' or die $ERRNO;
 print $arcindex "<h3>\n";
 print $arcindex '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
 print $arcindex "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
@@ -61,7 +61,7 @@ foreach my $key (@indices) {
 
   # Only print index for full-on seasons
   if ($season !~ /tournament/i) {
-    open my $out, '>', "$key.list" or die $ERRNO;
+    open my $out, '>', "templates/$key.list" or die $ERRNO;
     print $out "<h3>\n";
     print $out '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
     print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
