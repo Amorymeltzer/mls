@@ -23,174 +23,174 @@
     </section>
 
     <section class="main-content">
-<span class="header-nav">← <a href="/">Return home</a></span>
-<h3>
-  <a id="statsgraph" class="anchor" href="#statsgraph" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stats graph</h3>
-<a href="http://www.google.com" target="_blank">Google</a>
-<p>Heavily based on Mike Costelloe's <a href="http://mikecostelloe.com/crazyrhythms/" target="_blank">Visual Rhythms</a>.</p>
+      <span class="header-nav">← <a href="/">Return home</a></span>
+      <h3>
+	<a id="statsgraph" class="anchor" href="#statsgraph" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stats graph</h3>
+      <a href="http://www.google.com" target="_blank">Google</a>
+      <p>Heavily based on Mike Costelloe's <a href="http://mikecostelloe.com/crazyrhythms/" target="_blank">Visual Rhythms</a>.</p>
 
-<!-- <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
-<script src="/js/d3.v3.min.js" charset="utf-8"></script>
-<div id="linegraph" class="svg-linegraph">
-  <select id="menu">
-    <option value="R">Runs</option>
-    <option value="H">Hits</option>
-    <option value="2B">Doubles</option>
-    <option value="3B">Triples</option>
-    <option value="HR">Home Runs</option>
-    <!-- <option value="TB">Total Bases</option> -->
-    <option value="RBI">Runs Batted In</option>
-    <option value="BB">Walks</option>
-    <option value="K">Strikeouts</option>
-    <option value="SAC">Sac-flies</option>
-    <option value="AVG">Batting Average</option>
-    <option value="OBP">On-Base Pencentage</option>
-    <option value="SLG">Slugging</option>
-    <option value="OPS">OPS (OBP plus SLG)</option>
-  </select>
+      <!-- <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+      <script src="/js/d3.v3.min.js" charset="utf-8"></script>
+      <div id="linegraph" class="svg-linegraph">
+	<select id="menu">
+	  <option value="R">Runs</option>
+	  <option value="H">Hits</option>
+	  <option value="2B">Doubles</option>
+	  <option value="3B">Triples</option>
+	  <option value="HR">Home Runs</option>
+	  <!-- <option value="TB">Total Bases</option> -->
+	  <option value="RBI">Runs Batted In</option>
+	  <option value="BB">Walks</option>
+	  <option value="K">Strikeouts</option>
+	  <option value="SAC">Sac-flies</option>
+	  <option value="AVG">Batting Average</option>
+	  <option value="OBP">On-Base Pencentage</option>
+	  <option value="SLG">Slugging</option>
+	  <option value="OPS">OPS (OBP plus SLG)</option>
+	</select>
 
-  <script type="text/javascript" src="/js/linegraph.js"></script>
-</div>
-<h3>
-<a id="statstable-s14" class="anchor" href="#statstable-s14" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLS stats, Spring 2014 (archived)</h3>
-<p>Click on the column headers to sort the table.</p>
+	<script type="text/javascript" src="/js/linegraph.js"></script>
+      </div>
+      <h3>
+	<a id="statstable-s14" class="anchor" href="#statstable-s14" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLS stats, Spring 2014 (archived)</h3>
+      <p>Click on the column headers to sort the table.</p>
 
-<script src='/js/tablesort.min.js'></script>
-<script src='/js/tablesort.number.js'></script>
+      <script src='/js/tablesort.min.js'></script>
+      <script src='/js/tablesort.number.js'></script>
 
-<table id='mls-table'>
-<thead>
-<tr>
-<th title='Minor league science, Major league style'>Player</th>
-<th data-sort-method='number' title='At Bats'>AB</th>
-<th data-sort-method='number' title='Runs'>R</th>
-<th data-sort-method='number' title='Hits'>H</th>
-<th data-sort-method='number' title='Doubles'>2B</th>
-<th data-sort-method='number' title='Triples'>3B</th>
-<th data-sort-method='number' title='Home Runs'>HR</th>
-<th data-sort-method='number' title='Runs Batted In'>RBI</th>
-<th data-sort-method='number' title='Walks (bases-on-balls)'>BB</th>
-<th data-sort-method='number' title='Strikeouts'>K</th>
-<th data-sort-method='number' title='Sacrifice flies'>SAC</th>
-<th data-sort-method='number' title='Batting average - H/AB'>AVG</th>
-<th data-sort-method='number' title='On-Base Percentage - (H+BB)/PA'>OBP</th>
-<th data-sort-method='number' title='Sugging percentage - Total bases/AB'>SLG</th>
-<th data-sort-method='number' title='On-base Plus Slugging - OBP+SLG'>OPS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td data-sort='Burch'>Andrew Burch</td>
-<td>8</td>
-<td>8</td>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>0</td>
-<td>3</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0.750</td>
-<td>0.800</td>
-<td>1.250</td>
-<td>2.050</td>
-</tr>
-<tr>
-<td data-sort='Patton'>Oliver Patton</td>
-<td>10</td>
-<td>8</td>
-<td>8</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.800</td>
-<td>0.800</td>
-<td>1.400</td>
-<td>2.200</td>
-</tr>
-<tr>
-<td data-sort='Heuer'>Luke Heuer</td>
-<td>8</td>
-<td>6</td>
-<td>6</td>
-<td>1</td>
-<td>3</td>
-<td>0</td>
-<td>6</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0.750</td>
-<td>0.778</td>
-<td>1.625</td>
-<td>2.403</td>
-</tr>
-<tr>
-<td data-sort='Edwards'>Joe Edwards</td>
-<td>10</td>
-<td>6</td>
-<td>7</td>
-<td>4</td>
-<td>2</td>
-<td>0</td>
-<td>8</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.700</td>
-<td>0.700</td>
-<td>1.500</td>
-<td>2.200</td>
-</tr>
-<tr class='no-sort'>
-<td style='font-weight:bold;'>Total:</td>
-<td style='font-weight:bold;'>36</td>
-<td style='font-weight:bold;'>28</td>
-<td style='font-weight:bold;'>27</td>
-<td style='font-weight:bold;'>13</td>
-<td style='font-weight:bold;'>6</td>
-<td style='font-weight:bold;'>0</td>
-<td style='font-weight:bold;'>23</td>
-<td style='font-weight:bold;'>3</td>
-<td style='font-weight:bold;'>0</td>
-<td style='font-weight:bold;'>0</td>
-<td style='font-weight:bold;'>0.750</td>
-<td style='font-weight:bold;'>0.769</td>
-<td style='font-weight:bold;'>1.444</td>
-<td style='font-weight:bold;'>2.213</td>
-</tr>
-</tbody>
-</table>
+      <table id='mls-table'>
+	<thead>
+	  <tr>
+	    <th title='Minor league science, Major league style'>Player</th>
+	    <th data-sort-method='number' title='At Bats'>AB</th>
+	    <th data-sort-method='number' title='Runs'>R</th>
+	    <th data-sort-method='number' title='Hits'>H</th>
+	    <th data-sort-method='number' title='Doubles'>2B</th>
+	    <th data-sort-method='number' title='Triples'>3B</th>
+	    <th data-sort-method='number' title='Home Runs'>HR</th>
+	    <th data-sort-method='number' title='Runs Batted In'>RBI</th>
+	    <th data-sort-method='number' title='Walks (bases-on-balls)'>BB</th>
+	    <th data-sort-method='number' title='Strikeouts'>K</th>
+	    <th data-sort-method='number' title='Sacrifice flies'>SAC</th>
+	    <th data-sort-method='number' title='Batting average - H/AB'>AVG</th>
+	    <th data-sort-method='number' title='On-Base Percentage - (H+BB)/PA'>OBP</th>
+	    <th data-sort-method='number' title='Sugging percentage - Total bases/AB'>SLG</th>
+	    <th data-sort-method='number' title='On-base Plus Slugging - OBP+SLG'>OPS</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+	    <td data-sort='Burch'>Andrew Burch</td>
+	    <td>8</td>
+	    <td>8</td>
+	    <td>6</td>
+	    <td>2</td>
+	    <td>1</td>
+	    <td>0</td>
+	    <td>3</td>
+	    <td>2</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>0.750</td>
+	    <td>0.800</td>
+	    <td>1.250</td>
+	    <td>2.050</td>
+	  </tr>
+	  <tr>
+	    <td data-sort='Patton'>Oliver Patton</td>
+	    <td>10</td>
+	    <td>8</td>
+	    <td>8</td>
+	    <td>6</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>6</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>0.800</td>
+	    <td>0.800</td>
+	    <td>1.400</td>
+	    <td>2.200</td>
+	  </tr>
+	  <tr>
+	    <td data-sort='Heuer'>Luke Heuer</td>
+	    <td>8</td>
+	    <td>6</td>
+	    <td>6</td>
+	    <td>1</td>
+	    <td>3</td>
+	    <td>0</td>
+	    <td>6</td>
+	    <td>1</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>0.750</td>
+	    <td>0.778</td>
+	    <td>1.625</td>
+	    <td>2.403</td>
+	  </tr>
+	  <tr>
+	    <td data-sort='Edwards'>Joe Edwards</td>
+	    <td>10</td>
+	    <td>6</td>
+	    <td>7</td>
+	    <td>4</td>
+	    <td>2</td>
+	    <td>0</td>
+	    <td>8</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>0</td>
+	    <td>0.700</td>
+	    <td>0.700</td>
+	    <td>1.500</td>
+	    <td>2.200</td>
+	  </tr>
+	  <tr class='no-sort'>
+	    <td style='font-weight:bold;'>Total:</td>
+	    <td style='font-weight:bold;'>36</td>
+	    <td style='font-weight:bold;'>28</td>
+	    <td style='font-weight:bold;'>27</td>
+	    <td style='font-weight:bold;'>13</td>
+	    <td style='font-weight:bold;'>6</td>
+	    <td style='font-weight:bold;'>0</td>
+	    <td style='font-weight:bold;'>23</td>
+	    <td style='font-weight:bold;'>3</td>
+	    <td style='font-weight:bold;'>0</td>
+	    <td style='font-weight:bold;'>0</td>
+	    <td style='font-weight:bold;'>0.750</td>
+	    <td style='font-weight:bold;'>0.769</td>
+	    <td style='font-weight:bold;'>1.444</td>
+	    <td style='font-weight:bold;'>2.213</td>
+	  </tr>
+	</tbody>
+      </table>
 
-<script>
-new Tablesort(document.getElementById('mls-table'));
-</script>
-<h3>
-<a id="archive" class="anchor" href="#archive" aria-hidden="true"><span class="octicon octicon-link"></span></a>Archived data</h3>
-<p><a href="./04.09">04/09/2014</a> &bull; <a href="./04.16">04/16/2014</a></p><h3>
-  <span class="header-nav">← <a href="/">Return home</a></span>
-<footer class="site-footer">
-<!-- <span class="site-footer-owner"> -->
-<span class="site-footer-credits"><a href="https://github.com/Amorymeltzer/mls">mls</a> is maintained by <a href="https://github.com/Amorymeltzer">Amorymeltzer</a>.  This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.  Stats visualizations are based on <a href="https://github.com/MikeCostelloe/crazy-rhythms">Crazy Rhythms</a> by <a href="http://mikecostelloe.com/">Mike Costelloe</a>.</span>
-</footer>
+      <script>
+	new Tablesort(document.getElementById('mls-table'));
+      </script>
+      <h3>
+	<a id="archive" class="anchor" href="#archive" aria-hidden="true"><span class="octicon octicon-link"></span></a>Archived data</h3>
+      <p><a href="./04.09">04/09/2014</a> &bull; <a href="./04.16">04/16/2014</a></p><h3>
+	<span class="header-nav">← <a href="/">Return home</a></span>
+	<footer class="site-footer">
+	  <!-- <span class="site-footer-owner"> -->
+	  <span class="site-footer-credits"><a href="https://github.com/Amorymeltzer/mls">mls</a> is maintained by <a href="https://github.com/Amorymeltzer">Amorymeltzer</a>.  This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.  Stats visualizations are based on <a href="https://github.com/MikeCostelloe/crazy-rhythms">Crazy Rhythms</a> by <a href="http://mikecostelloe.com/">Mike Costelloe</a>.</span>
+	</footer>
 
-</section>
+    </section>
 
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-42380740-3");
-pageTracker._trackPageview();
-} catch(err) {}
-</script>
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-42380740-3");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
 
-</body>
+  </body>
 </html>

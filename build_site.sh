@@ -1,24 +1,6 @@
 #!/usr/bin/env bash
 # build_site.sh by Amory Meltzer
-# Create the proper index page, including sorting
-
-#### Rewrite plans
-## Run multipleWorksheets.pl
-## Generate season index (chart, table)
-## Generate individual gameday index (table)
-## Move tournament results to appropriate place
-## Generate tournament index (csv, table)
-## Generate index, archive page (ordered) with tournaments
-## Games link back to main season; season links to all individual games+tournys
-
-
-### HTML planning
-## masterData gets top, TOC, news, graph, table, archive nav, photos, bottom
-## archive nav lists each season and tournament page
-## each season gets top, navback, graph, table, individual game nav, bottom
-### individual games get top, navback, table, bottom
-## tournament index gets top, navback, tourny links, bottom
-## each tourny gets top, navback, table, bottom
+# Parse data, build index, piece together html
 
 
 function get_help {
@@ -46,8 +28,7 @@ while getopts 'i:ulhH?' opt; do
 done
 
 
-# Is this safe?  Coming from perl, bash's flexibility with variables makes me
-# uncomfortable FIXME TODO
+# Coming from perl, bash's flexibility with variables makes me uncomfortable
 function print() {
     cat $top > $index
     cat $news >> $index
@@ -56,6 +37,10 @@ function print() {
     cat $arc >> $index
     cat $bottom >> $index
     cat templates/site_footer >> $index
+
+    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
+
+    echo "Generated $index"
 }
 
 
@@ -63,6 +48,8 @@ if [ ! "$input" ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
 else
+    # Should probably test to ensure the file is valid first... FIXME TODO
+
     # Main process: parses master excel and produces/calculates all data
     perl multipleWorksheets.pl $input
 
@@ -174,99 +161,6 @@ else
     do
 	mv $csv data/$csv
     done
-
-    echo
-    echo "Site ready!"
-fi
-
-
-
-
-
-exit
-
-
-
-
-
-
-if [ ! $input ]; then
-    echo "Please specify an XLS/XLSX data file"
-    exit 1
-else
-    arcindex="archive/index.html"
-    cat archive/archive.index.top > $arcindex
-
-    # Grab everything...
-    FILES=$(find -E . -regex "./.*mls_.*xlsx?" | grep -v _site)
-    # Sort files chronologically
-    FILES=$(perl sortFiles.pl $FILES)
-
-    # Die if no proper files can be found
-    if [ -z "$FILES" ]; then
-	echo "No valid files given!!!"
-	exit
-    fi
-
-    for excel in $FILES
-    do
-	# find insists on a leading ./ - I generally won't be providing such
-	# things when running this but it's a good thing to watch out for when
-	# sanitizing
-	excel=$(echo $excel | perl -pe 's/^.\///;')
-
-	# Would love to test if it's an xls/x properly but this is close enough
-	if xlscat -i $excel &>/dev/null ; then
-
-	    # Prune file format
-	    file=$(echo $excel | perl -pe 's/\.xlsx?$//;')
-
-	    # Output file with same base name
-	    csv=$(echo $file.csv)
-	    # Convert XLS/XLSX to csv
-	    xlscat -c $excel &>/dev/null > $csv
-	    echo "Generated $csv"
-
-	    # Build the tables
-	    table=$(echo $file.table)
-	    if [ $excel == $input ]; then
-		perl makeMLSTable.pl $upDate $latest $csv $table
-	    else
-		perl makeMLSTable.pl -a $csv $table
-	    fi
-	    echo "Generated $table"
-
-	    # Combine all the html pieces
-	    if [ $excel == $input ]; then
-		index=index.html
-		top=top.html
-		news=news.html
-		bottom=bottom.html
-	    else
-		index=$file.html
-		top=archive_top.html
-		news=/dev/null
-		bottom=archive_bottom.html
-		perl makeArchiveIndex.pl $file $arcindex
-	    fi
-
-	    cat $top > $index
-	    cat $news >> $index
-	    cat $table >> $index
-	    cat $bottom >> $index
-
-	    # Properly indent file
-	    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
-
-	    echo "Generated $index"
-	else
-	    echo "$input is not a proper XLS/XLSX file"
-	    exit 1
-	fi
-    done
-    cat archive/archive.index.bottom >> $arcindex
-    # Properly indent file
-    emacs -batch $arcindex --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
     echo
     echo "Site ready!"
