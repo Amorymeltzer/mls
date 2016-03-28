@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# generate_data.sh by Amory Meltzer
+# build_site.sh by Amory Meltzer
 # Create the proper index page, including sorting
 
 #### Rewrite plans
