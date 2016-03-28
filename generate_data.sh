@@ -55,6 +55,7 @@ function print() {
     cat $table >> $index
     cat $arc >> $index
     cat $bottom >> $index
+    cat site_footer >> $index
 }
 
 
