@@ -22,8 +22,6 @@ while getopts 'i:ulhH?' opt; do
 	l) latest='-l';;
 	h) get_help $0
 	   exit 0;;
-	:) printf "Option -"$opt" requires an argument, try $0 -h\n" >&2
-           exit 1;;
     esac
 done
 
@@ -38,22 +36,26 @@ function print() {
     cat $bottom >> $index
     cat templates/site_footer >> $index
 
+    # Indent html
     emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
     echo "Generated $index"
 }
 
+# Simple error handling
+function dienice() {
+    echo "$1"
+    exit 1
+}
 
-# Some basic checks before getting started
+
+# some basic checks before getting started
 if [ ! "$input" ]; then
-    echo "Please specify an XLS/XLSX data file"
-    exit 1
+    dienice "Please specify an XLS/XLSX data file"
 elif [[ ! -a "$input" ]]; then
-    echo "$input does not exist"
-    exit 1
+    dienice "$input does not exist"
 elif [ ! $(echo "$input" | grep -oE "\.xlsx?$") ]; then
-    echo "$input is not an XLS/XLSX file"
-    exit 1
+    dienice "$input is not an XLS/XLSX file"
 else
     # Main process: parses master excel and produces/calculates all data
     perl multipleWorksheets.pl $input
@@ -69,8 +71,7 @@ else
 
     # Die if no proper files can be found
     if [ -z "$FILES" ]; then
-	echo "No valid files given!!!"
-	exit
+	dienice "No valid files found!!!"
     fi
 
     for csv in $FILES
