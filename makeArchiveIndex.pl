@@ -78,6 +78,7 @@ close $arcindex or die $ERRNO;
 
 # Special sorting subroutine to ensure Spring comes before sUmmer which
 # comes before Fall
+# Most recent seasons first
 sub seasonSort
   {
     my @input = ($a, $b);
@@ -95,5 +96,5 @@ sub seasonSort
     my $bLength = length $b;
 
     # Year, season, tournaments
-    $x <=> $y || $seasonOrderMap{$v} cmp $seasonOrderMap{$w} || $aLength <=> $bLength;
+    $y <=> $x || $seasonOrderMap{$v} cmp $seasonOrderMap{$w} || $aLength <=> $bLength;
   }
