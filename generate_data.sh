@@ -138,9 +138,15 @@ else
 		top=templates/season.index.top
 		bottom=templates/season.index.bottom
 		print
-	    elif [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
+	    elif [ ! $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
-		mv $csv $season/$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
+		# Stash in data directory
+		#mv $csv $season/$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
+		if [[ ! -d $season/data/ ]]; then
+		    mkdir -p $season/data/
+		fi
+
+		mv $csv $season/data/$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
 		continue
 	    fi
 
@@ -154,6 +160,16 @@ else
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
+    done
+
+    # Move lifetime stats as well
+    FILES=$(find -E . -maxdepth 1 -regex "./.{1,3}\.csv" | grep -v _site)
+    if [[ ! -d data/ ]]; then
+	mkdir -p data/
+    fi
+    for csv in $FILES
+    do
+	mv $csv data/$csv
     done
 
     echo

@@ -50,7 +50,7 @@ function linegraph() {
 
     // Data load and two console logs, before and after the data.map
     // Load data directly from directory
-    d3.csv('R.csv', function(error, data) {
+    d3.csv('data/R.csv', function(error, data) {
 
 	// Splits into 10 colors by owner
 	color.domain(d3.keys(data[0]).filter(function(key) { return key !== 'Date'; }));
@@ -150,7 +150,7 @@ function linegraph() {
 	function change() {
 	    var item = this.value;
 
-	    d3.csv(item + '.csv', function(error, data) {
+	    d3.csv('data/' + item + '.csv', function(error, data) {
 
 		data.forEach(function(d) {
 		    d.Date = formatDate(parseDate(d.Date));
