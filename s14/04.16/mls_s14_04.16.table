@@ -2,8 +2,8 @@
 <a id="statstable-s14_04.16" class="anchor" href="#statstable-s14_04.16" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLS stats, Spring 2014 (archived)</h3>
 <p>Click on the column headers to sort the table.</p>
 
-<script src='/tablesort.min.js'></script>
-<script src='/tablesort.number.js'></script>
+<script src='/js/tablesort.min.js'></script>
+<script src='/js/tablesort.number.js'></script>
 
 <table id='mls-table'>
 <thead>
