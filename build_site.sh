@@ -44,12 +44,17 @@ function print() {
 }
 
 
+# Some basic checks before getting started
 if [ ! "$input" ]; then
     echo "Please specify an XLS/XLSX data file"
     exit 1
+elif [[ ! -a "$input" ]]; then
+    echo "$input does not exist"
+    exit 1
+elif [ ! $(echo "$input" | grep -oE "\.xlsx?$") ]; then
+    echo "$input is not an XLS/XLSX file"
+    exit 1
 else
-    # Should probably test to ensure the file is valid first... FIXME TODO
-
     # Main process: parses master excel and produces/calculates all data
     perl multipleWorksheets.pl $input
 
