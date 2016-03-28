@@ -44,7 +44,8 @@ print $arcindex '<a id="archive" class="anchor" href="#archive" aria-hidden="tru
 print $arcindex "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
 print $arcindex '<p>';
 
-foreach my $key (sort seasonSort keys %seas) {
+my @indices = sort seasonSort keys %seas;
+foreach my $key (@indices) {
   # List games chronologically
   @{$seas{$key}} = sort @{$seas{$key}};
   print "$key: @{$seas{$key}}\n";
@@ -56,7 +57,12 @@ foreach my $key (sort seasonSort keys %seas) {
   my $date = '20'.substr $filename, -2, 2;
 
   #  print $arcindex "<p><a href=\"/$key\">$season $date</a></p>";
-  print $arcindex " \&mdash\; <a href=\"/$key\">$season $date</a>";
+  #  print $arcindex " \&bull\; <a href=\"/$key\">$season $date</a>";
+  print $arcindex "<a href=\"/$key\">$season $date</a>";
+
+  if ($key ne $indices[-1]) {
+    print $arcindex ' &bull; ';
+  }
 
   # Only print index for full-on seasons
   if ($season !~ /tournament/i) {
@@ -66,10 +72,16 @@ foreach my $key (sort seasonSort keys %seas) {
     print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
     print $out '<p>';
 
-    foreach (sort @{$seas{$key}}) {
+    my @games = sort @{$seas{$key}};
+    foreach (@games) {
       my ($show) = s/\./\//r;	# More reasonable formatting
       #  print $out "<p><a href=\"./$_\">$show/$date</a></p>";
-      print $out " \&mdash\; <a href=\"./$_\">$show/$date</a>";
+      #  print $out " \&bull\; <a href=\"./$_\">$show/$date</a>";
+      print $out "<a href=\"./$_\">$show/$date</a>";
+
+      if ($_ ne $games[-1]) {
+	print $out ' &bull; ';
+      }
     }
     print $out '</p>';
     close $out or die $ERRNO;
