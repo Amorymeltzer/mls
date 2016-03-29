@@ -76,9 +76,11 @@ function linegraph() {
 
 	// y-Domain is max of stat
 	y.domain([
-	    0,
+	    //0,
+	    d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
 	    d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
 	]);
+
 
 	svg.append('g')
 	    .attr('class', 'x axis')
@@ -171,8 +173,12 @@ function linegraph() {
 		    };
 		});
 
+		// x-Domain is date, evenly spaced
+		x.domain(data.map(function(d) { return d.Date; }));
+
 		// y-Domain to min/max of winPct's
 		y.domain([
+		    //0,
 		    d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
 		    d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
 		]);
@@ -196,7 +202,21 @@ function linegraph() {
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
 		    .transition()
+		    .attr('cx', function(c) { return x(c.Date); })
 		    .attr('cy', function(c) { return y(c.Record); });
+
+		owner.selectAll('circle')
+		    .data(function(d) { return d.values; })
+		    .enter().append('circle')
+		    .transition()
+		    .attr('r', 5)
+		    .attr('cx', function(c) { return x(c.Date); })
+		    .attr('cy', function(c) { return y(c.Record); })
+		    .attr('fill', function(d) { return color(this.parentNode.__data__.name); });
+
+		owner.selectAll('circle')
+		    .data(function(d) { return d.values; })
+		    .exit().remove();
 
 		// Update labels
 		owner.select(".labels")
