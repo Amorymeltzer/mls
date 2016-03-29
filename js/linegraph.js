@@ -55,8 +55,11 @@ function linegraph() {
 	// Splits into 10 colors by owner
 	color.domain(d3.keys(data[0]).filter(function(key) { return key !== 'Date'; }));
 
+	// Don't format opening values of zero
 	data.forEach(function(d) {
-	    d.Date = formatDate(parseDate(d.Date));
+	    if (d.Date !== 'Start') {
+		d.Date = formatDate(parseDate(d.Date));
+	    }
 	});
 
 	var owners = color.domain().map(function(name) {
@@ -152,8 +155,11 @@ function linegraph() {
 
 	    d3.csv('data/' + item + '.csv', function(error, data) {
 
+		// Don't format opening values of zero
 		data.forEach(function(d) {
-		    d.Date = formatDate(parseDate(d.Date));
+		    if (d.Date !== 'Start') {
+			d.Date = formatDate(parseDate(d.Date));
+		    }
 		});
 
 		var owners = color.domain().map(function(name) {
