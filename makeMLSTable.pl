@@ -11,7 +11,7 @@ use Getopt::Std;
 
 # Parse commandline options
 my %opts = ();
-getopts('uaglh',\%opts);
+getopts('uagh',\%opts);
 
 if ($opts{h} || @ARGV == 0 || @ARGV > 2) {
   usage();
@@ -70,7 +70,7 @@ close $in or die $ERRNO;
 
 # Date parsing
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
-$year += 1900;		# Convert to 4-digit year
+$year += 1900;			# Convert to 4-digit year
 my $updatedDate;
 # Get proper date when updating, default to old date
 if ($opts{u} && !$archive) {
@@ -145,11 +145,6 @@ open my $out, '>', "$output" or die $ERRNO;
 print $out "<h3>\n";
 print $out '<a id="statstable" class="anchor" href="#statstable" aria-hidden="true">';
 print $out '<span class="octicon octicon-link"></span>';
-
-#  my $status = $opts{l} ? 'latest season' : 'ongoing';
-#$status = $opts{l} ? 'latest season' : 'ongoing';
-#$status = 'archived' if $archive;
-#  print $out "</a>MLS stats, $season $date ($status)</h3>\n";
 print $out "</a>MLS stats, $status</h3>\n";
 
 # Sortify
@@ -240,7 +235,6 @@ Usage: $PROGRAM_NAME [-uah] mls_data.csv [output.html]
       -u Update the last-modified date of the index page
       -a Indicate input is a season file, treat differently
       -g Indicate input is a game file, treat differently
-      -l Offseason message
       -h Print this help message
 USAGE
     return;

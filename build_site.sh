@@ -6,11 +6,10 @@
 function get_help {
     cat <<END_HELP
 
-Usage: $(basename $0) -i <current_season.xlsx> [-ulh]
+Usage: $(basename $0) -i <current_season.xlsx> [-uh]
 
   -i		Specify input XLS/XLSX data file.  Required.
   -u		Pass -u to makeMLSTable.pl (updates 'current as of' date)
-  -l		Pass -l to makeMLSTable.pl (latest, not current, season)
   -h		this help
 END_HELP
 }
@@ -19,7 +18,6 @@ while getopts 'i:ulhH?' opt; do
     case $opt in
 	i) input=$OPTARG;;
 	u) upDate='-u';;
-	l) latest='-l';;
 	h) get_help $0
 	   exit 0;;
     esac
