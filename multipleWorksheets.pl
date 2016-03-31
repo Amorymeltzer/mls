@@ -152,7 +152,12 @@ foreach (sort keys %seasonsList) {
 	  $cell = calcStats($c,$player,'total',\%playerData);
 	  #  $playerData{$player}{'total'}[$c-2] = $cell;
 	  $playerData{$player}{'total'}[$c-$offset] = $cell;
-	  #  $masterData{$player}{'total'}[$c-2] = $cell if $tournament != 1;
+
+	  if ($masterData{$player}{'total'}[$c-$offset]) {
+	    $cell = calcStats($c,$player,'total',\%masterData);
+	  } else {
+	    $cell = calcStats($c,$player,'total',\%playerData);
+	  }
 	  $masterData{$player}{'total'}[$c-$offset] = $cell if $tournament != 1;
 
 	  # Calculate for the given gameDate to append
