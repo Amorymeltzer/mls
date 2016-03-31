@@ -110,6 +110,9 @@ foreach (sort keys %seasonsList) {
     open my $gameCsv, '>', "$gameOutfile" or die $ERRNO;
     print $gameCsv join q{,}, @stats;
 
+    # In order to properly correlate two arrays with different indices, one of
+    # which changes halfway through, we need a way to keep track.  Starts at
+    # 2, changes to 1 halfway through, resets to 2 on a new row.
     my $offset = 2;
     my $player;
     # Build player-data hash (of hash of arrays)
@@ -125,9 +128,8 @@ foreach (sort keys %seasonsList) {
 	  $player = $cell;	# Define current player for entire row, saves
                                 # issue of duplicating and polluting @players
 
-	  # Build player array; really just for sorting purposes when dumping
-	  # out the full-scale player database.  Only append if it's a new
-	  # player, otherwise we should just clear-out the current game array
+	  # Build player array.  Only append if it's a new player, otherwise
+	  # we should just clear-out the current game array
 	  if (! $playerData{$cell}) {
 	    push @players, $cell;
 	  } else {
@@ -139,20 +141,17 @@ foreach (sort keys %seasonsList) {
 	    push @masterPlayers, $cell;
 	  }
 
-
 	  $offset = 2;		# Reset on new row
-
 	  next;
 	}
 
-
-	#print "$c $gameDate $player $offset $cell\n";
 	if ($c >= 12) {
 	  # Calculate total first, so we don't overlap
 	  $cell = calcStats($c,$player,'total',\%playerData);
-	  #  $playerData{$player}{'total'}[$c-2] = $cell;
 	  $playerData{$player}{'total'}[$c-$offset] = $cell;
 
+	  # I want to use %masterData for calculations, but we have to first
+	  # establish that data before we can use it.
 	  if ($masterData{$player}{'total'}[$c-$offset]) {
 	    $cell = calcStats($c,$player,'total',\%masterData);
 	  } else {
@@ -164,40 +163,34 @@ foreach (sort keys %seasonsList) {
 	  $cell = calcStats($c,$player,$gameDate,\%playerData);
 	} else {
 	  if ($gameData{'cell'}[$c][$r]) {
-	    #  $playerData{$player}{'total'}[$c-2] += $cell;
 	    $playerData{$player}{'total'}[$c-$offset] += $cell;
-	    #  $masterData{$player}{'total'}[$c-2] += $cell if $tournament != 1;
 	    $masterData{$player}{'total'}[$c-$offset] += $cell if $tournament != 1;
 	  } else {
-	    #  $playerData{$player}{'total'}[$c-2] += 0;
 	    $playerData{$player}{'total'}[$c-$offset] += 0;
-	    #  $masterData{$player}{'total'}[$c-2] += 0 if $tournament != 1;
 	    $masterData{$player}{'total'}[$c-$offset] += 0 if $tournament != 1;
 	  }
 	}
 	push @{$playerData{$player}{$gameDate}}, $cell;
 	push @{$masterData{$player}{$gameDate}}, $cell if $tournament != 1;
 
-
-
 	print $gameCsv ",$cell";
 
-	if ($c == 7) {		# HR
+	# Build Total Bases stat.  Basically, doing the above for HR, run
+	# through a special scenario to build up TB and insert it into the
+	# array.  Then, of course, we have to increment the offset to keep
+	# everybody on the same page.
+	if ($c == 7) {
+	  $offset = 1;
 	  $cell = $playerData{$player}{$gameDate}[2] + $playerData{$player}{$gameDate}[3] + (2 * $playerData{$player}{$gameDate}[4]) + (3 * $playerData{$player}{$gameDate}[5]);
 
-	  $offset = 1;
-
 	  $playerData{$player}{'total'}[$c-$offset] += $cell;
-	  $masterData{$player}{'total'}[$c-$offset] += $cell if $tournament != 1;
-
 	  push @{$playerData{$player}{$gameDate}}, $cell;
-	  push @{$masterData{$player}{$gameDate}}, $cell if $tournament != 1;
-
+	  if ($tournament != 1) {
+	    $masterData{$player}{'total'}[$c-$offset] += $cell;
+	    push @{$masterData{$player}{$gameDate}}, $cell;
+	  }
 	  print $gameCsv ",$cell";
 	}
-
-
-
       }
     }
     close $gameCsv or die $ERRNO;
@@ -230,8 +223,7 @@ foreach (sort keys %seasonsList) {
     print $stat join q{,}, @players[0..$#players-1]; # Don't include totals
     print $stat "\n";
     # Set baseline of zero for cumulative stats
-    #  if ($i < 11) {
-    if ($i < 12) {		# TB#####
+    if ($i < 12) {
       my $length = $#players;
       print $stat 'Start,';
       print $stat join q{,}, (0) x $length;
@@ -242,9 +234,8 @@ foreach (sort keys %seasonsList) {
       print $stat "$dates[$j]";
       foreach my $dude (@players[0..$#players-1]) {
 	# Awkward kludge to add data, destructive but at the end so not an issue
-	#  if ($i >= 11) {
-	if ($i >= 12) {		# TB#####
-	  #  $playerData{$dude}{$dates[$j]}[$i-1] = calcStats($i+1,$dude,$dates[$j],\%playerData);
+	if ($i >= 12) {
+	  # $i is different than $c above thanks to $offset
 	  $playerData{$dude}{$dates[$j]}[$i-1] = calcStats($i,$dude,$dates[$j],\%playerData);
 	} else {
 	  $playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
@@ -278,7 +269,6 @@ foreach my $i (1..scalar @stats - 1) {
   print $stat join q{,}, @masterPlayers[0..$#masterPlayers-1]; # Don't include totals
   print $stat "\n";
   # Set baseline of zero for cumulative stats
-  #  if ($i < 11) {
   if ($i < 12) {
     my $length = $#masterPlayers;
     print $stat 'Start,';
@@ -290,9 +280,8 @@ foreach my $i (1..scalar @stats - 1) {
     print $stat "$masterDates[$j]";
     foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) { # Ignore totals
       # Awkward kludge to add data, destructive but at the end so not an issue
-      #  if ($i >= 11) {
       if ($i >= 12) {
-	#  $masterData{$dude}{$masterDates[$j]}[$i-1] = calcStats($i+1,$dude,$masterDates[$j],\%masterData);
+	# $i is different than $c above thanks to $offset
 	$masterData{$dude}{$masterDates[$j]}[$i-1] = calcStats($i,$dude,$masterDates[$j],\%masterData);
       } else {
 	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
@@ -347,9 +336,6 @@ sub calcStats
 
     ## Repeatedly used for calculations, convenient (
     # PA=AB+BB+SAC
-    #  my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[7] + ${$playerRef}{$player}{$chart}[9];
-
-    # TB #######
     my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
     # TB=H+2B+2*3B+3*4B
     my $TB = ${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[3] + (2 * ${$playerRef}{$player}{$chart}[4]) + (3 * ${$playerRef}{$player}{$chart}[5]);
@@ -357,21 +343,13 @@ sub calcStats
     if ($c == 12) {		# AVG = H/AB
       $cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      #  $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[7]) / $PA;
-
-
-      # TB######
       $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
     } elsif ($c == 14) {	# SLG = Total bases/AB
       $cell = $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 15) {	# OPS = OBP+SLG
-      #$cell = ${$playerRef}{$player}{$chart}[11] + ${$playerRef}{$player}{$chart}[12];
-
-      # TB#######
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
     }
-    #print "$c $player $chart $cell\n";
-    return sprintf '%.3f', $cell; # Prettify to three decimals
+    return sprintf '%.3f', $cell; #Prettify to three decimals
   }
 
 
