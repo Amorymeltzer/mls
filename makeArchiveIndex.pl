@@ -41,7 +41,7 @@ my %seasons = (
 open my $arcindex, '>', 'templates/arc.list' or die $ERRNO;
 print $arcindex "<h3>\n";
 print $arcindex '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
-print $arcindex "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
+print $arcindex "<span class=\"octicon octicon-link\"></span></a>Individual season data</h3>\n";
 print $arcindex '<p>';
 
 my @indices = sort seasonSort keys %seas;
@@ -64,7 +64,7 @@ foreach my $key (@indices) {
     open my $out, '>', "templates/$key.list" or die $ERRNO;
     print $out "<h3>\n";
     print $out '<a id="archive" class="anchor" href="#archive" aria-hidden="true">';
-    print $out "<span class=\"octicon octicon-link\"></span></a>Archived data</h3>\n";
+    print $out "<span class=\"octicon octicon-link\"></span></a>Individual game data</h3>\n";
     print $out '<p>';
 
     my @games = sort @{$seas{$key}};
