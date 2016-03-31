@@ -179,6 +179,7 @@ function linegraph() {
 		x.domain(data.map(function(d) { return d.Date; }));
 
 		// y-Domain to max of stat
+		// Extend Y-axis both ways for non-zero based traits
 		if (item == 'AVG' || item == 'OPS' || item == 'SLG' || item == 'OBP') {
 		    y.domain([
 			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),

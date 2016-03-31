@@ -21,9 +21,6 @@
 - Link to schedule on main page?
 #### JS
 - Fix mouseover tooltip on final newly-created points
-- If item/name/stat === AVG/OPS/etc y.domain min=min*.8, max=max*1.2
-- Else: min=min/0, max=max*1.2
-- Use var buffer?  0.2 apparently...
 - Section headers on season pages?  <script>document.write(location.pathname)</script>
 #### HTML rewrite
 - Chart text
