@@ -92,21 +92,42 @@ if ($opts{u} && !$archive) {
 
 
 # Allow for noncanonical filenames (mls_master, per-game stats) FIXME TODO
-my $filename = $input;
-my %seasons = (
-	       s => 'Spring',
-	       u => 'Summer',
-	       f => 'Fall');
-my ($season,$date) = (q{},q{});	# WOW this is ugly FIXME TODO
-
+#  my $status = $opts{l} ? 'latest season' : 'ongoing';
+my $status = 'archived';	# Likely default
 if ($input =~ m/mls_t?[suf]\d\d/) {
-  $filename =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/;
+  my %seasons = (
+		 s => 'Spring',
+		 u => 'Summer',
+		 f => 'Fall');
 
-  my ($kludge) = $filename =~ s/t?([suf]\d\d.*)/$1/r;
-  $season = 'Tournament ' if $filename =~ /^t/;
+  #  my ($filename) = $input =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/r;
+  my ($kludge) = $input =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/r;
+
+  my $season;
+  $season = 'Tournament ' if $kludge =~ /^t/;
+
+  $kludge =~ s/t?([suf]\d\d.*)/$1/;
 
   $season .= $seasons{substr $kludge, 0, 1};
-  $date = '20'.substr $kludge, 1, 2;
+  my $date = '20'.substr $kludge, 1, 2;
+
+
+  # Date parsing
+  my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
+  $year += 1900;		# Convert to 4-digit year
+
+  # Attempt to divine current season
+  # Not exact, esp. around June
+  my $curSeason = ($mon < 8 && $mon > 4) ? 'summer' : 'fall';
+  $curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
+
+  if ($curSeason eq lc $season && $date eq $year) {
+    $status = 'ongoing';
+  }
+
+  $status = "$season $date ($status)";
+} else {
+  $status = 'all-time';
 }
 # Need to get date and season info right for table html FIXME TODO
 
@@ -122,16 +143,18 @@ while (<DATA>) {
 
 open my $out, '>', "$output" or die $ERRNO;
 
-if (!$archive) {
-  $filename = 'latest';
-}
+# if (!$archive) {
+#   $filename = 'latest';
+# }
 print $out "<h3>\n";
 print $out '<a id="statstable" class="anchor" href="#statstable" aria-hidden="true">';
 print $out '<span class="octicon octicon-link"></span>';
 
-my $status = $opts{l} ? 'latest season' : 'ongoing';
-$status = 'archived' if $archive;
-print $out "</a>MLS stats, $season $date ($status)</h3>\n";
+#  my $status = $opts{l} ? 'latest season' : 'ongoing';
+#$status = $opts{l} ? 'latest season' : 'ongoing';
+#$status = 'archived' if $archive;
+#  print $out "</a>MLS stats, $season $date ($status)</h3>\n";
+print $out "</a>MLS stats, $status</h3>\n";
 
 # Sortify
 print $out '<p>Click on the column headers to sort the table.';
