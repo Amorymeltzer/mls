@@ -242,6 +242,7 @@ Player Minor league science, Major league style
   2B Doubles
   3B Triples
   HR Home Runs
+  TB Total Bases
   RBI Runs Batted In
   BB Walks (bases-on-balls)
   K Strikeouts
