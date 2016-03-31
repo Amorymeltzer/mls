@@ -1,12 +1,9 @@
 ### ToDo
 - Convert to python?
 - Individual column sorting? https://github.com/tristen/tablesort/pull/97
-- Change summer u to m?  For sorting (ie everything before t)
-- Propagate use English esp $PROGRAM_NAME for $0
 #### Future design
 - Front with brief splash, link to current/ongoing past stats
 - 1 or 2 photos, link photos page?
-- Move all stats to /stats, archive to /stats/archive
 - More content! :+1: :100: :+1:
 #### Stats
 - Per-game data, graph if played more than one game (cut down on 1-off anomalies) (20% threshold?)
@@ -19,10 +16,18 @@
 - Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
 #### Revamp plan
 - Stats for individual games, one per worksheet (google doc, name: Season Year MM/DD))
-- Insert TB or not?
 - Set axis for calculated stats to start at 0?  Should start at zero for everyone?
 - PA/AB/etc. checks for division by zero, proper sums (H+K+BB+SAC<PA, etc.)
+- Link to schedule on main page?
+#### JS
+- Fix mouseover tooltip on final newly-created points
+- If item/name/stat === AVG/OPS/etc y.domain min=min*.8, max=max*1.2
+- Else: min=min/0, max=max*1.2
+- Use var buffer?  0.2 apparently...
 #### HTML rewrite
+- Chart text
+- Rewrite photos/bottom
+- Propagate TOC? -> game index? Not sure...
 - Why so small?  Font size shrunk but the table is tiny
 - Maybe beef up font size?  Or just table size?
 - Might be jekyll artifact, check when live
