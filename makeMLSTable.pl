@@ -139,9 +139,6 @@ while (<DATA>) {
 
 open my $out, '>', "$output" or die $ERRNO;
 
-# if (!$archive) {
-#   $filename = 'latest';
-# }
 print $out "<h3>\n";
 print $out '<a id="statstable" class="anchor" href="#statstable" aria-hidden="true">';
 print $out '<span class="octicon octicon-link"></span>';

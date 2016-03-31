@@ -106,7 +106,7 @@ else
 		arc=templates/$season.list
 	    fi
 	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
-	    perl makeMLSTable.pl $csv $table
+	    perl makeMLSTable.pl $upDate $csv $table
 	fi
 
 	# Check each folder individually, avoid overwriting any data
