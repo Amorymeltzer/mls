@@ -7,6 +7,7 @@
 - More content! :+1: :100: :+1:
 #### Stats
 - Per-game data, graph if played more than one game (cut down on 1-off anomalies) (20% threshold?)
+- Calculate normalized stats?  3HR in 2 games versus 4HR in 5 games?  Not sure how this would work...
 - Team stats (RF/RA), record, etc.?
 - More sabermetrics?  wOBA, others?
 - Stat predictions, goals?  PCA plots? -> Joe
