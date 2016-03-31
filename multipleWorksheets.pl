@@ -249,7 +249,7 @@ foreach (sort keys %seasonsList) {
 }
 
 ## Dump lifetime totals (same format as season totals)
-open my $masterCsv, '>', 'masterData.csv' or die $ERRNO;
+open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
 print $masterCsv "\n";
 foreach my $dude (@masterPlayers) {

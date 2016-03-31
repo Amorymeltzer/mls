@@ -67,7 +67,7 @@ else
 
     # Grab everything...
     FILES=$(find -E . -maxdepth 1 -regex "./.*_t?[sfu][0-9][0-9].*csv" | grep -v _site)
-    FILES="$FILES ./masterData.csv" # Add lifetime totals
+    FILES="$FILES ./mls_master.csv" # Add lifetime totals
 
     # Die if no proper files can be found
     if [ -z "$FILES" ]; then
@@ -107,7 +107,7 @@ else
 		# Set here to avoid tourny errors FIXME TODO
 		arc=templates/$season.list
 	    fi
-	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
+	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
 	    perl makeMLSTable.pl $csv $table
 	fi
 
@@ -147,13 +147,16 @@ else
 	    fi
 
 	    mv $csv $table $season
-	elif [ $(echo $csv | grep -oE "masterData.csv") ]; then
+	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
 	    top=templates/top
 	    news=templates/news
 	    arc=templates/arc.list
 	    bottom=templates/bottom
 	    print
 
+	    if [[ ! -d data/ ]]; then
+		mkdir -p data/
+	    fi
 	    mv $csv $table data/
 	else
 	    echo "Warning: unable to properly file $csv"
@@ -162,9 +165,6 @@ else
 
     # Move lifetime stats as well
     FILES=$(find -E . -maxdepth 1 -regex "./.{1,3}\.csv" | grep -v _site)
-    if [[ ! -d data/ ]]; then
-	mkdir -p data/
-    fi
     for csv in $FILES
     do
 	mv $csv data/$csv
