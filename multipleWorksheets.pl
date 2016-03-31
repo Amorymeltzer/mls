@@ -56,12 +56,14 @@ my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS);
 my %masterData;
 my @masterPlayers;
 my @masterDates;
+my %masterPlayerCount;		# Count times a player is used
 
 foreach (sort keys %seasonsList) {
   print "seas: $_\t items: @{$seasonsList{$_}}\n";
   my %playerData;    # Hash holding per-player stat data [total, current game]
   my @players;	     # Player names
   my @dates;	     # Dates of play
+  my %playerCount;   # Count time a player is used
 
   # Ternary ?: ($a = $test ? $b : $c;)
   # a is b if test, c if not
@@ -122,13 +124,18 @@ foreach (sort keys %seasonsList) {
 	  # we should just clear-out the current game array
 	  if (! $playerData{$cell}) {
 	    push @players, $cell;
+	    $playerCount{$cell} = 1; # FIXME TODO Add a count if we've seen him
 	  } else {
 	    @{$playerData{$cell}{$gameDate}} = ();
+	    $playerCount{$cell}++; # FIXME TODO
 	  }
 
 	  # Do the same for the master list of players
 	  if ($tournament != 1 && !$masterData{$cell}) {
 	    push @masterPlayers, $cell;
+	    $masterPlayerCount{$cell} = 1; # FIXME TODO Add a count if we've seen him
+	  } elsif ($tournament != 1 && $masterData{$cell}) {
+	    $masterPlayerCount{$cell}++; # FIXME TODO
 	  }
 
 	  $offset = 2;		# Reset on new row
@@ -353,4 +360,19 @@ sub schwartz
       sort { $a->[1] cmp $b->[1] }
       map {[$_, join q{}, (split /\./)[2,0,1]]}
       @{$ref};
+  }
+
+
+sub noScrubs
+  {
+    my ($countRef,$playerRef) = @_;
+    my @return;
+    # Get maximum value of games, should probably just count up size of season
+    # hash or whatever FIXME TODO
+    my $max = (sort {$b <=> $a} values %{$countRef})[0];
+    foreach (@{$playerRef}) {
+      push @return, $_ if (${$countRef}{$_} / $max >= 0.2);
+    }
+
+    return @return;
   }
