@@ -12,7 +12,7 @@ use Spreadsheet::Read;
 
 
 if (@ARGV != 1) {
-  print "Usage: multipleWorksheets.pl MLS_Stats.xlsx\n";
+  print "Usage: $PROGRAM_NAME MLS_Stats.xlsx\n";
   exit;
 }
 
@@ -333,17 +333,17 @@ sub calcStats
   {
     my ($c,$player,$chart,$playerRef) = @_;
     my $cell;			# Hold calculated stat
-    ## Repeatedly used for calculations, convenient (
-    # PA=AB+BB+SAC
-    my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
-    # TB=H+2B+2*3B+3*4B
-    # Calculated previously
-    my $TB = ${$playerRef}{$player}{$chart}[6];
+
     if ($c == 12) {		# AVG = H/AB
       $cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
+      # PA=AB+BB+SAC
+      my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
       $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
     } elsif ($c == 14) {	# SLG = Total bases/AB
+      # TB=H+2B+2*3B+3*4B
+      # Calculated previously
+      my $TB = ${$playerRef}{$player}{$chart}[6];
       $cell = $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 15) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];

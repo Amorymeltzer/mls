@@ -225,6 +225,7 @@ Usage: $PROGRAM_NAME [-uah] mls_data.csv [output.html]
       -l Offseason message
       -h Print this help message
 USAGE
+    return;
   }
 
 
