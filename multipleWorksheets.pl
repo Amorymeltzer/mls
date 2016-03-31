@@ -360,24 +360,6 @@ sub schwartz
     @{$ref} =
       map {$_->[0]}
       sort { $a->[1] cmp $b->[1] }
-      map {[$_, join('', (split '\.', $_)[2,0,1])]}
+      map {[$_, join q{}, (split /\./)[2,0,1]]}
       @{$ref};
-  }
-
-
-#### Useful? FIXME TODO
-# Any previous seasons should be renamed/archived
-sub archiveFiles
-  {
-    my $name = shift;
-    ($name) = split /\./, $name; # Listification takes first item
-    # Year
-    my $curYear = '20'.substr $name, -2, 2;
-    # Season
-    my $season = substr $name, -3, 1;
-    # Also tournament
-    if ($name =~ /t/ || $curYear != $year || $season ne $seasons{$curSeason}) {
-      $name = 'archive/'.$name;
-    }
-    return $name.'.xlsx';
   }
