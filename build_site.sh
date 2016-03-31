@@ -153,6 +153,8 @@ else
 	    arc=templates/arc.list
 	    bottom=templates/bottom
 	    print
+
+	    mv $csv $table data/
 	else
 	    echo "Warning: unable to properly file $csv"
 	fi
