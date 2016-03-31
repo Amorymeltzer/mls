@@ -25,15 +25,6 @@ my %seasons = (
 	       summer => 'u',
 	       fall => 'f');
 
-# Date parsing
-my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
-$year += 1900;			# Convert to 4-digit year
-
-# Attempt to divine current season
-# Not exact, esp. around June
-my $curSeason = ($mon < 8 && $mon > 4) ? 'summer' : 'fall';
-$curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
-
 # Iterate over each sheet
 my $sheetNum = $book->[0]{'sheets'};
 my %seasonsList;		# Unique list of seasons that need parsing
@@ -79,8 +70,8 @@ foreach (sort keys %seasonsList) {
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
     my $date = shift @{$seasonsList{$_}};
-    my ($season,$syear) = split / /;
-    my $gameDate = "$date.".substr $syear, 2;
+    my ($season,$year) = split / /;
+    my $gameDate = "$date.".substr $year, 2;
 
     $gameDate = $date if $tournament == 1;
 
@@ -93,7 +84,7 @@ foreach (sort keys %seasonsList) {
     if ($tournament == 1) {	# Tourny names are parsed differently
       %gameData = %{$book->[$book->[0]{sheet}{"$date"}]};
     } else {
-      %gameData = %{$book->[$book->[0]{sheet}{"$season $syear $date"}]};
+      %gameData = %{$book->[$book->[0]{sheet}{"$season $year $date"}]};
     }
 
 

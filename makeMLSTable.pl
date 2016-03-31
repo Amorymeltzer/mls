@@ -68,13 +68,14 @@ close $in or die $ERRNO;
 #   warn "Warning: AB+BB+SAC and PA are NOT equal\nMissing data?\n";
 # }
 
-# Get proper date when updating, default to old date
+# Date parsing
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
+$year += 1900;		# Convert to 4-digit year
 my $updatedDate;
+# Get proper date when updating, default to old date
 if ($opts{u} && !$archive) {
   my @months = qw (January February March April May June July August September
 		   October November December);
-  my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
-  $year += 1900;		# Convert to 4-digit year
   $updatedDate = "$months[$mon] $mday, $year";
 
   # Save for next time
@@ -100,7 +101,6 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
 		 u => 'Summer',
 		 f => 'Fall');
 
-  #  my ($filename) = $input =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/r;
   my ($kludge) = $input =~ s/^(?:archive\/)?mls_(t?[suf]1\d(_\d\d\.\d\d)?)\.csv$/$1/r;
 
   my $season;
@@ -112,16 +112,12 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
   my $date = '20'.substr $kludge, 1, 2;
 
 
-  # Date parsing
-  my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
-  $year += 1900;		# Convert to 4-digit year
-
   # Attempt to divine current season
   # Not exact, esp. around June
-  my $curSeason = ($mon < 8 && $mon > 4) ? 'summer' : 'fall';
-  $curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'spring';
+  my $curSeason = ($mon < 8 && $mon > 4) ? 'Summer' : 'Fall';
+  $curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'Spring';
 
-  if ($curSeason eq lc $season && $date eq $year) {
+  if ($curSeason eq $season && $date eq $year) {
     $status = 'ongoing';
   }
 
