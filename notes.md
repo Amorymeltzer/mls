@@ -27,7 +27,6 @@
 #### HTML rewrite
 - Chart text
 - Rewrite photos/bottom
-- Propagate TOC? -> game index? Not sure...
 - Why so small?  Font size shrunk but the table is tiny
 - Maybe beef up font size?  Or just table size?
 - Might be jekyll artifact, check when live

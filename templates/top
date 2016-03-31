@@ -29,8 +29,8 @@
 	<ul>
 	  <li><a href='#newsfeed'>News</a></li>
 	  <li><a href='#statsgraph'>Stats graph</a></li>
-	  <li><a href='#statstable'>Table</a></li>
-	  <li><a href='#archive'>Archived data</a></li>
-	  <li><a href='#photos'>Photos</a></li>
+	  <li><a href='#statstable'>Stats table</a></li>
+	  <li><a href='#archive'>Season data</a></li>
+	  <li><a href='#photos'>Photo gallery</a></li>
 	</ul>
       </nav>

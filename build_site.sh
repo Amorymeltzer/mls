@@ -131,11 +131,17 @@ else
 		index=$season/$index
 		top=templates/season.index.top
 		bottom=templates/season.index.bottom
+
+		# Include TOC on season index, not tournaments
+		# Cleanup, this is all so awkward FIXME TODO
+		if [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
+		    news=templates/season.news
+		fi
+
 		print
 	    elif [ ! $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
 		# Stash in data directory
-		#mv $csv $season/$(echo $csv | sed -E 's/_[sfu][0-9][0-9]//')
 		if [[ ! -d $season/data/ ]]; then
 		    mkdir -p $season/data/
 		fi

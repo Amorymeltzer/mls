@@ -93,7 +93,6 @@ if ($opts{u} && !$archive) {
 
 
 # Allow for noncanonical filenames (mls_master, per-game stats) FIXME TODO
-#  my $status = $opts{l} ? 'latest season' : 'ongoing';
 my $status = 'archived';	# Likely default
 if ($input =~ m/mls_t?[suf]\d\d/) {
   my %seasons = (
@@ -121,9 +120,9 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
     $status = 'ongoing';
   }
 
-  $status = "$season $date ($status)";
+  $status = "$season $date stats table ($status)";
 } else {
-  $status = 'all-time';
+  $status = 'Lifetime stats table';
 }
 # Need to get date and season info right for table html FIXME TODO
 
@@ -142,7 +141,7 @@ open my $out, '>', "$output" or die $ERRNO;
 print $out "<h3>\n";
 print $out '<a id="statstable" class="anchor" href="#statstable" aria-hidden="true">';
 print $out '<span class="octicon octicon-link"></span>';
-print $out "</a>MLS stats, $status</h3>\n";
+print $out "</a>$status</h3>\n";
 
 # Sortify
 print $out '<p>Click on the column headers to sort the table.';
