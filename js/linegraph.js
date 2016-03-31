@@ -47,6 +47,8 @@ function linegraph() {
 	.x(function(d) { return x(d.Date); })
 	.y(function(d) { return y(d.Record); });
 
+    // Define a buffer for the Y-axis
+    var buffer = 0.05;
 
     // Data load and two console logs, before and after the data.map
     // Load data directly from directory
@@ -74,11 +76,10 @@ function linegraph() {
 	// x-Domain is date, evenly spaced
 	x.domain(data.map(function(d) { return d.Date; }));
 
-	// y-Domain is max of stat
+	// y-Domain is max of stat, default to start at 0
 	y.domain([
-	    //0,
-	    d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
-	    d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
+	    0,
+	    (1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
 	]);
 
 
@@ -176,12 +177,18 @@ function linegraph() {
 		// x-Domain is date, evenly spaced
 		x.domain(data.map(function(d) { return d.Date; }));
 
-		// y-Domain to min/max of winPct's
-		y.domain([
-		    //0,
-		    d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
-		    d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
-		]);
+		// y-Domain to max of stat
+		if (item == 'AVG' || item == 'OPS' || item == 'SLG' || item == 'OBP') {
+		    y.domain([
+			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
+			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
+		    ]);
+		} else {
+		    y.domain([
+			0,
+			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
+		    ]);
+		}
 
 		svg.select('.x.axis')
 		    .call(xAxis);
