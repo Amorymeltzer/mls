@@ -27,7 +27,7 @@
 - Section headers on season pages?  <script>document.write(location.pathname)</script>
 #### HTML rewrite
 - Chart text
-- Rewrite photos/bottom
+- Update news for start of season!
 - Why so small?  Font size shrunk but the table is tiny
 - Maybe beef up font size?  Or just table size?
 - Might be jekyll artifact, check when live
