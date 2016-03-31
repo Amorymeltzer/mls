@@ -91,7 +91,7 @@ if ($opts{u} && !$archive) {
 }
 
 
-# Allow for noncanonical filenames (masterdata, per-game stats) FIXME TODO
+# Allow for noncanonical filenames (mls_master, per-game stats) FIXME TODO
 my $filename = $input;
 my %seasons = (
 	       s => 'Spring',
@@ -126,8 +126,7 @@ if (!$archive) {
   $filename = 'latest';
 }
 print $out "<h3>\n";
-print $out "<a id=\"statstable-$filename\" class=\"anchor\" ";
-print $out "href=\"#statstable-$filename\" aria-hidden=\"true\">";
+print $out '<a id="statstable" class="anchor" href="#statstable" aria-hidden="true">';
 print $out '<span class="octicon octicon-link"></span>';
 
 my $status = $opts{l} ? 'latest season' : 'ongoing';
