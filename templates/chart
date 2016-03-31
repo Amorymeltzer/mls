@@ -12,7 +12,7 @@
     <option value="2B">Doubles</option>
     <option value="3B">Triples</option>
     <option value="HR">Home Runs</option>
-    <!-- <option value="TB">Total Bases</option> -->
+    <option value="TB">Total Bases</option>
     <option value="RBI">Runs Batted In</option>
     <option value="BB">Walks</option>
     <option value="K">Strikeouts</option>
