@@ -211,6 +211,8 @@ foreach (sort keys %seasonsList) {
   # Don't treat tournaments as part of a season
   next if $tournament == 1;
 
+  # Limit season stats to players who have played in a bare minimum of games
+  @players = noScrubs(\%playerCount,\@players);
   ## Dump season totals (identical to old-style format)
   my $seasonOutfile = createName($_,q{},0);
   open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
@@ -224,8 +226,6 @@ foreach (sort keys %seasonsList) {
   close $seasonCsv or die $ERRNO;
 
 
-  # Limit stats to players who have played in a bare minimum of games
-  @players = noScrubs(\%playerCount,\@players);
   # Sort dates
   schwartz(\@dates);
   my ($seasonSuffix) = $seasonOutfile =~ s/.*mls_(\w\d\d).*/$1/r;
@@ -263,6 +263,8 @@ foreach (sort keys %seasonsList) {
   }
 }
 
+# Limit lifetime stats to players who have played in a bare minimum of games
+@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers);
 ## Dump lifetime totals (same format as season totals)
 open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
@@ -275,8 +277,6 @@ foreach my $dude (@masterPlayers) {
 close $masterCsv or die $ERRNO;
 
 
-# Limit stats to players who have played in a bare minimum of games
-@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers);
 # Sort dates
 schwartz(\@masterDates);
 # Dump lifetime per-game values for each stat
