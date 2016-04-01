@@ -224,6 +224,8 @@ foreach (sort keys %seasonsList) {
   close $seasonCsv or die $ERRNO;
 
 
+  # Limit stats to players who have played in a bare minimum of games
+  @players = noScrubs(\%playerCount,\@players);
   # Sort dates
   schwartz(\@dates);
   my ($seasonSuffix) = $seasonOutfile =~ s/.*mls_(\w\d\d).*/$1/r;
@@ -273,6 +275,8 @@ foreach my $dude (@masterPlayers) {
 close $masterCsv or die $ERRNO;
 
 
+# Limit stats to players who have played in a bare minimum of games
+@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers);
 # Sort dates
 schwartz(\@masterDates);
 # Dump lifetime per-game values for each stat
