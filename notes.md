@@ -22,6 +22,8 @@
 #### JS
 - Fix mouseover tooltip on final newly-created points
 - Section headers on season pages?  <script>document.write(location.pathname)</script>
+- If someone misses the first game, their calculated stat will always be 0; this will lead to a lot of annoying, 0-based graphs when I don't want them.
+- I'm sure d3.js can get around this but that's a problem for another day
 #### HTML rewrite
 - Update news for start of season!
 - Why so small?  Font size shrunk but the table is tiny
