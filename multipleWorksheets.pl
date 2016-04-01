@@ -116,7 +116,8 @@ foreach (sort keys %seasonsList) {
 				# and $colN FIXME TODO
 	  next;
 	} elsif ($c == 1) {
-	  print $gameCsv "\n\"$cell\"";
+	  # Ignore the last row, for now
+	  print $gameCsv "\n\"$cell\"" if $r != $rowN;
 	  $player = $cell;	# Define current player for entire row, saves
                                 # issue of duplicating and polluting @players
 
@@ -124,6 +125,10 @@ foreach (sort keys %seasonsList) {
 	  # we should just clear-out the current game array
 	  if (! $playerData{$cell}) {
 	    push @players, $cell;
+	    # Keep totals last
+	    if ($players[-2] && $players[-2] =~ /Total/) {
+	      @players[-2,-1] = @players[-1,-2];
+	    }
 	    $playerCount{$cell} = 1; # FIXME TODO Add a count if we've seen him
 	  } else {
 	    @{$playerData{$cell}{$gameDate}} = ();
@@ -133,6 +138,10 @@ foreach (sort keys %seasonsList) {
 	  # Do the same for the master list of players
 	  if ($tournament != 1 && !$masterData{$cell}) {
 	    push @masterPlayers, $cell;
+	    # Keep totals last
+	    if ($masterPlayers[-2] && $masterPlayers[-2] =~ /Total/) {
+	      @masterPlayers[-2,-1] = @masterPlayers[-1,-2];
+	    }
 	    $masterPlayerCount{$cell} = 1; # FIXME TODO Add a count if we've seen him
 	  } elsif ($tournament != 1 && $masterData{$cell}) {
 	    $masterPlayerCount{$cell}++; # FIXME TODO
@@ -170,7 +179,8 @@ foreach (sort keys %seasonsList) {
 	push @{$playerData{$player}{$gameDate}}, $cell;
 	push @{$masterData{$player}{$gameDate}}, $cell if $tournament != 1;
 
-	print $gameCsv ",$cell";
+	# Ignore the last row, for now
+	print $gameCsv ",$cell" if $r != $rowN;
 
 	# Build Total Bases stat.  Basically, doing the above for HR, run
 	# through a special scenario to build up TB and insert it into the
@@ -187,10 +197,14 @@ foreach (sort keys %seasonsList) {
 	    $masterData{$player}{'total'}[$c-$offset] += $cell;
 	    push @{$masterData{$player}{$gameDate}}, $cell;
 	  }
-	  print $gameCsv ",$cell";
+	  # Ignore the last row, for now
+	  print $gameCsv ",$cell" if $r != $rowN;
 	}
       }
     }
+    # Print out last row.  Act all cocky 'n shit by using @players
+    print $gameCsv "\n\"$players[-1]\",";
+    print $gameCsv join q{,}, @{$playerData{$players[-1]}{$gameDate}};
     close $gameCsv or die $ERRNO;
   }
 
@@ -212,7 +226,6 @@ foreach (sort keys %seasonsList) {
 
   # Sort dates
   schwartz(\@dates);
-  # Non-destructive /r option added in 5.14, probably safe
   my ($seasonSuffix) = $seasonOutfile =~ s/.*mls_(\w\d\d).*/$1/r;
   # Dump per-game values for each stat in each season
   foreach my $i (1..scalar @stats - 1) {
@@ -231,6 +244,8 @@ foreach (sort keys %seasonsList) {
     foreach my $j (0..scalar @dates - 1) {
       print $stat "$dates[$j]";
       foreach my $dude (@players[0..$#players-1]) {
+	# Original valye if defined, 0 if not
+	$playerData{$dude}{$dates[$j]}[$i-1] ||= 0;
 	# Awkward kludge to add data, destructive but at the end so not an issue
 	if ($i >= 12) {
 	  # $i is different than $c above thanks to $offset
@@ -277,6 +292,8 @@ foreach my $i (1..scalar @stats - 1) {
   foreach my $j (0..scalar @masterDates - 1) {
     print $stat "$masterDates[$j]";
     foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) { # Ignore totals
+      # Original valye if defined, 0 if not
+      $masterData{$dude}{$masterDates[$j]}[$i-1] ||= 0;
       # Awkward kludge to add data, destructive but at the end so not an issue
       if ($i >= 12) {
 	# $i is different than $c above thanks to $offset
@@ -332,17 +349,33 @@ sub calcStats
     my ($c,$player,$chart,$playerRef) = @_;
     my $cell;			# Hold calculated stat
 
+    # There are a lot of boring, repetitive calls for existance here; they
+    # could mostly be replaced by long, asinine ternary calls I think, but
+    # perhaps this is more readable, if not technically uglier FIXME TODO
     if ($c == 12) {		# AVG = H/AB
-      $cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
+      if (${$playerRef}{$player}{$chart}[0] == 0 || !${$playerRef}{$player}{$chart}[0]) {
+	$cell = 0;
+      } else {
+	$cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
+      }
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
       # PA=AB+BB+SAC
       my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
-      $cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
+
+      if ($PA == 0 || !$PA) {
+	$cell = 0;
+      } else {
+	$cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
+      }
     } elsif ($c == 14) {	# SLG = Total bases/AB
       # TB=H+2B+2*3B+3*4B
       # Calculated previously
       my $TB = ${$playerRef}{$player}{$chart}[6];
-      $cell = $TB / ${$playerRef}{$player}{$chart}[0];
+      if (${$playerRef}{$player}{$chart}[0] == 0 || !${$playerRef}{$player}{$chart}[0]) {
+	$cell = 0;
+      } else {
+	$cell = $TB / ${$playerRef}{$player}{$chart}[0];
+      }
     } elsif ($c == 15) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
     }
