@@ -20,8 +20,10 @@
 - PA/AB/etc. checks for division by zero, proper sums (H+K+BB+SAC<PA, etc.)
 - Link to schedule on main page?
 #### JS
+- Why does the header h3 for the table appear above the chart, below chart h3 header, on season index?  Jekyll issue?
 - Fix mouseover tooltip on final newly-created points
-- Section headers on season pages?  <script>document.write(location.pathname)</script>
+- Show game dates on game pages?  makeMLSTable.pl to show game date in table header
+- Also show underneath, instead of GORDON! ??  Or just game date??
 - If someone misses the first game, their calculated stat will always be 0; this will lead to a lot of annoying, 0-based graphs when I don't want them.
 - I'm sure d3.js can get around this but that's a problem for another day
 #### HTML rewrite
