@@ -29,93 +29,273 @@
 <tbody>
 <tr>
 <td data-sort='Burch'>Andrew Burch</td>
-<td>10</td>
+<td>26</td>
+<td>21</td>
+<td>21</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>34</td>
+<td>17</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.808</td>
+<td>0.828</td>
+<td>1.308</td>
+<td>2.136</td>
+</tr>
+<tr>
+<td data-sort='Patton'>Oliver Patton</td>
+<td>27</td>
+<td>14</td>
+<td>17</td>
 <td>6</td>
+<td>1</td>
+<td>2</td>
+<td>31</td>
+<td>14</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.630</td>
+<td>0.621</td>
+<td>1.148</td>
+<td>1.769</td>
+</tr>
+<tr>
+<td data-sort='Bayes'>Derek Bayes</td>
+<td>9</td>
+<td>4</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 <td>5</td>
 <td>1</td>
 <td>1</td>
 <td>0</td>
-<td>8</td>
-<td>3</td>
-<td>1</td>
 <td>0</td>
-<td>0</td>
-<td>0.500</td>
-<td>0.545</td>
-<td>0.800</td>
-<td>1.345</td>
-</tr>
-<tr>
-<td data-sort='Patton'>Oliver Patton</td>
-<td>10</td>
-<td>8</td>
-<td>8</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>14</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.800</td>
-<td>0.800</td>
-<td>1.400</td>
-<td>2.200</td>
-</tr>
-<tr>
-<td data-sort='Heuer'>Luke Heuer</td>
-<td>10</td>
-<td>6</td>
-<td>6</td>
-<td>0</td>
-<td>4</td>
-<td>0</td>
-<td>14</td>
-<td>6</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
+<td>0.556</td>
 <td>0.600</td>
-<td>0.636</td>
-<td>1.400</td>
-<td>2.036</td>
+<td>0.556</td>
+<td>1.156</td>
 </tr>
 <tr>
 <td data-sort='Edwards'>Joe Edwards</td>
-<td>8</td>
+<td>23</td>
+<td>9</td>
+<td>17</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>31</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0.739</td>
+<td>0.708</td>
+<td>1.348</td>
+<td>2.056</td>
+</tr>
+<tr>
+<td data-sort='Squitieri'>Rich Squitieri</td>
+<td>23</td>
 <td>6</td>
-<td>8</td>
-<td>4</td>
+<td>15</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>19</td>
+<td>14</td>
 <td>2</td>
 <td>0</td>
+<td>1</td>
+<td>0.652</td>
+<td>0.654</td>
+<td>0.826</td>
+<td>1.480</td>
+</tr>
+<tr>
+<td data-sort='Hanten'>Nick Hanten</td>
+<td>22</td>
+<td>7</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>12</td>
+<td>6</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.545</td>
+<td>0.565</td>
+<td>0.545</td>
+<td>1.110</td>
+</tr>
+<tr>
+<td data-sort='Henschen'>Charlie Henschen</td>
+<td>19</td>
+<td>11</td>
+<td>13</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>17</td>
+<td>7</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.684</td>
+<td>0.700</td>
+<td>0.895</td>
+<td>1.595</td>
+</tr>
+<tr>
+<td data-sort='Richardson'>Scott Richardson</td>
+<td>20</td>
+<td>8</td>
+<td>11</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>15</td>
+<td>6</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.550</td>
+<td>0.571</td>
+<td>0.750</td>
+<td>1.321</td>
+</tr>
+<tr>
+<td data-sort='Meltzer'>Amory Meltzer</td>
+<td>22</td>
+<td>11</td>
+<td>12</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>14</td>
+<td>11</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.545</td>
+<td>0.565</td>
+<td>0.636</td>
+<td>1.201</td>
+</tr>
+<tr>
+<td data-sort='Walker'>Gordon Walker</td>
+<td>21</td>
+<td>11</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>11</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.524</td>
+<td>0.565</td>
+<td>0.524</td>
+<td>1.089</td>
+</tr>
+<tr>
+<td data-sort='Heuer'>Luke Heuer</td>
+<td>22</td>
+<td>11</td>
+<td>15</td>
+<td>2</td>
+<td>6</td>
+<td>1</td>
+<td>32</td>
 <td>16</td>
-<td>10</td>
-<td>0</td>
-<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0.682</td>
+<td>0.667</td>
+<td>1.455</td>
+<td>2.122</td>
+</tr>
+<tr>
+<td data-sort='Mirman'>Nick Mirman</td>
+<td>8</td>
 <td>3</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.625</td>
+<td>0.667</td>
+<td>0.625</td>
+<td>1.292</td>
+</tr>
+<tr>
+<td data-sort='Scott'>Andrew Scott</td>
+<td>7</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.571</td>
+<td>0.571</td>
+<td>0.571</td>
+<td>1.142</td>
+</tr>
+<tr>
+<td data-sort='Patel'>Qaiser Patel</td>
+<td>9</td>
+<td>5</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>9</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>0.778</td>
+<td>0.750</td>
 <td>1.000</td>
-<td>0.727</td>
-<td>2.000</td>
-<td>2.727</td>
+<td>1.750</td>
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
-<td style='font-weight:bold;'>38</td>
-<td style='font-weight:bold;'>26</td>
+<td style='font-weight:bold;'>264</td>
+<td style='font-weight:bold;'>127</td>
+<td style='font-weight:bold;'>169</td>
 <td style='font-weight:bold;'>27</td>
-<td style='font-weight:bold;'>11</td>
+<td style='font-weight:bold;'>14</td>
 <td style='font-weight:bold;'>7</td>
-<td style='font-weight:bold;'>0</td>
-<td style='font-weight:bold;'>52</td>
-<td style='font-weight:bold;'>25</td>
+<td style='font-weight:bold;'>245</td>
+<td style='font-weight:bold;'>127</td>
+<td style='font-weight:bold;'>18</td>
 <td style='font-weight:bold;'>2</td>
-<td style='font-weight:bold;'>1</td>
-<td style='font-weight:bold;'>3</td>
-<td style='font-weight:bold;'>0.711</td>
-<td style='font-weight:bold;'>0.674</td>
-<td style='font-weight:bold;'>1.368</td>
-<td style='font-weight:bold;'>2.042</td>
+<td style='font-weight:bold;'>5</td>
+<td style='font-weight:bold;'>0.640</td>
+<td style='font-weight:bold;'>0.652</td>
+<td style='font-weight:bold;'>0.928</td>
+<td style='font-weight:bold;'>1.580</td>
 </tr>
 </tbody>
 </table>
