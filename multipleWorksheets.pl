@@ -408,6 +408,7 @@ sub noScrubs
     # hash or whatever FIXME TODO
     my $max = (sort {$b <=> $a} values %{$countRef})[0];
     foreach (@{$playerRef}) {
+      #  print "$_ ${$countRef}{$_} $max\n";
       push @return, $_ if (${$countRef}{$_} / $max >= 0.2);
     }
 
