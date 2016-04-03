@@ -30,8 +30,7 @@ function linegraph() {
 
     // Colors
     // Should play with these FIXME TODO
-    // See also below x2
-    var color = d3.scale.category10();
+    var color = d3.scale.category20c();
 
     // Axes
     var xAxis = d3.svg.axis()
