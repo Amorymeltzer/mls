@@ -8,7 +8,7 @@ function pagenamer() {
     h['f'] = 'Fall';
 
     var url = location.pathname.split('/');
-    url.shift();		// Remove leading null
+    //url.shift();		// Remove leading null
     url.shift();		// Remove leading mls
     var season = url.split('');
     season.shift();		// Remove leading /
