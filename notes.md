@@ -1,5 +1,5 @@
 ### ToDo
-- Convert to python?
+- Convert to python, R?
 - Individual column sorting? https://github.com/tristen/tablesort/pull/97
 - More content! :+1: :100: :+1:
 #### Stats
@@ -9,6 +9,7 @@
 - Stat predictions, goals?  PCA plots? -> Joe
 - Individual stats with goal AVG?  Would need player pages...
 - Sort players by batting order?  Eh.
+- Calculated stats start with second game?
 #### Archive system
 - Small links to other archived tables - next/previous seasons?
 - Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
@@ -21,8 +22,4 @@
 - Show game dates on game pages?  makeMLSTable.pl to show game date in table header
 - If someone misses the first game, each calculated stat will start at 0; this will lead to a lot of annoying, 0-based graphs clumping in the middle
 - Need to figure out how to get the line.defined and data.filter functions to work properly with NaN/null/0
-#### HTML rewrite
-- Update news for start of season!
-- Why so small?  Font size shrunk but the table is tiny
-- Maybe beef up font size?  Or just table size?
-- Might be jekyll artifact, check when live
+- Expand graph slightly to the left
