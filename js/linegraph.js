@@ -45,6 +45,7 @@ function linegraph() {
 
     // Lines
     var line = d3.svg.line()
+	//.defined(function(d) { return !isNaN(d.Record); })
 	.x(function(d) { return x(d.Date); })
 	.y(function(d) { return y(d.Record); });
 
@@ -121,6 +122,8 @@ function linegraph() {
 	owner.append('g').selectAll('circle')
 	    .data(function(d) {return d.values; })
 	    .enter().append('circle')
+	    //.filter(function(d) {return d.Record >= 0; })
+	//.filter(function(d) {return d.Record !== 'NaN'; })
 	    .attr('r', 5)
 	    .attr('cx', function(c) { return x(c.Date); })
 	    .attr('cy', function(c) { return y(c.Record); })
@@ -217,6 +220,8 @@ function linegraph() {
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
 		    .enter().append('circle')
+		    //.filter(function(d) {return d.Record >= 0; })
+		//.filter(function(d) {return d.Record !== 'NaN'; })
 		    .transition()
 		    .attr('r', 5)
 		    .attr('cx', function(c) { return x(c.Date); })
