@@ -6,10 +6,8 @@ function pagenamer() {
     h['f'] = 'Fall';
     h['l'] = 'Lifetime';
 
-    var url = location.pathname.split('/');
-    url.shift();		// Remove leading null
-    url.shift();		// Remove leading mls
-    var season = url.shift().split('');
+    var season = location.pathname.split('');
+    season.shift();		// Remove leading /
     if (season[0] == 't') {
 	season.shift();
 	title = 'Tournament ';
