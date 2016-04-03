@@ -150,8 +150,8 @@ if (!$archive) {
 }
 print $out "</p>\n\n";
 
-print $out "<script src='/js/tablesort.min.js'></script>\n";
-print $out "<script src='/js/tablesort.number.js'></script>\n\n";
+print $out "<script src='/mls/js/tablesort.min.js'></script>\n";
+print $out "<script src='/mls/js/tablesort.number.js'></script>\n\n";
 print $out "<table id='mls-table'>\n";
 
 # Header row

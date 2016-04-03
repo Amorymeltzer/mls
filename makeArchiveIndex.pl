@@ -56,7 +56,7 @@ foreach my $key (@indices) {
   $season .= $seasons{substr $filename, -3, 1};
   my $date = '20'.substr $filename, -2, 2;
 
-  print $arcindex "<a href=\"/$key\">$season $date</a>";
+  print $arcindex "<a href=\"/mls/$key\">$season $date</a>";
   print $arcindex ' &bull; ' if $key ne $indices[-1];
 
   # Only print index for full-on seasons
