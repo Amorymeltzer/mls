@@ -19,7 +19,6 @@
 - Why does the header h3 for the table appear above the chart, below chart h3 header, on season index?  Jekyll issue?
 - Fix mouseover tooltip on final newly-created points
 - Show game dates on game pages?  makeMLSTable.pl to show game date in table header
-- Also show underneath, instead of GORDON! ??  Or just game date??
 - If someone misses the first game, each calculated stat will start at 0; this will lead to a lot of annoying, 0-based graphs clumping in the middle
 - Need to figure out how to get the line.defined and data.filter functions to work properly with NaN/null/0
 #### HTML rewrite
