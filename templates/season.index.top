@@ -15,7 +15,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name"><script src="/mls/js/getPageName.js"></script></h1>
-      <a href="/"><img src="/mls/img/mls_logo.png" style="width: 25%; height: 25%"/></a>
+      <a href="/mls/"><img src="/mls/img/mls_logo.png" style="width: 25%; height: 25%"/></a>
       <h2 class="project-tagline">GORDON!!!</h2>
       <!-- <a href="https://github.com/Amorymeltzer/mls" class="btn">View on GitHub</a> -->
       <!-- <a href="https://github.com/Amorymeltzer/mls/zipball/master" class="btn">Download .zip</a> -->
@@ -23,4 +23,4 @@
     </section>
 
     <section class="main-content">
-<span class="header-nav">← <a href="/">Return home</a></span>
+<span class="header-nav">← <a href="/mls/">Return home</a></span>
