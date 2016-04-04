@@ -244,6 +244,10 @@ foreach (sort keys %seasonsList) {
     }
 
     foreach my $j (0..scalar @dates - 1) {
+      # Try to cut down on noise by skipping the first data point of each
+      # calculated stat
+      next if ($j == 0 and $i >= 12);
+
       print $stat "$dates[$j]";
       foreach my $dude (@players[0..$#players-1]) {
 	# Original valye if defined, 0 if not
@@ -294,6 +298,10 @@ foreach my $i (1..scalar @stats - 1) {
   }
 
   foreach my $j (0..scalar @masterDates - 1) {
+    # Try to cut down on noise by skipping the first data point of each
+    # calculated stat
+    next if ($j == 0 and $i >= 12);
+
     print $stat "$masterDates[$j]";
     foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) { # Ignore totals
       # Original valye if defined, 0 if not
