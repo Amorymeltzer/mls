@@ -71,11 +71,11 @@ close $in or die $ERRNO;
 # Date parsing
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
+my @months = qw (January February March April May June July August September
+		 October November December);
 my $updatedDate;
 # Get proper date when updating, default to old date
 if ($opts{u} && !$archive) {
-  my @months = qw (January February March April May June July August September
-		   October November December);
   $updatedDate = "$months[$mon] $mday, $year";
 
   # Save for next time
@@ -118,6 +118,15 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
 
   if ($curSeason eq $season && $date eq $year) {
     $status = 'ongoing';
+  }
+
+  # Natural format for specific game files
+  if ($input =~ m/mls_t?[suf]1\d_(\d\d\.\d\d)\.csv/) {
+    my @dates = split /\./, $1;
+    if ($dates[1] =~ m/^0/) {
+      $dates[1] = (split //, $dates[1])[1];
+    }
+    $season = $months[$dates[0]-1].q{ }.$dates[1].q{,};
   }
 
   $status = "$season $date stats table ($status)";
