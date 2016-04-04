@@ -2,9 +2,8 @@
 // Heavily based on Mike Costelloe's Visual Rhythmes:
 // http://mikecostelloe.com/crazyrhythms/
 function linegraph() {
-    // Customize, need to make these be relative not absolute pixel counts
-    // FIXME TODO
-    var margin = {top: 20, right: 120, bottom: 30, left: 80}
+    // Need to make these be relative not absolute pixel counts FIXME TODO
+    var margin = {top: 20, right: 120, bottom: 30, left: 40}
     , width = 0.85 * window.innerWidth
     , height = 0.7 * window.innerHeight
     , width = width - margin.left - margin.right
