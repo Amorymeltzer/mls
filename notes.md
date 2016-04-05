@@ -14,11 +14,12 @@
 #### Revamp plan
 - PA/AB/etc. checks for division by zero, proper sums (H+K+BB+SAC<PA, etc.)
 - Link to schedule on main page?
+- Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
 #### JS
 - Why does the header h3 for the table appear above the chart, below chart h3 header, on season index?
 - Fix mouseover tooltip on final newly-created points
 - If someone misses the first game, each calculated stat will start at 0; this will lead to a lot of annoying, 0-based graphs clumping in the middle
 - Need to figure out how to get the line.defined and data.filter functions to work properly with NaN/null/0
-- Expand graph slightly to the left
+- Alternatively, just change the y.domain to minimum non-0 value.
 - Labels overlap, can I deal with that?  Force-directed?
 - Or use a legend?  http://d3-legend.susielu.com or http://www.competa.com/blog/2015/07/d3-js-part-7-of-9-adding-a-legend-to-explain-the-data/
