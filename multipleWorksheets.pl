@@ -294,6 +294,7 @@ foreach my $i (1..scalar @stats - 1) {
     my $length = $#masterPlayers;
     print $stat 'Start,';
     print $stat join q{,}, (0) x $length;
+    #  print $stat join q{,}, (0.01) x $length;
     print $stat "\n";
   }
 

@@ -43,7 +43,8 @@ function linegraph() {
 
     // Lines
     var line = d3.svg.line()
-	//.defined(function(d) { return !isNaN(d.Record); })
+	.defined(function(d) { return !isNaN(d.Record); })
+	//  .defined(function(d) { return d.Record; }) //zero 0
 	.x(function(d) { return x(d.Date); })
 	.y(function(d) { return y(d.Record); });
 
@@ -183,7 +184,9 @@ function linegraph() {
 		// Extend Y-axis both ways for non-zero based traits
 		if (item == 'AVG' || item == 'OPS' || item == 'SLG' || item == 'OBP') {
 		    y.domain([
-			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
+			//  (1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
+			//  (1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record || Infinity; }); }),
+			d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record || Infinity; }); }),
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
 		    ]);
 		} else {
@@ -211,15 +214,20 @@ function linegraph() {
 		// Update circles
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
+		    //  .filter(function(d) {return !isNaN(d.Record); })
+		    //  .filter(function(d) {return d.Record; })
 		    .transition()
 		    .attr('cx', function(c) { return x(c.Date); })
 		    .attr('cy', function(c) { return y(c.Record); });
+		    //.filter(function(d) { return isNaN(d.Record); }).remove();
 
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
 		    .enter().append('circle')
 		    //.filter(function(d) {return d.Record >= 0; })
-		//.filter(function(d) {return d.Record !== 'NaN'; })
+		    //.filter(function(d) {return d.Record !== 'NaN'; })
+		    //.filter(function(d) {return !isNaN(d.Record); }) NaN??
+		    //  .filter(function(d) {return d.Record; }) 0 zero
 		    .transition()
 		    .attr('r', 5)
 		    .attr('cx', function(c) { return x(c.Date); })
@@ -229,6 +237,12 @@ function linegraph() {
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
 		    .exit().remove();
+
+		// Certianly not ideal, but takes care of NaN dots still
+		// showing up
+		owner.selectAll('circle')
+		    .data(function(d) { return d.values; })
+		    .filter(function(d) { return isNaN(d.Record); }).remove();
 
 		// Update labels
 		owner.select(".labels")
