@@ -184,12 +184,10 @@ function linegraph() {
 		// Extend Y-axis both ways for non-zero based traits
 		if (item == 'AVG' || item == 'OPS' || item == 'SLG' || item == 'OBP') {
 		    y.domain([
-			//  (1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record; }); }),
-			//  (1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record || Infinity; }); }),
-			d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record || Infinity; }); }),
+			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record || Infinity; }); }),
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
 		    ]);
-		} else {
+		} else {	// Start at 0 for cumulative stats
 		    y.domain([
 			0,
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
