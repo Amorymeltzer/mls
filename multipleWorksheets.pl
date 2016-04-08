@@ -310,7 +310,8 @@ foreach my $i (1..scalar @stats - 1) {
       if (!$masterData{$dude}{$masterDates[$j]}[$i-1]) {
 	if (!$masterData{$dude}{$masterDates[$j-1]}[$i-1]) {
 	  if ($i >= 12) {
-	    print $stat q{,};
+	    #  print $stat q{,};
+	    print $stat q{,NaN};
 	  } else {
 	    $masterData{$dude}{$masterDates[$j]}[$i-1] ||= 0;
 	    print $stat ",$masterData{$dude}{$masterDates[$j]}[$i-1]";
