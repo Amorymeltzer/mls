@@ -250,8 +250,23 @@ foreach (sort keys %seasonsList) {
 
       print $stat "$dates[$j]";
       foreach my $dude (@players[0..$#players-1]) {
-	# Original valye if defined, 0 if not
-	$playerData{$dude}{$dates[$j]}[$i-1] ||= 0;
+	# PITA technique to try to get null values for nonexistant games and
+	# zero values for missed games or non-calculated stats
+	if (!$playerData{$dude}{$dates[$j]}[$i-1]) {
+	  if (!$playerData{$dude}{$dates[$j-1]}[$i-1]) {
+	    if ($i >= 12) {
+	      print $stat q{,NaN};
+	    } else {
+	      $playerData{$dude}{$dates[$j]}[$i-1] ||= 0;
+	      print $stat ",$playerData{$dude}{$dates[$j]}[$i-1]";
+	    }
+	    next;
+	  } else {
+	    # Original valye if defined, 0 if not
+	    $playerData{$dude}{$dates[$j]}[$i-1] ||= 0;
+	  }
+	}
+
 	# Awkward kludge to add data, destructive but at the end so not an issue
 	if ($i >= 12) {
 	  # $i is different than $c above thanks to $offset
@@ -310,7 +325,6 @@ foreach my $i (1..scalar @stats - 1) {
       if (!$masterData{$dude}{$masterDates[$j]}[$i-1]) {
 	if (!$masterData{$dude}{$masterDates[$j-1]}[$i-1]) {
 	  if ($i >= 12) {
-	    #  print $stat q{,};
 	    print $stat q{,NaN};
 	  } else {
 	    $masterData{$dude}{$masterDates[$j]}[$i-1] ||= 0;
@@ -323,7 +337,6 @@ foreach my $i (1..scalar @stats - 1) {
 	}
       }
 
-      #$masterData{$dude}{$masterDates[$j]}[$i-1] ||= 0;
       # Awkward kludge to add data, destructive but at the end so not an issue
       if ($i >= 12) {
 	# $i is different than $c above thanks to $offset
