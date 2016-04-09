@@ -44,7 +44,6 @@ function linegraph() {
     // Lines
     var line = d3.svg.line()
 	.defined(function(d) { return !isNaN(d.Record); })
-	//  .defined(function(d) { return d.Record; }) //zero 0
 	.x(function(d) { return x(d.Date); })
 	.y(function(d) { return y(d.Record); });
 
@@ -121,8 +120,6 @@ function linegraph() {
 	owner.append('g').selectAll('circle')
 	    .data(function(d) {return d.values; })
 	    .enter().append('circle')
-	    //.filter(function(d) {return d.Record >= 0; })
-	//.filter(function(d) {return d.Record !== 'NaN'; })
 	    .attr('r', 5)
 	    .attr('cx', function(c) { return x(c.Date); })
 	    .attr('cy', function(c) { return y(c.Record); })
@@ -212,25 +209,32 @@ function linegraph() {
 		// Update circles
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
-		    //  .filter(function(d) {return !isNaN(d.Record); })
-		    //  .filter(function(d) {return d.Record; })
 		    .transition()
 		    .attr('cx', function(c) { return x(c.Date); })
 		    .attr('cy', function(c) { return y(c.Record); });
-		    //.filter(function(d) { return isNaN(d.Record); }).remove();
 
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
 		    .enter().append('circle')
-		    //.filter(function(d) {return d.Record >= 0; })
-		    //.filter(function(d) {return d.Record !== 'NaN'; })
-		    //.filter(function(d) {return !isNaN(d.Record); }) NaN??
-		    //  .filter(function(d) {return d.Record; }) 0 zero
-		    .transition()
 		    .attr('r', 5)
 		    .attr('cx', function(c) { return x(c.Date); })
 		    .attr('cy', function(c) { return y(c.Record); })
-		    .attr('fill', function(d) { return color(this.parentNode.__data__.name); });
+		    .attr('fill', function(d) { return color(this.parentNode.__data__.name); })
+		    .on('mouseover', function(d) {
+			var xTip = parseFloat(d3.select(this).attr('cx'));
+			var yTip = parseFloat(d3.select(this).attr('cy'));
+
+			svg.append('text')
+			    .attr('id', 'tooltip')
+			    .attr('x', xTip + 5)
+			    .attr('y', yTip - 10)
+			    .attr('fill', 'black')
+			    .text(d.Record);
+		    })
+
+		    .on('mouseout', function() {
+			d3.select('#tooltip').remove()
+		    });
 
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
