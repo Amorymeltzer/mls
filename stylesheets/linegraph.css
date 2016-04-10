@@ -40,7 +40,7 @@
 #linegraph {
     /* width:900px; */
     width: auto;
-    float: right;
+    float: center;
 }
 
 .svg-linegraph {

@@ -3,7 +3,7 @@
 // http://mikecostelloe.com/crazyrhythms/
 function linegraph() {
     // Need to make these be relative not absolute pixel counts FIXME TODO
-    var margin = {top: 20, right: 120, bottom: 30, left: 40}
+    var margin = {top: 20, right: 120, bottom: 30, left: 30}
     , width = 0.85 * window.innerWidth
     , height = 0.75 * window.innerHeight
     , width = width - margin.left - margin.right
