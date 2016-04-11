@@ -93,8 +93,7 @@ foreach (sort keys %seasonsList) {
     # Inverted from how I think about rows/columns.  Value essentially means
     # how far they go, i.e. maxrow of 5 means rows extend 5 places to column E
     my $rowN = $gameData{'maxrow'};
-    #  my $colN = $gameData{'maxcol'};
-    my $colN = $gameData{'maxcol'} + 4; # Make room for calculated stats
+    my $colN = $#stats;		# 1 less than the number of elements in @stats
 
     ## Dump per-game totals (basically a copy of %gameData)
     ## Could I just use dataDumper? FIXME TODO
@@ -447,7 +446,6 @@ sub noScrubs
     # hash or whatever FIXME TODO
     my $max = (sort {$b <=> $a} values %{$countRef})[0];
     foreach (@{$playerRef}) {
-      #  print "$_ ${$countRef}{$_} $max\n";
       push @return, $_ if (${$countRef}{$_} / $max >= 0.2);
     }
 
