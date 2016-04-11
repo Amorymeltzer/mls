@@ -252,7 +252,6 @@ USAGE
 ## order to make reading the stats tables easier.
 __END__
 Player Minor league science, Major league style
-  PA Plate appearances
   AB At Bats
   R Runs
   H Hits
@@ -265,6 +264,6 @@ Player Minor league science, Major league style
   K Strikeouts
   SAC Sacrifice flies
   AVG Batting average - H/AB
-  OBP On-Base Percentage - (H+BB)/PA
-  SLG Sugging percentage - Total bases/AB
-  OPS On-base Plus Slugging - OBP+SLG
+  OBP On-Base Percentage - (H+BB)/(AB+BB+SAC)
+  SLG Sugging percentage - TB/AB
+  OPS On-base percentage Plus Slugging - OBP+SLG
