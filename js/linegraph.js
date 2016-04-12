@@ -9,6 +9,11 @@ function linegraph() {
     , width = width - margin.left - margin.right
     , height = height - margin.top - margin.bottom;
 
+    // Tooltip
+    var div = d3.select("#linegraph").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
     var svg = d3.select("#linegraph").append("svg")
 	.attr("width", width + margin.left + margin.right)
 	.attr("height", height + margin.top + margin.bottom)
@@ -128,16 +133,18 @@ function linegraph() {
 		var xTip = parseFloat(d3.select(this).attr('cx'));
 		var yTip = parseFloat(d3.select(this).attr('cy'));
 
-		svg.append('text')
-		    .attr('id', 'tooltip')
-		    .attr('x', xTip + 5)
-		    .attr('y', yTip - 10)
-		    .attr('fill', 'black')
-		    .text(d.Record);
+		div.transition()
+		    .duration(150)
+		    .style("opacity", .9);
+		div.html(d.Record)
+		    .style("left", xTip - 5 + "px")
+		    .style("top", yTip + 20 + "px");
 	    })
 
 	    .on('mouseout', function() {
-		d3.select('#tooltip').remove()
+		div.transition()
+		    .duration(300)
+		    .style("opacity", 0);
 	    });
 
 	// Adds the names at the end
@@ -224,16 +231,18 @@ function linegraph() {
 			var xTip = parseFloat(d3.select(this).attr('cx'));
 			var yTip = parseFloat(d3.select(this).attr('cy'));
 
-			svg.append('text')
-			    .attr('id', 'tooltip')
-			    .attr('x', xTip + 5)
-			    .attr('y', yTip - 10)
-			    .attr('fill', 'black')
-			    .text(d.Record);
+			div.transition()
+			    .duration(150)
+			    .style("opacity", .9);
+			div.html(d.Record)
+			    .style("left", xTip - 5 + "px")
+			    .style("top", yTip + 20 + "px");
 		    })
 
 		    .on('mouseout', function() {
-			d3.select('#tooltip').remove()
+			div.transition()
+			    .duration(300)
+			    .style("opacity", 0);
 		    });
 
 		owner.selectAll('circle')

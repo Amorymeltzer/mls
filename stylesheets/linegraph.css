@@ -33,10 +33,19 @@
     fill: none;
     stroke-width: 3px;
 }
-#tooltip {
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 45px;
+    height: 20px;
+    padding: 4px;
     font: 13px sans-serif;
+    color: black;
+    background: lightsteelblue;
+    border: solid 1px #ccc;
+    border-radius: 8px;
+    pointer-events: none;
 }
-
 #linegraph {
     /* width:900px; */
     width: auto;
