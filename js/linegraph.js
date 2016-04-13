@@ -73,7 +73,7 @@ function linegraph() {
 	    return {
 		name: name,
 		values: data.map(function(d) {
-		    return {Date: d.Date, Record: +d[name]};
+		    return {Date: d.Date, Record: d[name]};
 		})
 	    };
 	});
@@ -84,7 +84,7 @@ function linegraph() {
 	// y-Domain is max of stat, default to start at 0
 	y.domain([
 	    0,
-	    (1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
+	    (1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
 	]);
 
 
@@ -176,7 +176,7 @@ function linegraph() {
 		    return {
 			name: name,
 			values: data.map(function(d) {
-			    return {Date: d.Date, Record: +d[name]};
+			    return {Date: d.Date, Record: d[name]};
 			})
 		    };
 		});
@@ -188,13 +188,13 @@ function linegraph() {
 		// Extend Y-axis both ways for non-zero based traits
 		if (item == 'AVG' || item == 'OPS' || item == 'SLG' || item == 'OBP') {
 		    y.domain([
-			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return v.Record || Infinity; }); }),
-			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
+			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return +v.Record || Infinity; }); }),
+			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
 		    ]);
 		} else {	// Start at 0 for cumulative stats
 		    y.domain([
 			0,
-			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return v.Record; }); })
+			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
 		    ]);
 		}
 
