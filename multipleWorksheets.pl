@@ -16,6 +16,7 @@ if (@ARGV != 1) {
   exit;
 }
 
+print "Parsing $ARGV[0] for data...\n\n";
 my $book = ReadData ($ARGV[0]);
 
 # Season lookup.  Would be easy to substring, but this also means I get all
@@ -29,7 +30,7 @@ my %seasons = (
 my $sheetNum = $book->[0]{'sheets'};
 my %seasonsList;		# Unique list of seasons that need parsing
 # It's silly to run through this multiple times, need to just grab all names
-# from initial hash.  Order unimportant so it's doable.
+# from initial hash.  Order unimportant so it's doable. FIXME TODO
 for (1..$sheetNum) {
   my $seas = $book->[$_]{'label'};
 
@@ -58,8 +59,9 @@ my @masterPlayers;
 my @masterDates;
 my %masterPlayerCount;		# Count times a player is used
 
+print "Data found:\n";
 foreach (sort keys %seasonsList) {
-  print "seas: $_\t items: @{$seasonsList{$_}}\n";
+  print "Season: $_\t Items: @{$seasonsList{$_}}\n";
   my %playerData;    # Hash holding per-player stat data [total, current game]
   my @players;	     # Player names
   my @dates;	     # Dates of play
@@ -308,7 +310,6 @@ foreach my $i (1..scalar @stats - 1) {
     my $length = $#masterPlayers;
     print $stat 'Start,';
     print $stat join q{,}, (0) x $length;
-    #  print $stat join q{,}, (0.01) x $length;
     print $stat "\n";
   }
 

@@ -48,8 +48,6 @@ my @indices = sort seasonSort keys %seas;
 foreach my $key (@indices) {
   # List games chronologically
   @{$seas{$key}} = sort @{$seas{$key}};
-  print "$key: @{$seas{$key}}\n";
-
   # Parse filenames for seasons, tournaments
   my ($filename) = $key =~ s/^(?:archive\/)?mls_(t?[suf]1\d)$/$1/r;
   my $season = ($filename =~ /^t/) ? 'Tournament ' : q{};

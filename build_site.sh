@@ -57,7 +57,7 @@ elif [ ! $(echo "$input" | grep -oE "\.xlsx?$") ]; then
 else
     # Main process: parses master excel and produces/calculates all data
     perl multipleWorksheets.pl "$input"
-
+    echo
     # Get all the games and seasons and tournaments that need linking to
     SUBS=$(find -E . -regex "./mls_.*_.*.csv" -o -regex "./mls_t....csv" | grep -v _site)
     # Generate archive index lists via
@@ -72,6 +72,8 @@ else
 	dienice "No valid files found!!!"
     fi
 
+    # Build pages
+    echo "Creating html..."
     for csv in $FILES
     do
 	# find insists on a leading ./ - I won't be providing such things when
