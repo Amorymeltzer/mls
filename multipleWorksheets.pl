@@ -133,10 +133,10 @@ foreach (sort keys %seasonsList) {
 	    if ($players[-2] && $players[-2] =~ /Total/) {
 	      @players[-2,-1] = @players[-1,-2];
 	    }
-	    $playerCount{$cell} = 1; # FIXME TODO Add a count if we've seen him
+	    $playerCount{$cell} = 1; # Add a count if we've seen him
 	  } else {
 	    @{$playerData{$cell}{$gameDate}} = ();
-	    $playerCount{$cell}++; # FIXME TODO
+	    $playerCount{$cell}++;
 	  }
 
 	  # Do the same for the master list of players
@@ -146,9 +146,9 @@ foreach (sort keys %seasonsList) {
 	    if ($masterPlayers[-2] && $masterPlayers[-2] =~ /Total/) {
 	      @masterPlayers[-2,-1] = @masterPlayers[-1,-2];
 	    }
-	    $masterPlayerCount{$cell} = 1; # FIXME TODO Add a count if we've seen him
+	    $masterPlayerCount{$cell} = 1; # Add a count if we've seen him
 	  } elsif ($tournament != 1 && $masterData{$cell}) {
-	    $masterPlayerCount{$cell}++; # FIXME TODO
+	    $masterPlayerCount{$cell}++;
 	  }
 
 	  $offset = 2;		# Reset on new row
