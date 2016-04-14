@@ -63,9 +63,12 @@ while (<$in>) {
 }
 close $in or die $ERRNO;
 
-# Atempt to replace previous good data check with this mediocre data check
+# Atempt to replace previous good data check with these mediocre data checks
 if ($total[3]+$total[10] > $total[1]) {
   warn "Warning: H+K is greater than AB\nIncorrect data?\n";
+}
+if ($total[2] != $total[8]) {
+  warn "Warning: R and RBIs are not equal\nIncorrect data?\n";
 }
 
 # Date parsing
