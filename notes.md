@@ -12,7 +12,8 @@
 - Small links to other archived tables - next/previous seasons?
 - Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
 #### Revamp plan
-- PA/AB/etc. checks for division by zero, proper sums (H+K+BB+SAC<PA, etc.)
+- Deal with graphs at beginning of season (ugly, pointless)
+- PA/AB/etc. checks for division by zero, proper sums (H+K+BB+SAC<PA, R=RBI, etc.)
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
 - Change as many elements as possible from px to (r)em
