@@ -96,7 +96,7 @@ if ($opts{u} && !$archive) {
 
 
 # Allow for noncanonical filenames (mls_master, per-game stats) FIXME TODO
-my $status = 'archived';	# Likely default
+my $status = q{};		# Likely default
 if ($input =~ m/mls_t?[suf]\d\d/) {
   my %seasons = (
 		 s => 'Spring',
@@ -116,11 +116,12 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
 
   # Attempt to divine current season
   # Not exact, esp. around June
+  # Will just zero-out for specific game files, since it's unneeded
   my $curSeason = ($mon < 8 && $mon > 4) ? 'Summer' : 'Fall';
   $curSeason = ($mon < 3 || $mon > 4) ? $curSeason : 'Spring';
 
   if ($curSeason eq $season && $date eq $year) {
-    $status = 'ongoing';
+    $status = ' (ongoing)';
   }
 
   # Natural format for specific game files
@@ -130,9 +131,10 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
       $dates[1] = (split //, $dates[1])[1];
     }
     $season = $months[$dates[0]-1].q{ }.$dates[1].q{,};
+    $status = q{};
   }
 
-  $status = "$season $date stats table ($status)";
+  $status = "$season $date stats table$status";
 } else {
   $status = 'Lifetime stats table';
 }
