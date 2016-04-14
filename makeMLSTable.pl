@@ -63,10 +63,10 @@ while (<$in>) {
 }
 close $in or die $ERRNO;
 
-# Good check, turned off for now (need to decide PA or AB) FIXME TODO
-# if ($total[2]+$total[9]+$total[11] != $total[1]) {
-#   warn "Warning: AB+BB+SAC and PA are NOT equal\nMissing data?\n";
-# }
+# Atempt to replace previous good data check with this mediocre data check
+if ($total[3]+$total[10] > $total[1]) {
+  warn "Warning: H+K is greater than AB\nIncorrect data?\n";
+}
 
 # Date parsing
 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
