@@ -11,6 +11,10 @@ use English qw( -no_match_vars );
 use Spreadsheet::Read;
 
 
+# Threshold for inclusion in graphs and tables, see &noScrubs
+my $threshold = 0.2;
+
+
 if (@ARGV != 1) {
   print "Usage: $PROGRAM_NAME MLS_Stats.xlsx\n";
   exit;
@@ -98,7 +102,6 @@ foreach (sort keys %seasonsList) {
     my $colN = $#stats;		# 1 less than the number of elements in @stats
 
     ## Dump per-game totals (basically a copy of %gameData)
-    ## Could I just use dataDumper? FIXME TODO
     my $gameOutfile = createName($_,$date,$tournament);
     open my $gameCsv, '>', "$gameOutfile" or die $ERRNO;
     print $gameCsv join q{,}, @stats;
@@ -213,7 +216,7 @@ foreach (sort keys %seasonsList) {
   next if $tournament == 1;
 
   # Limit season stats to players who have played in a bare minimum of games
-  @players = noScrubs(\%playerCount,\@players);
+  @players = noScrubs(\%playerCount,\@players,\@dates);
   ## Dump season totals (identical to old-style format)
   my $seasonOutfile = createName($_,q{},0);
   open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
@@ -284,7 +287,7 @@ foreach (sort keys %seasonsList) {
 }
 
 # Limit lifetime stats to players who have played in a bare minimum of games
-@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers);
+@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
 ## Dump lifetime totals (same format as season totals)
 open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
@@ -441,13 +444,12 @@ sub schwartz
 
 sub noScrubs
   {
-    my ($countRef,$playerRef) = @_;
+    my ($countRef,$playerRef,$dateRef) = @_;
     my @return;
-    # Get maximum value of games, should probably just count up size of season
-    # hash or whatever FIXME TODO
-    my $max = (sort {$b <=> $a} values %{$countRef})[0];
+    my $max = scalar @{$dateRef}; # Number of games in the season
+
     foreach (@{$playerRef}) {
-      push @return, $_ if (${$countRef}{$_} / $max >= 0.2);
+      push @return, $_ if (${$countRef}{$_} / $max >= $threshold);
     }
 
     return @return;
