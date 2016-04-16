@@ -30,16 +30,14 @@ my %seasons = (
 	       summer => 'u',
 	       fall => 'f');
 
-# Iterate over each sheet
-my $sheetNum = $book->[0]{'sheets'};
-my %seasonsList;		# Unique list of seasons that need parsing
-# It's silly to run through this multiple times, need to just grab all names
-# from initial hash.  Order unimportant so it's doable. FIXME TODO
-for (1..$sheetNum) {
-  my $seas = $book->[$_]{'label'};
-
-  my @tmp = split / /, $seas;
-  $seas = "$tmp[0] $tmp[1]";
+# Unique list of seasons that need parsing
+my %seasonsList;
+# Grab, parse, and arrange all sheet names taken from the initial hash.  Sort
+# required to keep order the same, so players who missed games don't move
+# around
+foreach (sort keys %{$book->[0]{'sheet'}}) {
+  my @tmp = split / /;
+  my $seas = "$tmp[0] $tmp[1]";
   my $game = $tmp[2];
 
   if ($seas =~ /Tournament/) {
