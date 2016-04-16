@@ -395,37 +395,34 @@ sub calcStats
     my ($c,$player,$chart,$playerRef) = @_;
     my $cell;			# Hold calculated stat
 
-    # There are a lot of boring, repetitive calls for existance here; they
-    # could mostly be replaced by long, asinine ternary calls I think, but
-    # perhaps this is more readable, if not technically uglier FIXME TODO
+    # See &validDiv
     if ($c == 12) {		# AVG = H/AB
-      if (${$playerRef}{$player}{$chart}[0] == 0 || !${$playerRef}{$player}{$chart}[0]) {
-	$cell = 0;
-      } else {
-	$cell = ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
-      }
+      $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
       # PA=AB+BB+SAC
       my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
-
-      if ($PA == 0 || !$PA) {
-	$cell = 0;
-      } else {
-	$cell = (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
-      }
+      $cell = validDiv($PA) ? 0 : (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
     } elsif ($c == 14) {	# SLG = Total bases/AB
-      # TB=H+2B+2*3B+3*4B
-      # Calculated previously
+      # TB=H+2B+2*3B+3*4B, calculated previously
       my $TB = ${$playerRef}{$player}{$chart}[6];
-      if (${$playerRef}{$player}{$chart}[0] == 0 || !${$playerRef}{$player}{$chart}[0]) {
-	$cell = 0;
-      } else {
-	$cell = $TB / ${$playerRef}{$player}{$chart}[0];
-      }
+      $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 15) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
     }
     return sprintf '%.3f', $cell; # Prettify to three decimals
+  }
+
+
+# Pull boring, repetitive division-by-zero/existance checks out of &calcStats
+# for the sake of appearance
+sub validDiv
+  {
+    my $zTest = shift;
+    if ($zTest == 0 || !$zTest) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
 
