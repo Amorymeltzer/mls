@@ -19,6 +19,7 @@
     <option value="OBP">OBP</option>
     <option value="SLG">Slugging</option>
     <option value="OPS">OBP plus SLG</option>
+    <option value="wOBA">wOBA</option>
   </select>
 
   <script src="/mls/js/linegraph.js"></script>
