@@ -388,6 +388,7 @@ sub createName
 
 
 # Calc stats
+# Possible to avoid player/chart and just do the ref to the array? FIXME TODO
 sub calcStats
   {
     my ($c,$player,$chart,$playerRef) = @_;
