@@ -170,7 +170,8 @@ else
     done
 
     # Move lifetime stats as well
-    FILES=$(find -E . -maxdepth 1 -regex "./.{1,3}\.csv" | grep -v _site)
+    #  FILES=$(find -E . -maxdepth 1 -regex "./.{1,3}\.csv" | grep -v _site)
+    FILES=$(find -E . -maxdepth 1 -regex "./.{1,4}\.csv" | grep -v _site)
     for csv in $FILES
     do
 	mv $csv data/$csv

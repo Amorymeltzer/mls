@@ -54,7 +54,8 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 
 
 # Stats measured, for building the player hash
-my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS);
+#  my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS);
+my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS wOBA);
 # Master lists of stats, players, and dates played
 my %masterData;
 my @masterPlayers;
@@ -407,6 +408,11 @@ sub calcStats
       $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 15) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
+    } elsif ($c == 16) {	# wOBA
+      # PA=AB+BB+SAC
+      my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
+
+      $cell = validDiv($PA) ? 0 : calcwOBA(${$playerRef}{$player}{$chart}) / $PA;
     }
     return sprintf '%.3f', $cell; # Prettify to three decimals
   }
@@ -422,6 +428,18 @@ sub validDiv
     } else {
       return 0;
     }
+  }
+
+# Calculate wOBA scores
+# Pulled out here to make adjusting weights easier and so on
+sub calcwOBA
+  {
+    my $hashRef = shift;
+    my ($BB,$B1,$B2,$B3,$HR) = qw (0.72 0.90 1.24 1.56 1.95);
+
+    my $hits = ${$hashRef}[2] - ${$hashRef}[3] - ${$hashRef}[4] - ${$hashRef}[5];
+    return $BB*${$hashRef}[8] + $B1*$hits + $B2*${$hashRef}[3] + $B3*${$hashRef}[4] + $HR*${$hashRef}[5];
+
   }
 
 
