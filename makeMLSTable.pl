@@ -45,8 +45,7 @@ while (<$in>) {
     @header = @tmp;
 
     # Try to catch some potential errors
-    #  if ($header[-1] ne 'OPS') {
-    if ($header[-1] ne 'wOBA') {
+    if ($header[-1] ne 'OPS') {
       warn "Warning: Potential extra columns detected!!\n";
     }
     if ($NR != 1) {
