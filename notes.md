@@ -3,7 +3,7 @@
 - Individual column sorting? https://github.com/tristen/tablesort/pull/97
 - More content! :+1: :100: :+1:
 #### Stats
-- More sabermetrics?  wOBA, ISO, others?
+- More sabermetrics?  wOBA, ISO, GPA?
 - Team stats (RF/RA), record, etc.?
 - Stat predictions, goals?  PCA plots? -> Joe
 - Individual stats with goal AVG?  Would need player pages...
