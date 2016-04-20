@@ -396,21 +396,20 @@ sub calcStats
     my ($c,$player,$chart,$playerRef) = @_;
     my $cell;			# Hold calculated stat
 
+    # Used repeatedly, good to have available, makes below prettier
+    # PA=AB+BB+SAC
+    my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
+    # TB=H+2B+2*3B+3*4B, calculated previously
+    my $TB = ${$playerRef}{$player}{$chart}[6];
+
     # See &validDiv
     if ($c == 12) {		# AVG = H/AB
       $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      # PA=AB+BB+SAC
-      my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
       $cell = validDiv($PA) ? 0 : (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
     } elsif ($c == 14) {	# wOBA
-      # PA=AB+BB+SAC
-      my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
-
       $cell = validDiv($PA) ? 0 : calcwOBA(${$playerRef}{$player}{$chart}) / $PA;
     } elsif ($c == 15) {	# SLG = Total bases/AB
-      # TB=H+2B+2*3B+3*4B, calculated previously
-      my $TB = ${$playerRef}{$player}{$chart}[6];
       $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 16) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[14];
