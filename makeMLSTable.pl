@@ -270,6 +270,6 @@ Player Minor league science, Major league style
   SAC Sacrifice flies
   AVG Batting average - H/AB
   OBP On-Base Percentage - (H+BB)/(AB+BB+SAC)
+  wOBA Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action
   SLG Sugging - TB/AB
   OPS On-base percentage Plus Slugging - OBP+SLG
-  wOBA Weighted On-Base Average

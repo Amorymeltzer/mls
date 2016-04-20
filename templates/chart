@@ -17,9 +17,9 @@
     <option value="SAC">Sac-flies</option>
     <option value="AVG">Batting Average</option>
     <option value="OBP">OBP</option>
-    <option value="SLG">Slugging</option>
-    <option value="OPS">OBP plus SLG</option>
     <option value="wOBA">wOBA</option>
+    <option value="SLG">Slugging</option>
+    <option value="OPS">OBP Plus SLG</option>
   </select>
 
   <script src="/mls/js/linegraph.js"></script>
