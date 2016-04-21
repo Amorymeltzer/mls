@@ -56,7 +56,7 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 # Stats measured, for building the player hash
 #  my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS);
 #  my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS wOBA);
-my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP wOBA SLG OPS);
+my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
 # Master lists of stats, players, and dates played
 my %masterData;
 my @masterPlayers;
@@ -407,12 +407,16 @@ sub calcStats
       $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
       $cell = validDiv($PA) ? 0 : (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
-    } elsif ($c == 14) {	# wOBA
-      $cell = validDiv($PA) ? 0 : calcwOBA(${$playerRef}{$player}{$chart}) / $PA;
-    } elsif ($c == 15) {	# SLG = Total bases/AB
+    } elsif ($c == 14) {	# SLG = Total bases/AB
       $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : $TB / ${$playerRef}{$player}{$chart}[0];
+    } elsif ($c == 15) {	# ISO = SLG-AVG
+      $cell = ${$playerRef}{$player}{$chart}[13] + ${$playerRef}{$player}{$chart}[11];
     } elsif ($c == 16) {	# OPS = OBP+SLG
-      $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[14];
+      $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
+    } elsif ($c == 17) {	# GPA = (1.8*OBP+SLG)/4
+      $cell = (1.8*${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13])/4;
+    } elsif ($c == 18) {	# wOBA
+      $cell = validDiv($PA) ? 0 : calcwOBA(${$playerRef}{$player}{$chart}) / $PA;
     }
     return sprintf '%.3f', $cell; # Prettify to three decimals
   }

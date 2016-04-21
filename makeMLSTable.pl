@@ -45,7 +45,7 @@ while (<$in>) {
     @header = @tmp;
 
     # Try to catch some potential errors
-    if ($header[-1] ne 'OPS') {
+    if ($header[-1] ne 'wOBA') {
       warn "Warning: Potential extra columns detected!!\n";
     }
     if ($NR != 1) {
@@ -271,7 +271,7 @@ Player Minor league science, Major league style
   AVG Batting average - H/AB
   OBP On-Base Percentage - (H+BB)/(AB+BB+SAC)
   SLG Sugging - TB/AB
-  OPS On-base percentage Plus Slugging - OBP+SLG
   ISO Isolated Power - SLG-AVG
-  GPA GPA
+  OPS On-base percentage Plus Slugging - OBP+SLG
+  GPA Gross Production Average - (1.8*OBP+SLG)/4
   wOBA Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action

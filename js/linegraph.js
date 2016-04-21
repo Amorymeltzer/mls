@@ -186,7 +186,7 @@ function linegraph() {
 
 		// y-Domain to max of stat
 		// Extend Y-axis both ways for non-zero based traits
-		if (item == 'AVG' || item == 'OPS' || item == 'SLG' || item == 'OBP' || item == 'wOBA') {
+		if (item == 'AVG' || item == 'OBP' || item == 'SLG' || item == 'ISO' || item == 'OPS' || item == 'GPA' || item == 'wOBA') {
 		    y.domain([
 			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return +v.Record || Infinity; }); }),
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })

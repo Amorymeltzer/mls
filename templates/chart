@@ -17,9 +17,11 @@
     <option value="SAC">Sac-flies</option>
     <option value="AVG">Batting Average</option>
     <option value="OBP">OBP</option>
-    <option value="wOBA">wOBA</option>
     <option value="SLG">Slugging</option>
+    <option value="ISO">Isolated Power</option>
     <option value="OPS">OBP Plus SLG</option>
+    <option value="GPA">Gross Production Average</option>
+    <option value="wOBA">Weighted On-Base Average</option>
   </select>
 
   <script src="/mls/js/linegraph.js"></script>
