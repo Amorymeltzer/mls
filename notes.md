@@ -8,6 +8,7 @@
 - Stat predictions, goals?  PCA plots? -> Joe
 - Individual stats with goal AVG?  Would need player pages...
 - Sort players by batting order?  Eh.
+- What happens to order in season when players play, then miss, then come back?  Check it out (Scott, Luke, etc.)
 #### Archive system
 - Small links to other archived tables - next/previous seasons?
 - Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
