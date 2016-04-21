@@ -12,7 +12,7 @@ use Spreadsheet::Read;
 
 
 # Threshold for inclusion in graphs and tables, see &noScrubs
-my $threshold = 0.2;
+my $threshold = 0.25;
 
 
 if (@ARGV != 1) {
