@@ -410,7 +410,7 @@ sub calcStats
     } elsif ($c == 14) {	# SLG = Total bases/AB
       $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : $TB / ${$playerRef}{$player}{$chart}[0];
     } elsif ($c == 15) {	# ISO = SLG-AVG
-      $cell = ${$playerRef}{$player}{$chart}[13] + ${$playerRef}{$player}{$chart}[11];
+      $cell = ${$playerRef}{$player}{$chart}[13] - ${$playerRef}{$player}{$chart}[11];
     } elsif ($c == 16) {	# OPS = OBP+SLG
       $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
     } elsif ($c == 17) {	# GPA = (1.8*OBP+SLG)/4
