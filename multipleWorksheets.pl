@@ -157,20 +157,20 @@ foreach (sort keys %seasonsList) {
 
 	if ($c >= 12) {
 	  # Calculate total first, so we don't overlap
-	  $cell = calcStats($c,$player,'total',\%playerData);
+	  $cell = calcStats($c,\@{$playerData{$player}{'total'}});
 	  $playerData{$player}{'total'}[$c-$offset] = $cell;
 
 	  # I want to use %masterData for calculations, but we have to first
 	  # establish that data before we can use it.
 	  if ($masterData{$player}{'total'}[$c-$offset]) {
-	    $cell = calcStats($c,$player,'total',\%masterData);
+	    $cell = calcStats($c,\@{$masterData{$player}{'total'}});
 	  } else {
-	    $cell = calcStats($c,$player,'total',\%playerData);
+	    $cell = calcStats($c,\@{$playerData{$player}{'total'}});
 	  }
 	  $masterData{$player}{'total'}[$c-$offset] = $cell if $tournament != 1;
 
 	  # Calculate for the given gameDate to append
-	  $cell = calcStats($c,$player,$gameDate,\%playerData);
+	  $cell = calcStats($c,\@{$playerData{$player}{$gameDate}});
 	} else {
 	  if ($gameData{'cell'}[$c][$r]) {
 	    $playerData{$player}{'total'}[$c-$offset] += $cell;
@@ -274,7 +274,7 @@ foreach (sort keys %seasonsList) {
 	# Awkward kludge to add data, destructive but at the end so not an issue
 	if ($i >= 12) {
 	  # $i is different than $c above thanks to $offset
-	  $playerData{$dude}{$dates[$j]}[$i-1] = calcStats($i,$dude,$dates[$j],\%playerData);
+	  $playerData{$dude}{$dates[$j]}[$i-1] = calcStats($i,\@{$playerData{$dude}{$dates[$j]}});
 	} else {
 	  $playerData{$dude}{$dates[$j]}[$i-1] += $playerData{$dude}{$dates[$j-1]}[$i-1] if $j != 0;
 	}
@@ -343,7 +343,7 @@ foreach my $i (1..scalar @stats - 1) {
       # Awkward kludge to add data, destructive but at the end so not an issue
       if ($i >= 12) {
 	# $i is different than $c above thanks to $offset
-	$masterData{$dude}{$masterDates[$j]}[$i-1] = calcStats($i,$dude,$masterDates[$j],\%masterData);
+	$masterData{$dude}{$masterDates[$j]}[$i-1] = calcStats($i,\@{$masterData{$dude}{$masterDates[$j]}});
       } else {
 	$masterData{$dude}{$masterDates[$j]}[$i-1] += $masterData{$dude}{$masterDates[$j-1]}[$i-1] if $j != 0;
       }
@@ -390,33 +390,32 @@ sub createName
 
 
 # Calc stats
-# Possible to avoid player/chart and just do the ref to the array? FIXME TODO
 sub calcStats
   {
-    my ($c,$player,$chart,$playerRef) = @_;
-    my $cell;			# Hold calculated stat
+    my ($c,$playerRef) = @_;
+    my $cell;
 
     # Used repeatedly, good to have available, makes below prettier
     # PA=AB+BB+SAC
-    my $PA = ${$playerRef}{$player}{$chart}[0] + ${$playerRef}{$player}{$chart}[8] + ${$playerRef}{$player}{$chart}[10];
+    my $PA = ${$playerRef}[0] + ${$playerRef}[8] + ${$playerRef}[10];
     # TB=H+2B+2*3B+3*4B, calculated previously
-    my $TB = ${$playerRef}{$player}{$chart}[6];
+    my $TB = ${$playerRef}[6];
 
     # See &validDiv
     if ($c == 12) {		# AVG = H/AB
-      $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : ${$playerRef}{$player}{$chart}[2] / ${$playerRef}{$player}{$chart}[0];
+      $cell = validDiv(${$playerRef}[0]) ? 0 : ${$playerRef}[2] / ${$playerRef}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      $cell = validDiv($PA) ? 0 : (${$playerRef}{$player}{$chart}[2] + ${$playerRef}{$player}{$chart}[8]) / $PA;
+      $cell = validDiv($PA) ? 0 : (${$playerRef}[2] + ${$playerRef}[8]) / $PA;
     } elsif ($c == 14) {	# SLG = Total bases/AB
-      $cell = validDiv(${$playerRef}{$player}{$chart}[0]) ? 0 : $TB / ${$playerRef}{$player}{$chart}[0];
+      $cell = validDiv(${$playerRef}[0]) ? 0 : $TB / ${$playerRef}[0];
     } elsif ($c == 15) {	# ISO = SLG-AVG
-      $cell = ${$playerRef}{$player}{$chart}[13] - ${$playerRef}{$player}{$chart}[11];
+      $cell = ${$playerRef}[13] - ${$playerRef}[11];
     } elsif ($c == 16) {	# OPS = OBP+SLG
-      $cell = ${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13];
+      $cell = ${$playerRef}[12] + ${$playerRef}[13];
     } elsif ($c == 17) {	# GPA = (1.8*OBP+SLG)/4
-      $cell = (1.8*${$playerRef}{$player}{$chart}[12] + ${$playerRef}{$player}{$chart}[13])/4;
+      $cell = (1.8*${$playerRef}[12] + ${$playerRef}[13])/4;
     } elsif ($c == 18) {	# wOBA
-      $cell = validDiv($PA) ? 0 : calcwOBA(${$playerRef}{$player}{$chart}) / $PA;
+      $cell = validDiv($PA) ? 0 : calcwOBA(\@{$playerRef}) / $PA;
     }
     return sprintf '%.3f', $cell; # Prettify to three decimals
   }
