@@ -95,7 +95,7 @@ if ($opts{u} && !$archive) {
 }
 
 
-# Allow for noncanonical filenames (mls_master, per-game stats) FIXME TODO
+# Allow for noncanonical filenames (mls_master, per-game stats)
 my $status = q{};		# Likely default
 if ($input =~ m/mls_t?[suf]\d\d/) {
   my %seasons = (
@@ -138,8 +138,6 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
 } else {
   $status = 'Lifetime stats table';
 }
-# Need to get date and season info right for table html FIXME TODO
-
 
 
 # Build hash of header row titletips
