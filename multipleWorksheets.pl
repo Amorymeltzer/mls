@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 # multipleWorksheets.pl by Amory Meltzer
-# Prepare XLS/X files with multiple worksheets for xlscat
-# Probably better to just end run around xlscat in the long run, eh?
+# Process boxscores into master set of stats
 
 use strict;
 use warnings;
@@ -29,12 +28,11 @@ my %seasons = (
 	       spring => 's',
 	       summer => 'u',
 	       fall => 'f');
+my %seasonsList;		# Unique list of seasons that need parsing
 
-# Unique list of seasons that need parsing
-my %seasonsList;
 # Grab, parse, and arrange all sheet names taken from the initial hash.  Sort
-# required to keep order the same, so players who missed games don't move
-# around
+# required to keep order the same across games, so players who missed games
+# don't move around
 foreach (sort keys %{$book->[0]{'sheet'}}) {
   my @tmp = split / /;
   my $seas = "$tmp[0] $tmp[1]";
@@ -54,13 +52,11 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 
 
 # Stats measured, for building the player hash
-#  my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS);
-#  my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG OPS wOBA);
 my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
-# Master lists of stats, players, and dates played
-my %masterData;
-my @masterPlayers;
-my @masterDates;
+# Master lists
+my %masterData;	     # Hash holding per-player stat data [total, current game]
+my @masterPlayers;   # Player names
+my @masterDates;     # Dates of play
 my %masterPlayerCount;		# Count times a player is used
 
 print "Data found:\n";
@@ -121,9 +117,9 @@ foreach (sort keys %seasonsList) {
 	} elsif ($c == 1) {
 	  # Ignore the last row, for now
 	  print $gameCsv "\n\"$cell\"" if $r != $rowN;
-	  $player = $cell;	# Define current player for entire row, saves
-                                # issue of duplicating and polluting @players
-
+	  # Define current player for entire row, saves issue of duplicating
+	  # and polluting @players
+	  $player = $cell;
 	  # Build player array.  Only append if it's a new player, otherwise
 	  # we should just clear-out the current game array
 	  if (! $playerData{$cell}) {
@@ -132,10 +128,10 @@ foreach (sort keys %seasonsList) {
 	    if ($players[-2] && $players[-2] =~ /Total/) {
 	      @players[-2,-1] = @players[-1,-2];
 	    }
-	    $playerCount{$cell} = 1; # Add a count if we've seen him
+	    $playerCount{$cell} = 1; # First time up
 	  } else {
 	    @{$playerData{$cell}{$gameDate}} = ();
-	    $playerCount{$cell}++;
+	    $playerCount{$cell}++; # Add a count if we've seen him
 	  }
 
 	  # Do the same for the master list of players
@@ -145,9 +141,9 @@ foreach (sort keys %seasonsList) {
 	    if ($masterPlayers[-2] && $masterPlayers[-2] =~ /Total/) {
 	      @masterPlayers[-2,-1] = @masterPlayers[-1,-2];
 	    }
-	    $masterPlayerCount{$cell} = 1; # Add a count if we've seen him
+	    $masterPlayerCount{$cell} = 1; # First time up
 	  } elsif ($tournament != 1 && $masterData{$cell}) {
-	    $masterPlayerCount{$cell}++;
+	    $masterPlayerCount{$cell}++; # Add a count if we've seen him
 	  }
 
 	  $offset = 2;		# Reset on new row
@@ -159,8 +155,9 @@ foreach (sort keys %seasonsList) {
 	  $cell = calcStats($c,\@{$playerData{$player}{'total'}});
 	  $playerData{$player}{'total'}[$c-$offset] = $cell;
 
-	  # I want to use %masterData for calculations, but we have to first
-	  # establish that data before we can use it.
+	  # I want to use %masterData for the calculations, but we have to
+	  # first establish that data before we can use it.
+	  # Use ternary?  Or too ugly? FIXME TODO
 	  if ($masterData{$player}{'total'}[$c-$offset]) {
 	    $cell = calcStats($c,\@{$masterData{$player}{'total'}});
 	  } else {
@@ -185,10 +182,10 @@ foreach (sort keys %seasonsList) {
 	# Ignore the last row, for now
 	print $gameCsv ",$cell" if $r != $rowN;
 
-	# Build Total Bases stat.  Basically, doing the above for HR, run
-	# through a special scenario to build up TB and insert it into the
-	# array.  Then, of course, we have to increment the offset to keep
-	# everybody on the same page.
+	# Build Total Bases stat.  Basically, after doing the above for HR,
+	# run through a special scenario to build up TB and insert it into the
+	# array.  Of course, we have to decrement the offset to keep everybody
+	# on the same page.
 	if ($c == 7) {
 	  $offset = 1;
 	  # TB=H+2B+2*3B+3*4B
@@ -228,7 +225,6 @@ foreach (sort keys %seasonsList) {
   }
   close $seasonCsv or die $ERRNO;
 
-
   # Sort dates
   schwartz(\@dates);
   my ($seasonSuffix) = $seasonOutfile =~ s/.*mls_(\w\d\d).*/$1/r;
@@ -260,7 +256,7 @@ foreach (sort keys %seasonsList) {
 	    if ($i >= 12) {
 	      print $stat q{,NaN};
 	    } else {
-	      $playerData{$dude}{$dates[$j]}[$i-1] ||= 0;
+	      $playerData{$dude}{$dates[$j]}[$i-1] ||= 0; # just =0? FIXME TODO
 	      print $stat ",$playerData{$dude}{$dates[$j]}[$i-1]";
 	    }
 	    next;
@@ -297,7 +293,6 @@ foreach my $dude (@masterPlayers) {
   print $masterCsv "\n";
 }
 close $masterCsv or die $ERRNO;
-
 
 # Sort dates
 schwartz(\@masterDates);
@@ -354,8 +349,6 @@ foreach my $i (1..scalar @stats - 1) {
 }
 
 
-
-
 #### Subroutines
 # Build an appropriate name
 sub createName
@@ -400,6 +393,8 @@ sub calcStats
     # TB=H+2B+2*3B+3*4B, calculated previously
     my $TB = ${$playerRef}[6];
 
+    # Ternary ?: ($a = $test ? $b : $c;)
+    # a is b if test, c if not
     if ($c == 12) {		# AVG = H/AB
       $cell = !${$playerRef}[0] ? 0 : ${$playerRef}[2] / ${$playerRef}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
