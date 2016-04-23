@@ -256,12 +256,12 @@ foreach (sort keys %seasonsList) {
 	    if ($i >= 12) {
 	      print $stat q{,NaN};
 	    } else {
-	      $playerData{$dude}{$dates[$j]}[$i-1] ||= 0; # just =0? FIXME TODO
-	      print $stat ",$playerData{$dude}{$dates[$j]}[$i-1]";
+	      print $stat q{,0};
+	      $playerData{$dude}{$dates[$j]}[$i-1] = 0;
 	    }
 	    next;
 	  } else {
-	    # Original valye if defined, 0 if not
+	    # Original value if defined, 0 if not
 	    $playerData{$dude}{$dates[$j]}[$i-1] ||= 0;
 	  }
 	}
@@ -324,12 +324,12 @@ foreach my $i (1..scalar @stats - 1) {
 	  if ($i >= 12) {
 	    print $stat q{,NaN};
 	  } else {
-	    $masterData{$dude}{$masterDates[$j]}[$i-1] ||= 0;
-	    print $stat ",$masterData{$dude}{$masterDates[$j]}[$i-1]";
+	    print $stat q{,0};
+	    $masterData{$dude}{$masterDates[$j]}[$i-1] = 0;
 	  }
 	  next;
 	} else {
-	  # Original valye if defined, 0 if not
+	  # Original value if defined, 0 if not
 	  $masterData{$dude}{$masterDates[$j]}[$i-1] ||= 0;
 	}
       }
