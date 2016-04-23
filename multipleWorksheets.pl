@@ -156,8 +156,8 @@ foreach (sort keys %seasonsList) {
 	  $playerData{$player}{'total'}[$c-$offset] = $cell;
 
 	  # I want to use %masterData for the calculations, but we have to
-	  # first establish that data before we can use it.
-	  # Use ternary?  Or too ugly? FIXME TODO
+	  # first establish that data before we can use it.  Not using ternary
+	  # 'cause it's too damn ugly
 	  if ($masterData{$player}{'total'}[$c-$offset]) {
 	    $cell = calcStats($c,\@{$masterData{$player}{'total'}});
 	  } else {

@@ -80,9 +80,8 @@ close $arcindex or die $ERRNO;
 
 
 
-# Special sorting subroutine to ensure Spring comes before sUmmer which
-# comes before Fall
-# Most recent seasons first, for now FIXME TODO
+# Special sorting subroutine to ensure Spring comes before sUmmer which comes
+# before Fall, with the most recent seasons first
 sub seasonSort
   {
     my @input = ($a, $b);
