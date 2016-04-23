@@ -400,13 +400,12 @@ sub calcStats
     # TB=H+2B+2*3B+3*4B, calculated previously
     my $TB = ${$playerRef}[6];
 
-    # See &validDiv
     if ($c == 12) {		# AVG = H/AB
-      $cell = validDiv(${$playerRef}[0]) ? 0 : ${$playerRef}[2] / ${$playerRef}[0];
+      $cell = !${$playerRef}[0] ? 0 : ${$playerRef}[2] / ${$playerRef}[0];
     } elsif ($c == 13) {	# OBP = (H+BB)/PA
-      $cell = validDiv($PA) ? 0 : (${$playerRef}[2] + ${$playerRef}[8]) / $PA;
+      $cell = !$PA ? 0 : (${$playerRef}[2] + ${$playerRef}[8]) / $PA;
     } elsif ($c == 14) {	# SLG = Total bases/AB
-      $cell = validDiv(${$playerRef}[0]) ? 0 : $TB / ${$playerRef}[0];
+      $cell = !${$playerRef}[0] ? 0 : $TB / ${$playerRef}[0];
     } elsif ($c == 15) {	# ISO = SLG-AVG
       $cell = ${$playerRef}[13] - ${$playerRef}[11];
     } elsif ($c == 16) {	# OPS = OBP+SLG
@@ -414,23 +413,11 @@ sub calcStats
     } elsif ($c == 17) {	# GPA = (1.8*OBP+SLG)/4
       $cell = (1.8*${$playerRef}[12] + ${$playerRef}[13])/4;
     } elsif ($c == 18) {	# wOBA
-      $cell = validDiv($PA) ? 0 : calcwOBA(\@{$playerRef}) / $PA;
+      $cell = !$PA ? 0 : calcwOBA(\@{$playerRef}) / $PA;
     }
     return sprintf '%.3f', $cell; # Prettify to three decimals
   }
 
-
-# Pull boring, repetitive division-by-zero/existance checks out of &calcStats
-# for the sake of appearance
-sub validDiv
-  {
-    my $zTest = shift;
-    if ($zTest == 0 || !$zTest) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
 
 # Calculate wOBA scores
 # Pulled out here to make adjusting weights easier and so on
