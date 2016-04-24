@@ -67,25 +67,23 @@ foreach (sort keys %seasonsList) {
   my @dates;	     # Dates of play
   my %playerCount;   # Count time a player is used
 
-  # Ternary ?: ($a = $test ? $b : $c;)
-  # a is b if test, c if not
-  my $tournament = /Tournament/ ? 1 : 0;
-
+  # 1 if match, nada if not
+  my $tournament = /Tournament/;
   # Get each individual game info
   while (@{$seasonsList{$_}}) {
     my $date = shift @{$seasonsList{$_}};
     my ($season,$year) = split / /;
     my $gameDate = "$date.".substr $year, 2;
 
-    $gameDate = $date if $tournament == 1;
+    $gameDate = $date if $tournament;
 
     # Keep track of time
     push @dates, $gameDate;
-    push @masterDates, $gameDate if $tournament != 1;
+    push @masterDates, $gameDate if !$tournament;
 
     # Pull out corresponding worksheet for the individual game
     my %gameData;
-    if ($tournament == 1) {	# Tourny names are parsed differently
+    if ($tournament) {	# Tourny names are parsed differently
       %gameData = %{$book->[$book->[0]{sheet}{"$date"}]};
     } else {
       %gameData = %{$book->[$book->[0]{sheet}{"$season $year $date"}]};
@@ -135,14 +133,14 @@ foreach (sort keys %seasonsList) {
 	  }
 
 	  # Do the same for the master list of players
-	  if ($tournament != 1 && !$masterData{$cell}) {
+	  if (!$tournament && !$masterData{$cell}) {
 	    push @masterPlayers, $cell;
 	    # Keep totals last
 	    if ($masterPlayers[-2] && $masterPlayers[-2] =~ /Total/) {
 	      @masterPlayers[-2,-1] = @masterPlayers[-1,-2];
 	    }
 	    $masterPlayerCount{$cell} = 1; # First time up
-	  } elsif ($tournament != 1 && $masterData{$cell}) {
+	  } elsif (!$tournament && $masterData{$cell}) {
 	    $masterPlayerCount{$cell}++; # Add a count if we've seen him
 	  }
 
@@ -163,21 +161,21 @@ foreach (sort keys %seasonsList) {
 	  } else {
 	    $cell = calcStats($c,\@{$playerData{$player}{'total'}});
 	  }
-	  $masterData{$player}{'total'}[$c-$offset] = $cell if $tournament != 1;
+	  $masterData{$player}{'total'}[$c-$offset] = $cell if !$tournament;
 
 	  # Calculate for the given gameDate to append
 	  $cell = calcStats($c,\@{$playerData{$player}{$gameDate}});
 	} else {
 	  if ($gameData{'cell'}[$c][$r]) {
 	    $playerData{$player}{'total'}[$c-$offset] += $cell;
-	    $masterData{$player}{'total'}[$c-$offset] += $cell if $tournament != 1;
+	    $masterData{$player}{'total'}[$c-$offset] += $cell if !$tournament;
 	  } else {
 	    $playerData{$player}{'total'}[$c-$offset] += 0;
-	    $masterData{$player}{'total'}[$c-$offset] += 0 if $tournament != 1;
+	    $masterData{$player}{'total'}[$c-$offset] += 0 if !$tournament;
 	  }
 	}
 	push @{$playerData{$player}{$gameDate}}, $cell;
-	push @{$masterData{$player}{$gameDate}}, $cell if $tournament != 1;
+	push @{$masterData{$player}{$gameDate}}, $cell if !$tournament;
 
 	# Ignore the last row, for now
 	print $gameCsv ",$cell" if $r != $rowN;
@@ -193,7 +191,7 @@ foreach (sort keys %seasonsList) {
 	  $playerData{$player}{'total'}[$c-$offset] += $cell;
 	  push @{$playerData{$player}{$gameDate}}, $cell;
 
-	  if ($tournament != 1) {
+	  if (!$tournament) {
 	    $masterData{$player}{'total'}[$c-$offset] += $cell;
 	    push @{$masterData{$player}{$gameDate}}, $cell;
 	  }
@@ -209,7 +207,7 @@ foreach (sort keys %seasonsList) {
   }
 
   # Don't treat tournaments as part of a season
-  next if $tournament == 1;
+  next if $tournament;
 
   # Limit season stats to players who have played in a bare minimum of games
   @players = noScrubs(\%playerCount,\@players,\@dates);
@@ -357,7 +355,7 @@ sub createName
     my $name = 'mls_';
 
     # Tournament
-    $name .= 't' if $tourny == 1;
+    $name .= 't' if $tourny;
     # Season
     my $re = join q{|}, keys %seasons;
     my ($season) = $label =~ /\b($re)\b/i;
@@ -373,7 +371,7 @@ sub createName
     my ($curYear) = $label =~ /(\d+)/;
     $name .= substr $curYear, 2;
     # Only append gamedate if appropriate
-    if ($tourny != 1 && $datum) {
+    if (!$tourny && $datum) {
       $name .= "_$datum";
     }
 
