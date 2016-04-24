@@ -20,7 +20,7 @@ if (@ARGV != 1) {
 }
 
 print "Parsing $ARGV[0] for data...\n\n";
-my $book = ReadData ($ARGV[0]);
+my $book = ReadData ($ARGV[0]) or die $ERRNO;
 
 # Season lookup.  Would be easy to substring, but this also means I get all
 # seasons as a nice keys array
