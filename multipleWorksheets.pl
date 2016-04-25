@@ -83,7 +83,7 @@ foreach (sort keys %seasonsList) {
 
     # Pull out corresponding worksheet for the individual game
     my %gameData;
-    if ($tournament) {	# Tourny names are parsed differently
+    if ($tournament) {		# Tourny names are parsed differently
       %gameData = %{$book->[$book->[0]{sheet}{"$date"}]};
     } else {
       %gameData = %{$book->[$book->[0]{sheet}{"$season $year $date"}]};
@@ -412,12 +412,20 @@ sub calcStats
   }
 
 
-# Calculate wOBA scores
-# Pulled out here to make adjusting weights easier and so on
+# Calculate wOBA scores.  Pulled out here to make adjusting weights easier and
+# so on.  This uses values from 2010.  Other data sources include:
+# Original values from The Book: 0.72 0.90 1.241.56 1.95
+# Through 2008: http://tangotiger.net/bdb/lwts_woba_for_bdb.txt
+# Through 2010: http://www.beyondtheboxscore.com/2011/1/4/1912914/custom-woba-and-linear-weights-through-2010-baseball-databank-data
+# FanGraphs: http://www.fangraphs.com/guts.aspx?type=cn
+# Personal calculator: http://www.hardballtimes.com/tht-live/woba-calculator/
+# Also: https://docs.google.com/spreadsheets/d/1AOJekprrMTChBvPw9VJMBR1oaBHKYPY9PRmnySB8HcM/pub?gid=0#
+# And: http://www.tangotiger.net/bsrexpl.html
+# And: http://blog.philbirnbaum.com/2009/10/dont-use-regression-to-calculate-linear.html
 sub calcwOBA
   {
     my $hashRef = shift;
-    my ($BB,$B1,$B2,$B3,$HR) = qw (0.72 0.90 1.24 1.56 1.95);
+    my ($BB,$B1,$B2,$B3,$HR) = qw (0.70 0.89 1.27 1.61 2.07);
 
     my $hits = ${$hashRef}[2] - ${$hashRef}[3] - ${$hashRef}[4] - ${$hashRef}[5];
     return $BB*${$hashRef}[8] + $B1*$hits + $B2*${$hashRef}[3] + $B3*${$hashRef}[4] + $HR*${$hashRef}[5];
