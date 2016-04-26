@@ -242,7 +242,7 @@ foreach (sort keys %seasonsList) {
 
     foreach my $j (0..scalar @dates - 1) {
       # Try to cut down on noise by skipping the first data point of each
-      # calculated stat
+      # calculated stat in a given season (skip first 2 in master data)
       next if ($j == 0 and $i >= 12);
 
       print $stat "$dates[$j]";
@@ -309,9 +309,11 @@ foreach my $i (1..scalar @stats - 1) {
   }
 
   foreach my $j (0..scalar @masterDates - 1) {
-    # Try to cut down on noise by skipping the first data point of each
-    # calculated stat
-    next if ($j == 0 and $i >= 12);
+    # Try to cut down on noise by skipping the first two data points of each
+    # calculated stat (skip just first 1 in each season)
+    # Doesn't deal with people who weren't around at first, they'll still have
+    # gaps. FIXME TODO
+    next if ($j <= 1 and $i >= 12);
 
     print $stat "$masterDates[$j]";
     foreach my $dude (@masterPlayers[0..$#masterPlayers-1]) { # Ignore totals
