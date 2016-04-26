@@ -272,4 +272,4 @@ Player Minor league science, Major league style
   ISO Isolated Power - SLG-AVG
   OPS On-base percentage Plus Slugging - OBP+SLG
   GPA Gross Production Average - (1.8*OBP+SLG)/4
-  wOBA Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action
+  wOBA Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action (weights are from MLB 2010 season)

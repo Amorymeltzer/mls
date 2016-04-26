@@ -16,7 +16,7 @@
     <option value="K">Strikeouts</option>
     <option value="SAC">Sac-flies</option>
     <option value="AVG">Batting Average</option>
-    <option value="OBP">OBP</option>
+    <option value="OBP">On-Base Percentage</option>
     <option value="SLG">Slugging</option>
     <option value="ISO">Isolated Power</option>
     <option value="OPS">OBP Plus SLG</option>
