@@ -23,7 +23,10 @@
 <th data-sort-method='number' title='Batting average - H/AB'>AVG</th>
 <th data-sort-method='number' title='On-Base Percentage - (H+BB)/(AB+BB+SAC)'>OBP</th>
 <th data-sort-method='number' title='Sugging - TB/AB'>SLG</th>
+<th data-sort-method='number' title='Isolated Power - SLG-AVG'>ISO</th>
 <th data-sort-method='number' title='On-base percentage Plus Slugging - OBP+SLG'>OPS</th>
+<th data-sort-method='number' title='Gross Production Average - (1.8*OBP+SLG)/4'>GPA</th>
+<th data-sort-method='number' title='Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action (weights are from MLB 2010 season)'>wOBA</th>
 </tr>
 </thead>
 <tbody>
@@ -43,7 +46,10 @@
 <td>0.286</td>
 <td>0.286</td>
 <td>0.429</td>
+<td>0.143</td>
 <td>0.715</td>
+<td>0.236</td>
+<td>0.309</td>
 </tr>
 <tr>
 <td data-sort='Patel'>Qaiser Patel</td>
@@ -61,7 +67,10 @@
 <td>0.571</td>
 <td>0.571</td>
 <td>0.857</td>
+<td>0.286</td>
 <td>1.428</td>
+<td>0.471</td>
+<td>0.617</td>
 </tr>
 <tr>
 <td data-sort='Patton'>Oliver Patton</td>
@@ -79,133 +88,10 @@
 <td>0.600</td>
 <td>0.600</td>
 <td>1.400</td>
+<td>0.800</td>
 <td>2.000</td>
-</tr>
-<tr>
-<td data-sort='Edwards'>Joe Edwards</td>
-<td>5</td>
-<td>1</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.600</td>
-<td>0.600</td>
-<td>0.600</td>
-<td>1.200</td>
-</tr>
-<tr>
-<td data-sort='Squitieri'>Rich Squitieri</td>
-<td>5</td>
-<td>0</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>2</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.400</td>
-<td>0.400</td>
-<td>0.400</td>
-<td>0.800</td>
-</tr>
-<tr>
-<td data-sort='Bayes'>Derek Bayes</td>
-<td>5</td>
-<td>0</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>2</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.400</td>
-<td>0.400</td>
-<td>0.400</td>
-<td>0.800</td>
-</tr>
-<tr>
-<td data-sort='Hanten'>Nick Hanten</td>
-<td>5</td>
-<td>2</td>
-<td>4</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.800</td>
-<td>0.800</td>
-<td>1.200</td>
-<td>2.000</td>
-</tr>
-<tr>
-<td data-sort='Meltzer'>Amory Meltzer</td>
-<td>5</td>
-<td>1</td>
-<td>3</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.600</td>
-<td>0.600</td>
-<td>0.800</td>
-<td>1.400</td>
-</tr>
-<tr>
-<td data-sort='Walker'>Gordon Walker</td>
-<td>5</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.200</td>
-<td>0.200</td>
-<td>0.200</td>
-<td>0.400</td>
-</tr>
-<tr>
-<td data-sort='Turner'>Matt Turner</td>
-<td>5</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.200</td>
-<td>0.200</td>
-<td>0.200</td>
-<td>0.400</td>
+<td>0.620</td>
+<td>0.846</td>
 </tr>
 <tr>
 <td data-sort='Heuer'>Luke Heuer</td>
@@ -223,7 +109,52 @@
 <td>0.500</td>
 <td>0.500</td>
 <td>0.500</td>
+<td>0.000</td>
 <td>1.000</td>
+<td>0.350</td>
+<td>0.445</td>
+</tr>
+<tr>
+<td data-sort='Squitieri'>Rich Squitieri</td>
+<td>5</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.000</td>
+<td>0.800</td>
+<td>0.280</td>
+<td>0.356</td>
+</tr>
+<tr>
+<td data-sort='Edwards'>Joe Edwards</td>
+<td>5</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.600</td>
+<td>0.600</td>
+<td>0.600</td>
+<td>0.000</td>
+<td>1.200</td>
+<td>0.420</td>
+<td>0.534</td>
 </tr>
 <tr>
 <td data-sort='Mirman'>Nick Mirman</td>
@@ -241,7 +172,52 @@
 <td>0.500</td>
 <td>0.500</td>
 <td>0.500</td>
+<td>0.000</td>
 <td>1.000</td>
+<td>0.350</td>
+<td>0.445</td>
+</tr>
+<tr>
+<td data-sort='Bayes'>Derek Bayes</td>
+<td>5</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.000</td>
+<td>0.800</td>
+<td>0.280</td>
+<td>0.356</td>
+</tr>
+<tr>
+<td data-sort='Hanten'>Nick Hanten</td>
+<td>5</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.800</td>
+<td>0.800</td>
+<td>1.200</td>
+<td>0.400</td>
+<td>2.000</td>
+<td>0.660</td>
+<td>0.864</td>
 </tr>
 <tr>
 <td data-sort='Richardson'>Scott Richardson</td>
@@ -259,7 +235,73 @@
 <td>0.500</td>
 <td>0.500</td>
 <td>1.000</td>
+<td>0.500</td>
 <td>1.500</td>
+<td>0.475</td>
+<td>0.635</td>
+</tr>
+<tr>
+<td data-sort='Meltzer'>Amory Meltzer</td>
+<td>5</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.600</td>
+<td>0.600</td>
+<td>0.800</td>
+<td>0.200</td>
+<td>1.400</td>
+<td>0.470</td>
+<td>0.610</td>
+</tr>
+<tr>
+<td data-sort='Walker'>Gordon Walker</td>
+<td>5</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.200</td>
+<td>0.200</td>
+<td>0.200</td>
+<td>0.000</td>
+<td>0.400</td>
+<td>0.140</td>
+<td>0.178</td>
+</tr>
+<tr>
+<td data-sort='Turner'>Matt Turner</td>
+<td>5</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.200</td>
+<td>0.200</td>
+<td>0.200</td>
+<td>0.000</td>
+<td>0.400</td>
+<td>0.140</td>
+<td>0.178</td>
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
@@ -277,7 +319,10 @@
 <td style='font-weight:bold;'>0.467</td>
 <td style='font-weight:bold;'>0.467</td>
 <td style='font-weight:bold;'>0.650</td>
+<td style='font-weight:bold;'>0.183</td>
 <td style='font-weight:bold;'>1.117</td>
+<td style='font-weight:bold;'>0.373</td>
+<td style='font-weight:bold;'>0.486</td>
 </tr>
 </tbody>
 </table>

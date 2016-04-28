@@ -23,7 +23,10 @@
 <th data-sort-method='number' title='Batting average - H/AB'>AVG</th>
 <th data-sort-method='number' title='On-Base Percentage - (H+BB)/(AB+BB+SAC)'>OBP</th>
 <th data-sort-method='number' title='Sugging - TB/AB'>SLG</th>
+<th data-sort-method='number' title='Isolated Power - SLG-AVG'>ISO</th>
 <th data-sort-method='number' title='On-base percentage Plus Slugging - OBP+SLG'>OPS</th>
+<th data-sort-method='number' title='Gross Production Average - (1.8*OBP+SLG)/4'>GPA</th>
+<th data-sort-method='number' title='Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action (weights are from MLB 2010 season)'>wOBA</th>
 </tr>
 </thead>
 <tbody>
@@ -43,7 +46,10 @@
 <td>0.808</td>
 <td>0.828</td>
 <td>1.308</td>
+<td>0.500</td>
 <td>2.136</td>
+<td>0.700</td>
+<td>0.887</td>
 </tr>
 <tr>
 <td data-sort='Patton'>Oliver Patton</td>
@@ -61,7 +67,10 @@
 <td>0.630</td>
 <td>0.621</td>
 <td>1.148</td>
+<td>0.518</td>
 <td>1.769</td>
+<td>0.566</td>
+<td>0.731</td>
 </tr>
 <tr>
 <td data-sort='Bayes'>Derek Bayes</td>
@@ -79,7 +88,10 @@
 <td>0.556</td>
 <td>0.600</td>
 <td>0.556</td>
+<td>0.000</td>
 <td>1.156</td>
+<td>0.409</td>
+<td>0.515</td>
 </tr>
 <tr>
 <td data-sort='Edwards'>Joe Edwards</td>
@@ -97,7 +109,10 @@
 <td>0.739</td>
 <td>0.708</td>
 <td>1.348</td>
+<td>0.609</td>
 <td>2.056</td>
+<td>0.656</td>
+<td>0.849</td>
 </tr>
 <tr>
 <td data-sort='Squitieri'>Rich Squitieri</td>
@@ -115,7 +130,10 @@
 <td>0.652</td>
 <td>0.654</td>
 <td>0.826</td>
+<td>0.174</td>
 <td>1.480</td>
+<td>0.501</td>
+<td>0.624</td>
 </tr>
 <tr>
 <td data-sort='Hanten'>Nick Hanten</td>
@@ -133,7 +151,10 @@
 <td>0.545</td>
 <td>0.565</td>
 <td>0.545</td>
+<td>0.000</td>
 <td>1.110</td>
+<td>0.390</td>
+<td>0.495</td>
 </tr>
 <tr>
 <td data-sort='Henschen'>Charlie Henschen</td>
@@ -151,7 +172,10 @@
 <td>0.684</td>
 <td>0.700</td>
 <td>0.895</td>
+<td>0.211</td>
 <td>1.595</td>
+<td>0.539</td>
+<td>0.688</td>
 </tr>
 <tr>
 <td data-sort='Richardson'>Scott Richardson</td>
@@ -169,7 +193,10 @@
 <td>0.550</td>
 <td>0.571</td>
 <td>0.750</td>
+<td>0.200</td>
 <td>1.321</td>
+<td>0.444</td>
+<td>0.574</td>
 </tr>
 <tr>
 <td data-sort='Meltzer'>Amory Meltzer</td>
@@ -187,7 +214,10 @@
 <td>0.545</td>
 <td>0.565</td>
 <td>0.636</td>
+<td>0.091</td>
 <td>1.201</td>
+<td>0.413</td>
+<td>0.528</td>
 </tr>
 <tr>
 <td data-sort='Walker'>Gordon Walker</td>
@@ -205,7 +235,10 @@
 <td>0.524</td>
 <td>0.565</td>
 <td>0.524</td>
+<td>0.000</td>
 <td>1.089</td>
+<td>0.385</td>
+<td>0.487</td>
 </tr>
 <tr>
 <td data-sort='Heuer'>Luke Heuer</td>
@@ -223,7 +256,10 @@
 <td>0.682</td>
 <td>0.667</td>
 <td>1.455</td>
+<td>0.773</td>
 <td>2.122</td>
+<td>0.664</td>
+<td>0.846</td>
 </tr>
 <tr>
 <td data-sort='Mirman'>Nick Mirman</td>
@@ -241,7 +277,10 @@
 <td>0.625</td>
 <td>0.667</td>
 <td>0.625</td>
+<td>0.000</td>
 <td>1.292</td>
+<td>0.456</td>
+<td>0.572</td>
 </tr>
 <tr>
 <td data-sort='Scott'>Andrew Scott</td>
@@ -259,7 +298,10 @@
 <td>0.571</td>
 <td>0.571</td>
 <td>0.571</td>
+<td>0.000</td>
 <td>1.142</td>
+<td>0.400</td>
+<td>0.509</td>
 </tr>
 <tr>
 <td data-sort='Patel'>Qaiser Patel</td>
@@ -277,7 +319,10 @@
 <td>0.778</td>
 <td>0.750</td>
 <td>1.000</td>
+<td>0.222</td>
 <td>1.750</td>
+<td>0.588</td>
+<td>0.699</td>
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
@@ -295,7 +340,10 @@
 <td style='font-weight:bold;'>0.640</td>
 <td style='font-weight:bold;'>0.652</td>
 <td style='font-weight:bold;'>0.928</td>
+<td style='font-weight:bold;'>0.288</td>
 <td style='font-weight:bold;'>1.580</td>
+<td style='font-weight:bold;'>0.525</td>
+<td style='font-weight:bold;'>0.668</td>
 </tr>
 </tbody>
 </table>

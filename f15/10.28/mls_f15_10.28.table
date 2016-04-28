@@ -23,7 +23,10 @@
 <th data-sort-method='number' title='Batting average - H/AB'>AVG</th>
 <th data-sort-method='number' title='On-Base Percentage - (H+BB)/(AB+BB+SAC)'>OBP</th>
 <th data-sort-method='number' title='Sugging - TB/AB'>SLG</th>
+<th data-sort-method='number' title='Isolated Power - SLG-AVG'>ISO</th>
 <th data-sort-method='number' title='On-base percentage Plus Slugging - OBP+SLG'>OPS</th>
+<th data-sort-method='number' title='Gross Production Average - (1.8*OBP+SLG)/4'>GPA</th>
+<th data-sort-method='number' title='Weighted On-Base Average - Uses linear weights to calculate true value of each offensive action (weights are from MLB 2010 season)'>wOBA</th>
 </tr>
 </thead>
 <tbody>
@@ -43,7 +46,10 @@
 <td>0.750</td>
 <td>0.800</td>
 <td>1.500</td>
+<td>0.750</td>
 <td>2.300</td>
+<td>0.735</td>
+<td>0.894</td>
 </tr>
 <tr>
 <td data-sort='Patton'>Oliver Patton</td>
@@ -61,7 +67,10 @@
 <td>0.800</td>
 <td>0.800</td>
 <td>1.400</td>
+<td>0.600</td>
 <td>2.200</td>
+<td>0.710</td>
+<td>0.940</td>
 </tr>
 <tr>
 <td data-sort='Heuer'>Luke Heuer</td>
@@ -79,7 +88,10 @@
 <td>0.750</td>
 <td>0.800</td>
 <td>1.750</td>
+<td>1.000</td>
 <td>2.550</td>
+<td>0.798</td>
+<td>0.962</td>
 </tr>
 <tr>
 <td data-sort='Edwards'>Joe Edwards</td>
@@ -97,7 +109,10 @@
 <td>0.800</td>
 <td>0.800</td>
 <td>1.600</td>
+<td>0.800</td>
 <td>2.400</td>
+<td>0.760</td>
+<td>1.008</td>
 </tr>
 <tr>
 <td data-sort='Squitieri'>Rich Squitieri</td>
@@ -115,7 +130,10 @@
 <td>1.000</td>
 <td>0.800</td>
 <td>1.000</td>
+<td>0.000</td>
 <td>1.800</td>
+<td>0.610</td>
+<td>0.636</td>
 </tr>
 <tr>
 <td data-sort='Hanten'>Nick Hanten</td>
@@ -133,7 +151,10 @@
 <td>0.750</td>
 <td>0.800</td>
 <td>0.750</td>
+<td>0.000</td>
 <td>1.550</td>
+<td>0.548</td>
+<td>0.674</td>
 </tr>
 <tr>
 <td data-sort='Henschen'>Charlie Henschen</td>
@@ -151,7 +172,10 @@
 <td>1.000</td>
 <td>1.000</td>
 <td>1.000</td>
+<td>0.000</td>
 <td>2.000</td>
+<td>0.700</td>
+<td>0.852</td>
 </tr>
 <tr>
 <td data-sort='Richardson'>Scott Richardson</td>
@@ -169,7 +193,10 @@
 <td>0.667</td>
 <td>0.750</td>
 <td>0.667</td>
+<td>0.000</td>
 <td>1.417</td>
+<td>0.504</td>
+<td>0.620</td>
 </tr>
 <tr>
 <td data-sort='Meltzer'>Amory Meltzer</td>
@@ -187,7 +214,10 @@
 <td>0.500</td>
 <td>0.500</td>
 <td>0.750</td>
+<td>0.250</td>
 <td>1.250</td>
+<td>0.412</td>
+<td>0.540</td>
 </tr>
 <tr>
 <td data-sort='Walker'>Gordon Walker</td>
@@ -205,7 +235,10 @@
 <td>0.500</td>
 <td>0.500</td>
 <td>0.500</td>
+<td>0.000</td>
 <td>1.000</td>
+<td>0.350</td>
+<td>0.445</td>
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
@@ -223,7 +256,10 @@
 <td style='font-weight:bold;'>0.744</td>
 <td style='font-weight:bold;'>0.766</td>
 <td style='font-weight:bold;'>1.128</td>
+<td style='font-weight:bold;'>0.384</td>
 <td style='font-weight:bold;'>1.894</td>
+<td style='font-weight:bold;'>0.627</td>
+<td style='font-weight:bold;'>0.771</td>
 </tr>
 </tbody>
 </table>
