@@ -191,7 +191,7 @@ a:hover {
     vertical-align: baseline;
     text-align: center;
     white-space: nowrap;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.5rem;
     border: 1px solid #e9ebec; }
 .main-content table tr:nth-child(even) {
     background-color: #f6f6f6; }
