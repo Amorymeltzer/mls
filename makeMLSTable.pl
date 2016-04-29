@@ -53,6 +53,7 @@ while (<$in>) {
     }
     next;
   } elsif ($tmp[0] =~ /Total/) {
+    warn "Warning: Total row not the end of $input!\n" if !eof;
     @total = @tmp;
     last;
   }
