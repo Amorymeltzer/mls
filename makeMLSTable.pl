@@ -46,10 +46,10 @@ while (<$in>) {
 
     # Try to catch some potential errors
     if ($header[-1] ne 'wOBA') {
-      warn "Warning: Potential extra columns detected!!\n";
+      warn "Warning: Potential extra columns detected in $input!!\n";
     }
     if ($NR != 1) {
-      warn "Warning: Potential extra rows detected!\n"
+      warn "Warning: Potential extra rows detected in $input!\n"
     }
     next;
   } elsif ($tmp[0] =~ /Total/) {
@@ -65,10 +65,10 @@ close $in or die $ERRNO;
 
 # Atempt to replace previous good data check with these mediocre data checks
 if ($total[3]+$total[10] > $total[1]) {
-  warn "Warning: H+K is greater than AB\nIncorrect data?\n";
+  warn "Warning: H+K is greater than AB\nIncorrect data in $input?\n";
 }
 if ($total[2] != $total[8]) {
-  warn "Warning: R and RBIs are not equal\nIncorrect data?\n";
+  warn "Warning: R and RBIs are not equal\nIncorrect data in $input?\n";
 }
 
 # Date parsing
