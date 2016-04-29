@@ -58,6 +58,13 @@ else
     # Main process: parses master excel and produces/calculates all data
     perl multipleWorksheets.pl "$input"
     echo
+
+    # Die angrily if xlsx processing fails
+    if [ $? == 1 ]; then
+	echo "Aborting.  Cleanup likely needed."
+	exit
+    fi
+
     # Get all the games and seasons and tournaments that need linking to
     SUBS=$(find -E . -regex "./mls_.*_.*.csv" -o -regex "./mls_t....csv" | grep -v _site)
     # Generate archive index lists via

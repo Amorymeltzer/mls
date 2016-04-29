@@ -118,6 +118,13 @@ foreach (sort keys %seasonsList) {
 	  # Define current player for entire row, saves issue of duplicating
 	  # and polluting @players
 	  $player = $cell;
+
+	  # Die angrily if final row isn't totals, can't proceed
+	  if ($player ne 'Total:' && $r == $rowN) {
+	    warn "FATAL error: Totals not found in $date!!!\n";
+	    exit 1;
+	  }
+
 	  # Build player array.  Only append if it's a new player, otherwise
 	  # we should just clear-out the current game array
 	  if (! $playerData{$cell}) {
