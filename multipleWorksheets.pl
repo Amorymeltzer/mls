@@ -210,6 +210,7 @@ foreach (sort keys %seasonsList) {
     # Print out last row.  Act all cocky 'n shit by using @players
     print $gameCsv "\n\"$players[-1]\",";
     print $gameCsv join q{,}, @{$playerData{$players[-1]}{$gameDate}};
+    print $gameCsv "\n";
     close $gameCsv or die $ERRNO;
   }
 
