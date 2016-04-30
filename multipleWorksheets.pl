@@ -52,7 +52,7 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 
 
 # Stats measured, for building the player hash
-my @stats = qw ("Player" AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
+my @stats = qw (Player AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
 # Master lists
 my %masterData;	     # Hash holding per-player stat data [total, current game]
 my @masterPlayers;   # Player names
@@ -117,7 +117,7 @@ foreach (sort keys %seasonsList) {
 	  next;
 	} elsif ($c == 1) {
 	  # Ignore the last row, for now
-	  print $gameCsv "\n\"$cell\"" if $r != $rowN;
+	  print $gameCsv "\n$cell" if $r != $rowN;
 	  # Define current player for entire row, saves issue of duplicating
 	  # and polluting @players
 	  $player = $cell;
@@ -211,7 +211,7 @@ foreach (sort keys %seasonsList) {
       }
     }
     # Print out last row.  Act all cocky 'n shit by using @players
-    print $gameCsv "\n\"$players[-1]\",";
+    print $gameCsv "\n$players[-1],";
     print $gameCsv join q{,}, @{$playerData{$players[-1]}{$gameDate}};
     print $gameCsv "\n";
     close $gameCsv or die $ERRNO;
@@ -228,7 +228,7 @@ foreach (sort keys %seasonsList) {
   print $seasonCsv join q{,}, @stats;
   print $seasonCsv "\n";
   foreach my $dude (@players) {
-    print $seasonCsv "\"$dude\",";
+    print $seasonCsv "$dude,";
     print $seasonCsv join q{,}, @{$playerData{$dude}{'total'}};
     print $seasonCsv "\n";
   }
@@ -297,7 +297,7 @@ open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
 print $masterCsv "\n";
 foreach my $dude (@masterPlayers) {
-  print $masterCsv "\"$dude\",";
+  print $masterCsv "$dude,";
   print $masterCsv join q{,}, @{$masterData{$dude}{'total'}};
   print $masterCsv "\n";
 }
