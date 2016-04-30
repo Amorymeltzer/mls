@@ -110,7 +110,10 @@ foreach (sort keys %seasonsList) {
       for my $c (1..$colN) {
 	my $cell = $gameData{'cell'}[$c][$r]; # Just easier to remember
 	if ($r == 1) {			      # Hardcoded above in @stats
-	  warn "Warning: Potential extra columns detected!!\n" if ($c == 1 and $cell ne 'Player');
+	  if ($c == 1 and $cell ne 'Player') {
+	    warn "FATAL error: Potential extra columns detected!!\n";
+	    exit 1;
+	  }
 	  next;
 	} elsif ($c == 1) {
 	  # Ignore the last row, for now
