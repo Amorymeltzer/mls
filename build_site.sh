@@ -57,12 +57,14 @@ elif [ ! $(echo "$input" | grep -oE "\.xlsx?$") ]; then
 else
     # Main process: parses master excel and produces/calculates all data
     perl multipleWorksheets.pl "$input"
-    echo
 
     # Die angrily if xlsx processing fails
     if [ $? == 1 ]; then
+	echo
 	echo "Aborting.  Cleanup likely needed."
 	exit
+    else
+	echo
     fi
 
     # Get all the games and seasons and tournaments that need linking to
