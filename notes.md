@@ -4,7 +4,6 @@
 - Stat predictions, goals?  Team stats (RF/RA), PCA plots? -> Joe
 - Individual stats with goal AVG?  Would need player pages...
 - Sort players by batting order?  Eh.
-- What happens to order in season when players play, then miss, then come back?  Check it out (Scott, Luke, etc.)
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 #### Archive system
 - Small links to other archived tables - next/previous seasons?
