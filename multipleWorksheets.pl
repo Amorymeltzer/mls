@@ -116,6 +116,9 @@ foreach (sort keys %seasonsList) {
 	  } elsif ($c > 7 and $c < 12 and $cell ne $stats[$c]) {
 	    warn "FATAL error: Potential extra columns detected in $date!!!\n";
 	    exit 1;
+	  } elsif ($c > 12 and $cell) {
+	    warn "FATAL error: Potential extra columns detected in $date!!!\n";
+	    exit 1;
 	  }
 	  next;
 	} elsif ($c == 1) {
