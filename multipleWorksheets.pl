@@ -111,14 +111,11 @@ foreach (sort keys %seasonsList) {
 	my $cell = $gameData{'cell'}[$c][$r]; # Just easier to remember
 	if ($r == 1) {			      # Hardcoded above in @stats
 	  if ($c <= 7 and $cell ne $stats[$c-1]) {
-	    warn "FATAL error: Potential extra columns detected in $date!!!\n";
-	    exit 1;
+	    die "FATAL error: Potential extra columns detected in $date!!!\n";
 	  } elsif ($c > 7 and $c < 12 and $cell ne $stats[$c]) {
-	    warn "FATAL error: Potential extra columns detected in $date!!!\n";
-	    exit 1;
+	    die "FATAL error: Potential extra columns detected in $date!!!\n";
 	  } elsif ($c > 12 and $cell) {
-	    warn "FATAL error: Potential extra columns detected in $date!!!\n";
-	    exit 1;
+	    die "FATAL error: Potential extra columns detected in $date!!!\n";
 	  }
 	  next;
 	} elsif ($c == 1) {
@@ -130,8 +127,7 @@ foreach (sort keys %seasonsList) {
 
 	  # Die angrily if final row isn't totals, can't proceed
 	  if ($player ne 'Total:' && $r == $rowN) {
-	    warn "FATAL error: Totals not found in $date!!!\n";
-	    exit 1;
+	    die "FATAL error: Totals not found in $date!!!\n";
 	  }
 
 	  # Build player array.  Only append if it's a new player, otherwise

@@ -59,7 +59,7 @@ else
     perl multipleWorksheets.pl "$input"
 
     # Die angrily if xlsx processing fails
-    if [ $? == 1 ]; then
+    if [ $? != 0 ]; then
 	echo
 	echo "Aborting.  Cleanup likely needed."
 	exit
