@@ -110,11 +110,7 @@ foreach (sort keys %seasonsList) {
       for my $c (1..$colN) {
 	my $cell = $gameData{'cell'}[$c][$r]; # Just easier to remember
 	if ($r == 1) {			      # Hardcoded above in @stats
-	  if ($c <= 7 and $cell ne $stats[$c-1]) {
-	    die "FATAL error: Potential extra columns detected in $date!!!\n";
-	  } elsif ($c > 7 and $c < 12 and $cell ne $stats[$c]) {
-	    die "FATAL error: Potential extra columns detected in $date!!!\n";
-	  } elsif ($c > 12 and $cell) {
+	  if (($c <= 7 and $cell ne $stats[$c-1]) || ($c > 7 and $c < 12 and $cell ne $stats[$c]) || ($c > 12 and $cell)) {
 	    die "FATAL error: Potential extra columns detected in $date!!!\n";
 	  }
 	  next;
