@@ -15,5 +15,6 @@
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 #### JS
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
+- Or Chartjs? https://github.com/chartjs/Chart.js
 - Labels overlap, how can I deal with that?  Force-directed?
 - Or use a legend?  http://d3-legend.susielu.com or http://www.competa.com/blog/2015/07/d3-js-part-7-of-9-adding-a-legend-to-explain-the-data/
