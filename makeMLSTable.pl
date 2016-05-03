@@ -39,7 +39,6 @@ open my $in, '<', "$input" or die $ERRNO;
 while (<$in>) {
   chomp;
   my @tmp = split /,/;
-  $tmp[0] =~ s/\"//g;		# No quotes around names
   $tmp[-1] =~ s/\r//g;		# No stupid ^M crap
   if ($tmp[0] =~ /Player/) {
     @header = @tmp;
