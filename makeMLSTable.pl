@@ -13,13 +13,13 @@ use Getopt::Std;
 my %opts = ();
 getopts('uagh',\%opts);
 
-if ($opts{h} || @ARGV == 0 || @ARGV > 2) {
+if ($opts{h} || @ARGV != 2) {
   usage();
   exit;
 }
 
 my $input = $ARGV[0];
-my $output = $ARGV[1] // 'table.table';
+my $output = $ARGV[1];
 my $archive = $opts{a} // 0;	# Treat old ones slightly differently
 my $game = $opts{g} // 0;	# Treat old ones slightly differently
 
@@ -238,7 +238,7 @@ close $out or die $ERRNO;
 sub usage
   {
     print <<"USAGE";
-Usage: $PROGRAM_NAME [-uah] mls_data.csv [output.html]
+Usage: $PROGRAM_NAME [-uah] mls_data.csv output.html
       -u Update the last-modified date of the index page
       -a Indicate input is a season file, treat differently
       -g Indicate input is a game file, treat differently
