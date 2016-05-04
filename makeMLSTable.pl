@@ -15,7 +15,6 @@ getopts('uagh',\%opts);
 
 if ($opts{h} || @ARGV != 2) {
   usage();
-  exit;
 }
 
 my $input = $ARGV[0];
@@ -244,7 +243,7 @@ Usage: $PROGRAM_NAME [-uah] mls_data.csv output.html
       -g Indicate input is a game file, treat differently
       -h Print this help message
 USAGE
-    return;
+    exit;
   }
 
 
