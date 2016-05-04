@@ -62,7 +62,7 @@ while (<$in>) {
 close $in or die $ERRNO;
 
 # Atempt to replace previous good data check with these mediocre data checks
-if ($total[3]+$total[10] > $total[1]) {
+if ($total[3] + $total[10] > $total[1]) {
   warn "Warning: H+K is greater than AB\nIncorrect data in $input?\n";
 }
 if ($total[2] != $total[8]) {
@@ -74,8 +74,8 @@ my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst)=localtime;
 $year += 1900;			# Convert to 4-digit year
 my @months = qw (January February March April May June July August September
 		 October November December);
-my $updatedDate;
 # Get proper date when updating, default to old date
+my $updatedDate;
 if ($opts{u} && !$archive) {
   $updatedDate = "$months[$mon] $mday, $year";
 
