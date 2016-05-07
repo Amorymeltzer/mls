@@ -51,6 +51,12 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 }
 
 
+# Lineup
+my @sort = (
+	    'Andrew Burch',
+	    'Joe Edwards',
+	    'Amory Meltzer',
+	   );
 # Stats measured, for building the player hash
 my @stats = qw (Player AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
 # Master lists
@@ -291,6 +297,7 @@ foreach (sort keys %seasonsList) {
 
 # Limit lifetime stats to players who have played in a bare minimum of games
 @masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
+#@masterPlayers = lineup(\@sort,\@masterPlayers);
 ## Dump lifetime totals (same format as season totals)
 open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
@@ -465,6 +472,23 @@ sub noScrubs
 
     foreach (@{$playerRef}) {
       push @return, $_ if (${$countRef}{$_} / $max >= $threshold);
+    }
+
+    return @return;
+  }
+
+sub lineup
+  {
+    my ($orderRef,$playerRef) = @_;
+    my @return;
+    my %orderMap = map { ${$orderRef}[$_] => $_ } 0..$#{$orderRef};
+
+    foreach (@{$playerRef}) {
+      $return[$orderMap{$_}] = $_ if defined $orderMap{$_};
+    }
+
+    foreach (@{$playerRef}) {
+      push @return, $_ if !defined $orderMap{$_};
     }
 
     return @return;
