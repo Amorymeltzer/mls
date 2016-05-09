@@ -492,10 +492,11 @@ sub lineup
     my ($orderRef,$playerRef) = @_;
     my @return;
     my %orderMap = map { ${$orderRef}[$_] => $_ } 0..$#{$orderRef};
+    my %confirm = map { $_ => 1 } @{$playerRef};
 
     # Place everybody appropriately
     foreach (@{$orderRef}) {
-      push @return, $_ if defined $orderMap{$_};
+      push @return, $_ if (defined $orderMap{$_} and defined $confirm{$_});
     }
 
     # Throw anybody new at the end
