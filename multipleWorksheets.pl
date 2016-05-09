@@ -51,11 +51,22 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 }
 
 
-# Lineup
-my @sort = (
+# Murderers' Row
+my @lineup = (
 	    'Andrew Burch',
+	    'Qaiser Patel',
+	    'Oliver Patton',
+	    'Luke Heuer',
 	    'Joe Edwards',
+	    'Rich Squitieri',
+	    'Nick Mirman',
+	    'Derek Bayes',
+	    'Nick Hanten',
+	    'Charlie Henschen',
+	    'Scott Richardson',
 	    'Amory Meltzer',
+	    'Gordon Walker',
+	    'Matt Turner',
 	   );
 # Stats measured, for building the player hash
 my @stats = qw (Player AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
@@ -225,7 +236,6 @@ foreach (sort keys %seasonsList) {
   # Don't treat tournaments as part of a season
   next if $tournament;
 
-  # Limit season stats to players who have played in a bare minimum of games
   @players = noScrubs(\%playerCount,\@players,\@dates);
   ## Dump season totals (identical to old-style format)
   my $seasonOutfile = createName($_,q{},0);
@@ -295,9 +305,8 @@ foreach (sort keys %seasonsList) {
   }
 }
 
-# Limit lifetime stats to players who have played in a bare minimum of games
 @masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
-#@masterPlayers = lineup(\@sort,\@masterPlayers);
+@masterPlayers = lineup(\@lineup,\@masterPlayers);
 ## Dump lifetime totals (same format as season totals)
 open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
 print $masterCsv join q{,}, @stats;
@@ -463,7 +472,7 @@ sub schwartz
       @{$ref};
   }
 
-
+# Limit stats to players who have played in a bare minimum of games
 sub noScrubs
   {
     my ($countRef,$playerRef,$dateRef) = @_;
@@ -477,16 +486,19 @@ sub noScrubs
     return @return;
   }
 
+# List players according to Joe's masterful lineup
 sub lineup
   {
     my ($orderRef,$playerRef) = @_;
     my @return;
     my %orderMap = map { ${$orderRef}[$_] => $_ } 0..$#{$orderRef};
 
-    foreach (@{$playerRef}) {
-      $return[$orderMap{$_}] = $_ if defined $orderMap{$_};
+    # Place everybody appropriately
+    foreach (@{$orderRef}) {
+      push @return, $_ if defined $orderMap{$_};
     }
 
+    # Throw anybody new at the end
     foreach (@{$playerRef}) {
       push @return, $_ if !defined $orderMap{$_};
     }
