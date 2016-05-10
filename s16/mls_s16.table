@@ -115,27 +115,6 @@
 <td>0.445</td>
 </tr>
 <tr>
-<td data-sort='Squitieri'>Rich Squitieri</td>
-<td>5</td>
-<td>0</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>2</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.400</td>
-<td>0.400</td>
-<td>0.400</td>
-<td>0.000</td>
-<td>0.800</td>
-<td>0.280</td>
-<td>0.356</td>
-</tr>
-<tr>
 <td data-sort='Edwards'>Joe Edwards</td>
 <td>8</td>
 <td>3</td>
@@ -155,6 +134,27 @@
 <td>1.681</td>
 <td>0.531</td>
 <td>0.668</td>
+</tr>
+<tr>
+<td data-sort='Squitieri'>Rich Squitieri</td>
+<td>5</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.000</td>
+<td>0.800</td>
+<td>0.280</td>
+<td>0.356</td>
 </tr>
 <tr>
 <td data-sort='Mirman'>Nick Mirman</td>

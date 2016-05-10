@@ -53,21 +53,22 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 
 # Murderers' Row
 my @lineup = (
-	    'Andrew Burch',
-	    'Qaiser Patel',
-	    'Oliver Patton',
-	    'Luke Heuer',
-	    'Joe Edwards',
-	    'Rich Squitieri',
-	    'Nick Mirman',
-	    'Derek Bayes',
-	    'Nick Hanten',
-	    'Charlie Henschen',
-	    'Scott Richardson',
-	    'Amory Meltzer',
-	    'Gordon Walker',
-	    'Matt Turner',
-	   );
+	      'Andrew Burch',
+	      'Qaiser Patel',
+	      'Oliver Patton',
+	      'Luke Heuer',
+	      'Joe Edwards',
+	      'Rich Squitieri',
+	      'Nick Mirman',
+	      'Derek Bayes',
+	      'Nick Hanten',
+	      'Charlie Henschen',
+	      'Scott Richardson',
+	      'Amory Meltzer',
+	      'Gordon Walker',
+	      'Andrew Scott',
+	      'Matt Turner',
+	     );
 # Stats measured, for building the player hash
 my @stats = qw (Player AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
 # Master lists
@@ -237,6 +238,7 @@ foreach (sort keys %seasonsList) {
   next if $tournament;
 
   @players = noScrubs(\%playerCount,\@players,\@dates);
+  @players = lineup(\@lineup,\@players);
   ## Dump season totals (identical to old-style format)
   my $seasonOutfile = createName($_,q{},0);
   open my $seasonCsv, '>', "$seasonOutfile" or die $ERRNO;
