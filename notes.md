@@ -1,9 +1,9 @@
 ### ToDo
 - More content! :+1: :100: :+1:
-#### Stats
-- Stat predictions, goals?  Team stats (RF/RA), PCA plots? -> Joe
-- Individual stats with goal AVG?  Would need player pages...
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
+#### Stats
+- Team stats (RF/RA), PCA plots?
+- Individual stats with predictions, goal AVG?  Would need player pages...
 #### Archive system
 - Small links to other archived tables - next/previous seasons?
 - Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
