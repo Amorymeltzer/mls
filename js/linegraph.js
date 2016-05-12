@@ -23,7 +23,7 @@ function linegraph() {
 
     // Properly parse and nicely format dates
     var parseDate = d3.time.format("%m.%d.%y").parse;
-    var formatDate = d3.time.format("%b %d, %Y");
+    var formatDate = d3.time.format("%m/%d/%y");
 
     // Scales
     var x = d3.scale.ordinal()
