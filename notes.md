@@ -5,7 +5,6 @@
 - Team stats (RF/RA), PCA plots?
 - Individual stats with predictions, goal AVG?  Would need player pages...
 #### Archive system
-- Small links to other archived tables - next/previous seasons?
 - Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
 #### Revamp plan
 - Convert to python, R?
@@ -13,6 +12,8 @@
 - Deal with graphs at beginning of season (ugly, pointless)
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 #### JS
+- Angle X-axis to save space.  Should probably extend margin a bit to make up for it
+- Or just skip some...?
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
 - Or Chartjs? https://github.com/chartjs/Chart.js
 - Labels overlap, how can I deal with that?  Force-directed?
