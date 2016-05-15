@@ -17,7 +17,7 @@
 <th data-sort-method='number' title='Home Runs'>HR</th>
 <th data-sort-method='number' title='Total Bases'>TB</th>
 <th data-sort-method='number' title='Runs Batted In'>RBI</th>
-<th data-sort-method='number' title='Walks (bases-on-balls)'>BB</th>
+<th data-sort-method='number' title='Walks (Bases-on-Balls)'>BB</th>
 <th data-sort-method='number' title='Strikeouts'>K</th>
 <th data-sort-method='number' title='Sacrifice flies'>SAC</th>
 <th data-sort-method='number' title='Batting average - H/AB'>AVG</th>

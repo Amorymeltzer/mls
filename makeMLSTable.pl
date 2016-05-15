@@ -261,7 +261,7 @@ Player Minor league science, Major league style
   HR Home Runs
   TB Total Bases
   RBI Runs Batted In
-  BB Walks (bases-on-balls)
+  BB Walks (Bases-on-Balls)
   K Strikeouts
   SAC Sacrifice flies
   AVG Batting average - H/AB

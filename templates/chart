@@ -14,7 +14,7 @@
     <option value="RBI">Runs Batted In</option>
     <option value="BB">Walks</option>
     <option value="K">Strikeouts</option>
-    <option value="SAC">Sac-flies</option>
+    <option value="SAC">Sacrifice flies</option>
     <option value="AVG">Batting Average</option>
     <option value="OBP">On-Base Percentage</option>
     <option value="SLG">Slugging</option>
