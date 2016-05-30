@@ -6,7 +6,7 @@
 function get_help {
     cat <<END_HELP
 
-Usage: $(basename $0) -i <current_season.xlsx> [-uh]
+Usage: $(basename $0) -i <current_season.xlsx> [-u]
 
   -i		Specify input XLS/XLSX data file.  Required.
   -u		Pass -u to makeMLSTable.pl (updates 'current as of' date)
