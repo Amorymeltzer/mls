@@ -80,13 +80,12 @@ close $arcindex or die $ERRNO;
 
 
 
-# Special sorting subroutine to ensure Spring comes before sUmmer which comes
-# before Fall, with the most recent seasons first
+# Special sort to ensure the most recent seasons are listed first
 sub seasonSort
   {
     my @input = ($a, $b);
 
-    my @seasonOrder = qw (s u f);
+    my @seasonOrder = qw (f u s);
     my %seasonOrderMap = map { $seasonOrder[$_] => $_ } 0..$#seasonOrder;
     my ($v,$w) = ($a,$b);
     $v =~ s/^t//;

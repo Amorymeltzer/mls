@@ -5,8 +5,6 @@
 - BABIP?
 - Team stats (RF/RA), PCA plots?
 - Individual stats with predictions, goal AVG?  Would need player pages...
-#### Archive system
-- Should mainpage list seasons from oldest to newest, newest to oldest, or old to new within a year, or what?  Maybe new line for each year?
 #### Revamp plan
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
