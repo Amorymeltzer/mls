@@ -114,8 +114,11 @@ function linegraph() {
 	    .enter().append('g')
 	    .attr('class', 'owner')
 	    .on("click", function(d) {
-		d3.selectAll(".owner").transition().duration(200).style("opacity",0.1);
-		d3.select(this).transition().duration(200).style("opacity",1);
+		var active = this.active ? false : true,
+		    opaque = active ? 0.2 : 1;
+		d3.selectAll(".owner").transition().duration(200).style("opacity", opaque);
+		d3.select(this).transition().duration(200).style("opacity", 1);
+		this.active = active;
 	    });
 
 
