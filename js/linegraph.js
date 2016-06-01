@@ -18,8 +18,10 @@ function linegraph() {
 	.attr("width", width + margin.left + margin.right)
 	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+	.on("click", function(d) {
+	    d3.selectAll(".owner").style("opacity",0.1);
+	});
 
     // Properly parse and nicely format dates
     var parseDate = d3.time.format("%m.%d.%y").parse;
