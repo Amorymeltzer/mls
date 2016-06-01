@@ -114,10 +114,10 @@ function linegraph() {
 	    .enter().append('g')
 	    .attr('class', 'owner')
 	    .on("click", function(d) {
-		d3.selectAll(".owner").style("opacity",0.1);
-		d3.select(this).style("opacity",1);
+		d3.selectAll(".owner").transition().duration(200).style("opacity",0.1);
+		d3.select(this).transition().duration(200).style("opacity",1);
 	    });
-	
+
 
 	// Assigns each owner a line and a unique color for it
 	owner.append('path')
