@@ -18,10 +18,7 @@ function linegraph() {
 	.attr("width", width + margin.left + margin.right)
 	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-	.on("click", function(d) {
-	    d3.selectAll(".owner").style("opacity",0.1);
-	});
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // Properly parse and nicely format dates
     var parseDate = d3.time.format("%m.%d.%y").parse;
@@ -115,7 +112,12 @@ function linegraph() {
 	var owner = svg.selectAll('.owner')
 	    .data(owners)
 	    .enter().append('g')
-	    .attr('class', 'owner');
+	    .attr('class', 'owner')
+	    .on("click", function(d) {
+		d3.selectAll(".owner").style("opacity",0.1);
+		d3.select(this).style("opacity",1);
+	    });
+	
 
 	// Assigns each owner a line and a unique color for it
 	owner.append('path')
