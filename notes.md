@@ -13,7 +13,6 @@
 #### JS
 - Angle X-axis to save space.  Should probably extend margin a bit to make up for it
 - Or just skip some...?
-- Fade out background on click?  Some options to work with but probably hard...
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
 - Or Chartjs? https://github.com/chartjs/Chart.js
 - Labels overlap, how can I deal with that?  Force-directed?
