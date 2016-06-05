@@ -6,6 +6,7 @@
 - Team stats (RF/RA), PCA plots?
 - Individual stats with predictions, goal AVG?  Would need player pages...
 #### Revamp plan
+- Really need to get better colors, some of these are just too light
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
 - Deal with graphs at beginning of season (ugly, pointless)
