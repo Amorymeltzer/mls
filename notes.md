@@ -6,11 +6,13 @@
 - Team stats (RF/RA), PCA plots?
 - Individual stats with predictions, goal AVG?  Would need player pages...
 #### Revamp plan
-- Really need to get better colors, some of these are just too light
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
 - Deal with graphs at beginning of season (ugly, pointless)
 - Link to schedule on main page?  Or show upcoming/next game(s)?
+##### ColorBrewer
+- Really need to get better colors, some of these are just too light
+- https://bl.ocks.org/mbostock/5577023
 #### JS
 - Angle X-axis to save space.  Should probably extend margin a bit to make up for it
 - Or just skip some...?
