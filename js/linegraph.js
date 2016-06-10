@@ -115,8 +115,9 @@ function linegraph() {
 	    .enter().append('g')
 	    .attr('class', 'owner')
 	    .on("click", function(d) {
+		// Fader switch
 		var active = this.active ? false : true,
-		    opaque = active ? 0.2 : 1;
+		    opaque = active ? 0.15 : 1;
 		d3.selectAll(".owner").transition().duration(200).style("opacity", opaque);
 		d3.select(this).transition().duration(200).style("opacity", 1);
 		this.active = active;
