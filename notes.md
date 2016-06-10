@@ -1,6 +1,7 @@
 ### ToDo
 - More content! :+1: :100: :+1:
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
+- Custom colorbrewer scale with more than 12 colors?
 #### Stats
 - BABIP?
 - Team stats (RF/RA), PCA plots?
@@ -10,9 +11,6 @@
 - Change as many elements as possible from px to (r)em
 - Deal with graphs at beginning of season (ugly, pointless)
 - Link to schedule on main page?  Or show upcoming/next game(s)?
-##### ColorBrewer
-- Really need to get better colors, some of these are just too light
-- https://bl.ocks.org/mbostock/5577023
 #### JS
 - Angle X-axis to save space.  Should probably extend margin a bit to make up for it
 - Or just skip some...?

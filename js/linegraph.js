@@ -31,9 +31,10 @@ function linegraph() {
     var y = d3.scale.linear()
 	.range([height, 0]);
 
-    // Colors
-    // Should play with these FIXME TODO
-    var color = d3.scale.category20c();
+    // Colors, using http://colorbrewer2.org/
+    // Some repetition with Paired but 12 is max. Draw up a custom scale??
+    var color = d3.scale.ordinal()
+	.range(colorbrewer.Paired[12]);
 
     // Axes
     var xAxis = d3.svg.axis()
