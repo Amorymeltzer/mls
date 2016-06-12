@@ -31,10 +31,10 @@ function linegraph() {
     var y = d3.scale.linear()
 	.range([height, 0]);
 
-    // Colors, using http://colorbrewer2.org/
-    // Some repetition with Paired but 12 is max. Draw up a custom scale??
+    // Colors, based off Paired[12] from http://colorbrewer2.org/
+    // Some repetition; draw up a custom scale??
     var color = d3.scale.ordinal()
-	.range(['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928']);
+	.range(['#84acc1','#1f78b4','#b2df8a','#33a02c','#ea8988','#e31a1c','#db9d4d','#ff7f00','#a890b4','#6a3d9a','#dddd66','#b15928']);
 
     // Axes
     var xAxis = d3.svg.axis()
