@@ -34,7 +34,7 @@ function linegraph() {
     // Colors, based off Paired[12] from http://colorbrewer2.org/
     // Some repetition; draw up a custom scale??
     var color = d3.scale.ordinal()
-	.range(['#84acc1','#1f78b4','#b2df8a','#33a02c','#ea8988','#e31a1c','#db9d4d','#ff7f00','#a890b4','#6a3d9a','#dddd66','#b15928']);
+	.range(['#84acc1','#1f78b4','#b2df8a','#33a02c','#ea8988','#e31a1c','#db9d4d','#ff7f00','#a890b4','#6a3d9a','#cccc55','#b15928']);
 
     // Axes
     var xAxis = d3.svg.axis()
