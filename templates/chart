@@ -1,6 +1,6 @@
 <h3>
   <a id="statsgraph" class="anchor" href="#statsgraph" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stats graph</h3>
-<p>Choose a stat and graph it over time.  Click on a player or line to toggle focus.</p>
+<p>Choose a stat and graph it over time.  Click a name or line to toggle your focus.</p>
 
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <div id="linegraph" class="svg-linegraph">
