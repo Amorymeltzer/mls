@@ -55,11 +55,10 @@ function linegraph() {
     // Define a buffer for the Y-axis
     var buffer = 0.05;
 
-    // Data load and two console logs, before and after the data.map
-    // Load data directly from directory
+    // Load data and two console logs, before and after data.map
     d3.csv('data/R.csv', function(error, data) {
 
-	// Splits into 10 colors by owner
+	// Assign owners a color
 	color.domain(d3.keys(data[0]).filter(function(key) { return key !== 'Date'; }));
 
 	// Don't format opening values of zero
@@ -78,10 +77,10 @@ function linegraph() {
 	    };
 	});
 
-	// x-Domain is date, evenly spaced
+	// X-domain is date, evenly spaced
 	x.domain(data.map(function(d) { return d.Date; }));
 
-	// y-Domain is max of stat, default to start at 0
+	// Y-domain is max of stat, default to start at 0
 	y.domain([
 	    0,
 	    (1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
@@ -109,7 +108,7 @@ function linegraph() {
 	    .style("text-anchor", "end")
 	    .text("Weekly total");
 
-	// Selects .owner class (none exist at first) and creates them as needed
+	// Select .owner class (none exist at first) and create them as needed
 	var owner = svg.selectAll('.owner')
 	    .data(owners)
 	    .enter().append('g')
@@ -124,13 +123,13 @@ function linegraph() {
 	    });
 
 
-	// Assigns each owner a line and a unique color for it
+	// Assign each owner a line and unique color
 	owner.append('path')
 	    .attr('class', 'line')
 	    .attr('d', function(d) { return line(d.values); })
 	    .style('stroke', function(d) { return color(d.name); })
 
-	// Adds a circle to each data node
+	// Add a circle to each data node
 	owner.append('g').selectAll('circle')
 	    .data(function(d) {return d.values; })
 	    .enter().append('circle')
@@ -156,7 +155,7 @@ function linegraph() {
 		    .style("opacity", 0);
 	    });
 
-	// Adds the names at the end
+	// Add the names at the end of the line
 	owner.append("text")
 	    .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
 	    .attr("transform", function(d) { return "translate(" + x(d.value.Date) + "," + y(d.value.Record) + ")"; })
@@ -190,10 +189,10 @@ function linegraph() {
 		    };
 		});
 
-		// x-Domain is date, evenly spaced
+		// X-domain is date, evenly spaced
 		x.domain(data.map(function(d) { return d.Date; }));
 
-		// y-Domain to max of stat
+		// Y-domain to max of stat
 		// Extend Y-axis both ways for non-zero based traits
 		if (item == 'AVG' || item == 'OBP' || item == 'SLG' || item == 'OPS' || item == 'GPA' || item == 'wOBA') {
 		    y.domain([
@@ -258,8 +257,8 @@ function linegraph() {
 		    .data(function(d) { return d.values; })
 		    .exit().remove();
 
-		// Certianly not ideal, but takes care of NaN dots still
-		// showing up
+		// Certianly not ideal, but takes care of NaN dots that still
+		// show up
 		owner.selectAll('circle')
 		    .data(function(d) { return d.values; })
 		    .filter(function(d) { return isNaN(d.Record); }).remove();
