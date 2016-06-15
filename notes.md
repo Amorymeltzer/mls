@@ -2,7 +2,6 @@
 - More content! :+1: :100: :+1:
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 #### Stats
-- BABIP?
 - Team stats (RF/RA), PCA plots?
 - Individual stats with predictions, goal AVG?  Would need player pages...
 #### Revamp plan
