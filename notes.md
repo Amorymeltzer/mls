@@ -1,7 +1,6 @@
 ### ToDo
 - More content! :+1: :100: :+1:
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
-- Expand colorbrewer scale with more than 12 colors
 #### Stats
 - BABIP?
 - Team stats (RF/RA), PCA plots?

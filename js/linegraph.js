@@ -31,10 +31,9 @@ function linegraph() {
     var y = d3.scale.linear()
 	.range([height, 0]);
 
-    // Colors, based off Paired[12] from http://colorbrewer2.org/
-    // Some repetition; draw up a custom scale??
+    // Colors, expanded/tweaked Paired[12] from http://colorbrewer2.org/
     var color = d3.scale.ordinal()
-	.range(['#84acc1','#1f78b4','#b2df8a','#33a02c','#ea8988','#e31a1c','#db9d4d','#ff7f00','#a890b4','#6a3d9a','#cccc55','#b15928']);
+	.range(['#84acc1','#1f78b4','#b2df8a','#33a02c','#e377c2','#e31a1c','#db9d4d','#ff7f00','#a890b4','#6a3d9a','#cccc55','#b15928','#7f7f7f','#17becf']);
 
     // Axes
     var xAxis = d3.svg.axis()
