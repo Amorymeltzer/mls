@@ -3,6 +3,7 @@
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 #### Stats
 - Team stats (RF/RA), PCA plots?
+- Could show team average, at least for calculated stats
 - Individual stats with predictions, goal AVG?  Would need player pages...
 - Player page could show graph with total/cumulative stats, list results per season
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
