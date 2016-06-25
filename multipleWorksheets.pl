@@ -16,6 +16,7 @@ my $threshold = 0.25;
 
 if (@ARGV != 1) {
   print "Usage: $PROGRAM_NAME MLS_Stats.xlsx\n";
+  print "Should only be run via build_site.sh\n";
   exit;
 }
 
