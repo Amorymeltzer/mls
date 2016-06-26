@@ -242,6 +242,8 @@ Usage: $PROGRAM_NAME [-uah] mls_data.csv output.html
       -a Indicate input is a season file, treat differently
       -g Indicate input is a game file, treat differently
       -h Print this help message
+
+Should probably only be run via build_site.sh
 USAGE
     exit;
   }
