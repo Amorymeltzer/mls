@@ -10,6 +10,7 @@ use English qw( -no_match_vars );
 
 if (!@ARGV) {
   print "Usage: $PROGRAM_NAME list_of_files\n";
+  print "Should only be run via build_site.sh\n";
   exit;
 }
 
