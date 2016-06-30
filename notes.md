@@ -1,6 +1,7 @@
 ### ToDo
 - More content! :+1: :100: :+1:
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
+- See colors of maximum contrast in dropbox
 #### Stats
 - Team stats (RF/RA), PCA plots?
 - Could show team average, at least for calculated stats
