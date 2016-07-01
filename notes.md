@@ -8,6 +8,7 @@
 - Individual stats with predictions, goal AVG?  Would need player pages...
 - Player page could show graph with total/cumulative stats, list results per season
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
+- Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
 #### Revamp plan
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
