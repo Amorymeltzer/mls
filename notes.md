@@ -22,3 +22,5 @@
 - Or Chartjs? https://github.com/chartjs/Chart.js
 - Labels overlap, how can I deal with that?  Force-directed?
 - Or use a legend?  http://d3-legend.susielu.com or http://www.competa.com/blog/2015/07/d3-js-part-7-of-9-adding-a-legend-to-explain-the-data/
+- Check out pre-rendering: https://github.com/fivethirtyeight/d3-pre
+- Requires some npm stuff first...
