@@ -16,6 +16,7 @@
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Videos?  gh-pages can't embed, but maybe plyr.js can?
 #### JS
+- Update to D3.js v4
 - Angle X-axis to save space.  Should probably extend margin a bit to make up for it
 - Or just skip some...?
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
