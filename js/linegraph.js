@@ -3,7 +3,7 @@
 // http://mikecostelloe.com/crazyrhythms/
 function linegraph() {
     // Need to make these be relative not absolute pixel counts FIXME TODO
-    var margin = {top: 20, right: 145, bottom: 30, left: 40}
+    var margin = {top: 20, right: 145, bottom: 50, left: 40}
     , width = 0.85 * window.innerWidth
     , height = 0.75 * window.innerHeight
     , width = width - margin.left - margin.right
@@ -90,12 +90,12 @@ function linegraph() {
 	    .attr('class', 'x axis')
 	    .attr('transform', 'translate(0,' + height + ')')
 	    .call(xAxis)
-	    .append("text")
-	    .attr("x", width)
-	    .attr("y", -12)
-	    .attr("dy", ".71em")
+	    .selectAll("text")
 	    .style("text-anchor", "end")
-	    .text("Date");
+	    .attr("dx", "-.4em")
+	    .attr("dy", ".5em")
+	    .attr("transform", "rotate(-40)");
+	//.text("Date");
 
 	svg.append('g')
 	    .attr("class", "y axis")
@@ -206,7 +206,12 @@ function linegraph() {
 		}
 
 		svg.select('.x.axis')
-		    .call(xAxis);
+		    .call(xAxis)
+		    .selectAll("text")
+		    .style("text-anchor", "end")
+		    .attr("dx", "-.4em")
+		    .attr("dy", ".5em")
+		    .attr("transform", "rotate(-40)" );
 
 		svg.select('.y.axis')
 		    .call(yAxis);
