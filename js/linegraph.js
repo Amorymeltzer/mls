@@ -105,7 +105,8 @@ function linegraph() {
 	    .attr("y", 6)
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
-	    .text("Weekly total");
+	    .text("Running total")
+	    .attr("class", "y-title");
 
 	// Select .owner class (none exist at first) and create them as needed
 	var owner = svg.selectAll('.owner')
@@ -198,12 +199,19 @@ function linegraph() {
 			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return +v.Record || Infinity; }); }),
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
 		    ]);
+		    svg.select('.y-title')
+			.text("Running average");
 		} else {	// Start at 0 for cumulative stats and ISO
 		    y.domain([
 			0,
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
 		    ]);
+		    svg.select('.y-title')
+			.text("Running total");
 		}
+		if (item == 'ISO') {
+		    svg.select('.y-title')
+			.text("Running average");}
 
 		svg.select('.x.axis')
 		    .call(xAxis)
