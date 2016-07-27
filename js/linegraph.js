@@ -95,7 +95,14 @@ function linegraph() {
 	    .attr("dx", "-.4em")
 	    .attr("dy", ".5em")
 	    .attr("transform", "rotate(-40)");
-	//.text("Date");
+
+	svg.select('.x.axis')
+	    .append("text")
+	    .attr("x", width)
+	    .attr("y", -12)
+	    .attr("dy", ".71em")
+	    .style("text-anchor", "end")
+	    .text("Date");
 
 	svg.append('g')
 	    .attr("class", "y axis")
@@ -220,6 +227,14 @@ function linegraph() {
 		    .attr("dx", "-.4em")
 		    .attr("dy", ".5em")
 		    .attr("transform", "rotate(-40)" );
+
+		svg.select('.x.axis')
+		    .append("text")
+		    .attr("x", width)
+		    .attr("y", -12)
+		    .attr("dy", ".71em")
+		    .style("text-anchor", "end")
+		    .text("Date");
 
 		svg.select('.y.axis')
 		    .call(yAxis);
