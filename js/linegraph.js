@@ -91,6 +91,7 @@ function linegraph() {
 	    .attr('transform', 'translate(0,' + height + ')')
 	    .call(xAxis)
 	    .selectAll("text")
+	    .attr('class', 'x-labels')
 	    .style("text-anchor", "end")
 	    .attr("dx", "-.4em")
 	    .attr("dy", ".5em")
@@ -98,6 +99,7 @@ function linegraph() {
 
 	svg.select('.x.axis')
 	    .append("text")
+	    .attr('class', 'x-title')
 	    .attr("x", width)
 	    .attr("y", -12)
 	    .attr("dy", ".71em")
@@ -222,19 +224,12 @@ function linegraph() {
 
 		svg.select('.x.axis')
 		    .call(xAxis)
-		    .selectAll("text")
+		    .selectAll('.x-labels')
 		    .style("text-anchor", "end")
 		    .attr("dx", "-.4em")
 		    .attr("dy", ".5em")
 		    .attr("transform", "rotate(-40)" );
 
-		svg.select('.x.axis')
-		    .append("text")
-		    .attr("x", width)
-		    .attr("y", -12)
-		    .attr("dy", ".71em")
-		    .style("text-anchor", "end")
-		    .text("Date");
 
 		svg.select('.y.axis')
 		    .call(yAxis);
