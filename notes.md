@@ -1,8 +1,9 @@
 ### ToDo
-- More content! :+1: :100: :+1:
+- Fix issue of base not being set properly if lowest calculated stat value is 0 (see Gordon, Summer 2016)
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 - See colors of maximum contrast in dropbox
 #### Stats
+- More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
 - Could show team average, at least for calculated stats
 - Individual stats with predictions, goal AVG?  Would need player pages...
