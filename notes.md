@@ -2,6 +2,16 @@
 - Fix issue of base not being set properly if lowest calculated stat value is 0 (see Gordon, Summer 2016)
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 - See colors of maximum contrast in dropbox
+#### Migrate to D3 v4
+- A LOT OF NAMESPACE CHANGES eg d3.svg.line -> d3.line, d3.time
+- Check out new default axis appearance https://github.com/d3/d3-axis
+- Ticks might be easier to manipulate https://github.com/d3/d3-array/blob/master/README.md#ticks
+- Selections https://github.com/d3/d3/blob/master/CHANGES.md#selections-d3-selection
+- Transitions https://github.com/d3/d3/blob/master/CHANGES.md#transitions-d3-transition
+- d3.active allows chained transitions for example
+- Changes to lines probably just namespace, but double check. Also curves, etc.
+- Times are different too
+- Colors are different, and now have opacity (who cares?) and perhaps new color scales
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
@@ -17,7 +27,6 @@
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Videos?  gh-pages can't embed, but maybe plyr.js can?
 #### JS
-- Update to D3.js v4
 - Skip some x-axis labels to save space.  Should probably extend margin a bit...
 
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
