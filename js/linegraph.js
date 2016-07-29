@@ -21,32 +21,30 @@ function linegraph() {
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // Properly parse and nicely format dates
-    var parseDate = d3.time.format("%m.%d.%y").parse;
-    var formatDate = d3.time.format("%m/%d/%y");
+    var parseDate = d3.timeParse("%m.%d.%y");
+    var formatDate = d3.timeFormat("%m/%d/%y");
 
     // Scales
-    var x = d3.scale.ordinal()
-	.rangePoints([0, width]);
+    var x = d3.scalePoint()
+	.range([0, width]);
 
-    var y = d3.scale.linear()
+    var y = d3.scaleLinear()
 	.range([height, 0]);
 
     // Colors, expanded/tweaked Paired[12] from http://colorbrewer2.org/
-    var color = d3.scale.ordinal()
+    var color = d3.scaleOrdinal()
 	.range(['#84acc1','#1f78b4','#b2df8a','#33a02c','#e377c2','#e31a1c','#db9d4d','#ff7f00','#a890b4','#6a3d9a','#cccc55','#b15928','#7f7f7f','#17becf']);
 
     // Axes
-    var xAxis = d3.svg.axis()
-	.scale(x)
-	.orient('bottom');
+    var xAxis = d3.axisBottom()
+	.scale(x);
 
-    var yAxis = d3.svg.axis()
+    var yAxis = d3.axisLeft()
 	.scale(y)
-	.outerTickSize(0)
-	.orient('left');
+	.tickSizeOuter(0);
 
     // Lines
-    var line = d3.svg.line()
+    var line = d3.line()
 	.defined(function(d) { return !isNaN(d.Record); })
 	.x(function(d) { return x(d.Date); })
 	.y(function(d) { return y(d.Record); });
