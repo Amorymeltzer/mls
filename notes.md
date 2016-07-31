@@ -18,6 +18,7 @@
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
 - Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
 #### Revamp plan
+- Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
 - Deal with graphs at beginning of season (ugly, pointless)
