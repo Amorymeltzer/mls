@@ -34,22 +34,22 @@
 <td data-sort='Burch'>Andrew Burch</td>
 <td>3</td>
 <td>2</td>
-<td>2</td>
-<td>0</td>
+<td>3</td>
 <td>0</td>
 <td>1</td>
-<td>5</td>
+<td>1</td>
+<td>8</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
-<td>0.667</td>
-<td>0.667</td>
-<td>1.667</td>
 <td>1.000</td>
-<td>2.334</td>
-<td>0.717</td>
-<td>0.987</td>
+<td>1.000</td>
+<td>2.667</td>
+<td>1.667</td>
+<td>3.667</td>
+<td>1.117</td>
+<td>1.523</td>
 </tr>
 <tr>
 <td data-sort='Patel'>Qaiser Patel</td>
@@ -286,22 +286,22 @@
 <td style='font-weight:bold;'>Total:</td>
 <td style='font-weight:bold;'>35</td>
 <td style='font-weight:bold;'>15</td>
-<td style='font-weight:bold;'>17</td>
+<td style='font-weight:bold;'>18</td>
 <td style='font-weight:bold;'>1</td>
-<td style='font-weight:bold;'>0</td>
 <td style='font-weight:bold;'>1</td>
-<td style='font-weight:bold;'>21</td>
+<td style='font-weight:bold;'>1</td>
+<td style='font-weight:bold;'>24</td>
 <td style='font-weight:bold;'>15</td>
 <td style='font-weight:bold;'>1</td>
 <td style='font-weight:bold;'>0</td>
 <td style='font-weight:bold;'>0</td>
-<td style='font-weight:bold;'>0.486</td>
-<td style='font-weight:bold;'>0.500</td>
-<td style='font-weight:bold;'>0.600</td>
-<td style='font-weight:bold;'>0.114</td>
-<td style='font-weight:bold;'>1.100</td>
-<td style='font-weight:bold;'>0.375</td>
-<td style='font-weight:bold;'>0.483</td>
+<td style='font-weight:bold;'>0.514</td>
+<td style='font-weight:bold;'>0.528</td>
+<td style='font-weight:bold;'>0.686</td>
+<td style='font-weight:bold;'>0.172</td>
+<td style='font-weight:bold;'>1.214</td>
+<td style='font-weight:bold;'>0.409</td>
+<td style='font-weight:bold;'>0.528</td>
 </tr>
 </tbody>
 </table>
