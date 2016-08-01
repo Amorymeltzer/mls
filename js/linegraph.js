@@ -203,7 +203,11 @@ function linegraph() {
 		// Extend Y-axis both ways for non-zero based traits
 		if (item == 'AVG' || item == 'OBP' || item == 'SLG' || item == 'OPS' || item == 'GPA' || item == 'wOBA') {
 		    y.domain([
-			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return +v.Record || Infinity; }); }),
+			// The use of infinity here was taken from http://stackoverflow.com/q/29261994/
+			// It makes D3 find the lowest non-zero value
+			// Not sure why I wanted that in the first place, though
+			// (1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return +v.Record || Infinity; }); }),
+			(1 - buffer)*d3.min(owners, function(c) { return d3.min(c.values, function(v) { return +v.Record; }); }),
 			(1 + buffer)*d3.max(owners, function(c) { return d3.max(c.values, function(v) { return +v.Record; }); })
 		    ]);
 		    svg.select('.y-title')
