@@ -1,5 +1,4 @@
 ### ToDo
-- Fix issue of base not being set properly if lowest calculated stat value is 0 (see Gordon, Summer 2016)
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 - Should probably reconcile cumulative stats starting at 0 for people midway but NaN for calculated
 - See colors of maximum contrast in dropbox
