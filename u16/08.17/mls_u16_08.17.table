@@ -2,8 +2,8 @@
 <a id="statstable" class="anchor" href="#statstable" aria-hidden="true"><span class="octicon octicon-link"></span></a>August 17, 2016 stats table</h3>
 <p>Click on the column headers to sort the table.</p>
 
-<script src='/mls/js/tablesort.min.js'></script>
-<script src='/mls/js/tablesort.number.js'></script>
+<script src='/js/tablesort.min.js'></script>
+<script src='/js/tablesort.number.js'></script>
 
 <table id='mls-table'>
 <thead>
