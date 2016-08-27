@@ -20,7 +20,7 @@ if (@ARGV != 1) {
   exit;
 }
 
-print "Parsing $ARGV[0] for data...\n\n";
+print "Parsing $ARGV[0] for data, this may take a while...\n\n";
 my $book = ReadData ($ARGV[0]) or die $ERRNO;
 
 # Season lookup.  Would be easy to substring, but this also means I get all
