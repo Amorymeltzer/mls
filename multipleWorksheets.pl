@@ -80,7 +80,7 @@ my %masterPlayerCount;		# Count times a player is used
 
 print "Data found:\n";
 foreach (sort keys %seasonsList) {
-  print "Season: $_\t Items: @{$seasonsList{$_}}\n";
+  print "$_:\t@{$seasonsList{$_}}\n";
   my %playerData;    # Hash holding per-player stat data [total, current game]
   my @players;	     # Player names
   my @dates;	     # Dates of play
