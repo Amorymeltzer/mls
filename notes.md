@@ -2,7 +2,6 @@
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
 - Should probably reconcile cumulative stats starting at 0 for people midway but NaN for calculated
 - See colors of maximum contrast in dropbox
-- Scroll newsfeed?
 #### Migrate to D3 v4
 - Ticks might be easier to manipulate https://github.com/d3/d3-array/blob/master/README.md#ticks
 - Selections https://github.com/d3/d3/blob/master/CHANGES.md#selections-d3-selection

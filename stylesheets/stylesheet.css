@@ -258,6 +258,11 @@ a:hover {
     font-size: 0.8rem;}
 
 
+#newsfeed {
+    height: 200px;
+    overflow-y: auto;
+}
+
 
 .table-of-contents {
     float: right;
