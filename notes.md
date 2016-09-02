@@ -18,9 +18,10 @@
 - Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
 #### Revamp plan
 - Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
+- Deal with graphs at beginning of season (ugly, pointless)
+- Combo this with shorter timeframe on front page, should be useful?
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
-- Deal with graphs at beginning of season (ugly, pointless)
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Videos?  gh-pages can't embed, but maybe plyr.js can?
 #### JS
