@@ -8,6 +8,16 @@
 - Transitions https://github.com/d3/d3/blob/master/CHANGES.md#transitions-d3-transition
 - d3.active allows chained transitions for example
 - Colors are different, and now have opacity (who cares?) and perhaps new color scales
+#### Revamp plan
+- Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
+- Deal with graphs at beginning of season (ugly, pointless)
+- Combo this with shorter timeframe on front page, should be useful?
+- Deal with double-headers.  Easy to just advance day by one but ugly.  Prettier than the code needed for a workaround though...
+- Convert to python, R?
+- Change as many elements as possible from px to (r)em
+- Link to schedule on main page?  Or show upcoming/next game(s)?
+- Videos?  gh-pages can't embed, but maybe plyr.js can?
+- Confirmatory output sorted by time not season?  Everything works but it's unnerving
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
@@ -16,14 +26,6 @@
 - Player page could show graph with total/cumulative stats, list results per season
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
 - Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
-#### Revamp plan
-- Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
-- Deal with graphs at beginning of season (ugly, pointless)
-- Combo this with shorter timeframe on front page, should be useful?
-- Convert to python, R?
-- Change as many elements as possible from px to (r)em
-- Link to schedule on main page?  Or show upcoming/next game(s)?
-- Videos?  gh-pages can't embed, but maybe plyr.js can?
 #### JS
 - Skip some x-axis labels to save space.  Should probably extend margin a bit...
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
