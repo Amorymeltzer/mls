@@ -113,6 +113,16 @@ else
 		perl makeMLSTable.pl -ag $csv $table # Game index
 	    else
 		perl makeMLSTable.pl -a $csv $table # Season index
+
+		#  Don't show the season chart unless at least three games
+		#  have been played.  Not perfect, hence the message
+		if [ $(grep -c ^ $season/data/AB.csv) -lt 5 ]; then
+		    echo
+		    echo "Note: Please remove #statsgraph from the $season index nav"
+		    echo
+		    chart=/dev/null
+		fi
+
 		# Set here to avoid tourny errors FIXME TODO
 		arc=templates/$season.list
 	    fi
