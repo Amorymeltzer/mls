@@ -10,7 +10,6 @@
 - Colors are different, and now have opacity (who cares?) and perhaps new color scales
 #### Revamp plan
 - Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
-- Combo this with shorter timeframe on front page, should be useful?
 - Deal with double-headers.  Easy to just advance day by one but ugly.  Prettier than the code needed for a workaround though...
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
