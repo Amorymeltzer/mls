@@ -8,13 +8,17 @@
 - d3.active allows chained transitions for example
 - Colors are different, and now have opacity (who cares?) and perhaps new color scales
 #### Revamp plan
-- Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
 - Deal with double-headers.  Easy to just advance day by one but ugly.  Prettier than the code needed for a workaround though...
 - Convert to python, R?
 - Change as many elements as possible from px to (r)em
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Videos?  gh-pages can't embed, but maybe plyr.js can?
 - Confirmatory output sorted by time not season?  Everything works but it's unnerving
+##### Front page rewrite
+- Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
+- Could do this by making a running hash from the last 17 or so dates, then crunch first few for noise and 15 total
+- Would need to derive player names, I think, but maybe I can lean on the availability and veracity of the data, which by this time should be established
+- This this would also allow me to stop skipping data, and just let the noise in on the full picture and season pages
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
