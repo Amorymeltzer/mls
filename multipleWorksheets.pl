@@ -308,6 +308,14 @@ foreach (sort keys %seasonsList) {
   }
 }
 
+# Just a sort of visual check that no spelling errors were introduced.  It
+# should be obvious if I implement the player pages, but this is nice to have
+print "\nMurderer's Row:\n";
+foreach (sort @masterPlayers) {
+  print "$_\n";
+}
+print "\n";
+
 @masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
 @masterPlayers = lineup(\@lineup,\@masterPlayers);
 ## Dump lifetime totals (same format as season totals)
