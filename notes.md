@@ -14,6 +14,7 @@
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Videos?  gh-pages can't embed, but maybe plyr.js can?
 - Confirmatory output sorted by time not season?  Everything works but it's unnerving
+- Zoom, reset
 ##### Front page rewrite
 - Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
 - Could do this by making a running hash from the last 17 or so dates, then crunch first few for noise and 15 total
