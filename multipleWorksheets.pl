@@ -34,7 +34,10 @@ my %seasonsList;		# Unique list of seasons that need parsing
 # Grab, parse, and arrange all sheet names taken from the initial hash.  Sort
 # required to keep order the same across games, so players who missed games
 # don't move around
+my @runningDates;		# Running list of most recent games, not
+                                # defined below because, well, we need it here.
 foreach (sort keys %{$book->[0]{'sheet'}}) {
+  #print "$_\n";
   my @tmp = split / /;
   my $seas = "$tmp[0] $tmp[1]";
   my $game = $tmp[2];
@@ -42,6 +45,15 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
   if ($seas =~ /Tournament/) {
     $seas = "$tmp[0] $tmp[1] $tmp[2]";
     $game = $seas;
+  } else {
+    # Sneak in here to anticipate the full gamut of non-tournament game
+    # dates. This is a minor duplicates of the &createName process to make use
+    # of the schwartzian transform in order to ensure we get only the most
+    # recent games.  Honestly, this wouldn't be a bad idea for @masterDates,
+    # but it's not horrific doing it this way.
+    my $run = substr $tmp[1], -2;
+    $run = "$tmp[2].$run";
+    push @runningDates, $run;
   }
 
   if (!$seasonsList{$seas}) {

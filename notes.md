@@ -21,6 +21,9 @@
 - Would need to derive player names, I think, but maybe I can lean on the availability and veracity of the data, which by this time should be established
 - This this would also allow me to stop skipping data, and just let the noise in on the full picture and season pages
 - Link game dates in graph or table or something to individual pages?
+- Better(?) way might be to do a running hash of hash, with player names as lookups for a binary 1 or 0 on each date?  Awkward, but I could rederive the data this way
+- Rely on the overall number of sheets to get total number of dates, thus allowing me to anticipate when data collection needs starting?
+- This this would also allow me to (maybe?) stop skipping data, and just let the noise in on the full picture and season pages
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
