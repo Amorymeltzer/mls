@@ -23,6 +23,12 @@ if (@ARGV != 1) {
 print "Parsing $ARGV[0] for data...\n\n";
 my $book = ReadData ($ARGV[0]) or die $ERRNO;
 
+# Master lists
+my %masterData;	     # Hash holding per-player stat data [total, current game]
+my @masterPlayers;   # Player names
+my @masterDates;     # Dates of play
+my %masterPlayerCount;		# Count times a player is used
+my @runningDates;		# Running list of most recent games
 # Season lookup.  Would be easy to substring, but this also means I get all
 # seasons as a nice keys array
 my %seasons = (
@@ -34,8 +40,6 @@ my %seasonsList;		# Unique list of seasons that need parsing
 # Grab, parse, and arrange all sheet names taken from the initial hash.  Sort
 # required to keep order the same across games, so players who missed games
 # don't move around
-my @runningDates;		# Running list of most recent games, not
-                                # defined below because, well, we need it here.
 foreach (sort keys %{$book->[0]{'sheet'}}) {
   #print "$_\n";
   my @tmp = split / /;
@@ -63,7 +67,6 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
   }
 }
 
-
 # Murderers' Row
 my @lineup = (
 	      'Andrew Burch',
@@ -84,11 +87,6 @@ my @lineup = (
 	     );
 # Stats measured, for building the player hash
 my @stats = qw (Player AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
-# Master lists
-my %masterData;	     # Hash holding per-player stat data [total, current game]
-my @masterPlayers;   # Player names
-my @masterDates;     # Dates of play
-my %masterPlayerCount;		# Count times a player is used
 
 print "Data found:\n";
 foreach (sort keys %seasonsList) {
