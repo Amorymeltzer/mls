@@ -8,6 +8,7 @@ use diagnostics;
 
 use English qw( -no_match_vars );
 use Spreadsheet::Read;
+use Storable qw(dclone);
 
 
 # Threshold for inclusion in graphs and tables, see &noScrubs
@@ -29,6 +30,9 @@ my @masterPlayers;   # Player names
 my @masterDates;     # Dates of play
 my %masterPlayerCount;		# Count times a player is used
 my @runningDates;		# Running list of most recent games
+my $runningData;		# Array since copying a multi-dim hash
+                                # requires deep-cloning and references
+my @runningPlayers;		# Will copy later
 # Season lookup.  Would be easy to substring, but this also means I get all
 # seasons as a nice keys array
 my %seasons = (
@@ -340,6 +344,71 @@ foreach my $dude (@masterPlayers) {
   print $masterCsv "\n";
 }
 close $masterCsv or die $ERRNO;
+
+
+
+
+################################################################################
+$runningData = dclone(\%masterData);
+@runningPlayers = @masterPlayers;
+
+# Sort dates
+schwartz(\@runningDates);
+# Dump lifetime per-game values for each stat
+foreach my $i (1..scalar @stats - 1) {
+  open my $stat, '>', "running_$stats[$i].csv" or die $ERRNO;
+  print $stat 'Date,';
+  print $stat join q{,}, @runningPlayers[0..$#runningPlayers-1]; # Don't include totals
+  print $stat "\n";
+  # Set baseline of zero for cumulative stats
+  if ($i < 12) {
+    my $length = $#runningPlayers;
+    print $stat 'Start,';
+    print $stat join q{,}, (0) x $length;
+    print $stat "\n";
+  }
+
+  foreach my $j (0..scalar @runningDates - 1) {
+    # Try to cut down on noise by skipping the first two data points of each
+    # calculated stat (skip just first 1 in each season)
+    # Doesn't deal with people who weren't around at first, they'll still have
+    # gaps. FIXME TODO
+    next if ($j <= 1 and $i >= 12);
+
+    print $stat "$runningDates[$j]";
+    foreach my $dude (@runningPlayers[0..$#runningPlayers-1]) { # Ignore totals
+      # PITA technique to try to get null values for nonexistant games and
+      # zero values for missed games or non-calculated stats
+      if (!${$runningData}{$dude}{$runningDates[$j]}[$i-1]) {
+	if (!${$runningData}{$dude}{$runningDates[$j-1]}[$i-1]) {
+	  if ($i >= 12) {
+	    print $stat q{,NaN};
+	  } else {
+	    print $stat q{,0};
+	    ${$runningData}{$dude}{$runningDates[$j]}[$i-1] = 0;
+	  }
+	  next;
+	} else {
+	  # Original value if defined, 0 if not
+	  ${$runningData}{$dude}{$runningDates[$j]}[$i-1] ||= 0;
+	}
+      }
+
+      # Awkward kludge to add data, destructive but at the end so not an issue
+      if ($i >= 12) {
+	# $i is different than $c above thanks to $offset
+	${$runningData}{$dude}{$runningDates[$j]}[$i-1] = calcStats($i,\@{${$runningData}{$dude}{$runningDates[$j]}});
+      } else {
+	${$runningData}{$dude}{$runningDates[$j]}[$i-1] += ${$runningData}{$dude}{$runningDates[$j-1]}[$i-1] if $j != 0;
+      }
+      print $stat ",${$runningData}{$dude}{$runningDates[$j]}[$i-1]";
+    }
+    print $stat "\n";
+  }
+  close $stat or die $ERRNO;
+}
+################################################################################
+
 
 # Sort dates
 schwartz(\@masterDates);
