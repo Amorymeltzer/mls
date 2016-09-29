@@ -30,6 +30,7 @@
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
 - Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
 #### JS
+- Check pagename.js document.write in new version (54?) of chrome
 - Skip some x-axis labels to save space.  Should probably extend margin a bit...
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
 - Or Chartjs? https://github.com/chartjs/Chart.js
