@@ -17,13 +17,13 @@
 - http://bl.ocks.org/mbostock/3892928 and http://bl.ocks.org/mbostock/4dc8736fb1ce9799c6d6
 ##### Front page rewrite
 - Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
+- This this would also allow me to (maybe?) stop skipping data, and just let the noise in on the full picture and season pages
 - Could do this by making a running hash from the last 17 or so dates, then crunch first few for noise and 15 total
 - Would need to derive player names, I think, but maybe I can lean on the availability and veracity of the data, which by this time should be established
 - This this would also allow me to stop skipping data, and just let the noise in on the full picture and season pages
 - Link game dates in graph or table or something to individual pages?
 - Better(?) way might be to do a running hash of hash, with player names as lookups for a binary 1 or 0 on each date?  Awkward, but I could rederive the data this way
 - Rely on the overall number of sheets to get total number of dates, thus allowing me to anticipate when data collection needs starting?
-- This this would also allow me to (maybe?) stop skipping data, and just let the noise in on the full picture and season pages
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
