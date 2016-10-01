@@ -192,7 +192,14 @@ else
     FILES=$(find -E . -maxdepth 1 -regex "./.{1,4}\.csv" | grep -v _site)
     for csv in $FILES
     do
-	mv $csv data/$csv
+	mv $csv life/data/$csv
+    done
+
+    # Move running stats
+    FILES=$(find -E . -maxdepth 1 -regex "./running_.{1,4}\.csv" | grep -v _site)
+    for csv in $FILES
+    do
+	mv $csv "data/${csv/running_/}"
     done
 
     echo

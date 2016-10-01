@@ -24,6 +24,7 @@
 - Link game dates in graph or table or something to individual pages?
 - Better(?) way might be to do a running hash of hash, with player names as lookups for a binary 1 or 0 on each date?  Awkward, but I could rederive the data this way
 - Rely on the overall number of sheets to get total number of dates, thus allowing me to anticipate when data collection needs starting?
+- Need to deal with page creation, templates, and the creation of the lifetime directory
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
