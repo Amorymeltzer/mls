@@ -31,6 +31,8 @@ my @masterDates;     # Dates of play
 my %masterPlayerCount;		# Count times a player is used
 my @runningDates;		# Running list of dates, used in conjunction
 my %runningDatesLookup;		# with this lookup array to check dates
+my %runningData;		# Lazily check if we've seen a player before
+                                # FIXME TODO
 my $runningData;		# Array since copying a multi-dim hash
                                 # requires deep-cloning and references
 my @runningPlayers;		# Running list of players
@@ -187,16 +189,24 @@ foreach (sort keys %seasonsList) {
 	  # Do the same for the master list of players
 	  if (!$tournament && !$masterData{$cell}) {
 	    push @masterPlayers, $cell;
-	    push @runningPlayers, $cell if exists $runningDatesLookup{$gameDate};
 	    # Keep totals last
 	    if ($masterPlayers[-2] && $masterPlayers[-2] =~ /Total/) {
 	      @masterPlayers[-2,-1] = @masterPlayers[-1,-2];
-	      @runningPlayers[-2,-1] = @runningPlayers[-1,-2] if exists $runningDatesLookup{$gameDate};
 	    }
 	    $masterPlayerCount{$cell} = 1; # First time up
-	    $runningPlayerCount{$cell} = 1 if exists $runningDatesLookup{$gameDate}; # First time up
 	  } elsif (!$tournament && $masterData{$cell}) {
 	    $masterPlayerCount{$cell}++; # Add a count if we've seen him
+	  }
+
+	  # Lazy use of %runningData
+	  if (!$tournament && !$runningData{$cell}) {
+	    push @runningPlayers, $cell if exists $runningDatesLookup{$gameDate};
+
+	    if ($runningPlayers[-2] && $runningPlayers[-2] =~ /Total/) {
+	      @runningPlayers[-2,-1] = @runningPlayers[-1,-2] if exists $runningDatesLookup{$gameDate};
+	    }
+	    $runningPlayerCount{$cell} = 1 if exists $runningDatesLookup{$gameDate}; # First time up
+	  } elsif (!$tournament && $runningData{$cell}) {
 	    $runningPlayerCount{$cell}++ if exists $runningDatesLookup{$gameDate}; # Add a count if we've seen him
 	  }
 
@@ -231,7 +241,10 @@ foreach (sort keys %seasonsList) {
 	  }
 	}
 	push @{$playerData{$player}{$gameDate}}, $cell;
-	push @{$masterData{$player}{$gameDate}}, $cell if !$tournament;
+	if (!$tournament) {
+	push @{$masterData{$player}{$gameDate}}, $cell;
+	push @{$runningData{$player}{$gameDate}}, $cell if exists $runningDatesLookup{$gameDate};
+      }
 
 	# Ignore the last row, for now
 	print $gameCsv ",$cell" if $r != $rowN;
