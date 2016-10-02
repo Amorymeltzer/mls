@@ -29,10 +29,12 @@ my %masterData;	     # Hash holding per-player stat data [total, current game]
 my @masterPlayers;   # Player names
 my @masterDates;     # Dates of play
 my %masterPlayerCount;		# Count times a player is used
-my @runningDates;		# Running list of most recent games
+my @runningDates;		# Running list of dates, used in conjunction
+my %runningDatesLookup;		# with this lookup array to check dates
 my $runningData;		# Array since copying a multi-dim hash
                                 # requires deep-cloning and references
-my @runningPlayers;		# Will copy later
+my @runningPlayers;		# Running list of players
+my %runningPlayerCount;		# Did those running players actually play
 # Season lookup.  Would be easy to substring, but this also means I get all
 # seasons as a nice keys array
 my %seasons = (
@@ -70,6 +72,14 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
     push @{$seasonsList{$seas}}, $game;
   }
 }
+
+schwartz(\@runningDates);		# Sort running dates
+@runningDates = @runningDates[-17..-1];	# Keep only the ones I care about.
+                                        # Should probably make this a variable
+                                        # somewhere FIXME TODO
+# Build lookup list of running dates via hash slice
+@runningDatesLookup{@runningDates} = ();
+
 
 # Murderers' Row
 my @lineup = (
@@ -177,13 +187,17 @@ foreach (sort keys %seasonsList) {
 	  # Do the same for the master list of players
 	  if (!$tournament && !$masterData{$cell}) {
 	    push @masterPlayers, $cell;
+	    push @runningPlayers, $cell if exists $runningDatesLookup{$gameDate};
 	    # Keep totals last
 	    if ($masterPlayers[-2] && $masterPlayers[-2] =~ /Total/) {
 	      @masterPlayers[-2,-1] = @masterPlayers[-1,-2];
+	      @runningPlayers[-2,-1] = @runningPlayers[-1,-2] if exists $runningDatesLookup{$gameDate};
 	    }
 	    $masterPlayerCount{$cell} = 1; # First time up
+	    $runningPlayerCount{$cell} = 1 if exists $runningDatesLookup{$gameDate}; # First time up
 	  } elsif (!$tournament && $masterData{$cell}) {
 	    $masterPlayerCount{$cell}++; # Add a count if we've seen him
+	    $runningPlayerCount{$cell}++ if exists $runningDatesLookup{$gameDate}; # Add a count if we've seen him
 	  }
 
 	  $offset = 2;		# Reset on new row
@@ -332,27 +346,26 @@ my $min=$threshold*$masterPlayerCount{$masterPlayers[-1]};
 print "Minimum for inclusion:\t$min\n";
 print "\n";
 
-@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
-@masterPlayers = lineup(\@lineup,\@masterPlayers);
-## Dump lifetime totals (same format as season totals)
-open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
-print $masterCsv join q{,}, @stats;
-print $masterCsv "\n";
-foreach my $dude (@masterPlayers) {
-  print $masterCsv "$dude,";
-  print $masterCsv join q{,}, @{$masterData{$dude}{'total'}};
-  print $masterCsv "\n";
-}
-close $masterCsv or die $ERRNO;
-
-
-
 
 ################################################################################
 $runningData = dclone(\%masterData);
-@runningPlayers = @masterPlayers;
 
-# Sort dates
+@runningPlayers = noScrubs(\%runningPlayerCount,\@runningPlayers,\@runningDates);
+@runningPlayers = lineup(\@lineup,\@runningPlayers);
+## Dump lifetime totals (same format as season totals)
+open my $runningCsv, '>', 'mls_running.csv' or die $ERRNO;
+print $runningCsv join q{,}, @stats;
+print $runningCsv "\n";
+foreach my $dude (@runningPlayers) {
+  print $runningCsv "$dude,";
+  print $runningCsv join q{,}, @{${$runningData}{$dude}{'total'}};
+  print $runningCsv "\n";
+}
+close $runningCsv or die $ERRNO;
+
+
+# Sort dates again?  Left in because there's a good chance I can/should
+# subroutine this, so I'd like to keep it all as it should be FIXME TODO
 schwartz(\@runningDates);
 # Dump lifetime per-game values for each stat
 foreach my $i (1..scalar @stats - 1) {
@@ -408,6 +421,19 @@ foreach my $i (1..scalar @stats - 1) {
   close $stat or die $ERRNO;
 }
 ################################################################################
+
+@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
+@masterPlayers = lineup(\@lineup,\@masterPlayers);
+## Dump lifetime totals (same format as season totals)
+open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
+print $masterCsv join q{,}, @stats;
+print $masterCsv "\n";
+foreach my $dude (@masterPlayers) {
+  print $masterCsv "$dude,";
+  print $masterCsv join q{,}, @{$masterData{$dude}{'total'}};
+  print $masterCsv "\n";
+}
+close $masterCsv or die $ERRNO;
 
 
 # Sort dates
