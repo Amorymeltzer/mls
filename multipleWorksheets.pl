@@ -13,6 +13,8 @@ use Storable qw(dclone);
 
 # Threshold for inclusion in graphs and tables, see &noScrubs
 my $threshold = 0.25;
+# Number of dates to track running values
+my $lookback = 17;
 
 
 if (@ARGV != 1) {
@@ -76,7 +78,7 @@ foreach (sort keys %{$book->[0]{'sheet'}}) {
 }
 
 schwartz(\@runningDates);		# Sort running dates
-@runningDates = @runningDates[-17..-1];	# Keep only the ones I care about.
+@runningDates = @runningDates[-$lookback..-1];	# Keep only the ones I care about.
                                         # Should probably make this a variable
                                         # somewhere FIXME TODO
 # Build lookup list of running dates via hash slice
