@@ -281,7 +281,7 @@ foreach (sort keys %seasonsList) {
   # Don't treat tournaments as part of a season
   next if $tournament;
 
-  @players = noScrubs(\%playerCount,\@players,\@dates);
+  @players = noScrubs(\%playerCount,\@players,\@dates,$threshold);
   @players = lineup(\@lineup,\@players);
   ## Dump season totals (identical to old-style format)
   my $seasonOutfile = createName($_,q{},0);
@@ -365,7 +365,7 @@ print "\n";
 ################################################################################
 $runningData = dclone(\%masterData);
 
-@runningPlayers = noScrubs(\%runningPlayerCount,\@runningPlayers,\@runningDates);
+@runningPlayers = noScrubs(\%runningPlayerCount,\@runningPlayers,\@runningDates,$threshold);
 @runningPlayers = lineup(\@lineup,\@runningPlayers);
 ## Dump lifetime totals (same format as season totals)
 open my $runningCsv, '>', 'mls_running.csv' or die $ERRNO;
@@ -437,7 +437,7 @@ foreach my $i (1..scalar @stats - 1) {
 }
 ################################################################################
 
-@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
+@masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates,$threshold);
 @masterPlayers = lineup(\@lineup,\@masterPlayers);
 ## Dump lifetime totals (same format as season totals)
 open my $masterCsv, '>', 'mls_master.csv' or die $ERRNO;
@@ -608,12 +608,12 @@ sub schwartz
 # Limit stats to players who have played in a bare minimum of games
 sub noScrubs
   {
-    my ($countRef,$playerRef,$dateRef) = @_;
+    my ($countRef,$playerRef,$dateRef,$thresh) = @_;
     my @return;
     my $max = scalar @{$dateRef}; # Number of games in the season
 
     foreach (@{$playerRef}) {
-      push @return, $_ if (${$countRef}{$_} / $max >= $threshold);
+      push @return, $_ if (${$countRef}{$_} / $max >= $thresh);
     }
 
     return @return;
