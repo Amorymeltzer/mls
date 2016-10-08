@@ -28,7 +28,8 @@
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
-- Calcuate oWAR from full team averages?  Need to reform wOBA first...
+- Calcuate oWAR from full team averages?  Need to reform wOBA first and look toward RAA
+- How do I calculate wOBA scale?  Scaled to OBP but what does that mean?
 - Could show team average, at least for calculated stats
 - Individual stats with predictions, goal AVG?  Would need player pages...
 - Player page could show graph with total/cumulative stats, list results per season
