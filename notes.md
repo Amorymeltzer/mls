@@ -32,7 +32,8 @@
 - How do I calculate wOBA scale?  Scaled to OBP but what does that mean?
 - Could show team average, at least for calculated stats
 - Individual stats with predictions, goal AVG?  Would need player pages...
-- Player page could show graph with total/cumulative stats, list results per season
+- Can I pull this info from masterData?  Maybe.
+- Show lifetime graph and list per-season stat lines?
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
 - Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
 #### JS
