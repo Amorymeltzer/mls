@@ -26,6 +26,7 @@
 - Rely on the overall number of sheets to get total number of dates, thus allowing me to anticipate when data collection needs starting?
 - Need to deal with page creation, templates, and the creation of the lifetime directory
 - Could create player page alongside data, but might need to swap masterDates and dudes order in masterData parsing
+- Issue with running vs life not recalculating totals properly?  That needs to be dealt with
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
