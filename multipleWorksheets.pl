@@ -361,6 +361,9 @@ my $min=$threshold*$masterPlayerCount{$masterPlayers[-1]};
 print "Minimum for inclusion:\t$min\n";
 print "\n";
 
+######### FIXME TODO
+# SUBROUTINE EVERYTHING ie master and running shit
+######### FIXME TODO
 
 ################################################################################
 $runningData = dclone(\%masterData);
