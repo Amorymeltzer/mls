@@ -29,6 +29,8 @@
 - Issue with running vs life not recalculating totals properly?  That needs to be dealt with
 #### Stats
 - More content! :+1: :100: :+1:
+- Could we maybe do an ELO score?  Curious how this would look year to year, maybe manually grab data from facebook?
+- Would probably need to be a separate workflow
 - Team stats (RF/RA), PCA plots?
 - Calcuate oWAR from full team averages?  Need to reform wOBA first and look toward RAA
 - How do I calculate wOBA scale?  Scaled to OBP but what does that mean?
