@@ -118,7 +118,7 @@ else
 		#  have been played.  Not perfect, hence the message
 		if [ $(grep -c ^ $season/data/AB.csv) -lt 5 ]; then
 		    echo
-		    echo "Note: Please remove #statsgraph from the $season index nav"
+		    echo -e "${Color_Red_Bold}Note: Please remove #statsgraph from the $season index nav${Color_zOff}"
 		    echo
 		    chart=/dev/null
 		fi
