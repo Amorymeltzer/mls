@@ -16,6 +16,7 @@
 - Zoom, reset https://github.com/d3/d3-zoom
 - http://bl.ocks.org/mbostock/3892928 and http://bl.ocks.org/mbostock/4dc8736fb1ce9799c6d6
 ##### Front page rewrite
+- Need to make lifetime index somehow, but the rest works??  Must be issues people or else the rest is weird....
 - Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
 - This this would also allow me to (maybe?) stop skipping data, and just let the noise in on the full picture and season pages
 - Could do this by making a running hash from the last 17 or so dates, then crunch first few for noise and 15 total
