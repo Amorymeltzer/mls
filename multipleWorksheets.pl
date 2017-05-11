@@ -312,7 +312,8 @@ foreach (sort keys %seasonsList) {
 # should be obvious if I implement the player pages, but this is nice to have
 print "\nMurderer's Row:\n";
 foreach (sort @masterPlayers) {
-  print "$_\n";
+  #  print "$_\n";
+  print "$_\t$masterPlayerCount{$_}\n";
 }
 print "\n";
 
