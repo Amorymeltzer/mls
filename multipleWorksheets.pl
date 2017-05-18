@@ -314,6 +314,8 @@ print "\nMurderer's Row:\n";
 foreach (sort @masterPlayers) {
   print "$_\t$masterPlayerCount{$_}\n";
 }
+my $min=$threshold*$masterPlayerCount{$masterPlayers[-1]};
+print "Minimum for inclusion:\t$min\n";
 print "\n";
 
 @masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates);
