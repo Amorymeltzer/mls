@@ -21,6 +21,7 @@
 - Could do this by making a running hash from the last 17 or so dates, then crunch first few for noise and 15 total
 - Would need to derive player names, I think, but maybe I can lean on the availability and veracity of the data, which by this time should be established
 - This this would also allow me to stop skipping data, and just let the noise in on the full picture and season pages
+- Link game dates in graph or table or something to individual pages?
 #### Stats
 - More content! :+1: :100: :+1:
 - Team stats (RF/RA), PCA plots?
