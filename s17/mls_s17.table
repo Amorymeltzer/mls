@@ -32,45 +32,45 @@
 <tbody>
 <tr>
 <td data-sort='Burch'>Andrew Burch</td>
-<td>14</td>
-<td>7</td>
-<td>8</td>
+<td>18</td>
+<td>9</td>
+<td>11</td>
 <td>2</td>
 <td>0</td>
 <td>2</td>
-<td>16</td>
-<td>8</td>
+<td>19</td>
+<td>9</td>
 <td>2</td>
+<td>1</td>
 <td>0</td>
-<td>0</td>
-<td>0.571</td>
-<td>0.625</td>
-<td>1.143</td>
-<td>0.572</td>
-<td>1.768</td>
-<td>0.567</td>
-<td>0.728</td>
+<td>0.611</td>
+<td>0.650</td>
+<td>1.056</td>
+<td>0.445</td>
+<td>1.706</td>
+<td>0.556</td>
+<td>0.716</td>
 </tr>
 <tr>
 <td data-sort='Patel'>Qaiser Patel</td>
+<td>18</td>
+<td>12</td>
 <td>15</td>
-<td>9</td>
-<td>13</td>
 <td>2</td>
 <td>0</td>
 <td>0</td>
-<td>15</td>
-<td>8</td>
+<td>17</td>
+<td>9</td>
+<td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>0.867</td>
-<td>0.867</td>
-<td>1.000</td>
-<td>0.133</td>
-<td>1.867</td>
-<td>0.640</td>
-<td>0.822</td>
+<td>0.833</td>
+<td>0.842</td>
+<td>0.944</td>
+<td>0.111</td>
+<td>1.786</td>
+<td>0.615</td>
+<td>0.779</td>
 </tr>
 <tr>
 <td data-sort='Edwards'>Joe Edwards</td>
@@ -95,24 +95,24 @@
 </tr>
 <tr>
 <td data-sort='Squitieri'>Rich Squitieri</td>
-<td>10</td>
-<td>5</td>
-<td>5</td>
+<td>14</td>
+<td>6</td>
+<td>7</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>6</td>
-<td>4</td>
+<td>8</td>
+<td>5</td>
 <td>3</td>
 <td>0</td>
 <td>0</td>
 <td>0.500</td>
-<td>0.615</td>
-<td>0.600</td>
-<td>0.100</td>
-<td>1.215</td>
-<td>0.427</td>
-<td>0.533</td>
+<td>0.588</td>
+<td>0.571</td>
+<td>0.071</td>
+<td>1.159</td>
+<td>0.407</td>
+<td>0.512</td>
 </tr>
 <tr>
 <td data-sort='Mirman'>Nick Mirman</td>
@@ -137,58 +137,58 @@
 </tr>
 <tr>
 <td data-sort='Hanten'>Nick Hanten</td>
-<td>18</td>
-<td>6</td>
-<td>9</td>
+<td>20</td>
+<td>7</td>
+<td>10</td>
 <td>1</td>
 <td>1</td>
 <td>0</td>
-<td>12</td>
+<td>13</td>
 <td>6</td>
-<td>0</td>
-<td>0</td>
+<td>1</td>
+<td>1</td>
 <td>0</td>
 <td>0.500</td>
-<td>0.500</td>
-<td>0.667</td>
-<td>0.167</td>
-<td>1.167</td>
-<td>0.392</td>
-<td>0.506</td>
+<td>0.524</td>
+<td>0.650</td>
+<td>0.150</td>
+<td>1.174</td>
+<td>0.398</td>
+<td>0.510</td>
 </tr>
 <tr>
 <td data-sort='Richardson'>Scott Richardson</td>
-<td>15</td>
-<td>5</td>
-<td>8</td>
+<td>18</td>
+<td>6</td>
+<td>11</td>
+<td>2</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>8</td>
-<td>3</td>
+<td>13</td>
+<td>6</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0.533</td>
-<td>0.562</td>
-<td>0.533</td>
-<td>0.000</td>
-<td>1.095</td>
-<td>0.386</td>
-<td>0.489</td>
+<td>0.611</td>
+<td>0.632</td>
+<td>0.722</td>
+<td>0.111</td>
+<td>1.354</td>
+<td>0.465</td>
+<td>0.592</td>
 </tr>
 <tr>
 <td data-sort='Meltzer'>Amory Meltzer</td>
-<td>12</td>
+<td>15</td>
 <td>4</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
 <td>4</td>
 <td>0</td>
-<td>0</td>
-<td>0</td>
-<td>4</td>
-<td>3</td>
-<td>0</td>
-<td>1</td>
+<td>2</td>
 <td>0</td>
 <td>0.333</td>
 <td>0.333</td>
@@ -200,108 +200,108 @@
 </tr>
 <tr>
 <td data-sort='Hurlburt'>Nick Hurlburt</td>
-<td>18</td>
-<td>6</td>
-<td>9</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>9</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.500</td>
-<td>0.500</td>
-<td>0.500</td>
-<td>0.000</td>
-<td>1.000</td>
-<td>0.350</td>
-<td>0.445</td>
-</tr>
-<tr>
-<td data-sort='Holm'>David Holm</td>
-<td>16</td>
-<td>8</td>
-<td>9</td>
-<td>2</td>
+<td>21</td>
+<td>7</td>
+<td>10</td>
+<td>1</td>
 <td>0</td>
 <td>0</td>
 <td>11</td>
-<td>8</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.476</td>
+<td>0.476</td>
+<td>0.524</td>
+<td>0.048</td>
+<td>1.000</td>
+<td>0.345</td>
+<td>0.442</td>
+</tr>
+<tr>
+<td data-sort='Holm'>David Holm</td>
+<td>19</td>
+<td>11</td>
+<td>12</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>15</td>
+<td>9</td>
 <td>2</td>
 <td>0</td>
 <td>0</td>
-<td>0.562</td>
-<td>0.611</td>
-<td>0.688</td>
-<td>0.126</td>
-<td>1.299</td>
-<td>0.447</td>
-<td>0.565</td>
+<td>0.632</td>
+<td>0.667</td>
+<td>0.789</td>
+<td>0.157</td>
+<td>1.456</td>
+<td>0.497</td>
+<td>0.630</td>
 </tr>
 <tr>
 <td data-sort='Prince'>Dan Prince</td>
-<td>13</td>
-<td>7</td>
-<td>6</td>
-<td>0</td>
-<td>2</td>
-<td>2</td>
-<td>16</td>
+<td>17</td>
 <td>9</td>
+<td>9</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>21</td>
+<td>11</td>
 <td>1</td>
 <td>0</td>
 <td>1</td>
-<td>0.462</td>
-<td>0.467</td>
-<td>1.231</td>
-<td>0.769</td>
-<td>1.698</td>
-<td>0.518</td>
-<td>0.656</td>
+<td>0.529</td>
+<td>0.526</td>
+<td>1.235</td>
+<td>0.706</td>
+<td>1.761</td>
+<td>0.545</td>
+<td>0.698</td>
 </tr>
 <tr>
 <td data-sort='Owen'>Joey Owen</td>
-<td>13</td>
-<td>4</td>
-<td>8</td>
+<td>16</td>
+<td>5</td>
+<td>10</td>
+<td>2</td>
 <td>1</td>
 <td>0</td>
-<td>0</td>
-<td>9</td>
-<td>2</td>
-<td>0</td>
+<td>14</td>
+<td>7</td>
 <td>0</td>
 <td>0</td>
-<td>0.615</td>
-<td>0.615</td>
-<td>0.692</td>
-<td>0.077</td>
-<td>1.307</td>
-<td>0.450</td>
-<td>0.577</td>
+<td>0</td>
+<td>0.625</td>
+<td>0.625</td>
+<td>0.875</td>
+<td>0.250</td>
+<td>1.500</td>
+<td>0.500</td>
+<td>0.649</td>
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
-<td style='font-weight:bold;'>169</td>
-<td style='font-weight:bold;'>67</td>
-<td style='font-weight:bold;'>88</td>
-<td style='font-weight:bold;'>10</td>
-<td style='font-weight:bold;'>3</td>
+<td style='font-weight:bold;'>201</td>
+<td style='font-weight:bold;'>82</td>
+<td style='font-weight:bold;'>109</td>
+<td style='font-weight:bold;'>17</td>
+<td style='font-weight:bold;'>4</td>
 <td style='font-weight:bold;'>5</td>
-<td style='font-weight:bold;'>119</td>
-<td style='font-weight:bold;'>67</td>
-<td style='font-weight:bold;'>12</td>
+<td style='font-weight:bold;'>149</td>
+<td style='font-weight:bold;'>82</td>
+<td style='font-weight:bold;'>14</td>
+<td style='font-weight:bold;'>4</td>
 <td style='font-weight:bold;'>1</td>
-<td style='font-weight:bold;'>1</td>
-<td style='font-weight:bold;'>0.521</td>
-<td style='font-weight:bold;'>0.549</td>
-<td style='font-weight:bold;'>0.704</td>
-<td style='font-weight:bold;'>0.183</td>
-<td style='font-weight:bold;'>1.253</td>
-<td style='font-weight:bold;'>0.423</td>
 <td style='font-weight:bold;'>0.542</td>
+<td style='font-weight:bold;'>0.569</td>
+<td style='font-weight:bold;'>0.741</td>
+<td style='font-weight:bold;'>0.199</td>
+<td style='font-weight:bold;'>1.310</td>
+<td style='font-weight:bold;'>0.441</td>
+<td style='font-weight:bold;'>0.565</td>
 </tr>
 </tbody>
 </table>
