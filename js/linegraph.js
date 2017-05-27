@@ -226,7 +226,8 @@ function linegraph() {
 
 		svg.select('.x.axis')
 		    .call(xAxis)
-		    .selectAll('.x-labels')
+		    .selectAll("text:not(.x-labels)")
+		    .attr('class', 'x-labels')
 		    .style("text-anchor", "end")
 		    .attr("dx", "-.4em")
 		    .attr("dy", ".5em")
