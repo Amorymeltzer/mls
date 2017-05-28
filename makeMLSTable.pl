@@ -133,6 +133,8 @@ if ($input =~ m/mls_t?[suf]\d\d/) {
   }
 
   $status = "$season $date stats table$status";
+} elsif ($input =~ m/mls_running.csv/) {
+  $status = "Running stats table (last 17 games)";
 } else {
   $status = 'Lifetime stats table';
 }

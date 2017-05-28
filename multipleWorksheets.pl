@@ -14,6 +14,7 @@ use Storable qw(dclone);
 # Threshold for inclusion in graphs and tables, see &noScrubs
 my $threshold = 0.25;
 # Number of dates to track running values
+# Also used in makeMLSTable.pl, so if this changes update that too
 my $lookback = 17;
 
 
