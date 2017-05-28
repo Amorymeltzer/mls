@@ -181,8 +181,12 @@ else
 	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
 	    index=life/$index
 	    top=templates/season.index.top
+	    news=templates/season.news
+	    arc=templates/arc.list
 	    bottom=templates/season.index.bottom
 	    print
+
+	    sed -i '' 's/Individual game /Season /' $index
 
 	    if [[ ! -d life/data/ ]]; then
 		mkdir -p life/data/
