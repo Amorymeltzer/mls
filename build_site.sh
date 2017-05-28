@@ -75,6 +75,7 @@ else
     # Grab everything...
     FILES=$(find -E . -maxdepth 1 -regex "./.*_t?[sfu][0-9][0-9].*csv" | grep -v _site)
     FILES="$FILES ./mls_master.csv" # Add lifetime totals
+    FILES="$FILES ./mls_running.csv" # Add running totals
 
     # Die if no proper files can be found
     if [ -z "$FILES" ]; then
@@ -126,7 +127,7 @@ else
 		# Set here to avoid tourny errors FIXME TODO
 		arc=templates/$season.list
 	    fi
-	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
+	elif [ $(echo $csv | grep -oE "mls_[mr][a-z]{5,6}.csv") ]; then
 	    perl makeMLSTable.pl $upDate $csv $table
 	fi
 
@@ -171,8 +172,23 @@ else
 		continue
 	    fi
 
-	    mv $csv $table $season
+	    # Organize data appropriately for seasons, not tournaments
+	    if [ ! $(echo $file | grep -oE "mls_t[sfu][0-9][0-9]") ]; then
+		mv $csv $table $season/data/
+	    else
+		mv $csv $table $season/
+	    fi
 	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
+	    index=life/$index
+	    top=templates/season.index.top
+	    bottom=templates/season.index.bottom
+	    print
+
+	    if [[ ! -d life/data/ ]]; then
+		mkdir -p life/data/
+	    fi
+	    mv $csv $table life/data/
+	elif [ $(echo $csv | grep -oE "mls_running.csv") ]; then
 	    top=templates/top
 	    news=templates/news
 	    arc=templates/arc.list
