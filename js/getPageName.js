@@ -1,17 +1,15 @@
 function pagenamer() {
     var title = '';		// Build upon later
-
-    // Lookup hash
-    var h = {};
+    var h = {};			// Lookup hash
     h['s'] = 'Spring';
     h['u'] = 'Summer';
     h['f'] = 'Fall';
+    h['l'] = 'Lifetime';
 
     var url = location.pathname.split('/');
     url.shift();		// Remove leading null
     url.shift();		// Remove leading mls
     var season = url.shift().split('');
-    //season.shift();		// Remove leading /
     if (season[0] == 't') {
 	season.shift();
 	title = 'Tournament ';
@@ -20,11 +18,15 @@ function pagenamer() {
     // Lookup season
     var seas = season.shift();
     title += h[seas];
-    // Year
-    title += ' 20';
-    title += season.shift();
-    title += season.shift();
-
+    // Lifetime stats are special
+    if (season[0] == 'i') {
+	title += 'Stats';
+    } else {
+	// Year
+	title += ' 20';
+	title += season.shift();
+	title += season.shift();
+    }
     document.write(title);
 };
 pagenamer();
