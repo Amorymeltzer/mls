@@ -20,7 +20,7 @@ function pagenamer() {
     title += h[seas];
     // Lifetime stats are special
     if (season[0] == 'i') {
-	title += 'Stats';
+	title += ' Stats';
     } else {
 	// Year
 	title += ' 20';
