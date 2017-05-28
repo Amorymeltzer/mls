@@ -13,7 +13,6 @@
 - Change as many elements as possible from px to (r)em
 - Link to schedule on main page?  Or show upcoming/next game(s)?
 - Videos?  gh-pages can't embed, but maybe plyr.js can?
-- Confirmatory output sorted by time not season?  Everything works but it's unnerving
 - Zoom, reset https://github.com/d3/d3-zoom
 - http://bl.ocks.org/mbostock/3892928 and http://bl.ocks.org/mbostock/4dc8736fb1ce9799c6d6
 ##### Front page rewrite
@@ -31,7 +30,6 @@
 - Or good place to show some sort of scatter graph?  I'm sure some saber site has a good example
 - Or perhaps one of those radial diagrams?  With various stats?  Relates to PCA...
 #### JS
-- Check pagename.js document.write in new version (54?) of chrome
 - Skip some x-axis labels to save space.  Should probably extend margin a bit...
 - Check out D3plus? https://github.com/alexandersimoes/d3plus/ and http://d3plus.org/examples/advanced/9862486/
 - Or Chartjs? https://github.com/chartjs/Chart.js
