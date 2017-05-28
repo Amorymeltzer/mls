@@ -186,7 +186,10 @@ else
 	    bottom=templates/season.index.bottom
 	    print
 
+	    # Cleanup TOC
 	    sed -i '' 's/Individual game /Season /' $index
+	    # Cleanup arc
+	    sed -i '' 's/<p>.*Lifetime stats<\/a> \&bull; /<p>/' $index
 
 	    if [[ ! -d life/data/ ]]; then
 		mkdir -p life/data/

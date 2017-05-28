@@ -45,6 +45,9 @@ print $arcindex '<a id="archive" class="anchor" href="#archive" aria-hidden="tru
 print $arcindex "<span class=\"octicon octicon-link\"></span></a>Individual season data</h3>\n";
 print $arcindex '<p>';
 
+print $arcindex '<a href=\"/mls/life\">Lifetime stats</a>';
+print $arcindex ' &bull; ';
+
 my @indices = sort seasonSort keys %seas;
 foreach my $key (@indices) {
   # List games chronologically
