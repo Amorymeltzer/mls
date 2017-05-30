@@ -430,7 +430,6 @@ foreach my $i (1..scalar @stats - 1) {
 }
 
 ## Create and dump running totals
-my $rcell;
 open my $runningCsv, '>', 'mls_running.csv' or die $ERRNO;
 print $runningCsv join q{,}, @stats;
 print $runningCsv "\n";
@@ -441,7 +440,7 @@ foreach my $dude (@runningPlayers) {
     foreach my $j (0..scalar @runningDates - 1) {
       if ($i <= 11) {
 	${$runningData}{$dude}{'total'}[$i] += $masterData{$dude}{$runningDates[$j]}[$i];
-      } else {			# Not the index change
+      } else {			# Note the index change
 	${$runningData}{$dude}{'total'}[$i-1] = calcStats($i,\@{${$runningData}{$dude}{$runningDates[$j]}});
       }
     }
