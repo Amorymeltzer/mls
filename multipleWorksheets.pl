@@ -371,17 +371,6 @@ $runningData = dclone(\%masterData);
 
 @runningPlayers = noScrubs(\%runningPlayerCount,\@runningPlayers,\@runningDates,$threshold);
 @runningPlayers = lineup(\@lineup,\@runningPlayers);
-## Dump lifetime totals (same format as season totals)
-open my $runningCsv, '>', 'mls_running.csv' or die $ERRNO;
-print $runningCsv join q{,}, @stats;
-print $runningCsv "\n";
-foreach my $dude (@runningPlayers) {
-  print $runningCsv "$dude,";
-  print $runningCsv join q{,}, @{${$runningData}{$dude}{'total'}};
-  print $runningCsv "\n";
-}
-close $runningCsv or die $ERRNO;
-
 
 # Sort dates again?  Left in because there's a good chance I can/should
 # subroutine this, so I'd like to keep it all as it should be FIXME TODO
@@ -439,6 +428,31 @@ foreach my $i (1..scalar @stats - 1) {
   }
   close $stat or die $ERRNO;
 }
+
+## Create and dump running totals
+my $rcell;
+open my $runningCsv, '>', 'mls_running.csv' or die $ERRNO;
+print $runningCsv join q{,}, @stats;
+print $runningCsv "\n";
+foreach my $dude (@runningPlayers) {
+  print $runningCsv "$dude,";
+  foreach my $i (0..scalar @stats - 1) {
+    ${$runningData}{$dude}{'total'}[$i] = 0; # Reset to start new running calc
+    foreach my $j (0..scalar @runningDates - 1) {
+      if ($i <= 11) {
+	${$runningData}{$dude}{'total'}[$i] += $masterData{$dude}{$runningDates[$j]}[$i];
+      } else {			# Not the index change
+	${$runningData}{$dude}{'total'}[$i-1] = calcStats($i,\@{${$runningData}{$dude}{$runningDates[$j]}});
+      }
+    }
+  }
+  pop @{${$runningData}{$dude}{'total'}};
+  print $runningCsv join q{,}, @{${$runningData}{$dude}{'total'}};
+  print $runningCsv "\n";
+}
+close $runningCsv or die $ERRNO;
+
+
 ################################################################################
 
 @masterPlayers = noScrubs(\%masterPlayerCount,\@masterPlayers,\@masterDates,$threshold);
