@@ -35,9 +35,9 @@ function print() {
     cat templates/site_footer >> $index
 
     # Indent html
-    emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
+    #  emacs -batch $index --eval '(indent-region (point-min) (point-max) nil)' -f save-buffer 2>/dev/null
 
-    echo "Generated $index"
+    #  echo "Generated $index"
 }
 
 # Simple error handling
@@ -161,6 +161,7 @@ else
 		fi
 
 		print
+		echo "Generated $index remove me when done"
 	    elif [ ! $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
 		# Stash in data directory
@@ -185,6 +186,7 @@ else
 	    arc=templates/arc.list
 	    bottom=templates/season.index.bottom
 	    print
+	    echo "Generated $index remove me when done"
 
 	    # Cleanup TOC
 	    sed -i '' 's/Individual game /Season /' $index
@@ -201,6 +203,7 @@ else
 	    arc=templates/arc.list
 	    bottom=templates/bottom
 	    print
+	    echo "Generated $index remove me when done"
 
 	    if [[ ! -d data/ ]]; then
 		mkdir -p data/
