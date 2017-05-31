@@ -178,6 +178,9 @@ else
 		mv $csv $table $season/
 	    fi
 	elif [ $(echo $csv | grep -oE "mls_master.csv") ]; then
+	    if [[ ! -d life/data/ ]]; then
+		mkdir -p life/data/
+	    fi
 	    index=life/$index
 	    top=templates/season.index.top
 	    news=templates/season.news
@@ -191,9 +194,6 @@ else
 	    # Cleanup arc
 	    sed -i '' 's/<p>.*Lifetime stats<\/a> \&bull; /<p>/' $index
 
-	    if [[ ! -d life/data/ ]]; then
-		mkdir -p life/data/
-	    fi
 	    mv $csv $table life/data/
 	elif [ $(echo $csv | grep -oE "mls_running.csv") ]; then
 	    top=templates/top
