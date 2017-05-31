@@ -178,6 +178,27 @@
 <td>0.547</td>
 </tr>
 <tr>
+<td data-sort='Hurlburt'>Nick Hurlburt</td>
+<td>26</td>
+<td>5</td>
+<td>11</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>13</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.423</td>
+<td>0.423</td>
+<td>0.500</td>
+<td>0.077</td>
+<td>0.923</td>
+<td>0.315</td>
+<td>0.406</td>
+</tr>
+<tr>
 <td data-sort='Richardson'>Scott Richardson</td>
 <td>17</td>
 <td>4</td>
@@ -241,48 +262,6 @@
 <td>0.346</td>
 </tr>
 <tr>
-<td data-sort='Turner'>Matt Turner</td>
-<td>16</td>
-<td>8</td>
-<td>8</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>8</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-<td>0</td>
-<td>0.500</td>
-<td>0.600</td>
-<td>0.500</td>
-<td>0.000</td>
-<td>1.100</td>
-<td>0.395</td>
-<td>0.496</td>
-</tr>
-<tr>
-<td data-sort='Hurlburt'>Nick Hurlburt</td>
-<td>26</td>
-<td>5</td>
-<td>11</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>13</td>
-<td>9</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0.423</td>
-<td>0.423</td>
-<td>0.500</td>
-<td>0.077</td>
-<td>0.923</td>
-<td>0.315</td>
-<td>0.406</td>
-</tr>
-<tr>
 <td data-sort='Tautges'>Brandon Tautges</td>
 <td>17</td>
 <td>6</td>
@@ -302,6 +281,27 @@
 <td>0.824</td>
 <td>0.288</td>
 <td>0.366</td>
+</tr>
+<tr>
+<td data-sort='Turner'>Matt Turner</td>
+<td>16</td>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>8</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0.500</td>
+<td>0.600</td>
+<td>0.500</td>
+<td>0.000</td>
+<td>1.100</td>
+<td>0.395</td>
+<td>0.496</td>
 </tr>
 <tr>
 <td data-sort='Lee'>Justin Lee</td>

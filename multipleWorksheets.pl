@@ -97,12 +97,12 @@ my @lineup = (
 	      'Nick Mirman',
 	      'Derek Bayes',
 	      'Nick Hanten',
+	      'Nick Hurlburt',
 	      'Charlie Henschen',
 	      'Scott Richardson',
 	      'Amory Meltzer',
 	      'Gordon Walker',
 	      'Andrew Scott',
-	      'Matt Turner',
 	     );
 # Stats measured, for building the player hash
 my @stats = qw (Player AB R H 2B 3B HR TB RBI BB K SAC AVG OBP SLG ISO OPS GPA wOBA);
