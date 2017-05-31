@@ -439,8 +439,24 @@ foreach my $dude (@runningPlayers) {
     ${$runningData}{$dude}{'total'}[$i] = 0; # Reset to start new running calc
     foreach my $j (0..scalar @runningDates - 1) {
       if ($i <= 11) {
+	# Note the hybrid use of %masterData and @runningDates.  This is just
+	# a check to ensure no null values (don't need to muck about with NaN)
+	# but given my annoying reliance on %masterData in the =+ calculation,
+	# it seems appropxiate FIXME TODO
+	if (!$masterData{$dude}{$runningDates[$j]}[$i]) {
+	  ${$runningData}{$dude}{'total'}[$i] += 0;
+	  next;
+	}
+
 	${$runningData}{$dude}{'total'}[$i] += $masterData{$dude}{$runningDates[$j]}[$i];
-      } else {			# Note the index change
+      } else {
+	# Note the index change below
+
+	# Take care of players joining late or leaving early
+	if (!${$runningData}{$dude}{$runningDates[$j]}[$i]) {
+	  ${$runningData}{$dude}{'total'}[$i-1] = 0;
+	  next if $i != $#stats;
+	}
 	${$runningData}{$dude}{'total'}[$i-1] = calcStats($i,\@{${$runningData}{$dude}{$runningDates[$j]}});
       }
     }
