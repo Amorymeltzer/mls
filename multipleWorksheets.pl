@@ -359,8 +359,13 @@ foreach (sort @masterPlayers) {
   print "$_\t$masterPlayerCount{$_}\n";
 }
 my $min=$threshold*$masterPlayerCount{$masterPlayers[-1]};
-print "Minimum for inclusion:\t$min\n";
-print "\n";
+print "\nMinimum for inclusion in lifetime:\t$min\n";
+print "\nRunner's Row:\n";
+foreach (sort @runningPlayers) {
+  print "$_\t$runningPlayerCount{$_}\n";
+}
+my $rmin=$threshold*$runningPlayerCount{$runningPlayers[-1]};
+print "\nMinimum for inclusion in running:\t$rmin\n";
 
 ######### FIXME TODO
 # SUBROUTINE EVERYTHING ie master and running shit
