@@ -178,6 +178,27 @@
 <td>0.583</td>
 </tr>
 <tr>
+<td data-sort='Bayes'>Derek Bayes</td>
+<td>5</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.400</td>
+<td>0.000</td>
+<td>0.800</td>
+<td>0.280</td>
+<td>0.356</td>
+</tr>
+<tr>
 <td data-sort='Hanten'>Nick Hanten</td>
 <td>20</td>
 <td>7</td>
@@ -281,6 +302,27 @@
 <td>0.694</td>
 <td>0.254</td>
 <td>0.328</td>
+</tr>
+<tr>
+<td data-sort='Tautges'>Brandon Tautges</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.200</td>
+<td>0.429</td>
+<td>0.200</td>
+<td>0.000</td>
+<td>0.629</td>
+<td>0.243</td>
+<td>0.327</td>
 </tr>
 <tr class='no-sort'>
 <td style='font-weight:bold;'>Total:</td>
