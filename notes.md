@@ -1,8 +1,8 @@
 ### ToDo
 - Player noisiness is a real issue if they missed the first X games.  Currently not figuring for it but should
+- Not a huge issue given running data stuff atm, but it's there
 - Should probably reconcile cumulative stats starting at 0 for people midway but NaN for calculated
-- build_site.sh: Treat life/ master data as a season?
-- Really just clean up build_site.sh overall
+- Really just clean up build_site.sh and multipleWorksheets.pl!
 - Fix the "remove statsgraph" message via... variable?
 #### Migrate to D3 v4
 - Ticks might be easier to manipulate https://github.com/d3/d3-array/blob/master/README.md#ticks
@@ -19,18 +19,10 @@
 - Zoom, reset https://github.com/d3/d3-zoom
 - http://bl.ocks.org/mbostock/3892928 and http://bl.ocks.org/mbostock/4dc8736fb1ce9799c6d6
 ##### Front page rewrite
-- Need to make lifetime index somehow, but the rest works??  Must be issues people or else the rest is weird....
-- Make front page stats for last 10 or 15 games, move lifetime to subpage a la seasons?
-- This this would also allow me to (maybe?) stop skipping data, and just let the noise in on the full picture and season pages
-- Could do this by making a running hash from the last 17 or so dates, then crunch first few for noise and 15 total
-- Would need to derive player names, I think, but maybe I can lean on the availability and veracity of the data, which by this time should be established
-- This this would also allow me to stop skipping data, and just let the noise in on the full picture and season pages
-- Link game dates in graph or table or something to individual pages?
-- Better(?) way might be to do a running hash of hash, with player names as lookups for a binary 1 or 0 on each date?  Awkward, but I could rederive the data this way
-- Rely on the overall number of sheets to get total number of dates, thus allowing me to anticipate when data collection needs starting?
-- Need to deal with page creation, templates, and the creation of the lifetime directory
+- Recalibrate threshold - maybe move toward specific values (5 for lifetime, 3 for running, 2 for season?)
+- Figure out how much I can (mostly) stop skipping data and just let the noise in on the lifetime and season pages
 - Could create player page alongside data, but might need to swap masterDates and dudes order in masterData parsing
-- Issue with running vs life not recalculating totals properly?  That needs to be dealt with
+- Link game dates in graph or table or something to individual pages?
 #### Stats
 - More content! :+1: :100: :+1:
 - Could we maybe do an ELO score?  Curious how this would look year to year, maybe manually grab data from facebook?
