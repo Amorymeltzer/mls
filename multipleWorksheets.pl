@@ -377,8 +377,14 @@ $runningData = dclone(\%masterData);
 # Writ of Attainder on Matt Turner, since he mucks up the low end and doesn't
 # play anymore.  This should be temporary FIXME TODO
 my $index = 0;
-$index++ until $runningPlayers[$index] eq 'Matt Turner';
-splice(@runningPlayers, $index, 1);
+for (@runningPlayers) {
+  if ($_ eq 'Matt Turner') {
+    splice @runningPlayers, $index, 1;
+    last;
+  } else {
+    $index++;
+  }
+}
 
 @runningPlayers = noScrubs(\%runningPlayerCount,\@runningPlayers,\@runningDates,$threshold);
 @runningPlayers = lineup(\@lineup,\@runningPlayers);
