@@ -84,6 +84,8 @@ else
     echo "Creating html..."
     for csv in $FILES
     do
+	chartnav=0 # Used later to identify new season navs that need mofidying
+
 	# find insists on a leading ./ - I won't be providing such things when
 	# running this but it's a good thing to watch out for when sanitizing
 	csv=$(echo $csv | perl -pe 's/^.\///;')
@@ -113,12 +115,9 @@ else
 	    else
 		perl makeMLSTable.pl -a $csv $table # Season index
 
-		#  Don't show the season chart unless at least three games
-		#  have been played.  Not perfect, hence the message
+		#  Only show season chart if at least 3 games have been played
 		if [ $(grep -c ^ $season/data/AB.csv) -lt 5 ]; then
-		    echo
-		    echo -e "${Color_Red_Bold}Note: Please remove #statsgraph from the $season index nav${Color_zOff}"
-		    echo
+		    chartnav=1
 		    chart=/dev/null
 		fi
 
@@ -160,6 +159,10 @@ else
 
 		print
 		echo "Generated $index"
+		if [ $chartnav == 1 ]; then
+		    sed -i '' 's/^.*<li>.*statsgraph.*<.li>.*$//' $index
+		fi
+		chartnav=0
 	    elif [ ! $(echo $file | grep -oE "mls_t?[sfu][0-9][0-9]") ]; then
 		# Rename and be done with season-based stats
 		# Stash in data directory
